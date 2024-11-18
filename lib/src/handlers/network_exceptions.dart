@@ -1,6 +1,10 @@
+// ignore_for_file: deprecated_member_use
+
 import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 part 'network_exceptions.freezed.dart';
 
 @freezed
@@ -76,10 +80,10 @@ class NetworkExceptions with _$NetworkExceptions {
             case DioExceptionType.sendTimeout:
               break;
             case DioExceptionType.badCertificate:
-            // TODO: Handle this case.
+              // TODO: Handle this case.
               break;
             case DioExceptionType.connectionError:
-            // TODO: Handle this case.
+              // TODO: Handle this case.
               break;
           }
         } else if (error is SocketException) {
@@ -154,10 +158,10 @@ class NetworkExceptions with _$NetworkExceptions {
               status = 500;
               break;
             case DioExceptionType.badCertificate:
-            // TODO: Handle this case.
+              // TODO: Handle this case.
               break;
             case DioExceptionType.connectionError:
-            // TODO: Handle this case.
+              // TODO: Handle this case.
               break;
           }
         } else if (error is SocketException) {

@@ -70,7 +70,7 @@
 //                 color: Style.white,
 //               ),
 //               if(widget.onDelete != null)
-//                 ButtonEffectAnimation(
+//                 ButtonEffect(
 //                   onTap:() => widget.onDelete?.call(),
 //                   child: SizedBox(
 //                     height: 36.r,

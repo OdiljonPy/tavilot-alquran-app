@@ -42,7 +42,7 @@
 //       ),
 //       child: Stack(
 //               children: [
-//                 ButtonEffectAnimation(
+//                 ButtonEffect(
 //                   onTap: () async {
 //                     XFile? file;
 //                     try {
@@ -81,7 +81,7 @@
 //                   right: 16.w,
 //                   child: Row(
 //                     children: [
-//                       ButtonEffectAnimation(
+//                       ButtonEffect(
 //                         child: GestureDetector(
 //                           onTap: () async {
 //                             XFile? file;
@@ -119,7 +119,7 @@
 //                       ),
 //                       10.horizontalSpace,
 //                       if (imageFilePath != null)
-//                         ButtonEffectAnimation(
+//                         ButtonEffect(
 //                           child: GestureDetector(
 //                             onTap: onDelete,
 //                             child: BlurWrap(

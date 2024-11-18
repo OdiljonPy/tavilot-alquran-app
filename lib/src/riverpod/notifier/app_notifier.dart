@@ -9,12 +9,12 @@ class AppNotifier extends StateNotifier<AppState> {
   }
 
   Future<void> fetchLocale() async {
-    final lang = LocalStorage.getLanguage()?.locale ?? 'en';
-    state = state.copyWith(lang: lang.isEmpty ? 'en' : lang);
+    final lang = LocalStorage.getLanguage()?.locale ?? 'ru';
+    state = state.copyWith(lang: lang.isEmpty ? 'ru' : lang);
   }
 
   Future<void> changeLocale(LanguageData? language) async {
     await LocalStorage.setActiveLocale(language?.locale);
-    state = state.copyWith(lang: language?.locale ?? 'en');
+    state = state.copyWith(lang: language?.locale ?? 'ru');
   }
 }

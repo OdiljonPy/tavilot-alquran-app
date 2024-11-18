@@ -12,6 +12,7 @@ class LoginButton extends StatelessWidget {
   final Color bgColor;
   final Color titleColor;
   final double borderRadius;
+  final double? height;
   final Function()? onPressed;
 
   const LoginButton({
@@ -23,11 +24,12 @@ class LoginButton extends StatelessWidget {
     this.bgColor = Style.primary,
     this.titleColor = Style.white,
     this.borderRadius = 8,
+    this.height,
   });
 
   @override
   Widget build(BuildContext context) {
-    return ButtonEffectAnimation(
+    return ButtonEffect(
       child: Material(
         borderRadius: BorderRadius.circular(borderRadius),
         color: isActive ? bgColor : Style.selectedItemsText,
@@ -35,14 +37,12 @@ class LoginButton extends StatelessWidget {
           onTap: onPressed,
           borderRadius: BorderRadius.circular(borderRadius),
           child: Container(
-            height: 56.r,
+            height: height ?? 60.r,
             padding: const EdgeInsets.symmetric(horizontal: 12),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(borderRadius),
                 border: Border.all(
-                    color: bgColor == Style.transparent
-                        ? Style.selectedItemsText
-                        : Style.transparent)),
+                    color: Style.primary)),
             alignment: Alignment.center,
             child: isLoading
                 ? const SizedBox(

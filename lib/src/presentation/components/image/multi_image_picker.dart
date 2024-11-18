@@ -46,7 +46,7 @@
 //     return Column(
 //       children: [
 //         (itemCount > 0) == false
-//             ? ButtonEffectAnimation(
+//             ? ButtonEffect(
 //           onTap: () async {
 //             AppHelpers.showAlertDialog(
 //                 context: context,
@@ -124,7 +124,7 @@
 //             Positioned(
 //               right: 16.r,
 //               top: 16.r,
-//               child: ButtonEffectAnimation(
+//               child: ButtonEffect(
 //                 onTap: () => onDelete(
 //                   (imageUrls?.isNotEmpty ?? false)
 //                       ? imageUrls?.first?.path ?? ""
@@ -214,7 +214,7 @@
 //                         : true)
 //                       Positioned.fill(
 //                         child: Center(
-//                           child: ButtonEffectAnimation(
+//                           child: ButtonEffect(
 //                             onTap: () {
 //                               String path;
 //                               try {
@@ -311,7 +311,7 @@
 //                     Positioned(
 //                       top: 12.r,
 //                       right: 12.r,
-//                       child: ButtonEffectAnimation(
+//                       child: ButtonEffect(
 //                         onTap: () {
 //                           String path;
 //                           try {
@@ -344,7 +344,7 @@
 //   }
 //
 //   _mediaPicker(BuildContext context) {
-//     return ButtonEffectAnimation(
+//     return ButtonEffect(
 //       onTap: () async {
 //         AppHelpers.showAlertDialog(
 //             context: context,
@@ -416,7 +416,7 @@
 //                         alignment: Alignment.topRight,
 //                         child: Padding(
 //                           padding: REdgeInsets.all(6),
-//                           child: ButtonEffectAnimation(
+//                           child: ButtonEffect(
 //                             onTap: () {
 //                               String path;
 //                               try {

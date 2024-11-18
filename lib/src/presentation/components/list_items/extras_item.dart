@@ -20,7 +20,7 @@
 //
 //   @override
 //   Widget build(BuildContext context) {
-//     return ButtonEffectAnimation(
+//     return ButtonEffect(
 //       child: GestureDetector(
 //         onTap: onTap,
 //         child: Container(

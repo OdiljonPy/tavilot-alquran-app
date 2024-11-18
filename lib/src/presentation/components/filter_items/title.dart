@@ -20,7 +20,7 @@
 //           AppHelpers.getTranslation(TrKeys.filter),
 //           style: Style.interNormal(color: Style.black, size: 22),
 //         ),
-//         ButtonEffectAnimation(
+//         ButtonEffect(
 //           onTap: onTap,
 //           child: Text(
 //             AppHelpers.getTranslation(TrKeys.clearAll),

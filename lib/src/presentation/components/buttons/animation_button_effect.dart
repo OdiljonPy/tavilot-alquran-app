@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import '../../styles/style.dart';
 
-class ButtonEffectAnimation extends StatefulWidget {
+class ButtonEffect extends StatefulWidget {
   final bool disabled;
   final VoidCallback? onTap;
   final Widget child;
 
-  const ButtonEffectAnimation({
+  const ButtonEffect({
     super.key,
     this.disabled = false,
     required this.child,
@@ -17,7 +17,7 @@ class ButtonEffectAnimation extends StatefulWidget {
   State createState() => _ButtonEffectAnimationState();
 }
 
-class _ButtonEffectAnimationState extends State<ButtonEffectAnimation>
+class _ButtonEffectAnimationState extends State<ButtonEffect>
     with TickerProviderStateMixin {
   AnimationController? _controllerA;
 

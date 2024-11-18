@@ -39,55 +39,58 @@ class LoginNotifier extends StateNotifier<LoginState> {
     VoidCallback? goToMain,
   }) async {
     final connected = await AppConnectivity.connectivity();
-    if (connected) {
-      if (!AppValidators.isValidEmail(state.email)) {
-        state = state.copyWith(isEmailNotValid: true);
-        return;
-      }
-      state = state.copyWith(isLoading: true);
-      final response = await authRepository.login(
-        email: state.email,
-        password: state.password,
-      );
-      response.when(
-        success: (data) async {
-          LocalStorage.setToken(data.data?.accessToken ?? '');
-          LocalStorage.setUser(data.data?.user);
-          // fetchCurrencies(
-          //   checkYourNetworkConnection: checkYourNetwork,
-          //   goToMain: goToMain,
-          // );
+    state = state.copyWith(isLoading: true);
+    final response = await authRepository.login(
+      phoneNumber: state.email,
+      password: state.password,
+    );
+    response.when(
+      success: (data) async {
+        await LocalStorage.setToken(data.result?.accessToken ?? '');
+        // await LocalStorage.(data.result?.accessToken ?? '');
+        // LocalStorage.setUser(data.result?.user);
+        goToMain?.call();
+        // fetchCurrencies(
+        //   checkYourNetworkConnection: checkYourNetwork,
+        //   goToMain: goToMain,
+        // );
 
-          // res.when(
-          //   success: (s) {
-          //     LocalStorage.setUser(s.data);
-          //     LocalStorage.setWallet(s.data?.wallet);
-          //   },
-          //   failure: (failure, status) {},
-          // );
+        // res.when(
+        //   success: (s) {
+        //     LocalStorage.setUser(s.data);
+        //     LocalStorage.setWallet(s.data?.wallet);
+        //   },
+        //   failure: (failure, status) {},
+        // );
 
-          if (Platform.isAndroid || Platform.isIOS) {
-            String? fcmToken;
-            try {
-              // fcmToken = await FirebaseMessaging.instance.getToken();
-            } catch (e) {
-              debugPrint('===> error with getting firebase token $e');
-            }
-            // _authRepository.updateFirebaseToken(fcmToken);
+        if (Platform.isAndroid || Platform.isIOS) {
+          String? fcmToken;
+          try {
+            // fcmToken = await FirebaseMessaging.instance.getToken();
+          } catch (e) {
+            debugPrint('===> error with getting firebase token $e');
           }
-        },
-        failure: (failure, status) {
-          state = state.copyWith(isLoading: false, isLoginError: true);
-          if (status == 401) {
-            LocalStorage.deleteUser();
-            unAuthorised?.call();
-          }
-          debugPrint('==> login failure: $failure');
-        },
-      );
-    } else {
-      checkYourNetwork?.call();
-    }
+          // _authRepository.updateFirebaseToken(fcmToken);
+        }
+      },
+      failure: (failure, status) {
+        state = state.copyWith(isLoading: false, isLoginError: true);
+        if (status == 401) {
+          LocalStorage.deleteUser();
+          unAuthorised?.call();
+        }
+        debugPrint('==> login failure: $failure');
+      },
+    );
+    // if (connected) {
+    //   // if (!AppValidators.isValidEmail(state.email)) {
+    //   //   state = state.copyWith(isEmailNotValid: true);
+    //   //   return;
+    //   // }
+    //
+    // } else {
+    //   // checkYourNetwork?.call();
+    // }
   }
   //
   // Future<void> fetchCurrencies({

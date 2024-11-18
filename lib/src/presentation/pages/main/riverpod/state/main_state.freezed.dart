@@ -16,17 +16,9 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$MainState {
-  bool get isProductsLoading => throw _privateConstructorUsedError;
-  bool get isMoreProductsLoading => throw _privateConstructorUsedError;
-  bool get isShopsLoading => throw _privateConstructorUsedError;
-  bool get isBrandsLoading => throw _privateConstructorUsedError;
-  bool get isCategoriesLoading => throw _privateConstructorUsedError;
-  bool get hasMore => throw _privateConstructorUsedError;
+  bool get isChapterLoading => throw _privateConstructorUsedError;
+  List<Chapter> get chapters => throw _privateConstructorUsedError;
   int get selectIndex => throw _privateConstructorUsedError;
-  String get query => throw _privateConstructorUsedError;
-  String get shopQuery => throw _privateConstructorUsedError;
-  String get categoryQuery => throw _privateConstructorUsedError;
-  String get brandQuery => throw _privateConstructorUsedError;
 
   /// Create a copy of MainState
   /// with the given fields replaced by the non-null parameter values.
@@ -40,18 +32,7 @@ abstract class $MainStateCopyWith<$Res> {
   factory $MainStateCopyWith(MainState value, $Res Function(MainState) then) =
       _$MainStateCopyWithImpl<$Res, MainState>;
   @useResult
-  $Res call(
-      {bool isProductsLoading,
-      bool isMoreProductsLoading,
-      bool isShopsLoading,
-      bool isBrandsLoading,
-      bool isCategoriesLoading,
-      bool hasMore,
-      int selectIndex,
-      String query,
-      String shopQuery,
-      String categoryQuery,
-      String brandQuery});
+  $Res call({bool isChapterLoading, List<Chapter> chapters, int selectIndex});
 }
 
 /// @nodoc
@@ -69,63 +50,23 @@ class _$MainStateCopyWithImpl<$Res, $Val extends MainState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isProductsLoading = null,
-    Object? isMoreProductsLoading = null,
-    Object? isShopsLoading = null,
-    Object? isBrandsLoading = null,
-    Object? isCategoriesLoading = null,
-    Object? hasMore = null,
+    Object? isChapterLoading = null,
+    Object? chapters = null,
     Object? selectIndex = null,
-    Object? query = null,
-    Object? shopQuery = null,
-    Object? categoryQuery = null,
-    Object? brandQuery = null,
   }) {
     return _then(_value.copyWith(
-      isProductsLoading: null == isProductsLoading
-          ? _value.isProductsLoading
-          : isProductsLoading // ignore: cast_nullable_to_non_nullable
+      isChapterLoading: null == isChapterLoading
+          ? _value.isChapterLoading
+          : isChapterLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      isMoreProductsLoading: null == isMoreProductsLoading
-          ? _value.isMoreProductsLoading
-          : isMoreProductsLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isShopsLoading: null == isShopsLoading
-          ? _value.isShopsLoading
-          : isShopsLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isBrandsLoading: null == isBrandsLoading
-          ? _value.isBrandsLoading
-          : isBrandsLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isCategoriesLoading: null == isCategoriesLoading
-          ? _value.isCategoriesLoading
-          : isCategoriesLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
-      hasMore: null == hasMore
-          ? _value.hasMore
-          : hasMore // ignore: cast_nullable_to_non_nullable
-              as bool,
+      chapters: null == chapters
+          ? _value.chapters
+          : chapters // ignore: cast_nullable_to_non_nullable
+              as List<Chapter>,
       selectIndex: null == selectIndex
           ? _value.selectIndex
           : selectIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      query: null == query
-          ? _value.query
-          : query // ignore: cast_nullable_to_non_nullable
-              as String,
-      shopQuery: null == shopQuery
-          ? _value.shopQuery
-          : shopQuery // ignore: cast_nullable_to_non_nullable
-              as String,
-      categoryQuery: null == categoryQuery
-          ? _value.categoryQuery
-          : categoryQuery // ignore: cast_nullable_to_non_nullable
-              as String,
-      brandQuery: null == brandQuery
-          ? _value.brandQuery
-          : brandQuery // ignore: cast_nullable_to_non_nullable
-              as String,
     ) as $Val);
   }
 }
@@ -138,18 +79,7 @@ abstract class _$$MainStateImplCopyWith<$Res>
       __$$MainStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {bool isProductsLoading,
-      bool isMoreProductsLoading,
-      bool isShopsLoading,
-      bool isBrandsLoading,
-      bool isCategoriesLoading,
-      bool hasMore,
-      int selectIndex,
-      String query,
-      String shopQuery,
-      String categoryQuery,
-      String brandQuery});
+  $Res call({bool isChapterLoading, List<Chapter> chapters, int selectIndex});
 }
 
 /// @nodoc
@@ -165,63 +95,23 @@ class __$$MainStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isProductsLoading = null,
-    Object? isMoreProductsLoading = null,
-    Object? isShopsLoading = null,
-    Object? isBrandsLoading = null,
-    Object? isCategoriesLoading = null,
-    Object? hasMore = null,
+    Object? isChapterLoading = null,
+    Object? chapters = null,
     Object? selectIndex = null,
-    Object? query = null,
-    Object? shopQuery = null,
-    Object? categoryQuery = null,
-    Object? brandQuery = null,
   }) {
     return _then(_$MainStateImpl(
-      isProductsLoading: null == isProductsLoading
-          ? _value.isProductsLoading
-          : isProductsLoading // ignore: cast_nullable_to_non_nullable
+      isChapterLoading: null == isChapterLoading
+          ? _value.isChapterLoading
+          : isChapterLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      isMoreProductsLoading: null == isMoreProductsLoading
-          ? _value.isMoreProductsLoading
-          : isMoreProductsLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isShopsLoading: null == isShopsLoading
-          ? _value.isShopsLoading
-          : isShopsLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isBrandsLoading: null == isBrandsLoading
-          ? _value.isBrandsLoading
-          : isBrandsLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isCategoriesLoading: null == isCategoriesLoading
-          ? _value.isCategoriesLoading
-          : isCategoriesLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
-      hasMore: null == hasMore
-          ? _value.hasMore
-          : hasMore // ignore: cast_nullable_to_non_nullable
-              as bool,
+      chapters: null == chapters
+          ? _value._chapters
+          : chapters // ignore: cast_nullable_to_non_nullable
+              as List<Chapter>,
       selectIndex: null == selectIndex
           ? _value.selectIndex
           : selectIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      query: null == query
-          ? _value.query
-          : query // ignore: cast_nullable_to_non_nullable
-              as String,
-      shopQuery: null == shopQuery
-          ? _value.shopQuery
-          : shopQuery // ignore: cast_nullable_to_non_nullable
-              as String,
-      categoryQuery: null == categoryQuery
-          ? _value.categoryQuery
-          : categoryQuery // ignore: cast_nullable_to_non_nullable
-              as String,
-      brandQuery: null == brandQuery
-          ? _value.brandQuery
-          : brandQuery // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -230,56 +120,31 @@ class __$$MainStateImplCopyWithImpl<$Res>
 
 class _$MainStateImpl extends _MainState {
   const _$MainStateImpl(
-      {this.isProductsLoading = false,
-      this.isMoreProductsLoading = false,
-      this.isShopsLoading = false,
-      this.isBrandsLoading = false,
-      this.isCategoriesLoading = false,
-      this.hasMore = true,
-      this.selectIndex = 0,
-      this.query = '',
-      this.shopQuery = '',
-      this.categoryQuery = '',
-      this.brandQuery = ''})
-      : super._();
+      {this.isChapterLoading = false,
+      final List<Chapter> chapters = const [],
+      this.selectIndex = 0})
+      : _chapters = chapters,
+        super._();
 
   @override
   @JsonKey()
-  final bool isProductsLoading;
+  final bool isChapterLoading;
+  final List<Chapter> _chapters;
   @override
   @JsonKey()
-  final bool isMoreProductsLoading;
-  @override
-  @JsonKey()
-  final bool isShopsLoading;
-  @override
-  @JsonKey()
-  final bool isBrandsLoading;
-  @override
-  @JsonKey()
-  final bool isCategoriesLoading;
-  @override
-  @JsonKey()
-  final bool hasMore;
+  List<Chapter> get chapters {
+    if (_chapters is EqualUnmodifiableListView) return _chapters;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_chapters);
+  }
+
   @override
   @JsonKey()
   final int selectIndex;
-  @override
-  @JsonKey()
-  final String query;
-  @override
-  @JsonKey()
-  final String shopQuery;
-  @override
-  @JsonKey()
-  final String categoryQuery;
-  @override
-  @JsonKey()
-  final String brandQuery;
 
   @override
   String toString() {
-    return 'MainState(isProductsLoading: $isProductsLoading, isMoreProductsLoading: $isMoreProductsLoading, isShopsLoading: $isShopsLoading, isBrandsLoading: $isBrandsLoading, isCategoriesLoading: $isCategoriesLoading, hasMore: $hasMore, selectIndex: $selectIndex, query: $query, shopQuery: $shopQuery, categoryQuery: $categoryQuery, brandQuery: $brandQuery)';
+    return 'MainState(isChapterLoading: $isChapterLoading, chapters: $chapters, selectIndex: $selectIndex)';
   }
 
   @override
@@ -287,42 +152,16 @@ class _$MainStateImpl extends _MainState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MainStateImpl &&
-            (identical(other.isProductsLoading, isProductsLoading) ||
-                other.isProductsLoading == isProductsLoading) &&
-            (identical(other.isMoreProductsLoading, isMoreProductsLoading) ||
-                other.isMoreProductsLoading == isMoreProductsLoading) &&
-            (identical(other.isShopsLoading, isShopsLoading) ||
-                other.isShopsLoading == isShopsLoading) &&
-            (identical(other.isBrandsLoading, isBrandsLoading) ||
-                other.isBrandsLoading == isBrandsLoading) &&
-            (identical(other.isCategoriesLoading, isCategoriesLoading) ||
-                other.isCategoriesLoading == isCategoriesLoading) &&
-            (identical(other.hasMore, hasMore) || other.hasMore == hasMore) &&
+            (identical(other.isChapterLoading, isChapterLoading) ||
+                other.isChapterLoading == isChapterLoading) &&
+            const DeepCollectionEquality().equals(other._chapters, _chapters) &&
             (identical(other.selectIndex, selectIndex) ||
-                other.selectIndex == selectIndex) &&
-            (identical(other.query, query) || other.query == query) &&
-            (identical(other.shopQuery, shopQuery) ||
-                other.shopQuery == shopQuery) &&
-            (identical(other.categoryQuery, categoryQuery) ||
-                other.categoryQuery == categoryQuery) &&
-            (identical(other.brandQuery, brandQuery) ||
-                other.brandQuery == brandQuery));
+                other.selectIndex == selectIndex));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      isProductsLoading,
-      isMoreProductsLoading,
-      isShopsLoading,
-      isBrandsLoading,
-      isCategoriesLoading,
-      hasMore,
-      selectIndex,
-      query,
-      shopQuery,
-      categoryQuery,
-      brandQuery);
+  int get hashCode => Object.hash(runtimeType, isChapterLoading,
+      const DeepCollectionEquality().hash(_chapters), selectIndex);
 
   /// Create a copy of MainState
   /// with the given fields replaced by the non-null parameter values.
@@ -335,41 +174,17 @@ class _$MainStateImpl extends _MainState {
 
 abstract class _MainState extends MainState {
   const factory _MainState(
-      {final bool isProductsLoading,
-      final bool isMoreProductsLoading,
-      final bool isShopsLoading,
-      final bool isBrandsLoading,
-      final bool isCategoriesLoading,
-      final bool hasMore,
-      final int selectIndex,
-      final String query,
-      final String shopQuery,
-      final String categoryQuery,
-      final String brandQuery}) = _$MainStateImpl;
+      {final bool isChapterLoading,
+      final List<Chapter> chapters,
+      final int selectIndex}) = _$MainStateImpl;
   const _MainState._() : super._();
 
   @override
-  bool get isProductsLoading;
+  bool get isChapterLoading;
   @override
-  bool get isMoreProductsLoading;
-  @override
-  bool get isShopsLoading;
-  @override
-  bool get isBrandsLoading;
-  @override
-  bool get isCategoriesLoading;
-  @override
-  bool get hasMore;
+  List<Chapter> get chapters;
   @override
   int get selectIndex;
-  @override
-  String get query;
-  @override
-  String get shopQuery;
-  @override
-  String get categoryQuery;
-  @override
-  String get brandQuery;
 
   /// Create a copy of MainState
   /// with the given fields replaced by the non-null parameter values.

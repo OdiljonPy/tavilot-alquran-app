@@ -46,7 +46,7 @@
 //           borderRadius: BorderRadius.circular(12.r),
 //         ),
 //         child: (isAdding && imageFilePath == null)
-//             ? ButtonEffectAnimation(
+//             ? ButtonEffect(
 //           onTap: () async {
 //             XFile? file;
 //             try {
@@ -123,7 +123,7 @@
 //             Align(
 //                 alignment: Alignment.center,
 //                 child: imageFilePath != null
-//                     ? ButtonEffectAnimation(
+//                     ? ButtonEffect(
 //                   onTap: onDelete,
 //                   child: BlurWrap(
 //                     radius: BorderRadius.circular(16.r),
@@ -142,7 +142,7 @@
 //                     ),
 //                   ),
 //                 )
-//                     : ButtonEffectAnimation(
+//                     : ButtonEffect(
 //                   onTap: () async {
 //                     XFile? file;
 //                     try {

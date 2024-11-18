@@ -193,7 +193,7 @@ class PinCodePage extends ConsumerWidget {
             ),
             Expanded(
                 child: Image.asset(
-              Assets.pngSplashGirl,
+              Assets.pngLoginBook,
               height: double.infinity,
               fit: BoxFit.cover,
             )),

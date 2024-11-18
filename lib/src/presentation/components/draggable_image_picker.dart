@@ -123,7 +123,7 @@
 //             ),
 //             Align(
 //               alignment: Alignment.topRight,
-//               child: ButtonEffectAnimation(
+//               child: ButtonEffect(
 //                 onTap: () => onDelete(listOfImages?.first ?? ""),
 //                 child: BlurWrap(
 //                   blur: 4,
@@ -184,7 +184,7 @@
 //                   ),
 //                   Align(
 //                     alignment: Alignment.center,
-//                     child: ButtonEffectAnimation(
+//                     child: ButtonEffect(
 //                       onTap: () {
 //                         String path;
 //                         try {
@@ -310,7 +310,7 @@
 //             Positioned(
 //               right: 16.r,
 //               top: 16.r,
-//               child: ButtonEffectAnimation(
+//               child: ButtonEffect(
 //                 onTap: () => onDelete(
 //                   (imageUrls?.isNotEmpty ?? false)
 //                       ? imageUrls?.first?.path ?? ""
@@ -377,7 +377,7 @@
 //                   ),
 //                   Align(
 //                     alignment: Alignment.center,
-//                     child: ButtonEffectAnimation(
+//                     child: ButtonEffect(
 //                       onTap: () {
 //                         String path;
 //                         try {
@@ -462,7 +462,7 @@
 //                         alignment: Alignment.topRight,
 //                         child: Padding(
 //                           padding:  REdgeInsets.all(6),
-//                           child: ButtonEffectAnimation(
+//                           child: ButtonEffect(
 //                             onTap: () {
 //                               String path;
 //                               try {

@@ -10,4 +10,5 @@ class SplashNotifier extends StateNotifier<SplashState> {
 
   SplashNotifier() : super(const SplashState());
 
+
 }

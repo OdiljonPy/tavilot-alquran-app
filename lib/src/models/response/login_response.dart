@@ -1,75 +1,39 @@
-import '../data/user_data.dart';
-
 class LoginResponse {
-  LoginResponse({LoginData? data}) {
-    _data = data;
-  }
+  Login? result;
+  bool? ok;
 
-  LoginResponse.fromJson(dynamic json) {
-    _data = json['data'] != null ? LoginData.fromJson(json['data']) : null;
-  }
+  LoginResponse({
+    this.result,
+    this.ok,
+  });
 
-  LoginData? _data;
+  factory LoginResponse.fromJson(Map<String, dynamic> json) => LoginResponse(
+    result: json["result"] == null ? null : Login.fromJson(json["result"]),
+    ok: json["ok"],
+  );
 
-  LoginResponse copyWith({LoginData? data}) =>
-      LoginResponse(data: data ?? _data);
-
-  LoginData? get data => _data;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    if (_data != null) {
-      map['data'] = _data?.toJson();
-    }
-    return map;
-  }
+  Map<String, dynamic> toJson() => {
+    "result": result?.toJson(),
+    "ok": ok,
+  };
 }
 
-class LoginData {
-  LoginData({
-    String? accessToken,
-    String? tokenType,
-    UserData? user,
-  }) {
-    _accessToken = accessToken;
-    _tokenType = tokenType;
-    _user = user;
-  }
+class Login {
+  String? accessToken;
+  String? refreshToken;
 
-  LoginData.fromJson(dynamic json) {
-    _accessToken = json['access_token'];
-    _tokenType = json['token_type'];
-    _user = json['user'] != null ? UserData.fromJson(json['user']) : null;
-  }
+  Login({
+    this.accessToken,
+    this.refreshToken,
+  });
 
-  String? _accessToken;
-  String? _tokenType;
-  UserData? _user;
+  factory Login.fromJson(Map<String, dynamic> json) => Login(
+    accessToken: json["access_token"],
+    refreshToken: json["refresh_token"],
+  );
 
-  LoginData copyWith({
-    String? accessToken,
-    String? tokenType,
-    UserData? user,
-  }) =>
-      LoginData(
-        accessToken: accessToken ?? _accessToken,
-        tokenType: tokenType ?? _tokenType,
-        user: user ?? _user,
-      );
-
-  String? get accessToken => _accessToken;
-
-  String? get tokenType => _tokenType;
-
-  UserData? get user => _user;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['access_token'] = _accessToken;
-    map['token_type'] = _tokenType;
-    if (_user != null) {
-      map['user'] = _user?.toJson();
-    }
-    return map;
-  }
+  Map<String, dynamic> toJson() => {
+    "access_token": accessToken,
+    "refresh_token": refreshToken,
+  };
 }

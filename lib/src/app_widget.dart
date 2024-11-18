@@ -1,37 +1,13 @@
 import 'package:al_quran/src/presentation/styles/style.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_isolate/flutter_isolate.dart';
-import 'core/di/dependency_manager.dart';
 import 'core/routes/app_router.dart';
-import 'core/utils/local_storage.dart';
 import 'presentation/components/components.dart';
 import 'presentation/theme/light_theme.dart';
 import 'presentation/theme/theme/theme.dart';
 // ignore: depend_on_referenced_packages
 import 'package:provider/provider.dart';
-
-// @pragma('vm:entry-point')
-// Future<int> getOtherTranslation(int arg) async {
-//   final settingsRepository = SettingsSettingsRepositoryImpl();
-//   final res = await settingsRepository.getLanguages();
-//   res.when(
-//       success:  (l) {
-//     l.data?.forEach((e) async {
-//       final translations =
-//       await settingsRepository.getMobileTranslations(lang: e.locale);
-//       translations.when(
-//               success: (d) {
-//         LocalStorage.setOtherTranslations(
-//             translations: d.data, key: e.id.toString());
-//       },
-//           failure: (f, s) => null);
-//
-//     });
-//   }, failure: (f,s)=> null);
-//   return 0;
-// }
 
 class AppWidget extends StatefulWidget {
   const AppWidget({super.key});
@@ -41,9 +17,7 @@ class AppWidget extends StatefulWidget {
 }
 
 class _AppWidgetState extends State<AppWidget> {
-  // Future<Future<FlutterIsolate>> isolate() async {
-  //   return FlutterIsolate.spawn(getOtherTranslation, 0);
-  // }
+
 
   @override
   void initState() {
@@ -54,28 +28,7 @@ class _AppWidgetState extends State<AppWidget> {
     super.initState();
   }
 
-  // Future fetchSetting() async {
-  //   final connect = await Connectivity().checkConnectivity();
-  //   if (connect == ConnectivityResult.wifi ||
-  //       connect == ConnectivityResult.mobile) {
-  //     // settingsRepository.getGlobalSettings();
-  //     // await settingsRepository.getLanguages();
-  //     // await settingsRepository.getTranslations();
-  //     // if (LocalStorage.getSelectedCurrency() == null) {
-  //     //   settingsRepository.getCurrencies();
-  //     // }
-  //   }
-  // }
 
-
-  // Future fetchSettingNoAwait() async {
-  //   settingsRepository.getGlobalSettings();
-  //   settingsRepository.getLanguages();
-  //   settingsRepository.getTranslations();
-  //   // if (LocalStorage.getSelectedCurrency() == null) {
-  //   //   settingsRepository.getCurrencies();
-  //   // }
-  // }
 
   final _rootRouter = AppRouter();
 
@@ -84,7 +37,6 @@ class _AppWidgetState extends State<AppWidget> {
     return FutureBuilder(
       future: Future.wait({
         AppTheme.create,
-        // if (LocalStorage.getTranslations().isEmpty) fetchSetting(),
       }),
     builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
         if(snapshot.hasData){
@@ -99,9 +51,9 @@ class _AppWidgetState extends State<AppWidget> {
                   scrollBehavior: CustomScrollBehavior(),
                   debugShowCheckedModeBanner: false,
                   routerConfig: _rootRouter.config(),
-                  // routerDelegate: appRouter.delegate(),
-                  // routeInformationParser: appRouter.defaultRouteParser(),
-                  locale: Locale(LocalStorage.getLanguage()?.locale ?? 'en'),
+                  locale: context.locale,
+                  supportedLocales: context.supportedLocales,
+                  localizationsDelegates: context.localizationDelegates,
                   color: Style.white,
                   builder: (context, child) => ScrollConfiguration(
                     behavior: MyBehavior(),

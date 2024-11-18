@@ -42,7 +42,7 @@
 //
 //   @override
 //   Widget build(BuildContext context) {
-//     return ButtonEffectAnimation(
+//     return ButtonEffect(
 //       child: Material(
 //         borderRadius: BorderRadius.circular(15.r),
 //         color: isActive ? bgColor : Style.white,

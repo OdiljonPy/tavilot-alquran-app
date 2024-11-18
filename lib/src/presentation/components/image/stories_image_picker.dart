@@ -76,7 +76,7 @@
 //                               alignment: Alignment.topRight,
 //                               child: Padding(
 //                                 padding: REdgeInsets.all(6),
-//                                 child: ButtonEffectAnimation(
+//                                 child: ButtonEffect(
 //                                   onTap: () {
 //                                     String path;
 //                                     try {

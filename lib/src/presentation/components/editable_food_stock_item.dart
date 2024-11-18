@@ -83,7 +83,7 @@
 //                 ),
 //               ),
 //               if (isDeletable)
-//                 ButtonEffectAnimation(
+//                 ButtonEffect(
 //                   onTap: onDeleteStock,
 //                   child: Container(
 //                     width: 44.r,

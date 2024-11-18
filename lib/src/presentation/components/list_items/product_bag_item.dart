@@ -203,7 +203,7 @@
 //                       children: [
 //                         GestureDetector(
 //                           onTap: remove,
-//                           child: ButtonEffectAnimation(
+//                           child: ButtonEffect(
 //                             child: Container(
 //                               decoration: BoxDecoration(
 //                                 color: Style.removeButtonColor,
@@ -226,7 +226,7 @@
 //                         4.horizontalSpace,
 //                         GestureDetector(
 //                           onTap: add,
-//                           child: ButtonEffectAnimation(
+//                           child: ButtonEffect(
 //                             child: Container(
 //                               decoration: BoxDecoration(
 //                                 color: Style.addButtonColor,

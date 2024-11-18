@@ -93,7 +93,7 @@
 //             ),
 //             Positioned.fill(
 //               child: Center(
-//                 child: ButtonEffectAnimation(
+//                 child: ButtonEffect(
 //                   onTap: () {
 //                     Navigator.push(
 //                         context,

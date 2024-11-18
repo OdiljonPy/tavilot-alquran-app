@@ -46,7 +46,7 @@
 //           borderRadius: BorderRadius.circular(16.r),
 //         ),
 //         child: (isAdding && imageFilePath == null)
-//             ? ButtonEffectAnimation(
+//             ? ButtonEffect(
 //           onTap: () async => AppHelpers.getPhotoGallery(onImageChange),
 //           child: DottedBorder(
 //             dashPattern: const [8],
@@ -77,7 +77,7 @@
 //             Align(
 //               alignment: Alignment.center,
 //               child: imageFilePath != null
-//                   ? ButtonEffectAnimation(
+//                   ? ButtonEffect(
 //                 onTap: onDelete,
 //                 child: BlurWrap(
 //                   radius: BorderRadius.circular(20.r),
@@ -97,7 +97,7 @@
 //                 ),
 //               )
 //                   : isEdit
-//                   ? ButtonEffectAnimation(
+//                   ? ButtonEffect(
 //                 onTap: () async =>
 //                     AppHelpers.getPhotoGallery(onImageChange),
 //                 child: BlurWrap(

@@ -13,6 +13,7 @@ class AppRouter extends _$AppRouter {
   List<AutoRoute> get routes => [
     CupertinoRoute(path: '/', page: SplashRoute.page, initial: true),
     CupertinoRoute(path: '/main', page: MainRoute.page),
+    CupertinoRoute(path: '/login', page: LoginRoute.page),
     CupertinoRoute(path: '/pinCode', page: PinCodeRoute.page),
   ];
 }

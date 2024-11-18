@@ -91,7 +91,7 @@
 //   }
 //
 //   _image(BuildContext context) {
-//     return ButtonEffectAnimation(
+//     return ButtonEffect(
 //       onTap: () {
 //         Delayed(milliseconds: 500).run(() async {
 //           AppHelpers.getPhotoGallery(onImageChange);
@@ -125,7 +125,7 @@
 //   }
 //
 //   _video(Function(String) onChange) {
-//     return ButtonEffectAnimation(
+//     return ButtonEffect(
 //       onTap: () async => AppHelpers.getVideoGallery(onChange),
 //       child: Container(
 //         height: 124,

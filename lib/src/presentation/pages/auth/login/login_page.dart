@@ -1,16 +1,15 @@
-import 'package:al_quran/src/presentation/pages/auth/login/widgets/custom_passwords.dart';
+import 'package:al_quran/infrastructure/translations/locale_keys.g.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_remix/flutter_remix.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../../../../generated/assets.dart';
+import '../../../../../main.dart';
 import '../../../../core/constants/constants.dart';
 import '../../../../core/routes/app_router.dart';
 import '../../../../core/utils/utils.dart';
 import '../../../components/components.dart';
-import '../../../components/text_fields/custom_textformfield.dart';
 import '../../../styles/style.dart';
 import 'riverpod/provider/login_provider.dart';
 
@@ -66,227 +65,194 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         child: Scaffold(
           resizeToAvoidBottomInset: false,
           backgroundColor: Style.mainBack,
-          body: SizedBox(
+          body: Container(
+            padding: REdgeInsets.all(40.r),
             width: MediaQuery.sizeOf(context).width,
             child: Row(
               children: [
-                SafeArea(
-                  child: Container(
-                    constraints: BoxConstraints(maxWidth: 500.r),
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 50.r, right: 50.r),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          42.verticalSpace,
-                          Row(
-                            children: [
-                              Image.asset(
-                                Assets.pngAppIcon,
-                                height: 40,
-                                width: 40,
+                50.horizontalSpace,
+                Expanded(
+                  child: SafeArea(
+                    child: Container(
+                      constraints: BoxConstraints(maxWidth: 500.r),
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 50.r, right: 50.r),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            60.verticalSpace,
+                            Center(
+                              child: Image.asset(
+                                "assets/png/logo.png",
+                                width: 368.r,
+                                fit: BoxFit.cover,
                               ),
-                              12.horizontalSpace,
-                              Expanded(
-                                child: Text(
-                                  "Al quran",
-                                  style: GoogleFonts.inter(
-                                      fontSize: 32.sp,
-                                      color: Style.black,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                            ],
-                          ),
-                          56.verticalSpace,
-                          Text(
-                            AppHelpers.getTranslation(TrKeys.login),
-                            style: GoogleFonts.inter(
-                                fontSize: 32.sp,
-                                color: Style.black,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          36.verticalSpace,
-                          Text(
-                            AppHelpers.getTranslation(TrKeys.email),
-                            style: GoogleFonts.inter(
-                                fontSize: 10.sp,
-                                color: Style.black,
-                                fontWeight: FontWeight.w500),
-                          ),
-                          CustomTextField(
-                            hintText:
-                                AppHelpers.getTranslation(TrKeys.typeSomething),
-                            onChanged: notifier.setEmail,
-                            textController: login,
-                            inputType: TextInputType.emailAddress,
-                            textCapitalization: TextCapitalization.none,
-                            isError:
-                                state.isLoginError || state.isEmailNotValid,
-                            descriptionText: state.isEmailNotValid
-                                ? AppHelpers.getTranslation(
-                                    TrKeys.emailIsNotValid)
-                                : (state.isLoginError
-                                    ? AppHelpers.getTranslation(
-                                        TrKeys.loginCredentialsAreNotValid)
-                                    : null),
-                            onFieldSubmitted: (value) {
-                            //   return notifier.login(
-                            //   checkYourNetwork: () {
-                            //     AppHelpers.showSnackBar(
-                            //       context,
-                            //       AppHelpers.getTranslation(
-                            //           TrKeys.checkYourNetworkConnection),
-                            //     );
-                            //   },
-                            //   unAuthorised: () {
-                            //     AppHelpers.showSnackBar(
-                            //       context,
-                            //       AppHelpers.getTranslation(
-                            //           TrKeys.emailNotVerifiedYet),
-                            //     );
-                            //   },
-                            //   goToMain: () {
-                            //     context.replaceRoute(const MainRoute());
-                            //   },
-                            // );
-                            },
-                          ),
-                          50.verticalSpace,
-                          Text(
-                            AppHelpers.getTranslation(TrKeys.password),
-                            style: GoogleFonts.inter(
-                                fontSize: 10.sp,
-                                color: Style.black,
-                                fontWeight: FontWeight.w500),
-                          ),
-                          CustomTextField(
-                            textController: password,
-                            hintText:
-                                AppHelpers.getTranslation(TrKeys.typeSomething),
-                            obscure: state.showPassword,
-                            // label: AppHelpers.getTranslation(TrKeys.password),
-                            onChanged: notifier.setPassword,
-                            textCapitalization: TextCapitalization.none,
-                            isError:
-                                state.isLoginError || state.isPasswordNotValid,
-                            descriptionText: state.isPasswordNotValid
-                                ? AppHelpers.getTranslation(TrKeys
-                                    .passwordShouldContainMinimum8Characters)
-                                : (state.isLoginError
-                                    ? AppHelpers.getTranslation(
-                                        TrKeys.loginCredentialsAreNotValid)
-                                    : null),
-                            suffixIcon: IconButton(
-                              splashRadius: 25.r,
-                              icon: Icon(
-                                state.showPassword
-                                    ? FlutterRemix.eye_line
-                                    : FlutterRemix.eye_close_line,
-                                color: Style.black,
-                                size: 20.r,
-                              ),
-                              onPressed: () =>
-                                  notifier.setShowPassword(!state.showPassword),
                             ),
-                            onFieldSubmitted: (value) {
-                              return notifier.login(
-                              checkYourNetwork: () {
-                                AppHelpers.showSnackBar(
-                                  context,
-                                  AppHelpers.getTranslation(
-                                      TrKeys.checkYourNetworkConnection),
-                                );
-                              },
-                              unAuthorised: () {
-                                AppHelpers.showSnackBar(
-                                  context,
-                                  AppHelpers.getTranslation(
-                                      TrKeys.emailNotVerifiedYet),
-                                );
-                              },
-                              goToMain: () {
-                                bool checkPin =
-                                    LocalStorage.getPinCode().isEmpty;
-                                context.replaceRoute(
-                                    PinCodeRoute(isNewPassword: checkPin));
-                              },
-                            );
-                            },
-                          ),
-                          42.verticalSpace,
-                          Row(
-                            children: [
-                              // CustomCheckbox(isActive: true, onTap: () {}),
-                              14.horizontalSpace,
-                              Text(
-                                AppHelpers.getTranslation(TrKeys.keepMe),
-                                style: GoogleFonts.inter(
-                                    fontSize: 14.sp,
-                                    color: Style.black,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                            ],
-                          ),
-                          56.verticalSpace,
-                          LoginButton(
-                            isLoading: state.isLoading,
-                            title: AppHelpers.getTranslation(TrKeys.login),
-                            onPressed: () => notifier.login(
-                              checkYourNetwork: () {
-                                AppHelpers.showSnackBar(
-                                  context,
-                                  AppHelpers.getTranslation(
-                                      TrKeys.checkYourNetworkConnection),
-                                );
-                              },
-                              unAuthorised: () {
-                                AppHelpers.showSnackBar(
-                                  context,
-                                  AppHelpers.getTranslation(
-                                      TrKeys.emailNotVerifiedYet),
-                                );
-                              },
-                              goToMain: () {
-                                context.replaceRoute(
-                                    PinCodeRoute(isNewPassword: true));
+                            56.verticalSpace,
+                            Text(
+                              "Ассаламу алайкум!",
+                              style: GoogleFonts.inter(
+                                  fontSize: 30.sp,
+                                  color: Style.black,
+                                  fontWeight: FontWeight.normal,),
+                            ),
+                            Text(
+                              "Логин ва паролингизни киритинг",
+                              style: GoogleFonts.inter(
+                                  fontSize: 24.sp,
+                                  color: Style.black,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                            36.verticalSpace,
+
+                            OutlinedBorderTextField(
+                              hintText:
+                                  AppHelpers.getTranslation(TrKeys.typeSomething),
+                              onChanged: notifier.setEmail,
+                              textController: login,
+                              inputType: TextInputType.emailAddress,
+                              textCapitalization: TextCapitalization.none,
+                              // isError:
+                              //     state.isLoginError || state.isEmailNotValid,
+                              descriptionText: state.isEmailNotValid
+                                  ? AppHelpers.getTranslation(
+                                      TrKeys.emailIsNotValid)
+                                  : (state.isLoginError
+                                      ? AppHelpers.getTranslation(
+                                          TrKeys.loginCredentialsAreNotValid)
+                                      : null),
+                              onFieldSubmitted: (value) {
+                              //   return notifier.login(
+                              //   checkYourNetwork: () {
+                              //     AppHelpers.showSnackBar(
+                              //       context,
+                              //       AppHelpers.getTranslation(
+                              //           TrKeys.checkYourNetworkConnection),
+                              //     );
+                              //   },
+                              //   unAuthorised: () {
+                              //     AppHelpers.showSnackBar(
+                              //       context,
+                              //       AppHelpers.getTranslation(
+                              //           TrKeys.emailNotVerifiedYet),
+                              //     );
+                              //   },
+                              //   goToMain: () {
+                              //     context.replaceRoute(const MainRoute());
+                              //   },
+                              // );
+                              }, label: null,
+                            ),
+                            50.verticalSpace,
+                            OutlinedBorderTextField(
+                              hintText: LocaleKeys.password.tr(),
+                              onChanged: notifier.setPassword,
+                              textController: password,
+                              inputType: TextInputType.emailAddress,
+                              textCapitalization: TextCapitalization.none,
+                              // isError:
+                              //     state.isLoginError || state.isEmailNotValid,
+                              descriptionText: state.isEmailNotValid
+                                  ? AppHelpers.getTranslation(
+                                  TrKeys.emailIsNotValid)
+                                  : (state.isLoginError
+                                  ? AppHelpers.getTranslation(
+                                  TrKeys.loginCredentialsAreNotValid)
+                                  : null),
+                              onFieldSubmitted: (value) {
+                                //   return notifier.login(
+                                //   checkYourNetwork: () {
+                                //     AppHelpers.showSnackBar(
+                                //       context,
+                                //       AppHelpers.getTranslation(
+                                //           TrKeys.checkYourNetworkConnection),
+                                //     );
+                                //   },
+                                //   unAuthorised: () {
+                                //     AppHelpers.showSnackBar(
+                                //       context,
+                                //       AppHelpers.getTranslation(
+                                //           TrKeys.emailNotVerifiedYet),
+                                //     );
+                                //   },
+                                //   goToMain: () {
+                                //     context.replaceRoute(const MainRoute());
+                                //   },
+                                // );
+                              }, label: null,
+                            ),
+
+                            56.verticalSpace,
+                            LoginButton(
+                              height: 80.r,
+                              isLoading: state.isLoading,
+                              title: LocaleKeys.signed.tr(),
+                              onPressed: () {
+                                notifier.login(
+                                checkYourNetwork: () {
+                                  AppHelpers.showSnackBar(
+                                    context,
+                                    AppHelpers.getTranslation(
+                                        TrKeys.checkYourNetworkConnection),
+                                  );
+                                },
+                                unAuthorised: () {
+                                  AppHelpers.showSnackBar(
+                                    context,
+                                    AppHelpers.getTranslation(
+                                        TrKeys.emailNotVerifiedYet),
+                                  );
+                                },
+                                goToMain: () {
+                                  context.replaceRoute(
+                                      PinCodeRoute(isNewPassword: true));
+                                },
+                              );
                               },
                             ),
-                          ),
-                          const Spacer(),
-                          CustomPasswords(
-                            type: TrKeys.seller,
-                            onTap: () {
-                              login.text = AppConstants.demoSellerLogin;
-                              password.text = AppConstants.demoSellerPassword;
-                              notifier.setEmail(AppConstants.demoSellerLogin);
-                              notifier
-                                  .setPassword(AppConstants.demoSellerPassword);
-                            },
-                          ),
-                          const Spacer(),
-                          CustomPasswords(
-                            type: TrKeys.admin,
-                            onTap: () {
-                              login.text = AppConstants.demoAdminLogin;
-                              password.text = AppConstants.demoAdminPassword;
-                              notifier.setEmail(AppConstants.demoAdminLogin);
-                              notifier
-                                  .setPassword(AppConstants.demoAdminPassword);
-                            },
-                          ),
-                          const Spacer(),
-                        ],
+                            40.verticalSpace,
+                            LoginButton(
+                              titleColor: Style.primary,
+                              bgColor: Style.bg,
+                              isLoading: state.isLoading,
+                              title: AppHelpers.getTranslation(TrKeys.continueText),
+                              onPressed: () => notifier.login(
+                                checkYourNetwork: () {
+                                  AppHelpers.showSnackBar(
+                                    context,
+                                    AppHelpers.getTranslation(
+                                        TrKeys.checkYourNetworkConnection),
+                                  );
+                                },
+                                unAuthorised: () {
+                                  AppHelpers.showSnackBar(
+                                    context,
+                                    AppHelpers.getTranslation(
+                                        TrKeys.emailNotVerifiedYet),
+                                  );
+                                },
+                                goToMain: () {
+                                  context.replaceRoute(
+                                      PinCodeRoute(isNewPassword: true));
+                                },
+                              ),
+                            ),
+
+
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
+                100.horizontalSpace,
                 Expanded(
-                    child: Image.asset(
-                  Assets.pngSplashGirl,
-                  height: double.infinity,
-                  fit: BoxFit.cover,
-                )),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30.r),
+                        image: const DecorationImage(image:  AssetImage("assets/png/loginBook.png"), fit: BoxFit.cover),
+                      ),
+                    )),
               ],
             ),
           ),

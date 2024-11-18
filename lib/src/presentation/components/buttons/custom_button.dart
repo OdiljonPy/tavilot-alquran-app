@@ -23,7 +23,7 @@
 //
 //   @override
 //   Widget build(BuildContext context) {
-//     return ButtonEffectAnimation(
+//     return ButtonEffect(
 //       onTap: onTap,
 //       child: Container(
 //         padding: const EdgeInsets.symmetric(vertical: 12),

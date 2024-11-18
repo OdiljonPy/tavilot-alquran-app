@@ -20,7 +20,7 @@
 //
 //   @override
 //   Widget build(BuildContext context) {
-//     return ButtonEffectAnimation(
+//     return ButtonEffect(
 //       onTap: onTap,
 //       child: SizedBox(
 //         width: 120.w,

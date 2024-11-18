@@ -6,11 +6,11 @@ class Style {
 
   /// ###################### Colors ##########################
   static const white = Color(0xFFFFFFFF);
-
   static const transparent = Colors.transparent;
   static const blue = Color(0xFF0963E0);
   static const blueColor = Color(0xff3a92f5);
-  static const primary = Color(0xFF1A1564);
+  static const primary = Color(0xFFC99F69);
+  static const secondary = Color(0xFFEAD3B7);
   static const green = Color(0xFF16AA16);
   static const greenColor = Color(0xFF60CC3B);
   static const red = Color(0xFFFF3D00);
@@ -33,7 +33,7 @@ class Style {
   static const toggleColor = Color(0xFFE7E7E7);
   static const toggleShadowColor = Color(0xFF6B6B6B);
   static const logOutBgColor = Color(0xFFB9B9B9);
-  static const borderColor = Color(0xFFF2F2F2);
+  static const borderColor = Color(0xFF878787);
   static const addCountColor = Color(0xFFF7F7F7);
   static const discountColor = Color(0xFFF3F3F3);
   static const pending = Color(0xFFFFD989);
@@ -46,7 +46,7 @@ class Style {
   static const whiteWithOpacity = Color(0x30ffffff);
   static const success = Color(0xff31D0AA);
   static const icon = Color(0x30B1B1B1);
-  static const textHint = Color(0xff939393);
+  static const textHint = Color(0xff8B8B8B);
   static const bgDark = Color(0xff18191D);
   static const socialButtonDark = Color(0xff33393F);
   static const socialButtonLight = Color(0x40ffffff);
@@ -183,7 +183,7 @@ class Style {
     Color color = Style.black,
     double letterSpacing = 0,
   }) =>
-      GoogleFonts.inter(
+      GoogleFonts.cormorant(
         fontSize: size,
         fontWeight: FontWeight.bold,
         color: color,
@@ -198,7 +198,7 @@ class Style {
     double letterSpacing = 0,
     FontStyle? fontStyle,
   }) =>
-      GoogleFonts.inter(
+      GoogleFonts.cormorant(
         fontSize: size,
         fontWeight: FontWeight.w700,
         color: color,
@@ -214,7 +214,7 @@ class Style {
     double letterSpacing = 0,
     FontStyle? fontStyle,
   }) =>
-      GoogleFonts.inter(
+      GoogleFonts.cormorant(
         fontSize: size,
         fontWeight: FontWeight.w600,
         color: color,
@@ -230,7 +230,7 @@ class Style {
     TextDecoration textDecoration = TextDecoration.none,
     FontStyle? fontStyle,
   }) =>
-      GoogleFonts.inter(
+      GoogleFonts.cormorant(
         fontSize: size,
         fontWeight: FontWeight.w500,
         color: color,
@@ -246,7 +246,7 @@ class Style {
     TextDecoration textDecoration = TextDecoration.none,
     FontStyle? fontStyle,
   }) =>
-      GoogleFonts.inter(
+      GoogleFonts.cormorant(
         fontSize: size,
         fontWeight: FontWeight.w400,
         color: color,

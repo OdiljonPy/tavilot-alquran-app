@@ -15,7 +15,7 @@ class PinButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ButtonEffectAnimation(
+    return ButtonEffect(
       child: InkWell(
         borderRadius: BorderRadius.circular(5.r),
         onTap: onTap,

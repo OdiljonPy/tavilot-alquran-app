@@ -25,7 +25,7 @@ class CircleButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ButtonEffectAnimation(
+    return ButtonEffect(
       onTap: onTap,
       child: Container(
         height: height,

@@ -16,7 +16,7 @@ class NoDataInfo extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Image.asset(Assets.pngNoOrders, width: 205.w, height: 206.h),
+          Image.asset(Assets.pngLoginBook, width: 205.w, height: 206.h),
           Text(
             title,
             style: Style.interRegular(

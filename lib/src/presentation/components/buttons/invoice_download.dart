@@ -17,7 +17,7 @@
 //
 //   @override
 //   Widget build(BuildContext context) {
-//     return ButtonEffectAnimation(
+//     return ButtonEffect(
 //       child: GestureDetector(
 //         onTap: () {
 //           showDialog(
