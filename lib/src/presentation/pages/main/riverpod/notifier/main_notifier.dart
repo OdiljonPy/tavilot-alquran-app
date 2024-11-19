@@ -10,10 +10,10 @@ class MainNotifier extends StateNotifier<MainState> {
 
   ) : super(const MainState());
 
-  changeIndex(int index) {
+  changeIndex(int index, {VoidCallback? onSuccess}) {
     state = state.copyWith(selectIndex: index);
+     onSuccess?.call();
   }
-
 
   Future<void> fetchChapters(
       BuildContext context) async {
@@ -38,6 +38,7 @@ class MainNotifier extends StateNotifier<MainState> {
       },
     );
   }
+
 
 
 

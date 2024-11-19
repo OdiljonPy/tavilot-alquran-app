@@ -1,5 +1,7 @@
 
 import 'package:al_quran/src/repository/impl/chapter_repository.dart';
+import 'package:al_quran/src/repository/impl/juz_repository.dart';
+import 'package:al_quran/src/repository/juz_facade.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../handlers/handlers.dart';
@@ -16,6 +18,7 @@ void setUpDependencies() {
   // getIt.registerSingleton<SettingsRepository>(SettingsSettingsRepositoryImpl());
   getIt.registerSingleton<AuthFacade>(AuthRepository());
   getIt.registerSingleton<ChapterFacade>(ChapterRepository());
+  getIt.registerSingleton<JuzFacade>(JuzRepository());
   // getIt.registerSingleton<ProductsRepository>(ProductsRepositoryImpl());
   // getIt.registerSingleton<ShopsRepository>(ShopsRepositoryImpl());
   // getIt.registerSingleton<BrandsRepository>(BrandsRepositoryImpl());
@@ -45,6 +48,7 @@ final appRouter = getIt.get<AppRouter>();
 // final settingsRepository = getIt.get<SettingsRepository>();
 final authRepository = getIt.get<AuthFacade>();
 final chapterRepository = getIt.get<ChapterFacade>();
+final juzRepository = getIt.get<JuzFacade>();
 // final productsRepository = getIt.get<ProductsRepository>();
 // final shopsRepository = getIt.get<ShopsRepository>();
 // final brandsRepository = getIt.get<BrandsRepository>();

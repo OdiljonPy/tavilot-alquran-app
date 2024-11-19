@@ -1,3 +1,4 @@
+import 'package:al_quran/src/presentation/pages/about_page/surah_page/surah_page.dart';
 import 'package:al_quran/src/presentation/pages/for_students/for_students_page.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,7 @@ class _MainPageState extends ConsumerState<MainPage>
     IndexedStackChild(child: const BlogPage(), preload: true),
     IndexedStackChild(child: const ForStudentsPage()),
     IndexedStackChild(child: const AboutPage()),
-
+    IndexedStackChild(child: const SurahPage()),
   ];
 
   @override

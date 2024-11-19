@@ -1,10 +1,10 @@
+import 'package:al_quran/application/surah/surah_provider.dart';
 import 'package:al_quran/src/presentation/components/components.dart';
 import 'package:al_quran/src/presentation/pages/main/riverpod/provider/main_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-
 import '../../../../../generated/assets.dart';
 import '../../../styles/style.dart';
 
@@ -31,7 +31,7 @@ class _BlogPageState extends ConsumerState<BlogPage> {
                   fit: BoxFit.cover,
                 ),
               ),
-              child: Row(
+              child: const Row(
                 children: [
                   Expanded(flex: 1, child: SizedBox()),
                   Expanded(
@@ -145,6 +145,14 @@ class _BlogPageState extends ConsumerState<BlogPage> {
                   itemCount: ref.read(mainProvider).chapters.length,
                   itemBuilder: (BuildContext context, int index) {
                     return ButtonEffect(
+                      onTap: () {
+                         ref.read(mainProvider.notifier).changeIndex(3, onSuccess: ()async{
+                           print(ref.watch(mainProvider).selectIndex);
+                           await  ref.read(surahProvider.notifier)
+                               .fetchJuzes(context);
+                           await ref.read(surahProvider.notifier).fetchJuz(context, index + 1);
+                         });
+                      },
                       child: Container(
                         padding: REdgeInsets.all(20),
                         decoration: BoxDecoration(
@@ -177,14 +185,16 @@ class _BlogPageState extends ConsumerState<BlogPage> {
                             20.horizontalSpace,
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  "${ref.read(mainProvider).chapters[index].name}",
+                                  "${ref.watch(mainProvider).chapters[index].name}",
                                   style: Style.interRegular(
                                       size: 24, color: Style.black),
                                 ),
                                 Text(
-                                  "Маккада нозил бўлган, 7 оятдан иборат",
+                                  "${ref.watch(mainProvider).chapters[index].typeChoice == 1
+                                      ? "Маккий" : "Маданий"}, ${ref.watch(mainProvider).chapters[index].verseNumber} оят",
                                   style: Style.interRegular(
                                       size: 10, color: Style.black),
                                 ),
@@ -193,15 +203,16 @@ class _BlogPageState extends ConsumerState<BlogPage> {
                             const Spacer(),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.end,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
                                     "${ref.read(mainProvider).chapters[index].nameArabic}",
                                     style: Style.interRegular(
                                         size: 20, color: Style.black)),
                                 Text(
-                                  "7 oyat",
+                                  "${ref.watch(mainProvider).chapters[index].verseNumber} оят",
                                   style: Style.interRegular(
-                                      size: 10, color: Style.textHint),
+                                      size: 16, color: Style.textHint),
                                 ),
                               ],
                             )

@@ -1,4 +1,6 @@
+import 'package:al_quran/src/app_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Style {
@@ -184,7 +186,7 @@ class Style {
     double letterSpacing = 0,
   }) =>
       GoogleFonts.cormorant(
-        fontSize: size,
+        fontSize: size.sp,
         fontWeight: FontWeight.bold,
         color: color,
         decoration: TextDecoration.none,
@@ -199,7 +201,7 @@ class Style {
     FontStyle? fontStyle,
   }) =>
       GoogleFonts.cormorant(
-        fontSize: size,
+        fontSize: size.sp,
         fontWeight: FontWeight.w700,
         color: color,
         letterSpacing: letterSpacing,
@@ -215,7 +217,7 @@ class Style {
     FontStyle? fontStyle,
   }) =>
       GoogleFonts.cormorant(
-        fontSize: size,
+        fontSize: size.sp,
         fontWeight: FontWeight.w600,
         color: color,
         letterSpacing: letterSpacing,
@@ -231,7 +233,7 @@ class Style {
     FontStyle? fontStyle,
   }) =>
       GoogleFonts.cormorant(
-        fontSize: size,
+        fontSize: size.sp,
         fontWeight: FontWeight.w500,
         color: color,
         letterSpacing: letterSpacing,
@@ -247,7 +249,7 @@ class Style {
     FontStyle? fontStyle,
   }) =>
       GoogleFonts.cormorant(
-        fontSize: size,
+        fontSize: size.sp,
         fontWeight: FontWeight.w400,
         color: color,
         letterSpacing: letterSpacing,

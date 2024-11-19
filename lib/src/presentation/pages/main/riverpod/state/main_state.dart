@@ -1,6 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import '../../../../../models/models.dart';
-import '../../../../../models/response/chapter_response.dart';
+import '../../../../../models/response/juz_response.dart';
 part 'main_state.freezed.dart';
 
 @freezed
