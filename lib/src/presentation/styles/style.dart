@@ -14,6 +14,7 @@ class Style {
   static const primary = Color(0xFFC99F69);
   static const secondary = Color(0xFFEAD3B7);
   static const green = Color(0xFF16AA16);
+  static const darkGreen = Color(0xFF007577);
   static const greenColor = Color(0xFF60CC3B);
   static const red = Color(0xFFFF3D00);
   static const redColor = Color(0xFFF34750);
@@ -67,7 +68,7 @@ class Style {
   static const dragElement = Color(0xFFC4C5C7);
   static const semiGrey = Color(0xFFF1F1F1);
   static const unselect = Color(0xFFF8F8F8);
-  static const backgroundColor = Color(0xFFF8F8F8);
+  static const backgroundColor = Color(0xFFEBEBEB);
   static const orange = Color(0xffF26110);
   static const Color defaultBorderColor = Color(0xffdddddd);
   static const Color defaultLiveTimeIndicatorColor = Color(0xff444444);
@@ -247,6 +248,7 @@ class Style {
     double letterSpacing = 0,
     TextDecoration textDecoration = TextDecoration.none,
     FontStyle? fontStyle,
+    Color? decorationColor,
   }) =>
       GoogleFonts.cormorant(
         fontSize: size.sp,
@@ -255,5 +257,6 @@ class Style {
         letterSpacing: letterSpacing,
         decoration: textDecoration,
         fontStyle: fontStyle,
+        decorationColor: decorationColor
       );
 }

@@ -1,4 +1,5 @@
 import 'package:al_quran/application/surah/surah_provider.dart';
+import 'package:al_quran/src/core/utils/local_storage.dart';
 import 'package:al_quran/src/presentation/components/components.dart';
 import 'package:al_quran/src/presentation/pages/main/riverpod/provider/main_provider.dart';
 import 'package:flutter/cupertino.dart';
@@ -126,12 +127,17 @@ class _BlogPageState extends ConsumerState<BlogPage> {
             ),
           ),
           60.verticalSpace,
-          Padding(
-              padding: REdgeInsets.only(left: 40, bottom: 30),
-              child: Text(
-                "Суралар",
-                style: Style.interNormal(size: 36, color: Style.black),
-              )),
+          ButtonEffect(
+            onTap: (){
+              LocalStorage.deleteToken();
+            },
+            child: Padding(
+                padding: REdgeInsets.only(left: 40, bottom: 30),
+                child: Text(
+                  "Суралар",
+                  style: Style.interNormal(size: 36, color: Style.black),
+                )),
+          ),
           ref.watch(mainProvider).chapters.isEmpty
               ? const Loading()
               : GridView.builder(
@@ -147,10 +153,9 @@ class _BlogPageState extends ConsumerState<BlogPage> {
                     return ButtonEffect(
                       onTap: () {
                          ref.read(mainProvider.notifier).changeIndex(3, onSuccess: ()async{
-                           print(ref.watch(mainProvider).selectIndex);
-                           await  ref.read(surahProvider.notifier)
-                               .fetchJuzes(context);
-                           await ref.read(surahProvider.notifier).fetchJuz(context, index + 1);
+                           // await  ref.read(surahProvider.notifier)
+                           //     .fetchJuzes(context);
+                           await ref.read(surahProvider.notifier).fetchSurah(context, index + 1);
                          });
                       },
                       child: Container(

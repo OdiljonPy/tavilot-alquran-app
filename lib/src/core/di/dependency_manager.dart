@@ -1,10 +1,14 @@
 
+import 'package:al_quran/src/repository/for_students_facade.dart';
+import 'package:al_quran/src/repository/impl/about_repository.dart';
 import 'package:al_quran/src/repository/impl/chapter_repository.dart';
+import 'package:al_quran/src/repository/impl/for_students_repository.dart';
 import 'package:al_quran/src/repository/impl/juz_repository.dart';
 import 'package:al_quran/src/repository/juz_facade.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../handlers/handlers.dart';
+import '../../repository/about_facade.dart';
 import '../../repository/auth_facade.dart';
 import '../../repository/chapter_facade.dart';
 import '../../repository/impl/auth_repository.dart';
@@ -15,10 +19,11 @@ final GetIt getIt = GetIt.instance;
 void setUpDependencies() {
   getIt.registerSingleton<AppRouter>(AppRouter());
   getIt.registerLazySingleton<HttpService>(() => HttpService());
-  // getIt.registerSingleton<SettingsRepository>(SettingsSettingsRepositoryImpl());
   getIt.registerSingleton<AuthFacade>(AuthRepository());
   getIt.registerSingleton<ChapterFacade>(ChapterRepository());
   getIt.registerSingleton<JuzFacade>(JuzRepository());
+  getIt.registerSingleton<AboutFacade>(AboutRepository());
+  getIt.registerSingleton<ForStudentsFacade>(ForStudentsRepository());
   // getIt.registerSingleton<ProductsRepository>(ProductsRepositoryImpl());
   // getIt.registerSingleton<ShopsRepository>(ShopsRepositoryImpl());
   // getIt.registerSingleton<BrandsRepository>(BrandsRepositoryImpl());
@@ -44,11 +49,11 @@ void setUpDependencies() {
 
 final dioHttp = getIt.get<HttpService>();
 final appRouter = getIt.get<AppRouter>();
-
-// final settingsRepository = getIt.get<SettingsRepository>();
 final authRepository = getIt.get<AuthFacade>();
 final chapterRepository = getIt.get<ChapterFacade>();
 final juzRepository = getIt.get<JuzFacade>();
+final aboutRepository = getIt.get<AboutFacade>();
+final forStudentsRepository = getIt.get<ForStudentsFacade>();
 // final productsRepository = getIt.get<ProductsRepository>();
 // final shopsRepository = getIt.get<ShopsRepository>();
 // final brandsRepository = getIt.get<BrandsRepository>();
