@@ -1,6 +1,8 @@
 import 'package:al_quran/src/core/di/dependency_manager.dart';
+import 'package:al_quran/src/models/data/bookmark_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../src/core/utils/local_storage.dart';
 import 'surah_state.dart';
 
 class SurahNotifier extends StateNotifier<SurahState> {
@@ -8,6 +10,45 @@ class SurahNotifier extends StateNotifier<SurahState> {
 
   changeIndex(int index) {
     state = state.copyWith(selectIndex: index);
+  }
+
+  setBookmarkFromLocale() {
+    final bookmarkList = LocalStorage.getBookmarks();
+    state = state.copyWith(bookmarks: bookmarkList);
+  }
+
+  setBookMark(int id, int verseId) {
+    List<Bookmark> temp = List.from(state.bookmarks);
+    if (temp.any((element) => element.id == id)) {
+      temp[temp.indexWhere((element) => element.id == id)]
+              .verseIds
+              .any((e) => e == verseId)
+          ? temp[temp.indexWhere((element) => element.id == id)]
+              .verseIds
+              .remove(verseId)
+          : temp[temp.indexWhere((element) => element.id == id)]
+              .verseIds
+              .add(verseId);
+
+      state = state.copyWith(
+        bookmarks: temp
+      );
+    }
+    else {
+      temp.add(Bookmark(id: id, verseIds: [verseId]));
+      state = state.copyWith(
+        bookmarks: temp
+      );
+    }
+    LocalStorage.setBookmark(state.bookmarks);
+  }
+
+  selectJuzId(int index) {
+    state = state.copyWith(selectedJuzId: index);
+  }
+
+  selectSurahId(int index) {
+    state = state.copyWith(selectedSurahId: index);
   }
 
   clear() {
@@ -75,5 +116,4 @@ class SurahNotifier extends StateNotifier<SurahState> {
       },
     );
   }
-
 }

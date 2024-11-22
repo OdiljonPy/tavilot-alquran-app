@@ -72,7 +72,6 @@ class Style {
   static const orange = Color(0xffF26110);
   static const Color defaultBorderColor = Color(0xffdddddd);
   static const Color defaultLiveTimeIndicatorColor = Color(0xff444444);
-
   static const Color editProfileCircle = Color(0xFFF4F5F8);
   static const Color brandColor = Color(0xffE34F26);
   static const Color dontHaveAccBtnBack = Color(0xFFF8F8F8);

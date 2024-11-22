@@ -30,34 +30,40 @@ class CategoriesResponse {
 class Category {
   final int? id;
   final String? name;
+  final String? title;
   final List<dynamic>? subcategory;
 
   Category({
     this.id,
     this.name,
+    this.title,
     this.subcategory,
   });
 
   Category copyWith({
     int? id,
     String? name,
+    String? title,
     List<dynamic>? subcategory,
   }) =>
       Category(
         id: id ?? this.id,
         name: name ?? this.name,
+        title: title ?? this.title,
         subcategory: subcategory ?? this.subcategory,
       );
 
   factory Category.fromJson(Map<String, dynamic> json) => Category(
     id: json["id"],
     name: json["name"],
+    title: json["title"],
     subcategory: json["subcategory"] == null ? [] : List<dynamic>.from(json["subcategory"]!.map((x) => x)),
   );
 
   Map<String, dynamic> toJson() => {
     "id": id,
     "name": name,
+    "title": title,
     "subcategory": subcategory == null ? [] : List<dynamic>.from(subcategory!.map((x) => x)),
   };
 }

@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../../../../main.dart';
 import '../../../../core/constants/constants.dart';
 import '../../../../core/routes/app_router.dart';
 import '../../../../core/utils/utils.dart';
@@ -29,34 +28,11 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     //   (_) => ref.read(languagesProvider.notifier).checkLanguage(),
     // );
   }
-
   final TextEditingController login = TextEditingController();
   final TextEditingController password = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    // ref.listen(
-    //   languagesProvider,
-    //   (previous, next) {
-    //     if (next.isSelectLanguage &&
-    //         next.isSelectLanguage != previous?.isSelectLanguage) {
-    //       AppHelpers.showAlertDialog(
-    //         // isDismissible: false,
-    //         // isDrag: false,
-    //         context: context,
-    //         child: SizedBox(
-    //           height: MediaQuery.sizeOf(context).height / 2,
-    //           width: MediaQuery.sizeOf(context).width / 4,
-    //           child: LanguagesModal(
-    //             afterUpdate: () {
-    //               context.popRoute();
-    //             },
-    //           ),
-    //         ),
-    //       );
-    //     }
-    //   },
-    // );
     final notifier = ref.read(loginProvider.notifier);
     final state = ref.watch(loginProvider);
     return KeyboardDismisser(
@@ -112,8 +88,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                               textController: login,
                               inputType: TextInputType.emailAddress,
                               textCapitalization: TextCapitalization.none,
-                              // isError:
-                              //     state.isLoginError || state.isEmailNotValid,
                               descriptionText: state.isEmailNotValid
                                   ? AppHelpers.getTranslation(
                                       TrKeys.emailIsNotValid)
@@ -122,25 +96,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                           TrKeys.loginCredentialsAreNotValid)
                                       : null),
                               onFieldSubmitted: (value) {
-                              //   return notifier.login(
-                              //   checkYourNetwork: () {
-                              //     AppHelpers.showSnackBar(
-                              //       context,
-                              //       AppHelpers.getTranslation(
-                              //           TrKeys.checkYourNetworkConnection),
-                              //     );
-                              //   },
-                              //   unAuthorised: () {
-                              //     AppHelpers.showSnackBar(
-                              //       context,
-                              //       AppHelpers.getTranslation(
-                              //           TrKeys.emailNotVerifiedYet),
-                              //     );
-                              //   },
-                              //   goToMain: () {
-                              //     context.replaceRoute(const MainRoute());
-                              //   },
-                              // );
                               }, label: null,
                             ),
                             50.verticalSpace,
@@ -176,12 +131,11 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                 //     );
                                 //   },
                                 //   goToMain: () {
-                                //     context.replaceRoute(const MainRoute());
+                                //     context.replaceRoute(const MainRout  e());
                                 //   },
                                 // );
                               }, label: null,
                             ),
-
                             56.verticalSpace,
                             LoginButton(
                               height: 80.r,
@@ -204,8 +158,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                   );
                                 },
                                 goToMain: () {
-                                  context.replaceRoute(
-                                      PinCodeRoute(isNewPassword: true));
+                                  context.replaceRoute(const MainRoute());
                                 },
                               );
                               },

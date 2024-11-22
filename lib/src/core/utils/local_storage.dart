@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:al_quran/src/models/data/bookmark_data.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../models/models.dart';
 import '../constants/constants.dart';
@@ -22,6 +23,12 @@ class LocalStorage {
   static Future<void> setToken(String? token) async {
     if (_preferences != null) {
       await _preferences!.setString(AppConstants.keyToken, token ?? '');
+    }
+  }
+
+  static Future<void> setUserRate(int? userRate) async {
+    if (_preferences != null) {
+      await _preferences!.setInt(AppConstants.keyUserRate, userRate ?? 1);
     }
   }
 
@@ -70,6 +77,9 @@ class LocalStorage {
   }
 
   static String getToken() => _preferences?.getString(AppConstants.keyToken) ?? '';
+
+  static int getUserRate() => _preferences?.getInt(AppConstants.keyUserRate) ?? 1;
+
 
   static void deleteToken() => _preferences?.remove(AppConstants.keyToken);
 
@@ -169,13 +179,13 @@ class LocalStorage {
   static void deleteSelectedCurrency() =>
       _preferences?.remove(AppConstants.keySelectedCurrency);
 
-  // static Future<void> setBags(List<BagData> bags) async {
-  //   if (_preferences != null) {
-  //     final List<String> strings =
-  //         bags.map((bag) => jsonEncode(bag.toJson())).toList();
-  //     await _preferences!.setStringList(AppConstants.keyBags, strings);
-  //   }
-  // }
+  static Future<void> setBookmark(List<Bookmark> bookmarks) async {
+    if (_preferences != null) {
+      final List<String> strings =
+      bookmarks.map((bookmark) => jsonEncode(bookmark.toJson())).toList();
+      await _preferences!.setStringList(AppConstants.keyBookmark, strings);
+    }
+  }
 
   // static Future<void> setAddress(LocationData locationData) async {
   //   if (_preferences != null) {
@@ -218,18 +228,17 @@ class LocalStorage {
     return Wallet.fromJson(map);
   }
 
-  // static List<BagData> getBags() {
-  //   final List<String> bags =
-  //       _preferences?.getStringList(AppConstants.keyBags) ?? [];
-  //   final List<BagData> localBags = bags
-  //       .map(
-  //         (bag) => BagData.fromJson(jsonDecode(bag)),
-  //       )
-  //       .toList(growable: true);
-  //   return localBags;
-  // }
+  static List<Bookmark> getBookmarks() {
+    final List<String> bags =
+        _preferences?.getStringList(AppConstants.keyBookmark) ?? [];
+    final List<Bookmark> localBags = bags
+        .map(
+          (bag) => Bookmark.fromJson(jsonDecode(bag)),
+        )
+        .toList(growable: true);
+    return localBags;
+  }
 
-  static void deleteCartProducts() => _preferences?.remove(AppConstants.keyBags);
   //
   // static Future<void> setShop(ShopData? shop) async {
   //   if (_preferences != null) {
@@ -275,6 +284,5 @@ class LocalStorage {
     deletePinCode();
     deleteToken();
     deleteUser();
-    deleteCartProducts();
   }
 }

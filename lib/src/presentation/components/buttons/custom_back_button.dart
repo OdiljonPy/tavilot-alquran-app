@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/constants/constants.dart';
 import '../../../core/utils/app_helpers.dart';
-import '../../../core/utils/local_storage.dart';
 import '../../styles/style.dart';
 
 class CustomBackButton extends StatelessWidget {
@@ -18,16 +18,26 @@ class CustomBackButton extends StatelessWidget {
     return InkWell(
       borderRadius: BorderRadius.circular(12),
       onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.only(right: 18,top: 6,bottom: 6),
+      child: Container(
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Style.primary.withOpacity(0.3),
+              blurRadius: 10,
+              offset: const Offset(0, 4),
+            ),
+          ],
+          color: const Color(0xFFF6F6F6),
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: Style.primary.withOpacity(0.3)),
+        ),
+        padding: REdgeInsets.all(8),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(
-                LocalStorage.getLangLtr()
-                    ? FlutterRemix.arrow_left_s_line
-                    : FlutterRemix.arrow_right_s_line,
-                size: 32),
+            Icon(FlutterRemix.arrow_left_s_line,
+                size:24.r),
+            8.horizontalSpace,
             Text(AppHelpers.getTranslation(TrKeys.back),
                 style: Style.interNormal(size: 16)),
           ],

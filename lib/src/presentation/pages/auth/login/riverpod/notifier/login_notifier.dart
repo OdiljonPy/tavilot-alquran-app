@@ -47,8 +47,8 @@ class LoginNotifier extends StateNotifier<LoginState> {
     response.when(
       success: (data) async {
         await LocalStorage.setToken(data.result?.accessToken ?? '');
-        // await LocalStorage.(data.result?.accessToken ?? '');
-        // LocalStorage.setUser(data.result?.user);
+        await LocalStorage.setUserRate(data.result?.userRate ?? 1);
+        // await LocalStorage.setre(data.result?.user);
         goToMain?.call();
         // fetchCurrencies(
         //   checkYourNetworkConnection: checkYourNetwork,

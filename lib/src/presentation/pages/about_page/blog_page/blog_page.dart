@@ -1,5 +1,4 @@
 import 'package:al_quran/application/surah/surah_provider.dart';
-import 'package:al_quran/src/core/utils/local_storage.dart';
 import 'package:al_quran/src/presentation/components/components.dart';
 import 'package:al_quran/src/presentation/pages/main/riverpod/provider/main_provider.dart';
 import 'package:flutter/cupertino.dart';
@@ -7,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../../../generated/assets.dart';
+import '../../../../core/utils/local_storage.dart';
 import '../../../styles/style.dart';
 
 class BlogPage extends ConsumerStatefulWidget {
@@ -129,6 +129,7 @@ class _BlogPageState extends ConsumerState<BlogPage> {
           60.verticalSpace,
           ButtonEffect(
             onTap: (){
+              // ref.read(mainProvider.notifier).changeIndex(4);
               LocalStorage.deleteToken();
             },
             child: Padding(
@@ -153,9 +154,11 @@ class _BlogPageState extends ConsumerState<BlogPage> {
                     return ButtonEffect(
                       onTap: () {
                          ref.read(mainProvider.notifier).changeIndex(3, onSuccess: ()async{
-                           // await  ref.read(surahProvider.notifier)
-                           //     .fetchJuzes(context);
+                           ref.read(surahProvider.notifier).selectSurahId(index + 1);
+                           await  ref.read(surahProvider.notifier)
+                               .fetchJuzes(context);
                            await ref.read(surahProvider.notifier).fetchSurah(context, index + 1);
+                           await ref.read(surahProvider.notifier).fetchJuz(context, index + 1);
                          });
                       },
                       child: Container(

@@ -18,9 +18,12 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$SurahState {
   bool get isJuzLoading => throw _privateConstructorUsedError;
   bool get isSurahLoading => throw _privateConstructorUsedError;
+  int get selectedSurahId => throw _privateConstructorUsedError;
+  int get selectedJuzId => throw _privateConstructorUsedError;
   int get selectIndex => throw _privateConstructorUsedError;
   int get selectedIndicationType => throw _privateConstructorUsedError;
   List<JuzListItem> get juzes => throw _privateConstructorUsedError;
+  List<Bookmark> get bookmarks => throw _privateConstructorUsedError;
   JuzResponse? get juz => throw _privateConstructorUsedError;
   SingleChapter? get chapter => throw _privateConstructorUsedError;
 
@@ -40,9 +43,12 @@ abstract class $SurahStateCopyWith<$Res> {
   $Res call(
       {bool isJuzLoading,
       bool isSurahLoading,
+      int selectedSurahId,
+      int selectedJuzId,
       int selectIndex,
       int selectedIndicationType,
       List<JuzListItem> juzes,
+      List<Bookmark> bookmarks,
       JuzResponse? juz,
       SingleChapter? chapter});
 }
@@ -64,9 +70,12 @@ class _$SurahStateCopyWithImpl<$Res, $Val extends SurahState>
   $Res call({
     Object? isJuzLoading = null,
     Object? isSurahLoading = null,
+    Object? selectedSurahId = null,
+    Object? selectedJuzId = null,
     Object? selectIndex = null,
     Object? selectedIndicationType = null,
     Object? juzes = null,
+    Object? bookmarks = null,
     Object? juz = freezed,
     Object? chapter = freezed,
   }) {
@@ -79,6 +88,14 @@ class _$SurahStateCopyWithImpl<$Res, $Val extends SurahState>
           ? _value.isSurahLoading
           : isSurahLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      selectedSurahId: null == selectedSurahId
+          ? _value.selectedSurahId
+          : selectedSurahId // ignore: cast_nullable_to_non_nullable
+              as int,
+      selectedJuzId: null == selectedJuzId
+          ? _value.selectedJuzId
+          : selectedJuzId // ignore: cast_nullable_to_non_nullable
+              as int,
       selectIndex: null == selectIndex
           ? _value.selectIndex
           : selectIndex // ignore: cast_nullable_to_non_nullable
@@ -91,6 +108,10 @@ class _$SurahStateCopyWithImpl<$Res, $Val extends SurahState>
           ? _value.juzes
           : juzes // ignore: cast_nullable_to_non_nullable
               as List<JuzListItem>,
+      bookmarks: null == bookmarks
+          ? _value.bookmarks
+          : bookmarks // ignore: cast_nullable_to_non_nullable
+              as List<Bookmark>,
       juz: freezed == juz
           ? _value.juz
           : juz // ignore: cast_nullable_to_non_nullable
@@ -114,9 +135,12 @@ abstract class _$$SurahStateImplCopyWith<$Res>
   $Res call(
       {bool isJuzLoading,
       bool isSurahLoading,
+      int selectedSurahId,
+      int selectedJuzId,
       int selectIndex,
       int selectedIndicationType,
       List<JuzListItem> juzes,
+      List<Bookmark> bookmarks,
       JuzResponse? juz,
       SingleChapter? chapter});
 }
@@ -136,9 +160,12 @@ class __$$SurahStateImplCopyWithImpl<$Res>
   $Res call({
     Object? isJuzLoading = null,
     Object? isSurahLoading = null,
+    Object? selectedSurahId = null,
+    Object? selectedJuzId = null,
     Object? selectIndex = null,
     Object? selectedIndicationType = null,
     Object? juzes = null,
+    Object? bookmarks = null,
     Object? juz = freezed,
     Object? chapter = freezed,
   }) {
@@ -151,6 +178,14 @@ class __$$SurahStateImplCopyWithImpl<$Res>
           ? _value.isSurahLoading
           : isSurahLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      selectedSurahId: null == selectedSurahId
+          ? _value.selectedSurahId
+          : selectedSurahId // ignore: cast_nullable_to_non_nullable
+              as int,
+      selectedJuzId: null == selectedJuzId
+          ? _value.selectedJuzId
+          : selectedJuzId // ignore: cast_nullable_to_non_nullable
+              as int,
       selectIndex: null == selectIndex
           ? _value.selectIndex
           : selectIndex // ignore: cast_nullable_to_non_nullable
@@ -163,6 +198,10 @@ class __$$SurahStateImplCopyWithImpl<$Res>
           ? _value._juzes
           : juzes // ignore: cast_nullable_to_non_nullable
               as List<JuzListItem>,
+      bookmarks: null == bookmarks
+          ? _value._bookmarks
+          : bookmarks // ignore: cast_nullable_to_non_nullable
+              as List<Bookmark>,
       juz: freezed == juz
           ? _value.juz
           : juz // ignore: cast_nullable_to_non_nullable
@@ -181,12 +220,16 @@ class _$SurahStateImpl extends _SurahState {
   const _$SurahStateImpl(
       {this.isJuzLoading = false,
       this.isSurahLoading = false,
+      this.selectedSurahId = 0,
+      this.selectedJuzId = 0,
       this.selectIndex = 0,
       this.selectedIndicationType = 0,
       final List<JuzListItem> juzes = const [],
+      final List<Bookmark> bookmarks = const [],
       this.juz,
       this.chapter})
       : _juzes = juzes,
+        _bookmarks = bookmarks,
         super._();
 
   @override
@@ -195,6 +238,12 @@ class _$SurahStateImpl extends _SurahState {
   @override
   @JsonKey()
   final bool isSurahLoading;
+  @override
+  @JsonKey()
+  final int selectedSurahId;
+  @override
+  @JsonKey()
+  final int selectedJuzId;
   @override
   @JsonKey()
   final int selectIndex;
@@ -210,6 +259,15 @@ class _$SurahStateImpl extends _SurahState {
     return EqualUnmodifiableListView(_juzes);
   }
 
+  final List<Bookmark> _bookmarks;
+  @override
+  @JsonKey()
+  List<Bookmark> get bookmarks {
+    if (_bookmarks is EqualUnmodifiableListView) return _bookmarks;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_bookmarks);
+  }
+
   @override
   final JuzResponse? juz;
   @override
@@ -217,7 +275,7 @@ class _$SurahStateImpl extends _SurahState {
 
   @override
   String toString() {
-    return 'SurahState(isJuzLoading: $isJuzLoading, isSurahLoading: $isSurahLoading, selectIndex: $selectIndex, selectedIndicationType: $selectedIndicationType, juzes: $juzes, juz: $juz, chapter: $chapter)';
+    return 'SurahState(isJuzLoading: $isJuzLoading, isSurahLoading: $isSurahLoading, selectedSurahId: $selectedSurahId, selectedJuzId: $selectedJuzId, selectIndex: $selectIndex, selectedIndicationType: $selectedIndicationType, juzes: $juzes, bookmarks: $bookmarks, juz: $juz, chapter: $chapter)';
   }
 
   @override
@@ -229,11 +287,17 @@ class _$SurahStateImpl extends _SurahState {
                 other.isJuzLoading == isJuzLoading) &&
             (identical(other.isSurahLoading, isSurahLoading) ||
                 other.isSurahLoading == isSurahLoading) &&
+            (identical(other.selectedSurahId, selectedSurahId) ||
+                other.selectedSurahId == selectedSurahId) &&
+            (identical(other.selectedJuzId, selectedJuzId) ||
+                other.selectedJuzId == selectedJuzId) &&
             (identical(other.selectIndex, selectIndex) ||
                 other.selectIndex == selectIndex) &&
             (identical(other.selectedIndicationType, selectedIndicationType) ||
                 other.selectedIndicationType == selectedIndicationType) &&
             const DeepCollectionEquality().equals(other._juzes, _juzes) &&
+            const DeepCollectionEquality()
+                .equals(other._bookmarks, _bookmarks) &&
             (identical(other.juz, juz) || other.juz == juz) &&
             (identical(other.chapter, chapter) || other.chapter == chapter));
   }
@@ -243,9 +307,12 @@ class _$SurahStateImpl extends _SurahState {
       runtimeType,
       isJuzLoading,
       isSurahLoading,
+      selectedSurahId,
+      selectedJuzId,
       selectIndex,
       selectedIndicationType,
       const DeepCollectionEquality().hash(_juzes),
+      const DeepCollectionEquality().hash(_bookmarks),
       juz,
       chapter);
 
@@ -262,9 +329,12 @@ abstract class _SurahState extends SurahState {
   const factory _SurahState(
       {final bool isJuzLoading,
       final bool isSurahLoading,
+      final int selectedSurahId,
+      final int selectedJuzId,
       final int selectIndex,
       final int selectedIndicationType,
       final List<JuzListItem> juzes,
+      final List<Bookmark> bookmarks,
       final JuzResponse? juz,
       final SingleChapter? chapter}) = _$SurahStateImpl;
   const _SurahState._() : super._();
@@ -274,11 +344,17 @@ abstract class _SurahState extends SurahState {
   @override
   bool get isSurahLoading;
   @override
+  int get selectedSurahId;
+  @override
+  int get selectedJuzId;
+  @override
   int get selectIndex;
   @override
   int get selectedIndicationType;
   @override
   List<JuzListItem> get juzes;
+  @override
+  List<Bookmark> get bookmarks;
   @override
   JuzResponse? get juz;
   @override

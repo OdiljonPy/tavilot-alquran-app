@@ -8,6 +8,7 @@ class AppConstants {
   static const String keyLangSelected = 'keyLangSelected';
   static const String keyLanguageData = 'keyLanguageData';
   static const String keyToken = 'keyToken';
+  static const String keyUserRate = 'keyUserRate';
   static const String keyWallet = 'keyWallet';
   static const String keySystemLanguage = 'keySystemLanguage';
   static const String keyGlobalSettings = 'keyGlobalSettings';
@@ -16,7 +17,7 @@ class AppConstants {
   static const String keyShop = 'keyShop';
   static const String keyTranslations = 'keyTranslations';
   static const String keySelectedCurrency = 'keySelectedCurrency';
-  static const String keyBags = 'keyBags';
+  static const String keyBookmark = 'keyBookmark';
   static const String keyUser = 'keyUser';
   static const String keyAddress = 'keyAddress';
   static const String pinCode = 'pinCode';

@@ -1,12 +1,15 @@
+import 'package:al_quran/application/surah/surah_provider.dart';
 import 'package:al_quran/src/presentation/pages/about_page/surah_page/surah_page.dart';
 import 'package:al_quran/src/presentation/pages/for_students/for_students_page.dart';
 import 'package:al_quran/src/presentation/pages/main/riverpod/state/main_state.dart';
+import 'package:al_quran/src/presentation/pages/premium/premium_page.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:proste_indexed_stack/proste_indexed_stack.dart';
 import '../../../../application/about/about_provider.dart';
+import '../../../../application/for_students/for_students_provider.dart';
 import '../../components/app_logo.dart';
 import '../../components/components.dart';
 import '../../styles/style.dart';
@@ -30,16 +33,18 @@ class _MainPageState extends ConsumerState<MainPage>
     IndexedStackChild(child: const ForStudentsPage()),
     IndexedStackChild(child: const AboutPage()),
     IndexedStackChild(child: const SurahPage()),
+    IndexedStackChild(child: const PremiumPage()),
   ];
 
   @override
   void initState() {
     super.initState();
-
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(surahProvider.notifier).setBookmarkFromLocale();
       ref.read(mainProvider.notifier)
         ..changeIndex(0)
         ..fetchChapters(context);
+      ref.read(forStudentsProvider.notifier).fetchCategories(context);
     });
   }
 
@@ -102,13 +107,12 @@ class _MainPageState extends ConsumerState<MainPage>
                             color: state.selectIndex == 0
                                 ? Style.darkGreen
                                 : Style.black),
-
                       ),
                     ),
                     36.horizontalSpace,
                     ButtonEffect(
                       onTap: () {
-                        ref.read(mainProvider.notifier).changeIndex(0,
+                        ref.read(mainProvider.notifier).changeIndex(1,
                             onSuccess: () {
                           // ref.read(aboutProvider.notifier).fetchAbout(context);
                         });
