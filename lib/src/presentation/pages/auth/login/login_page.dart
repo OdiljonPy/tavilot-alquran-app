@@ -21,15 +21,15 @@ class LoginPage extends ConsumerStatefulWidget {
 }
 
 class _LoginPageState extends ConsumerState<LoginPage> {
+  late TextEditingController login;
+  late TextEditingController password;
   @override
   void initState() {
     super.initState();
-    // WidgetsBinding.instance.addPostFrameCallback(
-    //   (_) => ref.read(languagesProvider.notifier).checkLanguage(),
-    // );
+    login = TextEditingController(text: "+998");
+    password = TextEditingController();
   }
-  final TextEditingController login = TextEditingController();
-  final TextEditingController password = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -84,25 +84,30 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             OutlinedBorderTextField(
                               hintText:
                                   AppHelpers.getTranslation(TrKeys.typeSomething),
-                              onChanged: notifier.setEmail,
+                              // onChanged:(s)=> notifier.setEmail(s),
                               textController: login,
-                              inputType: TextInputType.emailAddress,
-                              textCapitalization: TextCapitalization.none,
-                              descriptionText: state.isEmailNotValid
-                                  ? AppHelpers.getTranslation(
-                                      TrKeys.emailIsNotValid)
-                                  : (state.isLoginError
-                                      ? AppHelpers.getTranslation(
-                                          TrKeys.loginCredentialsAreNotValid)
-                                      : null),
-                              onFieldSubmitted: (value) {
-                              }, label: null,
+                              inputType: TextInputType.phone,
+                              validator: AppValidators.emptyCheck,
+                              // textCapitalization: TextCapitalization.none,
+                              inputFormatters: [AppHelpers.phoneFormatter()],
+                              // descriptionText: state.isEmailNotValid
+                              //     ? AppHelpers.getTranslation(
+                              //         TrKeys.emailIsNotValid)
+                              //     : (state.isLoginError
+                              //         ? AppHelpers.getTranslation(
+                              //             TrKeys.loginCredentialsAreNotValid)
+                              //         : null),
+                              // onFieldSubmitted: (value) {
+                              // },
+                              label: null,
                             ),
                             50.verticalSpace,
                             OutlinedBorderTextField(
                               hintText: LocaleKeys.password.tr(),
                               onChanged: notifier.setPassword,
                               textController: password,
+                              obscure: true,
+                              validator: AppValidators.emptyCheck,
                               inputType: TextInputType.emailAddress,
                               textCapitalization: TextCapitalization.none,
                               // isError:
@@ -114,27 +119,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                   ? AppHelpers.getTranslation(
                                   TrKeys.loginCredentialsAreNotValid)
                                   : null),
-                              onFieldSubmitted: (value) {
-                                //   return notifier.login(
-                                //   checkYourNetwork: () {
-                                //     AppHelpers.showSnackBar(
-                                //       context,
-                                //       AppHelpers.getTranslation(
-                                //           TrKeys.checkYourNetworkConnection),
-                                //     );
-                                //   },
-                                //   unAuthorised: () {
-                                //     AppHelpers.showSnackBar(
-                                //       context,
-                                //       AppHelpers.getTranslation(
-                                //           TrKeys.emailNotVerifiedYet),
-                                //     );
-                                //   },
-                                //   goToMain: () {
-                                //     context.replaceRoute(const MainRout  e());
-                                //   },
-                                // );
-                              }, label: null,
+                              label: null,
                             ),
                             56.verticalSpace,
                             LoginButton(
@@ -143,6 +128,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                               title: LocaleKeys.signed.tr(),
                               onPressed: () {
                                 notifier.login(
+                                  phoneNumber: login.text,
                                 checkYourNetwork: () {
                                   AppHelpers.showSnackBar(
                                     context,
@@ -190,8 +176,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                 },
                               ),
                             ),
-
-
                           ],
                         ),
                       ),

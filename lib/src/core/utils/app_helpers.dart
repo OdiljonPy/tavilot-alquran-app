@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import '../../../infrastructure/translations/locale_keys.g.dart';
 import '../../models/models.dart';
 import '../../presentation/components/buttons/custom_button.dart';
@@ -20,6 +21,16 @@ class AppHelpers {
   static String phoneNumberSpaceRemover(String phoneNumber) {
     return phoneNumber.replaceAll(RegExp(r'[^\d+]'), '');
   }
+  static MaskTextInputFormatter phoneFormatter() {
+    return MaskTextInputFormatter(
+      mask: '+998 (##) ###-##-##',
+      filter: {
+        "#": RegExp(r'[0-9]'),
+      },
+      type: MaskAutoCompletionType.lazy,
+    );
+  }
+
   static String errorCodeToMessage(int errorCode) {
     switch (errorCode) {
       case 1:

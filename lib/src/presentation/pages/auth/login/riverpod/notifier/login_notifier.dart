@@ -22,7 +22,7 @@ class LoginNotifier extends StateNotifier<LoginState> {
 
   void setEmail(String text) {
     state = state.copyWith(
-      email: text.trim(),
+      email: text,
       isLoginError: false,
       isEmailNotValid: false,
       isPasswordNotValid: false,
@@ -34,6 +34,7 @@ class LoginNotifier extends StateNotifier<LoginState> {
   }
   //
   Future<void> login({
+    String? phoneNumber,
     VoidCallback? checkYourNetwork,
     VoidCallback? unAuthorised,
     VoidCallback? goToMain,
@@ -41,7 +42,7 @@ class LoginNotifier extends StateNotifier<LoginState> {
     final connected = await AppConnectivity.connectivity();
     state = state.copyWith(isLoading: true);
     final response = await authRepository.login(
-      phoneNumber: state.email,
+      phoneNumber: phoneNumber ?? '',
       password: state.password,
     );
     response.when(

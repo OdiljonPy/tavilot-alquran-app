@@ -90,8 +90,9 @@ class SurahPage extends ConsumerWidget {
                           itemBuilder: (BuildContext context, int index) {
                             return ButtonEffect(
                               onTap: () {
-                                notifier.selectSurahId(index + 1);
-                                notifier.fetchSurah(context, index + 1);
+                                notifier
+                                  ..selectSurahId(index + 1)
+                                  ..fetchSurah(context, index + 1);
                               },
                               child: Container(
                                 color: state.selectedSurahId == index + 1

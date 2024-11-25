@@ -64,7 +64,7 @@ class OutlinedBorderTextField extends StatelessWidget {
     this.maxLine,
     this.minLine,
     this.hintText,
-    this.radius =14,
+    this.radius = 14,
     this.borderWidth = 0.5,
   });
 
@@ -78,7 +78,7 @@ class OutlinedBorderTextField extends StatelessWidget {
       textInputAction: textInputAction,
       onFieldSubmitted: onFieldSubmitted,
       onChanged: onChanged,
-      obscureText: !(obscure ?? true),
+      obscureText: obscure ?? false,
       obscuringCharacter: '*',
       controller: textController,
       style: GoogleFonts.cormorant(
@@ -88,14 +88,13 @@ class OutlinedBorderTextField extends StatelessWidget {
         letterSpacing: -14 * 0.01,
       ),
       cursorWidth: 1,
-      maxLines: maxLine,
+      maxLines: obscure == true ? 1 : maxLine,
       cursorColor: Style.black,
       keyboardType: inputType,
       initialValue: initialText,
       readOnly: readOnly,
       inputFormatters: inputFormatters,
-      textCapitalization:
-      textCapitalization ?? TextCapitalization.sentences,
+      textCapitalization: textCapitalization ?? TextCapitalization.sentences,
       decoration: InputDecoration(
         labelText: hintText,
         hintText: hintText,
@@ -107,8 +106,10 @@ class OutlinedBorderTextField extends StatelessWidget {
         ),
         counterText: '',
         suffixIcon: suffixIcon,
-        suffixIconConstraints:
-        const BoxConstraints(maxWidth: 56, minWidth: 36,),
+        suffixIconConstraints: const BoxConstraints(
+          maxWidth: 56,
+          minWidth: 36,
+        ),
         labelStyle: style,
         prefix: prefix,
         prefixIcon: prefixIcon,
@@ -119,34 +120,40 @@ class OutlinedBorderTextField extends StatelessWidget {
         floatingLabelStyle: GoogleFonts.cormorant(
           fontWeight: FontWeight.w400,
           fontSize: labelSize ?? 14,
-          color: Style.primary  ,
+          color: Style.primary,
           letterSpacing: -14 * 0.01,
         ),
         fillColor: color ?? Style.transparent,
         filled: true,
         hoverColor: Style.transparent,
         enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide.merge(BorderSide(color: Style.borderColor, width: borderWidth),
+            borderSide: BorderSide.merge(
+                BorderSide(color: Style.borderColor, width: borderWidth),
                 BorderSide(color: Style.borderColor, width: borderWidth)),
             borderRadius: BorderRadius.circular(radius)),
         errorBorder: OutlineInputBorder(
-            borderSide: BorderSide.merge(BorderSide(color: Style.borderColor, width: borderWidth),
+            borderSide: BorderSide.merge(
+                BorderSide(color: Style.borderColor, width: borderWidth),
                 BorderSide(color: Style.borderColor, width: borderWidth)),
             borderRadius: BorderRadius.circular(radius)),
         border: OutlineInputBorder(
-            borderSide: BorderSide.merge(BorderSide(color: Style.borderColor, width: borderWidth),
+            borderSide: BorderSide.merge(
+                BorderSide(color: Style.borderColor, width: borderWidth),
                 BorderSide(color: Style.borderColor, width: borderWidth)),
             borderRadius: BorderRadius.circular(radius)),
         focusedErrorBorder: OutlineInputBorder(
-            borderSide: BorderSide.merge(BorderSide(color: Style.borderColor, width: borderWidth),
+            borderSide: BorderSide.merge(
+                BorderSide(color: Style.borderColor, width: borderWidth),
                 BorderSide(color: Style.borderColor, width: borderWidth)),
             borderRadius: BorderRadius.circular(radius)),
         disabledBorder: OutlineInputBorder(
-            borderSide: BorderSide.merge(BorderSide(color: Style.borderColor, width: borderWidth),
+            borderSide: BorderSide.merge(
+                BorderSide(color: Style.borderColor, width: borderWidth),
                 BorderSide(color: Style.borderColor, width: borderWidth)),
             borderRadius: BorderRadius.circular(radius)),
         focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide.merge(BorderSide(color: Style.primary, width: borderWidth),
+            borderSide: BorderSide.merge(
+                BorderSide(color: Style.primary, width: borderWidth),
                 BorderSide(color: Style.primary, width: borderWidth)),
             borderRadius: BorderRadius.circular(radius)),
       ),
