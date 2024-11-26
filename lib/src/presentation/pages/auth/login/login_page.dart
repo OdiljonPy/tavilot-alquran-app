@@ -66,14 +66,14 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             ),
                             56.verticalSpace,
                             Text(
-                              "Ассаламу алайкум!",
+                              LocaleKeys.hi.tr(),
                               style: GoogleFonts.inter(
                                   fontSize: 30.sp,
                                   color: Style.black,
                                   fontWeight: FontWeight.normal,),
                             ),
                             Text(
-                              "Логин ва паролингизни киритинг",
+                              LocaleKeys.enterLoginAndPassword.tr(),
                               style: GoogleFonts.inter(
                                   fontSize: 24.sp,
                                   color: Style.black,
@@ -82,8 +82,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             36.verticalSpace,
 
                             OutlinedBorderTextField(
-                              hintText:
-                                  AppHelpers.getTranslation(TrKeys.typeSomething),
+                              hintText: LocaleKeys.phoneNumber.tr(),
                               // onChanged:(s)=> notifier.setEmail(s),
                               textController: login,
                               inputType: TextInputType.phone,
@@ -110,6 +109,29 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                               validator: AppValidators.emptyCheck,
                               inputType: TextInputType.emailAddress,
                               textCapitalization: TextCapitalization.none,
+                              onFieldSubmitted: (_){
+                                notifier.login(
+                                  phoneNumber: login.text,
+                                  checkYourNetwork: () {
+                                    AppHelpers.showSnackBar(
+                                      context,
+                                      AppHelpers.getTranslation(
+                                          TrKeys.checkYourNetworkConnection),
+                                    );
+                                  },
+                                  unAuthorised: () {
+                                    AppHelpers.showSnackBar(
+                                      context,
+                                      AppHelpers.getTranslation(
+                                          TrKeys.emailNotVerifiedYet),
+                                    );
+                                  },
+                                  goToMain: () {
+                                    context.replaceRoute(const MainRoute());
+                                  },
+                                );
+
+                              },
                               // isError:
                               //     state.isLoginError || state.isEmailNotValid,
                               descriptionText: state.isEmailNotValid
@@ -125,7 +147,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             LoginButton(
                               height: 80.r,
                               isLoading: state.isLoading,
-                              title: LocaleKeys.signed.tr(),
+                              title: LocaleKeys.continueForApp.tr(),
                               onPressed: () {
                                 notifier.login(
                                   phoneNumber: login.text,
@@ -153,28 +175,12 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             LoginButton(
                               titleColor: Style.primary,
                               bgColor: Style.bg,
-                              isLoading: state.isLoading,
-                              title: AppHelpers.getTranslation(TrKeys.continueText),
-                              onPressed: () => notifier.login(
-                                checkYourNetwork: () {
-                                  AppHelpers.showSnackBar(
-                                    context,
-                                    AppHelpers.getTranslation(
-                                        TrKeys.checkYourNetworkConnection),
-                                  );
-                                },
-                                unAuthorised: () {
-                                  AppHelpers.showSnackBar(
-                                    context,
-                                    AppHelpers.getTranslation(
-                                        TrKeys.emailNotVerifiedYet),
-                                  );
-                                },
-                                goToMain: () {
-                                  context.replaceRoute(
-                                      PinCodeRoute(isNewPassword: true));
-                                },
-                              ),
+                              // isLoading: state.isLoading,
+                              title: LocaleKeys.register.tr(),
+                              onPressed: () {
+                                  // context.replaceRoute(const RegisterRoute());
+                                  context.replaceRoute( RegisterConfirmationRoute(phoneNumber: login.text));
+                              },
                             ),
                           ],
                         ),

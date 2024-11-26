@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../../../../models/response/juz_response.dart';
 part 'main_state.freezed.dart';
@@ -8,8 +9,7 @@ class MainState with _$MainState {
     @Default(false) bool isChapterLoading,
     @Default([]) List<Chapter> chapters,
     @Default(0) int selectIndex,
-
-
+    @Default(null) PageController? pageController,
   }) = _MainState;
 
   const MainState._();

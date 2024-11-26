@@ -32,7 +32,7 @@ class LoginNotifier extends StateNotifier<LoginState> {
   void setShowPassword(bool show) {
     state = state.copyWith(showPassword: show);
   }
-  //
+
   Future<void> login({
     String? phoneNumber,
     VoidCallback? checkYourNetwork,

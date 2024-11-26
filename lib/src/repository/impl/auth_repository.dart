@@ -47,80 +47,6 @@ class AuthRepository implements AuthFacade {
   }
 
   @override
-  Future<ApiResult<UpdateResponse>> update({
-    required String fullName,
-    required String birthDate,
-    required String pinfl,
-    required String placeIssue,
-    required String placeResidence,
-    required String dateIssue,
-    required String passportSeries,
-  }) async {
-    final data = {
-      'full_name': fullName,
-      'birth_date': birthDate,
-      'pinfl': pinfl,
-      'place_issue': placeIssue,
-      'place_residence': placeResidence,
-      'date_issue': dateIssue,
-      'passport_seria': passportSeries,
-    };
-    try {
-      final client = dioHttp.client(requireAuth: true);
-      final response = await client.patch(
-        '/api/v1/auth/update/',
-        data: data,
-      );
-      return ApiResult.success(
-        data: UpdateResponse.fromJson(response.data),
-      );
-    } catch (e, s) {
-      debugPrint('==> update failure: $e, $s');
-      if (e is DioException && e.response != null) {
-        final errorResponse = e.response?.data;
-        final errorMessage = AppHelpers.errorCodeToMessage(errorResponse['error_code']);
-        return ApiResult.failure(
-            error: errorMessage, statusCode: NetworkExceptions.getDioStatus(e));
-      } else {
-        return ApiResult.failure(
-            error: AppHelpers.errorHandler(e),
-            statusCode: NetworkExceptions.getDioStatus(e));
-      }
-    }
-  }
-
-  @override
-  Future<ApiResult<UserResponse>> getInfoByPINFL({
-    required String pinfl,
-  }) async {
-    final data = {
-      'pinfl': pinfl,
-    };
-    try {
-      final client = dioHttp.client(requireAuth: true);
-      final response = await client.get(
-        '/api/v1/auth/information/',
-        queryParameters: data,
-      );
-      return ApiResult.success(
-        data: UserResponse.fromJson(response.data),
-      );
-    } catch (e) {
-      debugPrint('==> get info by pinfl failure: $e');
-      if (e is DioException && e.response != null) {
-        final errorResponse = e.response?.data;
-        final errorMessage = AppHelpers.errorCodeToMessage(errorResponse['error_code']);
-        return ApiResult.failure(
-            error: errorMessage, statusCode: NetworkExceptions.getDioStatus(e));
-      } else {
-        return ApiResult.failure(
-            error: AppHelpers.errorHandler(e),
-            statusCode: NetworkExceptions.getDioStatus(e));
-      }
-    }
-  }
-
-  @override
   Future<ApiResult<LoginResponse>> refreshToken({
     required String refreshToken,
   }) async {
@@ -138,31 +64,6 @@ class AuthRepository implements AuthFacade {
       );
     } catch (e) {
       debugPrint('==> refresh failure: $e');
-      if (e is DioException && e.response != null) {
-        final errorResponse = e.response?.data;
-        final errorMessage = AppHelpers.errorCodeToMessage(errorResponse['error_code']);
-        return ApiResult.failure(
-            error: errorMessage, statusCode: NetworkExceptions.getDioStatus(e));
-      } else {
-        return ApiResult.failure(
-            error: AppHelpers.errorHandler(e),
-            statusCode: NetworkExceptions.getDioStatus(e));
-      }
-    }
-  }
-
-  @override
-  Future<ApiResult<UserResponse>> getUser() async {
-    try {
-      final client = dioHttp.client(requireAuth: true);
-      final response = await client.get(
-        '/api/v1/auth/me/',
-      );
-      return ApiResult.success(
-        data: UserResponse.fromJson(response.data),
-      );
-    } catch (e) {
-      debugPrint('==> auth me failure: $e');
       if (e is DioException && e.response != null) {
         final errorResponse = e.response?.data;
         final errorMessage = AppHelpers.errorCodeToMessage(errorResponse['error_code']);
@@ -361,11 +262,10 @@ class AuthRepository implements AuthFacade {
   Future<ApiResult<RegisterResponse>> signUp({
     required String phoneNumber,
     required String password,
-    required String deviceId,
   }) async {
     final data = SignUpRequest(
       phoneNumber: AppHelpers.phoneNumberSpaceRemover(phoneNumber),
-      password: password, deviceId: deviceId,
+      password: password,
     );
     try {
       final client = dioHttp.client(requireAuth: false);

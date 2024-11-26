@@ -1,12 +1,17 @@
 import 'package:al_quran/application/surah/surah_provider.dart';
+import 'package:al_quran/infrastructure/translations/locale_keys.g.dart';
+import 'package:al_quran/main.dart';
 import 'package:al_quran/src/presentation/pages/about_page/surah_page/surah_page.dart';
 import 'package:al_quran/src/presentation/pages/for_students/for_students_page.dart';
 import 'package:al_quran/src/presentation/pages/main/riverpod/state/main_state.dart';
+import 'package:al_quran/src/presentation/pages/main/widgets/custom_pop_up.dart';
 import 'package:al_quran/src/presentation/pages/premium/premium_page.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:proste_indexed_stack/proste_indexed_stack.dart';
 import '../../../../application/about/about_provider.dart';
 import '../../../../application/for_students/for_students_provider.dart';
@@ -28,13 +33,6 @@ class MainPage extends ConsumerStatefulWidget {
 
 class _MainPageState extends ConsumerState<MainPage>
     with SingleTickerProviderStateMixin {
-  late List<IndexedStackChild> list = [
-    IndexedStackChild(child: const BlogPage(), preload: true),
-    IndexedStackChild(child: const ForStudentsPage()),
-    IndexedStackChild(child: const AboutPage()),
-    IndexedStackChild(child: const SurahPage()),
-    IndexedStackChild(child: const PremiumPage()),
-  ];
 
   @override
   void initState() {
@@ -42,7 +40,7 @@ class _MainPageState extends ConsumerState<MainPage>
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(surahProvider.notifier).setBookmarkFromLocale();
       ref.read(mainProvider.notifier)
-        ..changeIndex(0)
+        ..setPageController()
         ..fetchChapters(context);
       ref.read(forStudentsProvider.notifier).fetchCategories(context);
     });
@@ -58,8 +56,18 @@ class _MainPageState extends ConsumerState<MainPage>
             final notifier = ref.read(mainProvider.notifier);
             return Scaffold(
               appBar: customAppBar(notifier, state),
-              body:
-                  ProsteIndexedStack(index: state.selectIndex, children: list),
+              body: PageView(
+                controller: state.pageController,
+                onPageChanged: notifier.changeIndex,
+                physics: const NeverScrollableScrollPhysics(),
+                children: const [
+                  BlogPage(),
+                  ForStudentsPage(),
+                  AboutPage(),
+                  SurahPage(),
+                  PremiumPage(),
+                ],
+              ),
             );
           },
         ),
@@ -98,7 +106,7 @@ class _MainPageState extends ConsumerState<MainPage>
                         });
                       },
                       child: Text(
-                        "Асосий Сахифа",
+                        LocaleKeys.mainPage.tr(),
                         style: Style.interRegular(
                             textDecoration: state.selectIndex == 0
                                 ? TextDecoration.underline
@@ -118,7 +126,7 @@ class _MainPageState extends ConsumerState<MainPage>
                         });
                       },
                       child: Text(
-                        "Таъвилот Ал-Қуръон ўкувчиларига",
+                        LocaleKeys.forStudent.tr(),
                         style: Style.interRegular(
                             textDecoration: state.selectIndex == 1
                                 ? TextDecoration.underline
@@ -138,7 +146,7 @@ class _MainPageState extends ConsumerState<MainPage>
                         });
                       },
                       child: Text(
-                        "Дастур Хакида",
+                        LocaleKeys.aboutApp.tr(),
                         style: Style.interRegular(
                             textDecoration: state.selectIndex == 2
                                 ? TextDecoration.underline
@@ -149,6 +157,10 @@ class _MainPageState extends ConsumerState<MainPage>
                                 : Style.black),
                       ),
                     ),
+                    36.horizontalSpace,
+                    CustomPopupItem(onTap: (){
+                      notifier.changeIndex(state.selectIndex);
+                    },)
                   ],
                 ))
           ],

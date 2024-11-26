@@ -16,7 +16,19 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$RegisterState {
-  bool get isRegistering => throw _privateConstructorUsedError;
+  bool get isLoading => throw _privateConstructorUsedError;
+  bool get hasFocus => throw _privateConstructorUsedError;
+  bool get isAcceptTerms => throw _privateConstructorUsedError;
+  bool get isSuccess => throw _privateConstructorUsedError;
+  bool get showPassword => throw _privateConstructorUsedError;
+  bool get isMinimumLength => throw _privateConstructorUsedError;
+  bool get isMinimumNum => throw _privateConstructorUsedError;
+  bool get isMinimumChar => throw _privateConstructorUsedError;
+  bool get isPasswordInvalid => throw _privateConstructorUsedError;
+  String get phone => throw _privateConstructorUsedError;
+  String get password => throw _privateConstructorUsedError;
+  String get otpCode => throw _privateConstructorUsedError;
+  String? get otpKey => throw _privateConstructorUsedError;
 
   /// Create a copy of RegisterState
   /// with the given fields replaced by the non-null parameter values.
@@ -31,7 +43,20 @@ abstract class $RegisterStateCopyWith<$Res> {
           RegisterState value, $Res Function(RegisterState) then) =
       _$RegisterStateCopyWithImpl<$Res, RegisterState>;
   @useResult
-  $Res call({bool isRegistering});
+  $Res call(
+      {bool isLoading,
+      bool hasFocus,
+      bool isAcceptTerms,
+      bool isSuccess,
+      bool showPassword,
+      bool isMinimumLength,
+      bool isMinimumNum,
+      bool isMinimumChar,
+      bool isPasswordInvalid,
+      String phone,
+      String password,
+      String otpCode,
+      String? otpKey});
 }
 
 /// @nodoc
@@ -49,13 +74,73 @@ class _$RegisterStateCopyWithImpl<$Res, $Val extends RegisterState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isRegistering = null,
+    Object? isLoading = null,
+    Object? hasFocus = null,
+    Object? isAcceptTerms = null,
+    Object? isSuccess = null,
+    Object? showPassword = null,
+    Object? isMinimumLength = null,
+    Object? isMinimumNum = null,
+    Object? isMinimumChar = null,
+    Object? isPasswordInvalid = null,
+    Object? phone = null,
+    Object? password = null,
+    Object? otpCode = null,
+    Object? otpKey = freezed,
   }) {
     return _then(_value.copyWith(
-      isRegistering: null == isRegistering
-          ? _value.isRegistering
-          : isRegistering // ignore: cast_nullable_to_non_nullable
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      hasFocus: null == hasFocus
+          ? _value.hasFocus
+          : hasFocus // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isAcceptTerms: null == isAcceptTerms
+          ? _value.isAcceptTerms
+          : isAcceptTerms // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSuccess: null == isSuccess
+          ? _value.isSuccess
+          : isSuccess // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showPassword: null == showPassword
+          ? _value.showPassword
+          : showPassword // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isMinimumLength: null == isMinimumLength
+          ? _value.isMinimumLength
+          : isMinimumLength // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isMinimumNum: null == isMinimumNum
+          ? _value.isMinimumNum
+          : isMinimumNum // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isMinimumChar: null == isMinimumChar
+          ? _value.isMinimumChar
+          : isMinimumChar // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isPasswordInvalid: null == isPasswordInvalid
+          ? _value.isPasswordInvalid
+          : isPasswordInvalid // ignore: cast_nullable_to_non_nullable
+              as bool,
+      phone: null == phone
+          ? _value.phone
+          : phone // ignore: cast_nullable_to_non_nullable
+              as String,
+      password: null == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String,
+      otpCode: null == otpCode
+          ? _value.otpCode
+          : otpCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      otpKey: freezed == otpKey
+          ? _value.otpKey
+          : otpKey // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -68,7 +153,20 @@ abstract class _$$RegisterStateImplCopyWith<$Res>
       __$$RegisterStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isRegistering});
+  $Res call(
+      {bool isLoading,
+      bool hasFocus,
+      bool isAcceptTerms,
+      bool isSuccess,
+      bool showPassword,
+      bool isMinimumLength,
+      bool isMinimumNum,
+      bool isMinimumChar,
+      bool isPasswordInvalid,
+      String phone,
+      String password,
+      String otpCode,
+      String? otpKey});
 }
 
 /// @nodoc
@@ -84,13 +182,73 @@ class __$$RegisterStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isRegistering = null,
+    Object? isLoading = null,
+    Object? hasFocus = null,
+    Object? isAcceptTerms = null,
+    Object? isSuccess = null,
+    Object? showPassword = null,
+    Object? isMinimumLength = null,
+    Object? isMinimumNum = null,
+    Object? isMinimumChar = null,
+    Object? isPasswordInvalid = null,
+    Object? phone = null,
+    Object? password = null,
+    Object? otpCode = null,
+    Object? otpKey = freezed,
   }) {
     return _then(_$RegisterStateImpl(
-      isRegistering: null == isRegistering
-          ? _value.isRegistering
-          : isRegistering // ignore: cast_nullable_to_non_nullable
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      hasFocus: null == hasFocus
+          ? _value.hasFocus
+          : hasFocus // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isAcceptTerms: null == isAcceptTerms
+          ? _value.isAcceptTerms
+          : isAcceptTerms // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSuccess: null == isSuccess
+          ? _value.isSuccess
+          : isSuccess // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showPassword: null == showPassword
+          ? _value.showPassword
+          : showPassword // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isMinimumLength: null == isMinimumLength
+          ? _value.isMinimumLength
+          : isMinimumLength // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isMinimumNum: null == isMinimumNum
+          ? _value.isMinimumNum
+          : isMinimumNum // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isMinimumChar: null == isMinimumChar
+          ? _value.isMinimumChar
+          : isMinimumChar // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isPasswordInvalid: null == isPasswordInvalid
+          ? _value.isPasswordInvalid
+          : isPasswordInvalid // ignore: cast_nullable_to_non_nullable
+              as bool,
+      phone: null == phone
+          ? _value.phone
+          : phone // ignore: cast_nullable_to_non_nullable
+              as String,
+      password: null == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String,
+      otpCode: null == otpCode
+          ? _value.otpCode
+          : otpCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      otpKey: freezed == otpKey
+          ? _value.otpKey
+          : otpKey // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -98,15 +256,64 @@ class __$$RegisterStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$RegisterStateImpl extends _RegisterState {
-  const _$RegisterStateImpl({this.isRegistering = false}) : super._();
+  const _$RegisterStateImpl(
+      {this.isLoading = false,
+      this.hasFocus = false,
+      this.isAcceptTerms = false,
+      this.isSuccess = false,
+      this.showPassword = false,
+      this.isMinimumLength = false,
+      this.isMinimumNum = false,
+      this.isMinimumChar = false,
+      this.isPasswordInvalid = false,
+      this.phone = '',
+      this.password = '',
+      this.otpCode = '',
+      this.otpKey})
+      : super._();
 
   @override
   @JsonKey()
-  final bool isRegistering;
+  final bool isLoading;
+  @override
+  @JsonKey()
+  final bool hasFocus;
+  @override
+  @JsonKey()
+  final bool isAcceptTerms;
+  @override
+  @JsonKey()
+  final bool isSuccess;
+  @override
+  @JsonKey()
+  final bool showPassword;
+  @override
+  @JsonKey()
+  final bool isMinimumLength;
+  @override
+  @JsonKey()
+  final bool isMinimumNum;
+  @override
+  @JsonKey()
+  final bool isMinimumChar;
+  @override
+  @JsonKey()
+  final bool isPasswordInvalid;
+  @override
+  @JsonKey()
+  final String phone;
+  @override
+  @JsonKey()
+  final String password;
+  @override
+  @JsonKey()
+  final String otpCode;
+  @override
+  final String? otpKey;
 
   @override
   String toString() {
-    return 'RegisterState(isRegistering: $isRegistering)';
+    return 'RegisterState(isLoading: $isLoading, hasFocus: $hasFocus, isAcceptTerms: $isAcceptTerms, isSuccess: $isSuccess, showPassword: $showPassword, isMinimumLength: $isMinimumLength, isMinimumNum: $isMinimumNum, isMinimumChar: $isMinimumChar, isPasswordInvalid: $isPasswordInvalid, phone: $phone, password: $password, otpCode: $otpCode, otpKey: $otpKey)';
   }
 
   @override
@@ -114,12 +321,47 @@ class _$RegisterStateImpl extends _RegisterState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$RegisterStateImpl &&
-            (identical(other.isRegistering, isRegistering) ||
-                other.isRegistering == isRegistering));
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
+            (identical(other.hasFocus, hasFocus) ||
+                other.hasFocus == hasFocus) &&
+            (identical(other.isAcceptTerms, isAcceptTerms) ||
+                other.isAcceptTerms == isAcceptTerms) &&
+            (identical(other.isSuccess, isSuccess) ||
+                other.isSuccess == isSuccess) &&
+            (identical(other.showPassword, showPassword) ||
+                other.showPassword == showPassword) &&
+            (identical(other.isMinimumLength, isMinimumLength) ||
+                other.isMinimumLength == isMinimumLength) &&
+            (identical(other.isMinimumNum, isMinimumNum) ||
+                other.isMinimumNum == isMinimumNum) &&
+            (identical(other.isMinimumChar, isMinimumChar) ||
+                other.isMinimumChar == isMinimumChar) &&
+            (identical(other.isPasswordInvalid, isPasswordInvalid) ||
+                other.isPasswordInvalid == isPasswordInvalid) &&
+            (identical(other.phone, phone) || other.phone == phone) &&
+            (identical(other.password, password) ||
+                other.password == password) &&
+            (identical(other.otpCode, otpCode) || other.otpCode == otpCode) &&
+            (identical(other.otpKey, otpKey) || other.otpKey == otpKey));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isRegistering);
+  int get hashCode => Object.hash(
+      runtimeType,
+      isLoading,
+      hasFocus,
+      isAcceptTerms,
+      isSuccess,
+      showPassword,
+      isMinimumLength,
+      isMinimumNum,
+      isMinimumChar,
+      isPasswordInvalid,
+      phone,
+      password,
+      otpCode,
+      otpKey);
 
   /// Create a copy of RegisterState
   /// with the given fields replaced by the non-null parameter values.
@@ -131,12 +373,48 @@ class _$RegisterStateImpl extends _RegisterState {
 }
 
 abstract class _RegisterState extends RegisterState {
-  const factory _RegisterState({final bool isRegistering}) =
-      _$RegisterStateImpl;
+  const factory _RegisterState(
+      {final bool isLoading,
+      final bool hasFocus,
+      final bool isAcceptTerms,
+      final bool isSuccess,
+      final bool showPassword,
+      final bool isMinimumLength,
+      final bool isMinimumNum,
+      final bool isMinimumChar,
+      final bool isPasswordInvalid,
+      final String phone,
+      final String password,
+      final String otpCode,
+      final String? otpKey}) = _$RegisterStateImpl;
   const _RegisterState._() : super._();
 
   @override
-  bool get isRegistering;
+  bool get isLoading;
+  @override
+  bool get hasFocus;
+  @override
+  bool get isAcceptTerms;
+  @override
+  bool get isSuccess;
+  @override
+  bool get showPassword;
+  @override
+  bool get isMinimumLength;
+  @override
+  bool get isMinimumNum;
+  @override
+  bool get isMinimumChar;
+  @override
+  bool get isPasswordInvalid;
+  @override
+  String get phone;
+  @override
+  String get password;
+  @override
+  String get otpCode;
+  @override
+  String? get otpKey;
 
   /// Create a copy of RegisterState
   /// with the given fields replaced by the non-null parameter values.

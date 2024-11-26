@@ -20,7 +20,9 @@ mixin _$SurahState {
   bool get isSurahLoading => throw _privateConstructorUsedError;
   int get selectedSurahId => throw _privateConstructorUsedError;
   int get selectedJuzId => throw _privateConstructorUsedError;
+  int get selectedBookmarkId => throw _privateConstructorUsedError;
   int get selectIndex => throw _privateConstructorUsedError;
+  int get selectedVerseId => throw _privateConstructorUsedError;
   int get selectedIndicationType => throw _privateConstructorUsedError;
   List<JuzListItem> get juzes => throw _privateConstructorUsedError;
   List<Bookmark> get bookmarks => throw _privateConstructorUsedError;
@@ -45,7 +47,9 @@ abstract class $SurahStateCopyWith<$Res> {
       bool isSurahLoading,
       int selectedSurahId,
       int selectedJuzId,
+      int selectedBookmarkId,
       int selectIndex,
+      int selectedVerseId,
       int selectedIndicationType,
       List<JuzListItem> juzes,
       List<Bookmark> bookmarks,
@@ -72,7 +76,9 @@ class _$SurahStateCopyWithImpl<$Res, $Val extends SurahState>
     Object? isSurahLoading = null,
     Object? selectedSurahId = null,
     Object? selectedJuzId = null,
+    Object? selectedBookmarkId = null,
     Object? selectIndex = null,
+    Object? selectedVerseId = null,
     Object? selectedIndicationType = null,
     Object? juzes = null,
     Object? bookmarks = null,
@@ -96,9 +102,17 @@ class _$SurahStateCopyWithImpl<$Res, $Val extends SurahState>
           ? _value.selectedJuzId
           : selectedJuzId // ignore: cast_nullable_to_non_nullable
               as int,
+      selectedBookmarkId: null == selectedBookmarkId
+          ? _value.selectedBookmarkId
+          : selectedBookmarkId // ignore: cast_nullable_to_non_nullable
+              as int,
       selectIndex: null == selectIndex
           ? _value.selectIndex
           : selectIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      selectedVerseId: null == selectedVerseId
+          ? _value.selectedVerseId
+          : selectedVerseId // ignore: cast_nullable_to_non_nullable
               as int,
       selectedIndicationType: null == selectedIndicationType
           ? _value.selectedIndicationType
@@ -137,7 +151,9 @@ abstract class _$$SurahStateImplCopyWith<$Res>
       bool isSurahLoading,
       int selectedSurahId,
       int selectedJuzId,
+      int selectedBookmarkId,
       int selectIndex,
+      int selectedVerseId,
       int selectedIndicationType,
       List<JuzListItem> juzes,
       List<Bookmark> bookmarks,
@@ -162,7 +178,9 @@ class __$$SurahStateImplCopyWithImpl<$Res>
     Object? isSurahLoading = null,
     Object? selectedSurahId = null,
     Object? selectedJuzId = null,
+    Object? selectedBookmarkId = null,
     Object? selectIndex = null,
+    Object? selectedVerseId = null,
     Object? selectedIndicationType = null,
     Object? juzes = null,
     Object? bookmarks = null,
@@ -186,9 +204,17 @@ class __$$SurahStateImplCopyWithImpl<$Res>
           ? _value.selectedJuzId
           : selectedJuzId // ignore: cast_nullable_to_non_nullable
               as int,
+      selectedBookmarkId: null == selectedBookmarkId
+          ? _value.selectedBookmarkId
+          : selectedBookmarkId // ignore: cast_nullable_to_non_nullable
+              as int,
       selectIndex: null == selectIndex
           ? _value.selectIndex
           : selectIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      selectedVerseId: null == selectedVerseId
+          ? _value.selectedVerseId
+          : selectedVerseId // ignore: cast_nullable_to_non_nullable
               as int,
       selectedIndicationType: null == selectedIndicationType
           ? _value.selectedIndicationType
@@ -222,7 +248,9 @@ class _$SurahStateImpl extends _SurahState {
       this.isSurahLoading = false,
       this.selectedSurahId = 0,
       this.selectedJuzId = 0,
+      this.selectedBookmarkId = 0,
       this.selectIndex = 0,
+      this.selectedVerseId = 0,
       this.selectedIndicationType = 0,
       final List<JuzListItem> juzes = const [],
       final List<Bookmark> bookmarks = const [],
@@ -246,7 +274,13 @@ class _$SurahStateImpl extends _SurahState {
   final int selectedJuzId;
   @override
   @JsonKey()
+  final int selectedBookmarkId;
+  @override
+  @JsonKey()
   final int selectIndex;
+  @override
+  @JsonKey()
+  final int selectedVerseId;
   @override
   @JsonKey()
   final int selectedIndicationType;
@@ -275,7 +309,7 @@ class _$SurahStateImpl extends _SurahState {
 
   @override
   String toString() {
-    return 'SurahState(isJuzLoading: $isJuzLoading, isSurahLoading: $isSurahLoading, selectedSurahId: $selectedSurahId, selectedJuzId: $selectedJuzId, selectIndex: $selectIndex, selectedIndicationType: $selectedIndicationType, juzes: $juzes, bookmarks: $bookmarks, juz: $juz, chapter: $chapter)';
+    return 'SurahState(isJuzLoading: $isJuzLoading, isSurahLoading: $isSurahLoading, selectedSurahId: $selectedSurahId, selectedJuzId: $selectedJuzId, selectedBookmarkId: $selectedBookmarkId, selectIndex: $selectIndex, selectedVerseId: $selectedVerseId, selectedIndicationType: $selectedIndicationType, juzes: $juzes, bookmarks: $bookmarks, juz: $juz, chapter: $chapter)';
   }
 
   @override
@@ -291,8 +325,12 @@ class _$SurahStateImpl extends _SurahState {
                 other.selectedSurahId == selectedSurahId) &&
             (identical(other.selectedJuzId, selectedJuzId) ||
                 other.selectedJuzId == selectedJuzId) &&
+            (identical(other.selectedBookmarkId, selectedBookmarkId) ||
+                other.selectedBookmarkId == selectedBookmarkId) &&
             (identical(other.selectIndex, selectIndex) ||
                 other.selectIndex == selectIndex) &&
+            (identical(other.selectedVerseId, selectedVerseId) ||
+                other.selectedVerseId == selectedVerseId) &&
             (identical(other.selectedIndicationType, selectedIndicationType) ||
                 other.selectedIndicationType == selectedIndicationType) &&
             const DeepCollectionEquality().equals(other._juzes, _juzes) &&
@@ -309,7 +347,9 @@ class _$SurahStateImpl extends _SurahState {
       isSurahLoading,
       selectedSurahId,
       selectedJuzId,
+      selectedBookmarkId,
       selectIndex,
+      selectedVerseId,
       selectedIndicationType,
       const DeepCollectionEquality().hash(_juzes),
       const DeepCollectionEquality().hash(_bookmarks),
@@ -331,7 +371,9 @@ abstract class _SurahState extends SurahState {
       final bool isSurahLoading,
       final int selectedSurahId,
       final int selectedJuzId,
+      final int selectedBookmarkId,
       final int selectIndex,
+      final int selectedVerseId,
       final int selectedIndicationType,
       final List<JuzListItem> juzes,
       final List<Bookmark> bookmarks,
@@ -348,7 +390,11 @@ abstract class _SurahState extends SurahState {
   @override
   int get selectedJuzId;
   @override
+  int get selectedBookmarkId;
+  @override
   int get selectIndex;
+  @override
+  int get selectedVerseId;
   @override
   int get selectedIndicationType;
   @override

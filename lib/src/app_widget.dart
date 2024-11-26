@@ -2,6 +2,7 @@ import 'package:al_quran/src/presentation/styles/style.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../main.dart';
 import 'core/routes/app_router.dart';
 import 'presentation/components/components.dart';
 import 'presentation/theme/light_theme.dart';
@@ -17,23 +18,11 @@ class AppWidget extends StatefulWidget {
 }
 
 class _AppWidgetState extends State<AppWidget> {
-
-
-  @override
-  void initState() {
-    // if (LocalStorage.getTranslations().isNotEmpty) {
-    //   fetchSettingNoAwait();
-    // }
-    // isolate();
-    super.initState();
-  }
-
-
-
   final _rootRouter = AppRouter();
 
   @override
   Widget build(BuildContext context) {
+    currentLocale = context.locale;
     return FutureBuilder(
       future: Future.wait({
         AppTheme.create,

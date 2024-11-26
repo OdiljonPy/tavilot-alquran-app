@@ -3,9 +3,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../styles/style.dart';
+
 class BookmarkWidget extends StatelessWidget {
   final VoidCallback onTap;
-  const BookmarkWidget({super.key, required this.onTap});
+  final bool isBookmarked;
+  const BookmarkWidget({super.key, required this.onTap, required this.isBookmarked});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +28,7 @@ class BookmarkWidget extends StatelessWidget {
           color: const Color(0xFFF9F9F9),
           borderRadius: BorderRadius.circular(8.r)
         ),
-        child: SvgPicture.asset("assets/svg/bookmark.svg"),
+        child: SvgPicture.asset(isBookmarked ? "assets/svg/bookmarkActive.svg": "assets/svg/bookmark.svg"),
       ),
     );
   }

@@ -19,6 +19,7 @@ mixin _$MainState {
   bool get isChapterLoading => throw _privateConstructorUsedError;
   List<Chapter> get chapters => throw _privateConstructorUsedError;
   int get selectIndex => throw _privateConstructorUsedError;
+  PageController? get pageController => throw _privateConstructorUsedError;
 
   /// Create a copy of MainState
   /// with the given fields replaced by the non-null parameter values.
@@ -32,7 +33,11 @@ abstract class $MainStateCopyWith<$Res> {
   factory $MainStateCopyWith(MainState value, $Res Function(MainState) then) =
       _$MainStateCopyWithImpl<$Res, MainState>;
   @useResult
-  $Res call({bool isChapterLoading, List<Chapter> chapters, int selectIndex});
+  $Res call(
+      {bool isChapterLoading,
+      List<Chapter> chapters,
+      int selectIndex,
+      PageController? pageController});
 }
 
 /// @nodoc
@@ -53,6 +58,7 @@ class _$MainStateCopyWithImpl<$Res, $Val extends MainState>
     Object? isChapterLoading = null,
     Object? chapters = null,
     Object? selectIndex = null,
+    Object? pageController = freezed,
   }) {
     return _then(_value.copyWith(
       isChapterLoading: null == isChapterLoading
@@ -67,6 +73,10 @@ class _$MainStateCopyWithImpl<$Res, $Val extends MainState>
           ? _value.selectIndex
           : selectIndex // ignore: cast_nullable_to_non_nullable
               as int,
+      pageController: freezed == pageController
+          ? _value.pageController
+          : pageController // ignore: cast_nullable_to_non_nullable
+              as PageController?,
     ) as $Val);
   }
 }
@@ -79,7 +89,11 @@ abstract class _$$MainStateImplCopyWith<$Res>
       __$$MainStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isChapterLoading, List<Chapter> chapters, int selectIndex});
+  $Res call(
+      {bool isChapterLoading,
+      List<Chapter> chapters,
+      int selectIndex,
+      PageController? pageController});
 }
 
 /// @nodoc
@@ -98,6 +112,7 @@ class __$$MainStateImplCopyWithImpl<$Res>
     Object? isChapterLoading = null,
     Object? chapters = null,
     Object? selectIndex = null,
+    Object? pageController = freezed,
   }) {
     return _then(_$MainStateImpl(
       isChapterLoading: null == isChapterLoading
@@ -112,6 +127,10 @@ class __$$MainStateImplCopyWithImpl<$Res>
           ? _value.selectIndex
           : selectIndex // ignore: cast_nullable_to_non_nullable
               as int,
+      pageController: freezed == pageController
+          ? _value.pageController
+          : pageController // ignore: cast_nullable_to_non_nullable
+              as PageController?,
     ));
   }
 }
@@ -122,7 +141,8 @@ class _$MainStateImpl extends _MainState {
   const _$MainStateImpl(
       {this.isChapterLoading = false,
       final List<Chapter> chapters = const [],
-      this.selectIndex = 0})
+      this.selectIndex = 0,
+      this.pageController = null})
       : _chapters = chapters,
         super._();
 
@@ -141,10 +161,13 @@ class _$MainStateImpl extends _MainState {
   @override
   @JsonKey()
   final int selectIndex;
+  @override
+  @JsonKey()
+  final PageController? pageController;
 
   @override
   String toString() {
-    return 'MainState(isChapterLoading: $isChapterLoading, chapters: $chapters, selectIndex: $selectIndex)';
+    return 'MainState(isChapterLoading: $isChapterLoading, chapters: $chapters, selectIndex: $selectIndex, pageController: $pageController)';
   }
 
   @override
@@ -156,12 +179,18 @@ class _$MainStateImpl extends _MainState {
                 other.isChapterLoading == isChapterLoading) &&
             const DeepCollectionEquality().equals(other._chapters, _chapters) &&
             (identical(other.selectIndex, selectIndex) ||
-                other.selectIndex == selectIndex));
+                other.selectIndex == selectIndex) &&
+            (identical(other.pageController, pageController) ||
+                other.pageController == pageController));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isChapterLoading,
-      const DeepCollectionEquality().hash(_chapters), selectIndex);
+  int get hashCode => Object.hash(
+      runtimeType,
+      isChapterLoading,
+      const DeepCollectionEquality().hash(_chapters),
+      selectIndex,
+      pageController);
 
   /// Create a copy of MainState
   /// with the given fields replaced by the non-null parameter values.
@@ -176,7 +205,8 @@ abstract class _MainState extends MainState {
   const factory _MainState(
       {final bool isChapterLoading,
       final List<Chapter> chapters,
-      final int selectIndex}) = _$MainStateImpl;
+      final int selectIndex,
+      final PageController? pageController}) = _$MainStateImpl;
   const _MainState._() : super._();
 
   @override
@@ -185,6 +215,8 @@ abstract class _MainState extends MainState {
   List<Chapter> get chapters;
   @override
   int get selectIndex;
+  @override
+  PageController? get pageController;
 
   /// Create a copy of MainState
   /// with the given fields replaced by the non-null parameter values.

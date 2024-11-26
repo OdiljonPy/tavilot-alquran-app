@@ -1,7 +1,5 @@
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:easy_localization/easy_localization.dart';
-// import 'package:firebase_core/firebase_core.dart';
-// import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,10 +13,18 @@ Locale? currentLocale;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setUpDependencies();
-  // if(Platform.isAndroid || Platform.isIOS){
-  //   await Firebase.initializeApp();
-  //   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-  // }
+  // await windowManager.ensureInitialized();
+  //
+  // WindowOptions windowOptions = const WindowOptions(
+  //   size: Size(800, 600),
+  //   center: true,
+  //   backgroundColor: Colors.transparent,
+  // );
+  // windowManager.waitUntilReadyToShow(windowOptions, () async {
+  //   await windowManager.show();
+  //   await windowManager.focus();
+  // });
+
   if (Platform.isLinux || Platform.isWindows || Platform.isMacOS) {
     doWhenWindowReady(() {
       const initialSize = Size(1280, 720);
@@ -32,6 +38,7 @@ void main() async {
   }
 
   await LocalStorage.init();
+  await EasyLocalization.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft,DeviceOrientation.landscapeRight]);
   runApp(EasyLocalization(
       supportedLocales: const [
@@ -45,6 +52,3 @@ void main() async {
 
       child: const ProviderScope(child: AppWidget())));}
 
-// Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-//   await Firebase.initializeApp();
-// }

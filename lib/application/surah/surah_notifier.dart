@@ -17,7 +17,7 @@ class SurahNotifier extends StateNotifier<SurahState> {
     state = state.copyWith(bookmarks: bookmarkList);
   }
 
-  setBookMark(int id, int verseId) {
+  setBookMark(int id, int verseId, String name) {
     List<Bookmark> temp = List.from(state.bookmarks);
     if (temp.any((element) => element.id == id)) {
       temp[temp.indexWhere((element) => element.id == id)]
@@ -30,21 +30,20 @@ class SurahNotifier extends StateNotifier<SurahState> {
               .verseIds
               .add(verseId);
 
-      state = state.copyWith(
-        bookmarks: temp
-      );
-    }
-    else {
-      temp.add(Bookmark(id: id, verseIds: [verseId]));
-      state = state.copyWith(
-        bookmarks: temp
-      );
+      state = state.copyWith(bookmarks: temp);
+    } else {
+      temp.add(Bookmark(id: id, verseIds: [verseId], name: name));
+      state = state.copyWith(bookmarks: temp);
     }
     LocalStorage.setBookmark(state.bookmarks);
   }
 
   selectJuzId(int index) {
     state = state.copyWith(selectedJuzId: index);
+  }
+
+  selectBookmarkId(int index, int verseId) {
+    state = state.copyWith(selectedBookmarkId: index, selectedVerseId: verseId);
   }
 
   selectSurahId(int index) {
@@ -98,7 +97,7 @@ class SurahNotifier extends StateNotifier<SurahState> {
     );
   }
 
-  Future<void> fetchSurah(BuildContext context, int id) async {
+  Future<void> fetchSurah(BuildContext context, int id,{VoidCallback? onSuccess}) async {
     state = state.copyWith(
       isSurahLoading: true,
     );
@@ -107,6 +106,7 @@ class SurahNotifier extends StateNotifier<SurahState> {
     response.when(
       success: (data) {
         state = state.copyWith(isSurahLoading: false, chapter: data.result);
+        onSuccess?.call();
         return;
       },
       failure: (failure, status) {

@@ -34,57 +34,9 @@ class AppHelpers {
   static String errorCodeToMessage(int errorCode) {
     switch (errorCode) {
       case 1:
-        return LocaleKeys.unauthorizedAccess.tr();
-      case 2:
-        return LocaleKeys.invalidInputProvided.tr();
-      case 3:
-        return LocaleKeys.permissionDenied.tr();
-      case 4:
-        return LocaleKeys.resourceNotFound.tr();
-      case 5:
-        return LocaleKeys.youAlreadyHave3AttemptsPleaseReturnAfter12Times.tr();
-      case 6:
-        return LocaleKeys.userAlreadyExists.tr();
-      case 7:
-        return LocaleKeys.userDoesNotExist.tr();
-      case 8:
-        return LocaleKeys.incorrectPassword.tr();
-      case 9:
-        return LocaleKeys.otpNotExpired.tr();
-      case 10:
-        return LocaleKeys.invalidToken.tr();
-      case 11:
-        return LocaleKeys.tokenExpired.tr();
-      case 12:
-        return LocaleKeys.otpKeyExpired.tr();
-      case 13:
-        return LocaleKeys.otpLimitExceeded.tr();
-      case 14:
-        return LocaleKeys.otpKeyDoesNotExist.tr();
-      case 15:
-        return LocaleKeys.incorrectOtpCode.tr();
-      case 16:
-        return LocaleKeys.validateError.tr();
-      case 17:
-        return LocaleKeys.youCanConfirmOrCancelOnlyOnce.tr();
-      case 18:
-        return LocaleKeys.noInfoFoundForCurrency.tr();
-      case 19:
-        return LocaleKeys.notEnoughMoneyOnBalance.tr();
-      case 20:
-        return LocaleKeys.ownerCannotBeDebtor.tr();
-      case 21:
-        return LocaleKeys.debtorCannotBeWitness.tr();
-      case 22:
-        return LocaleKeys.contractCannotBeCreatedWith0.tr();
-      case 23:
-        return LocaleKeys.approvedExtendMustBeCreatedOnce.tr();
-      case 24:
-        return LocaleKeys.permissionDenied.tr();
-      case 25:
-        return LocaleKeys.invalidValidationPerformed.tr();
+        return LocaleKeys.register.tr();
       default:
-        return LocaleKeys.unknownErrorOccurred.tr();
+        return LocaleKeys.register.tr();
     }
   }
 

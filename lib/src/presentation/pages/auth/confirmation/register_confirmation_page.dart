@@ -6,20 +6,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sms_autofill/sms_autofill.dart';
+import '../../../../../application/confirmation/register_confirmation_provider.dart';
 import '../../../../../infrastructure/translations/locale_keys.g.dart';
 import '../../../../core/utils/utils.dart';
 import '../../../components/components.dart';
 import '../../../styles/style.dart';
 
 @RoutePage()
-class RegisterPage extends ConsumerStatefulWidget {
-  const RegisterPage({super.key});
+class RegisterConfirmationPage extends ConsumerStatefulWidget {
+  final String phoneNumber;
+  const RegisterConfirmationPage({super.key, required this.phoneNumber});
 
   @override
-  ConsumerState<RegisterPage> createState() => _RegisterPageState();
+  ConsumerState<RegisterConfirmationPage> createState() => _RegisterConfirmationPageState();
 }
 
-class _RegisterPageState extends ConsumerState<RegisterPage> {
+class _RegisterConfirmationPageState extends ConsumerState<RegisterConfirmationPage> {
   late TextEditingController register;
   late TextEditingController password;
   @override
@@ -30,8 +33,8 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
   }
   @override
   Widget build(BuildContext context) {
-    final notifier = ref.read(registerProvider.notifier);
-    final state = ref.watch(registerProvider);
+    final notifier = ref.read(registerConfirmationProvider.notifier);
+    final state = ref.watch(registerConfirmationProvider);
     return KeyboardDismisser(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -61,89 +64,65 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                           ),
                           56.verticalSpace,
                           Text(
-                            "Ассаламу алайкум!",
+                            LocaleKeys.codeSendToNumber.tr(),
                             style: GoogleFonts.inter(
-                              fontSize: 30.sp,
+                              fontSize: 24.sp,
                               color: Style.black,
                               fontWeight: FontWeight.normal,),
                           ),
                           Text(
-                            "Логин ва паролингизни киритинг",
+                            widget.phoneNumber,
                             style: GoogleFonts.inter(
                                 fontSize: 24.sp,
                                 color: Style.black,
                                 fontWeight: FontWeight.w400),
                           ),
                           36.verticalSpace,
-
-                          OutlinedBorderTextField(
-                            hintText: LocaleKeys.phoneNumber.tr(),
-                            // onChanged:(s)=> notifier.setEmail(s),
-                            textController: register,
-                            inputType: TextInputType.phone,
-                            validator: AppValidators.emptyCheck,
-                            // textCapitalization: TextCapitalization.none,
-                            inputFormatters: [AppHelpers.phoneFormatter()],
-                            // descriptionText: state.isEmailNotValid
-                            //     ? AppHelpers.getTranslation(
-                            //         TrKeys.emailIsNotValid)
-                            //     : (state.isLoginError
-                            //         ? AppHelpers.getTranslation(
-                            //             TrKeys.loginCredentialsAreNotValid)
-                            //         : null),
-                            // onFieldSubmitted: (value) {
-                            // },
-                            label: null,
+                          SizedBox(
+                            height: 64,
+                            child: PinFieldAutoFill(
+                              codeLength: 6,
+                              currentCode: state.confirmCode,
+                              onCodeChanged: notifier.setCode,
+                              cursor: Cursor(
+                                width: 1,
+                                height: 24,
+                                color: Style.primary,
+                                enabled: true,
+                              ),
+                              decoration: BoxLooseDecoration(
+                                gapSpace: 20.r,
+                                textStyle: Style.interNormal(
+                                  size: 15.sp,
+                                  color:
+                                  state.isCodeError ? Style.red : Style.black,
+                                ),
+                                bgColorBuilder: const FixedColorBuilder(
+                                  Style.transparent,
+                                ),
+                                strokeColorBuilder: FixedColorBuilder(
+                                  state.isCodeError ? Style.red : Style.colorGrey,
+                                ),
+                              ),
+                            ),
                           ),
-                          50.verticalSpace,
-                          OutlinedBorderTextField(
-                            hintText: LocaleKeys.password.tr(),
-                            onChanged: notifier.setPassword,
-                            textController: password,
-                            obscure: true,
-                            validator: AppValidators.emptyCheck,
-                            inputType: TextInputType.emailAddress,
-                            textCapitalization: TextCapitalization.none,
-                            onFieldSubmitted: (_){
-                              notifier.register(
-                                onSuccess: () {
-                                  context.pushRoute(
-                                      RegisterConfirmationRoute(
-                                          phoneNumber: register.text));
-                                },
-                                context,
-                                phoneNumber: register.text,
-                                password: password.text,
-                              );
 
-                            },
-                            // isError:
-                            //     state.isLoginError || state.isEmailNotValid,
-                            // descriptionText: state.isEmailNotValid
-                            //     ? AppHelpers.getTranslation(
-                            //     TrKeys.emailIsNotValid)
-                            //     : (state.isLoginError
-                            //     ? AppHelpers.getTranslation(
-                            //     TrKeys.loginCredentialsAreNotValid)
-                            //     : null),
-                            label: null,
-                          ),
                           56.verticalSpace,
                           LoginButton(
                             height: 80.r,
                             isLoading: state.isLoading,
                             title: LocaleKeys.continueForApp.tr(),
                             onPressed: () {
-                              notifier.register(
-                                onSuccess: () {
-                                  // context.pushRoute(
-                                  //     RegisterConfirmationRoute(
-                                  //         phoneNumber: phoneNumber.text));
-                                },
-                                context,
-                                phoneNumber: register.text,
-                                password: password.text,
-                              );
+                              // notifier.register(
+                              //   onSuccess: () {
+                              //     // context.pushRoute(
+                              //     //     RegisterConfirmationRoute(
+                              //     //         phoneNumber: phoneNumber.text));
+                              //   },
+                              //   context,
+                              //   phoneNumber: register.text,
+                              //   password: password.text,
+                              // );
                             },
                           ),
                           40.verticalSpace,

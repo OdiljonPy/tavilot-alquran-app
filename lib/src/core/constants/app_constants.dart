@@ -17,7 +17,7 @@ class AppConstants {
   static const String keyShop = 'keyShop';
   static const String keyTranslations = 'keyTranslations';
   static const String keySelectedCurrency = 'keySelectedCurrency';
-  static const String keyBookmark = 'keyBookmark';
+  static const String keyBookmark = 'keyBookmarks';
   static const String keyUser = 'keyUser';
   static const String keyAddress = 'keyAddress';
   static const String pinCode = 'pinCode';

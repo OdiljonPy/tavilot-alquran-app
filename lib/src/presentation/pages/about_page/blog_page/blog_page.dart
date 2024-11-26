@@ -1,11 +1,13 @@
 import 'package:al_quran/application/surah/surah_provider.dart';
 import 'package:al_quran/src/presentation/components/components.dart';
 import 'package:al_quran/src/presentation/pages/main/riverpod/provider/main_provider.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../../../generated/assets.dart';
+import '../../../../../infrastructure/translations/locale_keys.g.dart';
 import '../../../../core/utils/local_storage.dart';
 import '../../../styles/style.dart';
 
@@ -32,22 +34,22 @@ class _BlogPageState extends ConsumerState<BlogPage> {
                   fit: BoxFit.cover,
                 ),
               ),
-              child: const Row(
+              child: Row(
                 children: [
-                  Expanded(flex: 1, child: SizedBox()),
+                  const Expanded(flex: 1, child: SizedBox()),
                   Expanded(
                       flex: 2,
                       child: OutlinedBorderTextField(
-                        prefixIcon: Icon(
+                        prefixIcon: const Icon(
                           CupertinoIcons.search,
                           color: Style.textHint,
                         ),
                         label: null,
-                        hintText: "Нима ӯқимоқчисиз?  ",
+                        hintText: LocaleKeys.whatUWant.tr(),
                         color: Style.white,
                         radius: 40,
                       )),
-                  Expanded(flex: 1, child: SizedBox()),
+                  const Expanded(flex: 1, child: SizedBox()),
                 ],
               )),
           60.verticalSpace,
@@ -70,7 +72,7 @@ class _BlogPageState extends ConsumerState<BlogPage> {
                           height: 30, width: 30, color: Style.black),
                       const Spacer(),
                       Text(
-                        "Таъвилот Ал-Қуръон ўкувчиларига",
+                        LocaleKeys.forStudent.tr(),
                         style: Style.interRegular(size: 24, color: Style.black),
                       )
                     ],
@@ -92,7 +94,7 @@ class _BlogPageState extends ConsumerState<BlogPage> {
                           height: 30, width: 30, color: Style.black),
                       const Spacer(),
                       Text(
-                        "Xаридлар",
+                        LocaleKeys.sells.tr(),
                         style: Style.interRegular(size: 24, color: Style.black),
                       )
                     ],
@@ -117,7 +119,7 @@ class _BlogPageState extends ConsumerState<BlogPage> {
                       ),
                       const Spacer(),
                       Text(
-                        "Дастур ҳақида",
+                        LocaleKeys.aboutApp.tr(),
                         style: Style.interRegular(size: 24, color: Style.black),
                       )
                     ],
@@ -128,14 +130,14 @@ class _BlogPageState extends ConsumerState<BlogPage> {
           ),
           60.verticalSpace,
           ButtonEffect(
-            onTap: (){
+            onTap: () {
               // ref.read(mainProvider.notifier).changeIndex(4);
               LocalStorage.deleteToken();
             },
             child: Padding(
                 padding: REdgeInsets.only(left: 40, bottom: 30),
                 child: Text(
-                  "Суралар",
+                  LocaleKeys.chapters.tr(),
                   style: Style.interNormal(size: 36, color: Style.black),
                 )),
           ),
@@ -153,13 +155,13 @@ class _BlogPageState extends ConsumerState<BlogPage> {
                   itemBuilder: (BuildContext context, int index) {
                     return ButtonEffect(
                       onTap: () {
-                         ref.read(mainProvider.notifier).changeIndex(3, onSuccess: ()async{
-                           ref.read(surahProvider.notifier).selectSurahId(index + 1);
-                           await  ref.read(surahProvider.notifier)
-                               .fetchJuzes(context);
-                           await ref.read(surahProvider.notifier).fetchSurah(context, index + 1);
-                           await ref.read(surahProvider.notifier).fetchJuz(context, index + 1);
-                         });
+                        ref.read(mainProvider.notifier).changeIndex(3,
+                            onSuccess: () async {
+                          ref.read(surahProvider.notifier)
+                            ..fetchJuzes(context)
+                            ..fetchSurah(context, index + 1)
+                            ..fetchJuz(context, index + 1);
+                        });
                       },
                       child: Container(
                         padding: REdgeInsets.all(20),
@@ -201,8 +203,7 @@ class _BlogPageState extends ConsumerState<BlogPage> {
                                       size: 24, color: Style.black),
                                 ),
                                 Text(
-                                  "${ref.watch(mainProvider).chapters[index].typeChoice == 1
-                                      ? "Маккий" : "Маданий"}, ${ref.watch(mainProvider).chapters[index].verseNumber} оят",
+                                  "${ref.watch(mainProvider).chapters[index].typeChoice == 1 ? "Маккий" : "Маданий"}, ${ref.watch(mainProvider).chapters[index].verseNumber} оят",
                                   style: Style.interRegular(
                                       size: 10, color: Style.black),
                                 ),

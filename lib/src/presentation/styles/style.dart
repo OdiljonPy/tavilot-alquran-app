@@ -249,7 +249,7 @@ class Style {
     FontStyle? fontStyle,
     Color? decorationColor,
   }) =>
-      GoogleFonts.amiri(
+      GoogleFonts.cormorant(
         fontSize: size.sp,
         fontWeight: FontWeight.w400,
         color: color,

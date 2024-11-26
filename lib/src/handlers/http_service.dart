@@ -13,8 +13,9 @@ class HttpService {
           headers: {
             'Accept': 'application/json',
             'Content-type': 'application/json',
-            'Accept-Language':
-                currentLocale?.countryCode?.toLowerCase() ?? 'ru',
+            'Accept-Language': currentLocale?.countryCode?.toLowerCase() == 'ru'
+                ? 'kr'
+                : currentLocale?.countryCode?.toLowerCase() ?? "kr",
           },
         ),
       )

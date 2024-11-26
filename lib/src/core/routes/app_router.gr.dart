@@ -37,6 +37,22 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    RegisterConfirmationRoute.name: (routeData) {
+      final args = routeData.argsAs<RegisterConfirmationRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: RegisterConfirmationPage(
+          key: args.key,
+          phoneNumber: args.phoneNumber,
+        ),
+      );
+    },
+    RegisterRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const RegisterPage(),
+      );
+    },
     SplashRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -110,6 +126,59 @@ class PinCodeRouteArgs {
   String toString() {
     return 'PinCodeRouteArgs{isNewPassword: $isNewPassword, key: $key}';
   }
+}
+
+/// generated route for
+/// [RegisterConfirmationPage]
+class RegisterConfirmationRoute
+    extends PageRouteInfo<RegisterConfirmationRouteArgs> {
+  RegisterConfirmationRoute({
+    Key? key,
+    required String phoneNumber,
+    List<PageRouteInfo>? children,
+  }) : super(
+          RegisterConfirmationRoute.name,
+          args: RegisterConfirmationRouteArgs(
+            key: key,
+            phoneNumber: phoneNumber,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'RegisterConfirmationRoute';
+
+  static const PageInfo<RegisterConfirmationRouteArgs> page =
+      PageInfo<RegisterConfirmationRouteArgs>(name);
+}
+
+class RegisterConfirmationRouteArgs {
+  const RegisterConfirmationRouteArgs({
+    this.key,
+    required this.phoneNumber,
+  });
+
+  final Key? key;
+
+  final String phoneNumber;
+
+  @override
+  String toString() {
+    return 'RegisterConfirmationRouteArgs{key: $key, phoneNumber: $phoneNumber}';
+  }
+}
+
+/// generated route for
+/// [RegisterPage]
+class RegisterRoute extends PageRouteInfo<void> {
+  const RegisterRoute({List<PageRouteInfo>? children})
+      : super(
+          RegisterRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'RegisterRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for

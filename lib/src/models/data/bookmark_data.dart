@@ -1,11 +1,13 @@
 class Bookmark {
+  final String name;
   final int id;
   final List<int> verseIds;
 
-  Bookmark({required this.id, required this.verseIds});
+  Bookmark({required this.id, required this.verseIds, required this.name});
 
   factory Bookmark.fromJson(Map<String, dynamic> json) {
     return Bookmark(
+      name: json['name'],
       id: json['id'],
       verseIds: List<int>.from(json['verse_id'].map((x) => x as int)),
     );
@@ -14,6 +16,7 @@ class Bookmark {
   Map<String, dynamic> toJson() {
     return {
       'id': id,
+      'name': name,
       'verse_id': verseIds,
     };
   }

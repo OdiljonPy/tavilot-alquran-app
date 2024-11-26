@@ -12,20 +12,6 @@ abstract class AuthFacade {
     required String password,
   });
 
-  Future<ApiResult<UserResponse>> getInfoByPINFL({
-    required String pinfl,
-  });
-
-  Future<ApiResult<UpdateResponse>> update({
-    required String fullName,
-    required String birthDate,
-    required String pinfl,
-    required String placeIssue,
-    required String placeResidence,
-    required String dateIssue ,
-    required String passportSeries,
-  });
-
   Future<ApiResult<LoginResponse>> refreshToken({
     required String refreshToken,
   });
@@ -37,7 +23,6 @@ abstract class AuthFacade {
   Future<ApiResult<RegisterResponse>> signUp({
     required String password,
     required String phoneNumber,
-    required String deviceId,
   });
 
   Future<ApiResult<LoginResponse>> sendOtp(
@@ -56,6 +41,4 @@ abstract class AuthFacade {
     required String resetToken,
     required String phoneNumber
   });
-
-  Future<ApiResult<UserResponse>> getUser();
 }
