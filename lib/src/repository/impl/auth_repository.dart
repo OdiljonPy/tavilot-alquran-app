@@ -191,16 +191,16 @@ class AuthRepository implements AuthFacade {
   }
 
   @override
-  Future<ApiResult<LoginResponse>> sendOtp(
+  Future<ApiResult<dynamic>> sendOtp(
       {required String otpKey, required int otpCode}) async {
     final data = {'otp_key': otpKey, 'otp_code': otpCode};
     try {
       final client = dioHttp.client(requireAuth: false);
       final response = await client.post(
-        'api/v1/auth/verify/',
+        '/api/v1/auth/verify/',
         data: data,
       );
-      return ApiResult.success(data: LoginResponse.fromJson(response.data));
+      return ApiResult.success(data: response.data);
     } catch (e) {
       debugPrint('==> send otp failure: $e');
       if (e is DioException && e.response != null) {

@@ -86,7 +86,7 @@ class _RegisterConfirmationPageState extends ConsumerState<RegisterConfirmationP
                               onCodeChanged: notifier.setCode,
                               cursor: Cursor(
                                 width: 1,
-                                height: 24,
+                                height: 24.r,
                                 color: Style.primary,
                                 enabled: true,
                               ),
@@ -106,33 +106,19 @@ class _RegisterConfirmationPageState extends ConsumerState<RegisterConfirmationP
                               ),
                             ),
                           ),
-
                           56.verticalSpace,
                           LoginButton(
                             height: 80.r,
                             isLoading: state.isLoading,
-                            title: LocaleKeys.continueForApp.tr(),
+                            isActive: state.isConfirm,
+                            title: LocaleKeys.confirm.tr(),
                             onPressed: () {
-                              // notifier.register(
-                              //   onSuccess: () {
-                              //     // context.pushRoute(
-                              //     //     RegisterConfirmationRoute(
-                              //     //         phoneNumber: phoneNumber.text));
-                              //   },
-                              //   context,
-                              //   phoneNumber: register.text,
-                              //   password: password.text,
-                              // );
-                            },
-                          ),
-                          40.verticalSpace,
-                          LoginButton(
-                            titleColor: Style.primary,
-                            bgColor: Style.bg,
-                            // isLoading: state.isLoading,
-                            title: LocaleKeys.enterWithPassword.tr(),
-                            onPressed: () {
-                              context.replaceRoute(const LoginRoute());
+                                notifier.confirmCode(context, ref.watch(registerProvider).otpKey, onSuccess: (){
+                                  if(context.mounted){
+                                    context.router.popUntilRoot();
+                                    context.replaceRoute(const LoginRoute());
+                                  }
+                                });
                             },
                           ),
 

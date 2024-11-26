@@ -42,7 +42,7 @@ class LoginButton extends StatelessWidget {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(borderRadius),
                 border: Border.all(
-                    color: Style.primary)),
+                    color: isActive?  Style.primary: Style.selectedItemsText)),
             alignment: Alignment.center,
             child: isLoading
                 ? const SizedBox(
@@ -55,9 +55,9 @@ class LoginButton extends StatelessWidget {
                   )
                 : Text(
               AppHelpers.getTranslation(title),
-                    style: GoogleFonts.inter(
-                      fontSize: 16,
-                      color: isActive ? titleColor : Style.black,
+                    style: GoogleFonts.cormorant(
+                      fontSize: 24,
+                      color: isActive ? titleColor : Style.white,
                       fontWeight: FontWeight.w500,
                       letterSpacing: 0.4
                     ),

@@ -175,11 +175,10 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             LoginButton(
                               titleColor: Style.primary,
                               bgColor: Style.bg,
-                              // isLoading: state.isLoading,
                               title: LocaleKeys.register.tr(),
                               onPressed: () {
-                                  // context.replaceRoute(const RegisterRoute());
-                                  context.replaceRoute( RegisterConfirmationRoute(phoneNumber: login.text));
+                                  context.replaceRoute(const RegisterRoute());
+                                  // context.replaceRoute( RegisterConfirmationRoute(phoneNumber: login.text));
                               },
                             ),
                           ],

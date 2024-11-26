@@ -92,7 +92,7 @@ class Style {
   static const Color separatorDot = Color(0xFFD9D9D9);
   static const Color arrowRight = Color(0xFFD9D9D9);
   static const Color locationAddress = Color(0xFF343434);
-  static const Color selectedItemsText = Color(0xFFA0A09C);
+  static const Color selectedItemsText = Color(0xFFBEBEBE);
   static const Color iconButtonBack = Color(0xFFE9E9E6);
   static const Color addButtonColor = Color(0xFFF3F3F3);
   static const Color removeButtonColor = Color(0xFFF7F7F7);

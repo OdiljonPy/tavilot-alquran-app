@@ -61,14 +61,14 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                           ),
                           56.verticalSpace,
                           Text(
-                            "Ассаламу алайкум!",
+                            LocaleKeys.hi.tr(),
                             style: GoogleFonts.inter(
-                              fontSize: 30.sp,
+                              fontSize: 24.sp,
                               color: Style.black,
                               fontWeight: FontWeight.normal,),
                           ),
                           Text(
-                            "Логин ва паролингизни киритинг",
+                            LocaleKeys.registerToContinue.tr(),
                             style: GoogleFonts.inter(
                                 fontSize: 24.sp,
                                 color: Style.black,
@@ -136,9 +136,9 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                             onPressed: () {
                               notifier.register(
                                 onSuccess: () {
-                                  // context.pushRoute(
-                                  //     RegisterConfirmationRoute(
-                                  //         phoneNumber: phoneNumber.text));
+                                  context.pushRoute(
+                                      RegisterConfirmationRoute(
+                                          phoneNumber: register.text));
                                 },
                                 context,
                                 phoneNumber: register.text,

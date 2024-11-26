@@ -25,7 +25,7 @@ abstract class AuthFacade {
     required String phoneNumber,
   });
 
-  Future<ApiResult<LoginResponse>> sendOtp(
+  Future<ApiResult<dynamic>> sendOtp(
       {required String otpKey, required int otpCode});
 
   Future<ApiResult<ReSendResponse>> resetPassword({

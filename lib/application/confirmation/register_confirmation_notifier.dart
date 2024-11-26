@@ -62,49 +62,39 @@ class RegisterConfirmationNotifier
 
   Future<void> confirmCode(BuildContext context, String? otpKey,
       {VoidCallback? onSuccess}) async {
-    final connected = await AppConnectivity.connectivity();
-    if (connected) {
-      state = state.copyWith(isLoading: true, isSuccess: false, isAllowed: state.isAllowed - 1);
-      final response = await authRepository.sendOtp(
-        otpKey: state.otpKey ?? otpKey ?? "",
-        otpCode: int.parse(state.confirmCode),
-      );
-      response.when(
-        success: (data) async {
-          state = state.copyWith(isLoading: false, isSuccess: true);
-          _timer?.cancel();
-          onSuccess?.call();
-          // state = state.copyWith(phoneNumber: phoneNumber);
-          // await LocalStorage.setRefreshToken(data.result?.refreshToken ?? '');
-          await LocalStorage.setToken(data.result?.accessToken ?? '');
-          // await LocalStorage.setRefreshDay(DateTime.now().toString())
-          //     .then((value) {
-          //   onSuccess?.call();
-          //   // if (context.mounted) {
-          //   //   context.replaceRoute(const MainRoute());
-          //   // }
-          //   // return;
-          // });
-          state = state.copyWith(isLoading: false);
-        },
-        failure: (failure, status) {
-          state = state.copyWith(
-              isLoading: false, isCodeError: true, isSuccess: false);
-          // AppHelpers.showCheckTopSnackBar(
-          //   context,
-          //   AppHelpers.getTranslation(failure.toString()),
-          // );
-          debugPrint('==> confirm code failure: $failure');
-        },
-      );
-    } else {
-      if (mounted) {
+    state = state.copyWith(isLoading: true, isSuccess: false, isAllowed: state.isAllowed - 1);
+    final response = await authRepository.sendOtp(
+      otpKey: state.otpKey ?? otpKey ?? "",
+      otpCode: int.parse(state.confirmCode),
+    );
+    response.when(
+      success: (data) async {
+        state = state.copyWith(isLoading: false, isSuccess: true);
+        _timer?.cancel();
+        onSuccess?.call();
+        // state = state.copyWith(phoneNumber: phoneNumber);
+        // await LocalStorage.setRefreshToken(data.result?.refreshToken ?? '');
+        // await LocalStorage.setToken(data.result?.accessToken ?? '');
+        // await LocalStorage.setRefreshDay(DateTime.now().toString())
+        //     .then((value) {
+        //   onSuccess?.call();
+        //   // if (context.mounted) {
+        //   //   context.replaceRoute(const MainRoute());
+        //   // }
+        //   // return;
+        // });
+        state = state.copyWith(isLoading: false);
+      },
+      failure: (failure, status) {
+        state = state.copyWith(
+            isLoading: false, isCodeError: true, isSuccess: false);
         // AppHelpers.showCheckTopSnackBar(
         //   context,
-        //   AppHelpers.getTranslation(TrKeys.checkYourNetworkConnection),
+        //   AppHelpers.getTranslation(failure.toString()),
         // );
-      }
-    }
+        debugPrint('==> confirm code failure: $failure');
+      },
+    );
   }
 
   void disposeTimer() {

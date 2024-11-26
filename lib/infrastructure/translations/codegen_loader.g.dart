@@ -17,6 +17,7 @@ class CodegenLoader extends AssetLoader{
   static const Map<String,dynamic> uz_UZ = {
   "hi": "Assalomu alaykum!",
   "enterLoginAndPassword": "Login va parolingizni kiriting",
+  "registerToContinue": "Davom etish uchun ro'yxatdan o'ting",
   "continueForApp": "Davom etish",
   "register": "Royhatdan otish",
   "password": "Parol",
@@ -55,6 +56,7 @@ class CodegenLoader extends AssetLoader{
 static const Map<String,dynamic> ru_RU = {
   "hi": "Ассаламу алайкум!",
   "enterLoginAndPassword": "Логин ва паролингизни киритинг",
+  "registerToContinue": "Давом этиш учун рӯйҳатдан ӯтинг",
   "continueForApp": "Давом этиш",
   "register": "Ройхаттан отиш",
   "password": "Парол",

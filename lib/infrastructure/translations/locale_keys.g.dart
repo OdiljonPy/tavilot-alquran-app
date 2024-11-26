@@ -3,6 +3,7 @@
 abstract class  LocaleKeys {
   static const hi = 'hi';
   static const enterLoginAndPassword = 'enterLoginAndPassword';
+  static const registerToContinue = 'registerToContinue';
   static const continueForApp = 'continueForApp';
   static const register = 'register';
   static const password = 'password';
