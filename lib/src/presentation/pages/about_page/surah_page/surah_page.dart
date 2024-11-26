@@ -38,17 +38,17 @@ class _SurahPageState extends ConsumerState<SurahPage> {
   Widget build(BuildContext context) {
     final state = ref.watch(surahProvider);
     final notifier = ref.read(surahProvider.notifier);
-    return SingleChildScrollView(
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            flex: 3,
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          flex: 3,
+          child: SingleChildScrollView(
             child: Container(
               decoration: BoxDecoration(
                 color: Style.white,
                 border: Border(
-                  right: BorderSide(color: Style.primary, width: 1.r),
+                  right: BorderSide(color: Style.secondary, width: 1.r),
                 ),
               ),
               constraints:
@@ -163,7 +163,7 @@ class _SurahPageState extends ConsumerState<SurahPage> {
                                                       size: 18),
                                                 ),
                                                 Text(
-                                                  "${ref.watch(mainProvider).chapters[index].verseNumber == 0 ? "Маккий" : "Маданий"}, ${ref.watch(mainProvider).chapters[index].verseNumber} оят",
+                                                  "${ref.watch(mainProvider).chapters[index].verseNumber == 0 ? LocaleKeys.makka.tr() : LocaleKeys.madina.tr()}, ${ref.watch(mainProvider).chapters[index].verseNumber} оят",
                                                   style: Style.interRegular(
                                                       size: 8),
                                                 ),
@@ -174,7 +174,8 @@ class _SurahPageState extends ConsumerState<SurahPage> {
                                               "${ref.watch(mainProvider).chapters[index].nameArabic}",
                                               style:
                                                   Style.interRegular(size: 20),
-                                            )
+                                            ),
+                                            5.horizontalSpace,
                                           ],
                                         ),
                                       ),
@@ -352,7 +353,7 @@ class _SurahPageState extends ConsumerState<SurahPage> {
                                                                   size: 18),
                                                         ),
                                                         Text(
-                                                          "${ref.watch(surahProvider).bookmarks[index].verseIds[j]} - oyat",
+                                                          "${ref.watch(surahProvider).bookmarks[index].verseIds[j]} - ${LocaleKeys.verse.tr()}",
                                                           style: Style
                                                               .interRegular(
                                                                   size: 8),
@@ -379,435 +380,250 @@ class _SurahPageState extends ConsumerState<SurahPage> {
               ),
             ),
           ),
-          Expanded(
-            flex: 11,
-            child: ref.watch(surahProvider).isJuzLoading ||
-                    ref.watch(surahProvider).isSurahLoading
-                ? SizedBox(
-                    height: MediaQuery.sizeOf(context).height,
-                    child: const Loading())
-                : Column(
-                    children: [
-                      Container(
-                        height: 40.r,
-                        margin: REdgeInsets.symmetric(vertical: 20),
-                        padding: REdgeInsets.all(4),
-                        decoration: BoxDecoration(
-                          color: Style.backgroundColor,
-                          borderRadius: BorderRadius.circular(20.r),
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            ButtonEffect(
-                              onTap: () {
-                                notifier.changeIndicationType(0);
-                              },
-                              child: Container(
-                                height: 32.r,
-                                padding: REdgeInsets.symmetric(
-                                    horizontal: 24, vertical: 5),
-                                decoration: BoxDecoration(
-                                  color: state.selectedIndicationType == 0
-                                      ? Style.primary
-                                      : Style.transparent,
-                                  borderRadius: BorderRadius.circular(20.r),
-                                ),
-                                child: Text(
-                                  LocaleKeys.arabic.tr(),
-                                  style: Style.interRegular(
-                                      size: 16,
-                                      color: state.selectedIndicationType == 0
-                                          ? Style.white
-                                          : Style.black),
-                                ),
-                              ),
-                            ),
-                            ButtonEffect(
-                              onTap: () {
-                                notifier.changeIndicationType(1);
-                              },
-                              child: Container(
-                                height: 32.r,
-                                padding: REdgeInsets.symmetric(
-                                    horizontal: 24, vertical: 5),
-                                decoration: BoxDecoration(
-                                  color: state.selectedIndicationType == 1
-                                      ? Style.primary
-                                      : Style.transparent,
-                                  borderRadius: BorderRadius.circular(20.r),
-                                ),
-                                child: Text(
-                                  LocaleKeys.translate.tr(),
-                                  style: Style.interRegular(
-                                      size: 16,
-                                      color: state.selectedIndicationType == 1
-                                          ? Style.white
-                                          : Style.black),
-                                ),
-                              ),
-                            ),
-                            BlurWrap(
-                              blur: LocalStorage.getUserRate() != 2 ? 10 : 0,
-                              radius: BorderRadius.circular(20.r),
-                              child: ButtonEffect(
+        ),
+        Expanded(
+          flex: 11,
+          child: ref.watch(surahProvider).isJuzLoading ||
+                  ref.watch(surahProvider).isSurahLoading
+              ? SizedBox(
+                  height: MediaQuery.sizeOf(context).height,
+                  child: const Loading())
+              : SingleChildScrollView(
+                
+                child: ColoredBox(
+                  color: Style.white,
+                  child: Column(
+                      children: [
+                        Container(
+                          height: 40.r,
+                          margin: REdgeInsets.symmetric(vertical: 20),
+                          padding: REdgeInsets.all(4),
+                          decoration: BoxDecoration(
+                            color: Style.backgroundColor,
+                            borderRadius: BorderRadius.circular(20.r),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              ButtonEffect(
                                 onTap: () {
-                                  if (LocalStorage.getUserRate() == 2) {
-                                    notifier.changeIndicationType(2);
-                                  }
+                                  notifier.changeIndicationType(0);
                                 },
                                 child: Container(
                                   height: 32.r,
                                   padding: REdgeInsets.symmetric(
                                       horizontal: 24, vertical: 5),
                                   decoration: BoxDecoration(
-                                    color: state.selectedIndicationType == 2
+                                    color: state.selectedIndicationType == 0
                                         ? Style.primary
                                         : Style.transparent,
                                     borderRadius: BorderRadius.circular(20.r),
                                   ),
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        LocaleKeys.surahDescription.tr(),
-                                        style: Style.interRegular(
-                                            size: 16,
-                                            color:
-                                                state.selectedIndicationType ==
-                                                        2
-                                                    ? Style.white
-                                                    : Style.black),
-                                      ),
-                                      if (LocalStorage.getUserRate() != 2)
-                                        10.horizontalSpace,
-                                      if (LocalStorage.getUserRate() != 2)
-                                        Icon(
-                                          Icons.lock_outline_rounded,
-                                          size: 24.r,
-                                        )
-                                    ],
+                                  child: Text(
+                                    LocaleKeys.arabic.tr(),
+                                    style: Style.interRegular(
+                                        size: 16,
+                                        color: state.selectedIndicationType == 0
+                                            ? Style.white
+                                            : Style.black),
                                   ),
                                 ),
                               ),
-                            )
-                          ],
-                        ),
-                      ),
-                      if (state.selectIndex == 0)
-                        Column(
-                          children: [
-                            Text(
-                              "${ref.watch(surahProvider).chapter?.name}",
-                              style: Style.interSemi(size: 24),
-                            ),
-                            Text(
-                              "${ref.watch(surahProvider).chapter?.typeChoice == 1 ? "Маккий" : "Маданий"}, ${ref.watch(surahProvider).chapter?.verseNumber} оят",
-                              style: Style.interRegular(size: 16),
-                            ),
-                            120.verticalSpace,
-                            ListView.separated(
-                              shrinkWrap: true,
-                              itemCount: ref
-                                      .watch(surahProvider)
-                                      .chapter
-                                      ?.verses
-                                      ?.length ??
-                                  0,
-                              itemBuilder: (BuildContext context, int j) {
-                                return ButtonEffect(
+                              ButtonEffect(
+                                onTap: () {
+                                  notifier.changeIndicationType(1);
+                                },
+                                child: Container(
+                                  height: 32.r,
+                                  padding: REdgeInsets.symmetric(
+                                      horizontal: 24, vertical: 5),
+                                  decoration: BoxDecoration(
+                                    color: state.selectedIndicationType == 1
+                                        ? Style.primary
+                                        : Style.transparent,
+                                    borderRadius: BorderRadius.circular(20.r),
+                                  ),
+                                  child: Text(
+                                    LocaleKeys.translate.tr(),
+                                    style: Style.interRegular(
+                                        size: 16,
+                                        color: state.selectedIndicationType == 1
+                                            ? Style.white
+                                            : Style.black),
+                                  ),
+                                ),
+                              ),
+                              BlurWrap(
+                                blur: LocalStorage.getUserRate() != 2 ? 10 : 0,
+                                radius: BorderRadius.circular(20.r),
+                                child: ButtonEffect(
                                   onTap: () {
-                                    notifier.setBookMark(
-                                        ref.watch(surahProvider).chapter?.id ??
-                                            0,
-                                        ref
-                                                .watch(surahProvider)
-                                                .chapter
-                                                ?.verses?[j]
-                                                .id ??
-                                            0,
-                                        ref
-                                                .watch(surahProvider)
-                                                .chapter
-                                                ?.name ??
-                                            "");
+                                    if (LocalStorage.getUserRate() == 2) {
+                                      notifier.changeIndicationType(2);
+                                    }
                                   },
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.end,
-                                        children: [
-                                          BookmarkWidget(
-                                            onTap: () {
-                                              notifier.setBookMark(
-                                                  ref
-                                                          .watch(surahProvider)
-                                                          .chapter
-                                                          ?.id ??
-                                                      0,
-                                                  ref
-                                                          .watch(surahProvider)
-                                                          .chapter
-                                                          ?.verses?[j]
-                                                          .id ??
-                                                      0,
-                                                  ref
-                                                          .watch(surahProvider)
-                                                          .chapter
-                                                          ?.name ??
-                                                      "");
-                                            },
-                                            isBookmarked: state.bookmarks.any(
-                                                (element) =>
-                                                    element.id ==
-                                                        ref
-                                                            .watch(
-                                                                surahProvider)
+                                  child: Container(
+                                    height: 32.r,
+                                    padding: REdgeInsets.symmetric(
+                                        horizontal: 24, vertical: 5),
+                                    decoration: BoxDecoration(
+                                      color: state.selectedIndicationType == 2
+                                          ? Style.primary
+                                          : Style.transparent,
+                                      borderRadius: BorderRadius.circular(20.r),
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          LocaleKeys.surahDescription.tr(),
+                                          style: Style.interRegular(
+                                              size: 16,
+                                              color:
+                                                  state.selectedIndicationType ==
+                                                          2
+                                                      ? Style.white
+                                                      : Style.black),
+                                        ),
+                                        if (LocalStorage.getUserRate() != 2)
+                                          10.horizontalSpace,
+                                        if (LocalStorage.getUserRate() != 2)
+                                          Icon(
+                                            Icons.lock_outline_rounded,
+                                            size: 24.r,
+                                          )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        if (state.selectIndex == 0)
+                          Column(
+                            children: [
+                              Text(
+                                "${ref.watch(surahProvider).chapter?.name}",
+                                style: Style.interSemi(size: 24),
+                              ),
+                              Text(
+                                "${ref.watch(surahProvider).chapter?.typeChoice == 1 ? "Маккий" : "Маданий"}, ${ref.watch(surahProvider).chapter?.verseNumber} оят",
+                                style: Style.interRegular(size: 16),
+                              ),
+                              120.verticalSpace,
+                              ListView.separated(
+                                shrinkWrap: true,
+                                itemCount: ref
+                                        .watch(surahProvider)
+                                        .chapter
+                                        ?.verses
+                                        ?.length ??
+                                    0,
+                                itemBuilder: (BuildContext context, int j) {
+                                  return ButtonEffect(
+                                    onTap: () {
+                                      notifier.setBookMark(
+                                          ref.watch(surahProvider).chapter?.id ??
+                                              0,
+                                          ref
+                                                  .watch(surahProvider)
+                                                  .chapter
+                                                  ?.verses?[j]
+                                                  .id ??
+                                              0,
+                                          ref
+                                                  .watch(surahProvider)
+                                                  .chapter
+                                                  ?.name ??
+                                              "");
+                                    },
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      children: [
+                                        Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            BookmarkWidget(
+                                              onTap: () {
+                                                notifier.setBookMark(
+                                                    ref
+                                                            .watch(surahProvider)
                                                             .chapter
-                                                            ?.id &&
-                                                    element.verseIds.contains(
-                                                        ref
-                                                            .watch(
-                                                                surahProvider)
+                                                            ?.id ??
+                                                        0,
+                                                    ref
+                                                            .watch(surahProvider)
                                                             .chapter
                                                             ?.verses?[j]
-                                                            .id)),
-                                          ),
-                                          const Spacer(),
-                                          Container(
-                                              height: 30.r,
-                                              width: 30.r,
-                                              decoration: const BoxDecoration(
-                                                image: DecorationImage(
-                                                    image: AssetImage(
-                                                        "assets/png/juzComponent.png")),
-                                              ),
-                                              child: Align(
-                                                alignment:
-                                                    const Alignment(0, -.3),
-                                                child: Text(
-                                                  "${ref.watch(surahProvider).chapter?.verses?[j].number}",
-                                                  style: Style.interRegular(
-                                                      size: 10),
+                                                            .id ??
+                                                        0,
+                                                    ref
+                                                            .watch(surahProvider)
+                                                            .chapter
+                                                            ?.name ??
+                                                        "");
+                                              },
+                                              isBookmarked: state.bookmarks.any(
+                                                  (element) =>
+                                                      element.id ==
+                                                          ref
+                                                              .watch(
+                                                                  surahProvider)
+                                                              .chapter
+                                                              ?.id &&
+                                                      element.verseIds.contains(
+                                                          ref
+                                                              .watch(
+                                                                  surahProvider)
+                                                              .chapter
+                                                              ?.verses?[j]
+                                                              .id)),
+                                            ),
+                                            const Spacer(),
+                                            Container(
+                                                height: 30.r,
+                                                width: 30.r,
+                                                decoration: const BoxDecoration(
+                                                  image: DecorationImage(
+                                                      image: AssetImage(
+                                                          "assets/png/juzComponent.png")),
                                                 ),
-                                              )),
-                                          20.horizontalSpace,
-                                          Flexible(
-                                            child: Text(
-                                              "${ref.watch(surahProvider).chapter?.verses?[j].textArabic}",
-                                              style:
-                                                  Style.interRegular(size: 20),
-                                              textAlign: TextAlign.end,
-                                            ),
-                                          ),
-                                          20.horizontalSpace,
-                                        ],
-                                      ),
-                                      if (state.selectedIndicationType == 1 ||
-                                          state.selectedIndicationType == 2)
-                                        28.verticalSpace,
-                                      if (state.selectedIndicationType == 1 ||
-                                          state.selectedIndicationType == 2)
-                                        Row(
-                                          children: [
-                                            const Spacer(),
-                                            Expanded(
-                                              child: Text(
-                                                "${ref.watch(surahProvider).chapter?.verses?[j].text}",
-                                                style: Style.interRegular(
-                                                    size: 20),
-                                                textAlign: TextAlign.end,
-                                              ),
-                                            ),
-                                            20.horizontalSpace,
-                                          ],
-                                        ),
-                                      if (state.selectedIndicationType == 2)
-                                        28.verticalSpace,
-                                      if (state.selectedIndicationType == 2)
-                                        Row(
-                                          children: [
-                                            const Spacer(),
-                                            Expanded(
-                                              child: Text(
-                                                "${ref.watch(surahProvider).chapter?.verses?[j].description}",
-                                                style: Style.interRegular(
-                                                    size: 20),
-                                                textAlign: TextAlign.end,
-                                              ),
-                                            ),
-                                            20.horizontalSpace,
-                                          ],
-                                        ),
-                                      14.verticalSpace
-                                    ],
-                                  ),
-                                );
-                              },
-                              separatorBuilder:
-                                  (BuildContext context, int index) {
-                                return Padding(
-                                    padding:
-                                        REdgeInsets.symmetric(vertical: 10),
-                                    child: const Divider(
-                                      thickness: 1,
-                                      color: Style.secondary,
-                                    ));
-                              },
-                            ),
-                          ],
-                        )
-                      else if (state.selectIndex == 1)
-                        ListView.separated(
-                          shrinkWrap: true,
-                          itemCount: ref
-                                  .watch(surahProvider)
-                                  .juz
-                                  ?.result
-                                  ?.chapters
-                                  ?.length ??
-                              0,
-                          itemBuilder: (BuildContext context, int index) {
-                            return Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text(
-                                  "${ref.watch(surahProvider).juz?.result?.chapters?[index].name}",
-                                  style: Style.interSemi(size: 24),
-                                ),
-                                Text(
-                                  "${ref.watch(surahProvider).juz?.result?.chapters?[index].typeChoice == 1 ? "Маккий" : "Маданий"}, "
-                                  "${ref.watch(surahProvider).juz?.result?.chapters?[index].verseNumber} оят",
-                                  style: Style.interRegular(size: 16),
-                                ),
-                                120.verticalSpace,
-                                ListView.separated(
-                                  shrinkWrap: true,
-                                  itemCount: ref
-                                          .watch(surahProvider)
-                                          .juz
-                                          ?.result
-                                          ?.chapters?[index]
-                                          .verses
-                                          ?.length ??
-                                      0,
-                                  itemBuilder: (BuildContext context, int i) {
-                                    return ButtonEffect(
-                                      onTap: () {
-                                        notifier.setBookMark(
-                                            ref
-                                                    .watch(surahProvider)
-                                                    .juz
-                                                    ?.result
-                                                    ?.chapters?[index]
-                                                    .id ??
-                                                0,
-                                            ref
-                                                    .watch(surahProvider)
-                                                    .juz
-                                                    ?.result
-                                                    ?.chapters?[index]
-                                                    .verses?[i]
-                                                    .id ??
-                                                0,
-                                            ref
-                                                    .watch(surahProvider)
-                                                    .juz
-                                                    ?.result
-                                                    ?.chapters?[index]
-                                                    .name ??
-                                                "");
-                                      },
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.end,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.end,
-                                        children: [
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.end,
-                                            children: [
-                                              BookmarkWidget(
-                                                onTap: () {
-                                                  notifier.setBookMark(
-                                                      ref
-                                                              .watch(
-                                                                  surahProvider)
-                                                              .juz
-                                                              ?.result
-                                                              ?.chapters?[index]
-                                                              .id ??
-                                                          0,
-                                                      ref
-                                                              .watch(
-                                                                  surahProvider)
-                                                              .juz
-                                                              ?.result
-                                                              ?.chapters?[index]
-                                                              .verses?[i]
-                                                              .id ??
-                                                          0,
-                                                      ref
-                                                              .watch(
-                                                                  surahProvider)
-                                                              .juz
-                                                              ?.result
-                                                              ?.chapters?[index]
-                                                              .name ??
-                                                          "");
-                                                },
-                                                isBookmarked: state.bookmarks
-                                                    .any((element) =>
-                                                        element.id ==
-                                                            ref
-                                                                .watch(
-                                                                    surahProvider)
-                                                                .juz
-                                                                ?.result
-                                                                ?.chapters?[
-                                                                    index]
-                                                                .id &&
-                                                        element.verseIds
-                                                            .contains(ref
-                                                                .watch(
-                                                                    surahProvider)
-                                                                .juz
-                                                                ?.result
-                                                                ?.chapters?[
-                                                                    index]
-                                                                .verses?[i]
-                                                                .id)),
-                                              ),
-                                              const Spacer(),
-                                              Container(
-                                                  height: 30.r,
-                                                  width: 30.r,
-                                                  decoration:
-                                                      const BoxDecoration(
-                                                    image: DecorationImage(
-                                                        image: AssetImage(
-                                                            "assets/png/juzComponent.png")),
+                                                child: Align(
+                                                  alignment:
+                                                      const Alignment(0, -.3),
+                                                  child: Text(
+                                                    "${ref.watch(surahProvider).chapter?.verses?[j].number}",
+                                                    style: Style.interRegular(
+                                                        size: 10),
                                                   ),
-                                                  child: Align(
-                                                    alignment:
-                                                        const Alignment(0, -.3),
-                                                    child: Text(
-                                                      "${ref.watch(surahProvider).juz?.result?.chapters?[index].verses?[i].number}",
-                                                      style: Style.interRegular(
-                                                          size: 10),
-                                                    ),
-                                                  )),
-                                              20.horizontalSpace,
-                                              Flexible(
+                                                )),
+                                            20.horizontalSpace,
+                                            Flexible(
+                                              child: Text(
+                                                "${ref.watch(surahProvider).chapter?.verses?[j].textArabic}",
+                                                style:
+                                                    Style.interRegular(size: 20),
+                                                textAlign: TextAlign.end,
+                                              ),
+                                            ),
+                                            20.horizontalSpace,
+                                          ],
+                                        ),
+                                        if (state.selectedIndicationType == 1 ||
+                                            state.selectedIndicationType == 2)
+                                          28.verticalSpace,
+                                        if (state.selectedIndicationType == 1 ||
+                                            state.selectedIndicationType == 2)
+                                          Row(
+                                            children: [
+                                              const Spacer(),
+                                              Expanded(
                                                 child: Text(
-                                                  "${ref.watch(surahProvider).juz?.result?.chapters?[index].verses?[i].textArabic}",
+                                                  "${ref.watch(surahProvider).chapter?.verses?[j].text}",
                                                   style: Style.interRegular(
                                                       size: 20),
                                                   textAlign: TextAlign.end,
@@ -816,243 +632,434 @@ class _SurahPageState extends ConsumerState<SurahPage> {
                                               20.horizontalSpace,
                                             ],
                                           ),
-                                          if (state.selectedIndicationType ==
-                                                  1 ||
-                                              state.selectedIndicationType == 2)
-                                            28.verticalSpace,
-                                          if (state.selectedIndicationType ==
-                                                  1 ||
-                                              state.selectedIndicationType == 2)
-                                            Row(
-                                              children: [
-                                                const Spacer(),
-                                                Expanded(
-                                                  child: Text(
-                                                    "${ref.watch(surahProvider).juz?.result?.chapters?[index].verses?[i].text}",
-                                                    style: Style.interRegular(
-                                                        size: 20),
-                                                    textAlign: TextAlign.end,
-                                                  ),
+                                        if (state.selectedIndicationType == 2)
+                                          28.verticalSpace,
+                                        if (state.selectedIndicationType == 2)
+                                          Row(
+                                            children: [
+                                              const Spacer(),
+                                              Expanded(
+                                                child: Text(
+                                                  "${ref.watch(surahProvider).chapter?.verses?[j].description}",
+                                                  style: Style.interRegular(
+                                                      size: 20),
+                                                  textAlign: TextAlign.end,
                                                 ),
-                                                20.horizontalSpace,
-                                              ],
-                                            ),
-                                          if (state.selectedIndicationType == 2)
-                                            28.verticalSpace,
-                                          if (state.selectedIndicationType == 2)
+                                              ),
+                                              20.horizontalSpace,
+                                            ],
+                                          ),
+                                        14.verticalSpace
+                                      ],
+                                    ),
+                                  );
+                                },
+                                separatorBuilder:
+                                    (BuildContext context, int index) {
+                                  return Padding(
+                                      padding:
+                                          REdgeInsets.symmetric(vertical: 10),
+                                      child: const Divider(
+                                        thickness: 1,
+                                        color: Style.secondary,
+                                      ));
+                                },
+                              ),
+                            ],
+                          )
+                        else if (state.selectIndex == 1)
+                          ListView.separated(
+                            shrinkWrap: true,
+                            itemCount: ref
+                                    .watch(surahProvider)
+                                    .juz
+                                    ?.result
+                                    ?.chapters
+                                    ?.length ??
+                                0,
+                            itemBuilder: (BuildContext context, int index) {
+                              return Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    "${ref.watch(surahProvider).juz?.result?.chapters?[index].name}",
+                                    style: Style.interSemi(size: 24),
+                                  ),
+                                  Text(
+                                    "${ref.watch(surahProvider).juz?.result?.chapters?[index].typeChoice == 1 ? "Маккий" : "Маданий"}, "
+                                    "${ref.watch(surahProvider).juz?.result?.chapters?[index].verseNumber} оят",
+                                    style: Style.interRegular(size: 16),
+                                  ),
+                                  120.verticalSpace,
+                                  ListView.separated(
+                                    shrinkWrap: true,
+                                    itemCount: ref
+                                            .watch(surahProvider)
+                                            .juz
+                                            ?.result
+                                            ?.chapters?[index]
+                                            .verses
+                                            ?.length ??
+                                        0,
+                                    itemBuilder: (BuildContext context, int i) {
+                                      return ButtonEffect(
+                                        onTap: () {
+                                          notifier.setBookMark(
+                                              ref
+                                                      .watch(surahProvider)
+                                                      .juz
+                                                      ?.result
+                                                      ?.chapters?[index]
+                                                      .id ??
+                                                  0,
+                                              ref
+                                                      .watch(surahProvider)
+                                                      .juz
+                                                      ?.result
+                                                      ?.chapters?[index]
+                                                      .verses?[i]
+                                                      .id ??
+                                                  0,
+                                              ref
+                                                      .watch(surahProvider)
+                                                      .juz
+                                                      ?.result
+                                                      ?.chapters?[index]
+                                                      .name ??
+                                                  "");
+                                        },
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          children: [
                                             Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
                                               children: [
-                                                const Spacer(),
-                                                Expanded(
-                                                  child: Text(
-                                                    "${ref.watch(surahProvider).juz?.result?.chapters?[index].verses?[i].description}",
-                                                    style: Style.interRegular(
-                                                        size: 20),
-                                                    textAlign: TextAlign.end,
-                                                  ),
-                                                ),
-                                                20.horizontalSpace,
-                                              ],
-                                            ),
-                                          14.verticalSpace
-                                        ],
-                                      ),
-                                    );
-                                  },
-                                  separatorBuilder:
-                                      (BuildContext context, int index) {
-                                    return Padding(
-                                        padding:
-                                            REdgeInsets.symmetric(vertical: 10),
-                                        child: const Divider(
-                                          thickness: 1,
-                                          color: Style.secondary,
-                                        ));
-                                  },
-                                )
-                              ],
-                            );
-                          },
-                          separatorBuilder: (BuildContext context, int index) {
-                            return 50.verticalSpace;
-                          },
-                        )
-                      else
-                        Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              "${ref.watch(surahProvider).chapter?.name}",
-                              style: Style.interSemi(size: 24),
-                            ),
-                            Text(
-                              "${ref.watch(surahProvider).chapter?.typeChoice == 1 ? "Маккий" : "Маданий"}, ${ref.watch(surahProvider).chapter?.verseNumber} оят",
-                              style: Style.interRegular(size: 16),
-                            ),
-                            120.verticalSpace,
-                            ScrollablePositionedList.separated(
-                              itemScrollController: _itemScrollController,
-                              itemPositionsListener: _itemPositionsListener,
-                              shrinkWrap: true,
-                              itemCount: ref
-                                      .watch(surahProvider)
-                                      .chapter
-                                      ?.verses
-                                      ?.length ??
-                                  0,
-                              itemBuilder: (BuildContext context, int j) {
-                                return ButtonEffect(
-                                  onTap: () {
-                                    notifier.setBookMark(
-                                        ref.watch(surahProvider).chapter?.id ??
-                                            0,
-                                        ref
-                                                .watch(surahProvider)
-                                                .chapter
-                                                ?.verses?[j]
-                                                .id ??
-                                            0,
-                                        ref
-                                                .watch(surahProvider)
-                                                .chapter
-                                                ?.name ??
-                                            "");
-                                  },
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.end,
-                                        children: [
-                                          BookmarkWidget(
-                                            onTap: () {
-                                              notifier.setBookMark(
-                                                  ref
-                                                          .watch(surahProvider)
-                                                          .chapter
-                                                          ?.id ??
-                                                      0,
-                                                  ref
-                                                          .watch(surahProvider)
-                                                          .chapter
-                                                          ?.verses?[j]
-                                                          .id ??
-                                                      0,
-                                                  ref
-                                                          .watch(surahProvider)
-                                                          .chapter
-                                                          ?.name ??
-                                                      "");
-                                            },
-                                            isBookmarked: state.bookmarks.any(
-                                                (element) =>
-                                                    element.id ==
+                                                BookmarkWidget(
+                                                  onTap: () {
+                                                    notifier.setBookMark(
                                                         ref
-                                                            .watch(
-                                                                surahProvider)
+                                                                .watch(
+                                                                    surahProvider)
+                                                                .juz
+                                                                ?.result
+                                                                ?.chapters?[index]
+                                                                .id ??
+                                                            0,
+                                                        ref
+                                                                .watch(
+                                                                    surahProvider)
+                                                                .juz
+                                                                ?.result
+                                                                ?.chapters?[index]
+                                                                .verses?[i]
+                                                                .id ??
+                                                            0,
+                                                        ref
+                                                                .watch(
+                                                                    surahProvider)
+                                                                .juz
+                                                                ?.result
+                                                                ?.chapters?[index]
+                                                                .name ??
+                                                            "");
+                                                  },
+                                                  isBookmarked: state.bookmarks
+                                                      .any((element) =>
+                                                          element.id ==
+                                                              ref
+                                                                  .watch(
+                                                                      surahProvider)
+                                                                  .juz
+                                                                  ?.result
+                                                                  ?.chapters?[
+                                                                      index]
+                                                                  .id &&
+                                                          element.verseIds
+                                                              .contains(ref
+                                                                  .watch(
+                                                                      surahProvider)
+                                                                  .juz
+                                                                  ?.result
+                                                                  ?.chapters?[
+                                                                      index]
+                                                                  .verses?[i]
+                                                                  .id)),
+                                                ),
+                                                const Spacer(),
+                                                Container(
+                                                    height: 30.r,
+                                                    width: 30.r,
+                                                    decoration:
+                                                        const BoxDecoration(
+                                                      image: DecorationImage(
+                                                          image: AssetImage(
+                                                              "assets/png/juzComponent.png")),
+                                                    ),
+                                                    child: Align(
+                                                      alignment:
+                                                          const Alignment(0, -.3),
+                                                      child: Text(
+                                                        "${ref.watch(surahProvider).juz?.result?.chapters?[index].verses?[i].number}",
+                                                        style: Style.interRegular(
+                                                            size: 10),
+                                                      ),
+                                                    )),
+                                                20.horizontalSpace,
+                                                Flexible(
+                                                  child: Text(
+                                                    "${ref.watch(surahProvider).juz?.result?.chapters?[index].verses?[i].textArabic}",
+                                                    style: Style.interRegular(
+                                                        size: 20),
+                                                    textAlign: TextAlign.end,
+                                                  ),
+                                                ),
+                                                20.horizontalSpace,
+                                              ],
+                                            ),
+                                            if (state.selectedIndicationType ==
+                                                    1 ||
+                                                state.selectedIndicationType == 2)
+                                              28.verticalSpace,
+                                            if (state.selectedIndicationType ==
+                                                    1 ||
+                                                state.selectedIndicationType == 2)
+                                              Row(
+                                                children: [
+                                                  const Spacer(),
+                                                  Expanded(
+                                                    child: Text(
+                                                      "${ref.watch(surahProvider).juz?.result?.chapters?[index].verses?[i].text}",
+                                                      style: Style.interRegular(
+                                                          size: 20),
+                                                      textAlign: TextAlign.end,
+                                                    ),
+                                                  ),
+                                                  20.horizontalSpace,
+                                                ],
+                                              ),
+                                            if (state.selectedIndicationType == 2)
+                                              28.verticalSpace,
+                                            if (state.selectedIndicationType == 2)
+                                              Row(
+                                                children: [
+                                                  const Spacer(),
+                                                  Expanded(
+                                                    child: Text(
+                                                      "${ref.watch(surahProvider).juz?.result?.chapters?[index].verses?[i].description}",
+                                                      style: Style.interRegular(
+                                                          size: 20),
+                                                      textAlign: TextAlign.end,
+                                                    ),
+                                                  ),
+                                                  20.horizontalSpace,
+                                                ],
+                                              ),
+                                            14.verticalSpace
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                    separatorBuilder:
+                                        (BuildContext context, int index) {
+                                      return Padding(
+                                          padding:
+                                              REdgeInsets.symmetric(vertical: 10),
+                                          child: const Divider(
+                                            thickness: 1,
+                                            color: Style.secondary,
+                                          ));
+                                    },
+                                  )
+                                ],
+                              );
+                            },
+                            separatorBuilder: (BuildContext context, int index) {
+                              return 50.verticalSpace;
+                            },
+                          )
+                        else
+                          Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                "${ref.watch(surahProvider).chapter?.name}",
+                                style: Style.interSemi(size: 24),
+                              ),
+                              Text(
+                                "${ref.watch(surahProvider).chapter?.typeChoice == 1 ? "Маккий" : "Маданий"}, ${ref.watch(surahProvider).chapter?.verseNumber} оят",
+                                style: Style.interRegular(size: 16),
+                              ),
+                              120.verticalSpace,
+                              ScrollablePositionedList.separated(
+                                itemScrollController: _itemScrollController,
+                                itemPositionsListener: _itemPositionsListener,
+                                shrinkWrap: true,
+                                itemCount: ref
+                                        .watch(surahProvider)
+                                        .chapter
+                                        ?.verses
+                                        ?.length ??
+                                    0,
+                                itemBuilder: (BuildContext context, int j) {
+                                  return ButtonEffect(
+                                    onTap: () {
+                                      notifier.setBookMark(
+                                          ref.watch(surahProvider).chapter?.id ??
+                                              0,
+                                          ref
+                                                  .watch(surahProvider)
+                                                  .chapter
+                                                  ?.verses?[j]
+                                                  .id ??
+                                              0,
+                                          ref
+                                                  .watch(surahProvider)
+                                                  .chapter
+                                                  ?.name ??
+                                              "");
+                                    },
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      children: [
+                                        Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            BookmarkWidget(
+                                              onTap: () {
+                                                notifier.setBookMark(
+                                                    ref
+                                                            .watch(surahProvider)
                                                             .chapter
-                                                            ?.id &&
-                                                    element.verseIds.contains(
-                                                        ref
-                                                            .watch(
-                                                                surahProvider)
+                                                            ?.id ??
+                                                        0,
+                                                    ref
+                                                            .watch(surahProvider)
                                                             .chapter
                                                             ?.verses?[j]
-                                                            .id)),
-                                          ),
-                                          const Spacer(),
-                                          Container(
-                                              height: 30.r,
-                                              width: 30.r,
-                                              decoration: const BoxDecoration(
-                                                image: DecorationImage(
-                                                    image: AssetImage(
-                                                        "assets/png/juzComponent.png")),
-                                              ),
-                                              child: Align(
-                                                alignment:
-                                                    const Alignment(0, -.3),
-                                                child: Text(
-                                                  "${ref.watch(surahProvider).chapter?.verses?[j].number}",
-                                                  style: Style.interRegular(
-                                                      size: 10),
+                                                            .id ??
+                                                        0,
+                                                    ref
+                                                            .watch(surahProvider)
+                                                            .chapter
+                                                            ?.name ??
+                                                        "");
+                                              },
+                                              isBookmarked: state.bookmarks.any(
+                                                  (element) =>
+                                                      element.id ==
+                                                          ref
+                                                              .watch(
+                                                                  surahProvider)
+                                                              .chapter
+                                                              ?.id &&
+                                                      element.verseIds.contains(
+                                                          ref
+                                                              .watch(
+                                                                  surahProvider)
+                                                              .chapter
+                                                              ?.verses?[j]
+                                                              .id)),
+                                            ),
+                                            const Spacer(),
+                                            Container(
+                                                height: 30.r,
+                                                width: 30.r,
+                                                decoration: const BoxDecoration(
+                                                  image: DecorationImage(
+                                                      image: AssetImage(
+                                                          "assets/png/juzComponent.png")),
                                                 ),
-                                              )),
-                                          20.horizontalSpace,
-                                          Flexible(
-                                            child: Text(
-                                              "${ref.watch(surahProvider).chapter?.verses?[j].textArabic}",
-                                              style:
-                                                  Style.interRegular(size: 20),
-                                              textAlign: TextAlign.end,
+                                                child: Align(
+                                                  alignment:
+                                                      const Alignment(0, -.3),
+                                                  child: Text(
+                                                    "${ref.watch(surahProvider).chapter?.verses?[j].number}",
+                                                    style: Style.interRegular(
+                                                        size: 10),
+                                                  ),
+                                                )),
+                                            20.horizontalSpace,
+                                            Flexible(
+                                              child: Text(
+                                                "${ref.watch(surahProvider).chapter?.verses?[j].textArabic}",
+                                                style:
+                                                    Style.interRegular(size: 20),
+                                                textAlign: TextAlign.end,
+                                              ),
                                             ),
+                                            20.horizontalSpace,
+                                          ],
+                                        ),
+                                        if (state.selectedIndicationType == 1 ||
+                                            state.selectedIndicationType == 2)
+                                          28.verticalSpace,
+                                        if (state.selectedIndicationType == 1 ||
+                                            state.selectedIndicationType == 2)
+                                          Row(
+                                            children: [
+                                              const Spacer(),
+                                              Expanded(
+                                                child: Text(
+                                                  "${ref.watch(surahProvider).chapter?.verses?[j].text}",
+                                                  style: Style.interRegular(
+                                                      size: 20),
+                                                  textAlign: TextAlign.end,
+                                                ),
+                                              ),
+                                              20.horizontalSpace,
+                                            ],
                                           ),
-                                          20.horizontalSpace,
-                                        ],
-                                      ),
-                                      if (state.selectedIndicationType == 1 ||
-                                          state.selectedIndicationType == 2)
-                                        28.verticalSpace,
-                                      if (state.selectedIndicationType == 1 ||
-                                          state.selectedIndicationType == 2)
-                                        Row(
-                                          children: [
-                                            const Spacer(),
-                                            Expanded(
-                                              child: Text(
-                                                "${ref.watch(surahProvider).chapter?.verses?[j].text}",
-                                                style: Style.interRegular(
-                                                    size: 20),
-                                                textAlign: TextAlign.end,
+                                        if (state.selectedIndicationType == 2)
+                                          28.verticalSpace,
+                                        if (state.selectedIndicationType == 2)
+                                          Row(
+                                            children: [
+                                              const Spacer(),
+                                              Expanded(
+                                                child: Text(
+                                                  "${ref.watch(surahProvider).chapter?.verses?[j].description}",
+                                                  style: Style.interRegular(
+                                                      size: 20),
+                                                  textAlign: TextAlign.end,
+                                                ),
                                               ),
-                                            ),
-                                            20.horizontalSpace,
-                                          ],
-                                        ),
-                                      if (state.selectedIndicationType == 2)
-                                        28.verticalSpace,
-                                      if (state.selectedIndicationType == 2)
-                                        Row(
-                                          children: [
-                                            const Spacer(),
-                                            Expanded(
-                                              child: Text(
-                                                "${ref.watch(surahProvider).chapter?.verses?[j].description}",
-                                                style: Style.interRegular(
-                                                    size: 20),
-                                                textAlign: TextAlign.end,
-                                              ),
-                                            ),
-                                            20.horizontalSpace,
-                                          ],
-                                        ),
-                                      14.verticalSpace
-                                    ],
-                                  ),
-                                );
-                              },
-                              separatorBuilder:
-                                  (BuildContext context, int index) {
-                                return Padding(
-                                    padding:
-                                        REdgeInsets.symmetric(vertical: 10),
-                                    child: const Divider(
-                                      thickness: 1,
-                                      color: Style.secondary,
-                                    ));
-                              },
-                            ),
-                          ],
-                        )
-                    ],
-                  ),
-          ),
-        ],
-      ),
+                                              20.horizontalSpace,
+                                            ],
+                                          ),
+                                        14.verticalSpace
+                                      ],
+                                    ),
+                                  );
+                                },
+                                separatorBuilder:
+                                    (BuildContext context, int index) {
+                                  return Padding(
+                                      padding:
+                                          REdgeInsets.symmetric(vertical: 10),
+                                      child: const Divider(
+                                        thickness: 1,
+                                        color: Style.secondary,
+                                      ));
+                                },
+                              ),
+                            ],
+                          )
+                      ],
+                    ),
+                ),
+              ),
+        ),
+      ],
     );
   }
 }

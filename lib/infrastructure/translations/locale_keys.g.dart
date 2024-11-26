@@ -38,5 +38,7 @@ abstract class  LocaleKeys {
   static const makka = 'makka';
   static const madina = 'madina';
   static const chooseLang = 'chooseLang';
+  static const kiril = 'kiril';
+  static const lotin = 'lotin';
 
 }

@@ -86,6 +86,8 @@ class OutlinedBorderTextField extends StatelessWidget {
         fontSize: labelSize ?? 16,
         color: Style.black,
         letterSpacing: -14 * 0.01,
+        fontFeatures: [const FontFeature.liningFigures()],
+
       ),
       cursorWidth: 1,
       maxLines: obscure == true ? 1 : maxLine,
@@ -103,6 +105,8 @@ class OutlinedBorderTextField extends StatelessWidget {
           fontSize: labelSize ?? 14,
           color: Style.textHint,
           letterSpacing: -14 * 0.01,
+          fontFeatures: [const FontFeature.liningFigures()],
+
         ),
         counterText: '',
         suffixIcon: suffixIcon,

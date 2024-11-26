@@ -1,8 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../core/constants/constants.dart';
-import '../../../core/utils/app_helpers.dart';
+import '../../../../infrastructure/translations/locale_keys.g.dart';
 import '../../styles/style.dart';
 
 class CustomBackButton extends StatelessWidget {
@@ -37,8 +37,8 @@ class CustomBackButton extends StatelessWidget {
           children: [
             Icon(FlutterRemix.arrow_left_s_line,
                 size:24.r),
-            8.horizontalSpace,
-            Text(AppHelpers.getTranslation(TrKeys.back),
+            6.horizontalSpace,
+            Text(LocaleKeys.goBack.tr(),
                 style: Style.interNormal(size: 16)),
           ],
         ),

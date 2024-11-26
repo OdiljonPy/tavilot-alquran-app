@@ -40,6 +40,7 @@ class _BlogPageState extends ConsumerState<BlogPage> {
                   Expanded(
                       flex: 2,
                       child: OutlinedBorderTextField(
+                        onChanged: ref.read(mainProvider.notifier).changeQuery,
                         prefixIcon: const Icon(
                           CupertinoIcons.search,
                           color: Style.textHint,
@@ -58,73 +59,87 @@ class _BlogPageState extends ConsumerState<BlogPage> {
             child: Row(
               children: [
                 Expanded(
-                    child: Container(
-                  padding: REdgeInsets.all(24),
-                  decoration: BoxDecoration(
-                    color: Style.secondary,
-                    borderRadius: BorderRadius.circular(15.r),
-                  ),
-                  height: 180.r,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SvgPicture.asset("assets/svg/book.svg",
-                          height: 30, width: 30, color: Style.black),
-                      const Spacer(),
-                      Text(
-                        LocaleKeys.forStudent.tr(),
-                        style: Style.interRegular(size: 24, color: Style.black),
-                      )
-                    ],
-                  ),
-                )),
+                    child: ButtonEffect(
+                      onTap: ()=>
+                        ref.read(mainProvider.notifier).changeIndex(1),
+                      child: Container(
+                                        padding: REdgeInsets.all(24),
+                                        decoration: BoxDecoration(
+                      color: Style.secondary,
+                      borderRadius: BorderRadius.circular(15.r),
+                                        ),
+                                        height: 180.r,
+                                        child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SvgPicture.asset("assets/svg/book.svg",
+                            height: 30, width: 30, color: Style.black),
+                        const Spacer(),
+                        Text(
+                          LocaleKeys.forStudent.tr(),
+                          style: Style.interRegular(size: 24, color: Style.black),
+                        )
+                      ],
+                                        ),
+                                      ),
+                    )),
                 12.horizontalSpace,
                 Expanded(
-                    child: Container(
-                  padding: REdgeInsets.all(24),
-                  decoration: BoxDecoration(
-                    color: Style.secondary,
-                    borderRadius: BorderRadius.circular(15.r),
-                  ),
-                  height: 180.r,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SvgPicture.asset("assets/svg/bag.svg",
-                          height: 30, width: 30, color: Style.black),
-                      const Spacer(),
-                      Text(
-                        LocaleKeys.sells.tr(),
-                        style: Style.interRegular(size: 24, color: Style.black),
-                      )
-                    ],
-                  ),
-                )),
+                    child: ButtonEffect(
+                      onTap: () {
+                        ref.read(mainProvider.notifier).changeIndex(4);
+                      },
+                      child: Container(
+                                        padding: REdgeInsets.all(24),
+                                        decoration: BoxDecoration(
+                      color: Style.secondary,
+                      borderRadius: BorderRadius.circular(15.r),
+                                        ),
+                                        height: 180.r,
+                                        child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SvgPicture.asset("assets/svg/bag.svg",
+                            height: 30, width: 30, color: Style.black),
+                        const Spacer(),
+                        Text(
+                          LocaleKeys.sells.tr(),
+                          style: Style.interRegular(size: 24, color: Style.black),
+                        )
+                      ],
+                                        ),
+                                      ),
+                    )),
                 12.horizontalSpace,
                 Expanded(
-                    child: Container(
-                  padding: REdgeInsets.all(24),
-                  decoration: BoxDecoration(
-                    color: Style.secondary,
-                    borderRadius: BorderRadius.circular(15.r),
-                  ),
-                  height: 180.r,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SvgPicture.asset(
-                        "assets/svg/info.svg",
-                        height: 30,
-                        width: 30,
-                      ),
-                      const Spacer(),
-                      Text(
-                        LocaleKeys.aboutApp.tr(),
-                        style: Style.interRegular(size: 24, color: Style.black),
-                      )
-                    ],
-                  ),
-                )),
+                    child: ButtonEffect(
+                      onTap: () {
+                        ref.read(mainProvider.notifier).changeIndex(2);
+                      },
+                      child: Container(
+                                        padding: REdgeInsets.all(24),
+                                        decoration: BoxDecoration(
+                      color: Style.secondary,
+                      borderRadius: BorderRadius.circular(15.r),
+                                        ),
+                                        height: 180.r,
+                                        child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SvgPicture.asset(
+                          "assets/svg/info.svg",
+                          height: 30,
+                          width: 30,
+                        ),
+                        const Spacer(),
+                        Text(
+                          LocaleKeys.aboutApp.tr(),
+                          style: Style.interRegular(size: 24, color: Style.black),
+                        )
+                      ],
+                                        ),
+                                      ),
+                    )),
               ],
             ),
           ),
@@ -143,7 +158,93 @@ class _BlogPageState extends ConsumerState<BlogPage> {
           ),
           ref.watch(mainProvider).chapters.isEmpty
               ? const Loading()
-              : GridView.builder(
+              : ref.watch(mainProvider).isChapterSearching ?GridView.builder(
+            padding: REdgeInsets.all(40),
+            shrinkWrap: true,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                mainAxisSpacing: 12.r,
+                crossAxisSpacing: 12.r,
+                crossAxisCount: 3,
+                mainAxisExtent: 110.r),
+            itemCount: ref.read(mainProvider).searchChapters.length,
+            itemBuilder: (BuildContext context, int index) {
+              return ButtonEffect(
+                onTap: () {
+                  ref.read(mainProvider.notifier).changeIndex(3,
+                      onSuccess: () async {
+                        ref.read(surahProvider.notifier)
+                          ..fetchJuzes(context)
+                          ..fetchSurah(context, ref.watch(mainProvider).searchChapters[index].id ??0)
+                          ..fetchJuz(context, 1);
+                      });
+                },
+                child: Container(
+                  padding: REdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    border:
+                    Border.all(color: Style.borderColor, width: 1),
+                    borderRadius: BorderRadius.circular(5.r),
+                  ),
+                  child: Row(
+                    children: [
+                      Container(
+                        height: 60.r,
+                        width: 60.r,
+                        decoration: const BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage(
+                              Assets.star,
+                            ),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        child: Center(
+                          child: Text(
+                            "${ref.watch(mainProvider).searchChapters[index].number}",
+                            style: Style.interRegular(
+                              size: 24, color: Style.white,),
+                          ),
+                        ),
+                      ),
+                      20.horizontalSpace,
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "${ref.watch(mainProvider).searchChapters[index].name}",
+                            style: Style.interRegular(
+                                size: 24, color: Style.black),
+                          ),
+                          Text(
+                            "${ref.watch(mainProvider).searchChapters[index].typeChoice == 1 ? LocaleKeys.makka.tr() : LocaleKeys.madina.tr()}, ${ref.watch(mainProvider).searchChapters[index].verseNumber} ${LocaleKeys.verse.tr()}",
+                            style: Style.interRegular(
+                                size: 10, color: Style.black),
+                          ),
+                        ],
+                      ),
+                      const Spacer(),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                              "${ref.read(mainProvider).searchChapters[index].nameArabic}",
+                              style: Style.interRegular(
+                                  size: 20, color: Style.black)),
+                          Text(
+                            "${ref.watch(mainProvider).searchChapters[index].verseNumber} ${LocaleKeys.verse.tr()}",
+                            style: Style.interRegular(
+                                size: 16, color: Style.textHint),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              );
+            },
+          ):  GridView.builder(
                   padding: REdgeInsets.all(40),
                   shrinkWrap: true,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -183,12 +284,11 @@ class _BlogPageState extends ConsumerState<BlogPage> {
                                   fit: BoxFit.cover,
                                 ),
                               ),
-                              child: Align(
-                                alignment: const Alignment(0, -.5),
+                              child: Center(
                                 child: Text(
                                   "${index + 1}",
                                   style: Style.interRegular(
-                                      size: 24, color: Style.white),
+                                      size: 24, color: Style.white,),
                                 ),
                               ),
                             ),
@@ -203,7 +303,7 @@ class _BlogPageState extends ConsumerState<BlogPage> {
                                       size: 24, color: Style.black),
                                 ),
                                 Text(
-                                  "${ref.watch(mainProvider).chapters[index].typeChoice == 1 ? "Маккий" : "Маданий"}, ${ref.watch(mainProvider).chapters[index].verseNumber} оят",
+                                  "${ref.watch(mainProvider).chapters[index].typeChoice == 1 ? LocaleKeys.makka.tr() : LocaleKeys.madina.tr()}, ${ref.watch(mainProvider).chapters[index].verseNumber} ${LocaleKeys.verse.tr()}",
                                   style: Style.interRegular(
                                       size: 10, color: Style.black),
                                 ),
@@ -219,7 +319,7 @@ class _BlogPageState extends ConsumerState<BlogPage> {
                                     style: Style.interRegular(
                                         size: 20, color: Style.black)),
                                 Text(
-                                  "${ref.watch(mainProvider).chapters[index].verseNumber} оят",
+                                  "${ref.watch(mainProvider).chapters[index].verseNumber} ${LocaleKeys.verse.tr()}",
                                   style: Style.interRegular(
                                       size: 16, color: Style.textHint),
                                 ),

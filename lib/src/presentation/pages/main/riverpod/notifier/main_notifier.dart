@@ -1,4 +1,5 @@
 import 'package:al_quran/src/core/di/dependency_manager.dart';
+import 'package:al_quran/src/models/response/juz_response.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../state/main_state.dart';
@@ -40,6 +41,24 @@ class MainNotifier extends StateNotifier<MainState> {
         //     context: context, message: failure.toString());
       },
     );
+  }
+
+  changeQuery(String query) {
+    if (query.isNotEmpty) {
+      state = state.copyWith(isChapterSearching: true);
+      List<Chapter> list = [];
+      for (int i = 0; i < state.chapters.length; i++) {
+        if (state.chapters[i].name
+            ?.toLowerCase()
+            .startsWith(query.toLowerCase()) ??
+            false) {
+          list.add(state.chapters[i]);
+        }
+      }
+      state = state.copyWith(searchChapters: list);
+    } else {
+      state = state.copyWith(isChapterSearching: false, searchChapters: []);
+    }
   }
 
 

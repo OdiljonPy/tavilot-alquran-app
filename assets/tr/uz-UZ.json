@@ -21,7 +21,7 @@
   "chapters": "Suralar",
   "juzes": "Juzlar",
   "whatUWant": "Nima o'qimoqchisiz?",
-  "goBack": "Orqaga qaytish",
+  "goBack": "Ortga qaytish",
   "buy": "Xarid qilish",
   "withPremiumUWillGEt": "Premium obuna orqali quyidagi\nhususiyatlarga ega bo'lasiz",
   "chooseForSell": "To'lov uchun o'zingizga qulay bo'lgan ilovani tanlang",
@@ -35,5 +35,7 @@
   "verse": "oyat",
   "makka": "Makkiy",
   "madina": "Madaniy",
-  "chooseLang": "Tilni tanlang"
+  "chooseLang": "Tilni tanlang",
+  "kiril": "Kirilcha",
+  "lotin": "Lotincha"
 }

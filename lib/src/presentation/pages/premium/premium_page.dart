@@ -1,5 +1,7 @@
+import 'package:al_quran/infrastructure/translations/locale_keys.g.dart';
 import 'package:al_quran/src/presentation/components/components.dart';
 import 'package:al_quran/src/presentation/styles/style.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -30,13 +32,13 @@ class PremiumPage extends ConsumerWidget {
                             fit: BoxFit.cover),
                       ),
                       child: Center(
-                          child: Text("Premium version",
+                          child: Text(LocaleKeys.premiumVersion.tr(),
                               style:
                                   Style.interSemi(size: 36, color: Style.primary))),
                     ),
                     20.verticalSpace,
                     Text(
-                      'Премиум версия орқали қуйидаги ҳусусиятларга эга бӯласиз',
+                      LocaleKeys.withPremiumUWillGEt.tr(),
                       style: Style.interRegular(color: Style.black, size: 24),
                     ),
                     const Spacer(),
@@ -44,7 +46,7 @@ class PremiumPage extends ConsumerWidget {
                       height: 70,
                       child: Row(
                         children: [
-                          Text("Толов учун озизга кулей болган иловани тангланг:", style: Style.interNormal(size: 22, color: Style.black),),
+                          Text(LocaleKeys.chooseForSell.tr(), style: Style.interNormal(size: 22, color: Style.black),),
                           20.horizontalSpace,
                           Image.asset("assets/png/payme.png"),
                           27.horizontalSpace,
@@ -59,7 +61,7 @@ class PremiumPage extends ConsumerWidget {
                       height: 80.r,
                         titleColor: Style.primary,
                         bgColor: Style.white,
-                        title: "Xarid qilish", onPressed: (){}),
+                        title: LocaleKeys.buy.tr(), onPressed: (){}),
 
                     80.verticalSpace,
 

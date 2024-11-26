@@ -215,49 +215,6 @@ class AuthRepository implements AuthFacade {
       }
     }
   }
-
-  // @override
-  // Future<ApiResult<RegisterResponse>> forgotPassword({
-  //   required String email,
-  // }) async {
-  //   final data = {'email': email};
-  //   try {
-  //     final client = inject<HttpService>().client(requireAuth: false);
-  //     final response = await client.post(
-  //       '/api/v1/auth/forgot/email-password',
-  //       queryParameters: data,
-  //     );
-  //     return ApiResult.success(data: RegisterResponse.fromJson(response.data));
-  //   } catch (e) {
-  //     debugPrint('==> forgot password failure: $e');
-  //     return ApiResult.failure(
-  //         error: AppHelpers.errorHandler(e),
-  //         statusCode: NetworkExceptions.getDioStatus(e));
-  //   }
-  // }
-
-  // @override
-  // Future<ApiResult<VerifyData>> forgotPasswordConfirm({
-  //   required String verifyCode,
-  //   required String email,
-  // }) async {
-  //   try {
-  //     final client = inject<HttpService>().client(requireAuth: false);
-  //     final response = await client.post(
-  //       '/api/v1/auth/forgot/email-password/$verifyCode?email=$email',
-  //     );
-  //
-  //     return ApiResult.success(
-  //       data: VerifyData.fromJson(response.data["data"]),
-  //     );
-  //   } catch (e) {
-  //     debugPrint('==> forgot password confirm failure: $e');
-  //     return ApiResult.failure(
-  //         error: AppHelpers.errorHandler(e),
-  //         statusCode: NetworkExceptions.getDioStatus(e));
-  //   }
-  // }
-
   @override
   Future<ApiResult<RegisterResponse>> signUp({
     required String phoneNumber,

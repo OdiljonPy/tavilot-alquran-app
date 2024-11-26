@@ -1,4 +1,3 @@
-import 'package:al_quran/main.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -35,22 +34,20 @@ class CustomPopupItem extends StatelessWidget {
         return [
             _buildPopupMenuItem(
               context: context,
-              title: LocaleKeys.register.tr(),
+              title: LocaleKeys.lotin.tr(),
               onTap: () {
                 Navigator.pop(c);
                 context.setLocale(const Locale('uz', 'UZ'));
                 onTap();
-                print("${currentLocale?.countryCode?.toLowerCase()}");
               },
             ),
             _buildPopupMenuItem(
               context: context,
-              title: LocaleKeys.register.tr(),
+              title: LocaleKeys.kiril.tr(),
               onTap: () {
                 Navigator.pop(c);
                 context.setLocale(const Locale('ru', 'RU'));
                 onTap();
-                print("${currentLocale?.countryCode?.toLowerCase()}");
               },
             ),
         ];

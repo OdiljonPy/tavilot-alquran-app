@@ -1,6 +1,5 @@
 import 'package:al_quran/application/surah/surah_provider.dart';
 import 'package:al_quran/infrastructure/translations/locale_keys.g.dart';
-import 'package:al_quran/main.dart';
 import 'package:al_quran/src/presentation/pages/about_page/surah_page/surah_page.dart';
 import 'package:al_quran/src/presentation/pages/for_students/for_students_page.dart';
 import 'package:al_quran/src/presentation/pages/main/riverpod/state/main_state.dart';
@@ -11,8 +10,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:proste_indexed_stack/proste_indexed_stack.dart';
 import '../../../../application/about/about_provider.dart';
 import '../../../../application/for_students/for_students_provider.dart';
 import '../../components/app_logo.dart';
@@ -85,9 +82,9 @@ class _MainPageState extends ConsumerState<MainPage>
           children: [
             GestureDetector(
                 onTap: () {
-                  // ref
-                  //     .read(mainProvider.notifier)
-                  //     .fetchProducts(isRefresh: true);
+                  ref
+                      .read(mainProvider.notifier)
+                      .fetchChapters(context);
                 },
                 child: const AppLogo()),
             const Expanded(
@@ -102,7 +99,6 @@ class _MainPageState extends ConsumerState<MainPage>
                       onTap: () {
                         ref.read(mainProvider.notifier).changeIndex(0,
                             onSuccess: () {
-                          // ref.read(aboutProvider.notifier).fetchAbout(context);
                         });
                       },
                       child: Text(
@@ -122,7 +118,6 @@ class _MainPageState extends ConsumerState<MainPage>
                       onTap: () {
                         ref.read(mainProvider.notifier).changeIndex(1,
                             onSuccess: () {
-                          // ref.read(aboutProvider.notifier).fetchAbout(context);
                         });
                       },
                       child: Text(

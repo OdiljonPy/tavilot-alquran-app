@@ -51,7 +51,9 @@ class CodegenLoader extends AssetLoader{
   "verse": "oyat",
   "makka": "Makkiy",
   "madina": "Madaniy",
-  "chooseLang": "Tilni tanlang"
+  "chooseLang": "Tilni tanlang",
+  "kiril": "Kirilcha",
+  "lotin": "Lotincha"
 };
 static const Map<String,dynamic> ru_RU = {
   "hi": "Ассаламу алайкум!",
@@ -90,7 +92,9 @@ static const Map<String,dynamic> ru_RU = {
   "verse": "оят",
   "makka": "Маккий",
   "madina": "Маданий",
-  "chooseLang": "Тилни танланг"
+  "chooseLang": "Тилни танланг",
+  "kiril": "Кирилча",
+  "lotin": "Лотинча"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"uz_UZ": uz_UZ, "ru_RU": ru_RU};
 }

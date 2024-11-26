@@ -191,6 +191,7 @@ class Style {
         color: color,
         decoration: TextDecoration.none,
         letterSpacing: letterSpacing,
+        fontFeatures: [const FontFeature.liningFigures()],
       );
 
   static interSemi({
@@ -207,6 +208,7 @@ class Style {
         letterSpacing: letterSpacing,
         decoration: decoration,
         fontStyle: fontStyle,
+        fontFeatures: [const FontFeature.liningFigures()],
       );
 
   static interMedium({
@@ -223,6 +225,7 @@ class Style {
         letterSpacing: letterSpacing,
         decoration: decoration,
         fontStyle: fontStyle,
+        fontFeatures: [const FontFeature.liningFigures()],
       );
 
   static interNormal({
@@ -256,6 +259,8 @@ class Style {
         letterSpacing: letterSpacing,
         decoration: textDecoration,
         fontStyle: fontStyle,
-        decorationColor: decorationColor
+        decorationColor: decorationColor,
+        fontFeatures: [const FontFeature.liningFigures()],
+
       );
 }

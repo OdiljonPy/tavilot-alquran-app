@@ -59,7 +59,8 @@ class LoginButton extends StatelessWidget {
                       fontSize: 24,
                       color: isActive ? titleColor : Style.white,
                       fontWeight: FontWeight.w500,
-                      letterSpacing: 0.4
+                      letterSpacing: 0.4,
+                      fontFeatures: [const FontFeature.liningFigures()],
                     ),
                   ),
           ),

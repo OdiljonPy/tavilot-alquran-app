@@ -19,6 +19,8 @@ mixin _$MainState {
   bool get isChapterLoading => throw _privateConstructorUsedError;
   List<Chapter> get chapters => throw _privateConstructorUsedError;
   int get selectIndex => throw _privateConstructorUsedError;
+  bool get isChapterSearching => throw _privateConstructorUsedError;
+  List<Chapter> get searchChapters => throw _privateConstructorUsedError;
   PageController? get pageController => throw _privateConstructorUsedError;
 
   /// Create a copy of MainState
@@ -37,6 +39,8 @@ abstract class $MainStateCopyWith<$Res> {
       {bool isChapterLoading,
       List<Chapter> chapters,
       int selectIndex,
+      bool isChapterSearching,
+      List<Chapter> searchChapters,
       PageController? pageController});
 }
 
@@ -58,6 +62,8 @@ class _$MainStateCopyWithImpl<$Res, $Val extends MainState>
     Object? isChapterLoading = null,
     Object? chapters = null,
     Object? selectIndex = null,
+    Object? isChapterSearching = null,
+    Object? searchChapters = null,
     Object? pageController = freezed,
   }) {
     return _then(_value.copyWith(
@@ -73,6 +79,14 @@ class _$MainStateCopyWithImpl<$Res, $Val extends MainState>
           ? _value.selectIndex
           : selectIndex // ignore: cast_nullable_to_non_nullable
               as int,
+      isChapterSearching: null == isChapterSearching
+          ? _value.isChapterSearching
+          : isChapterSearching // ignore: cast_nullable_to_non_nullable
+              as bool,
+      searchChapters: null == searchChapters
+          ? _value.searchChapters
+          : searchChapters // ignore: cast_nullable_to_non_nullable
+              as List<Chapter>,
       pageController: freezed == pageController
           ? _value.pageController
           : pageController // ignore: cast_nullable_to_non_nullable
@@ -93,6 +107,8 @@ abstract class _$$MainStateImplCopyWith<$Res>
       {bool isChapterLoading,
       List<Chapter> chapters,
       int selectIndex,
+      bool isChapterSearching,
+      List<Chapter> searchChapters,
       PageController? pageController});
 }
 
@@ -112,6 +128,8 @@ class __$$MainStateImplCopyWithImpl<$Res>
     Object? isChapterLoading = null,
     Object? chapters = null,
     Object? selectIndex = null,
+    Object? isChapterSearching = null,
+    Object? searchChapters = null,
     Object? pageController = freezed,
   }) {
     return _then(_$MainStateImpl(
@@ -127,6 +145,14 @@ class __$$MainStateImplCopyWithImpl<$Res>
           ? _value.selectIndex
           : selectIndex // ignore: cast_nullable_to_non_nullable
               as int,
+      isChapterSearching: null == isChapterSearching
+          ? _value.isChapterSearching
+          : isChapterSearching // ignore: cast_nullable_to_non_nullable
+              as bool,
+      searchChapters: null == searchChapters
+          ? _value._searchChapters
+          : searchChapters // ignore: cast_nullable_to_non_nullable
+              as List<Chapter>,
       pageController: freezed == pageController
           ? _value.pageController
           : pageController // ignore: cast_nullable_to_non_nullable
@@ -142,8 +168,11 @@ class _$MainStateImpl extends _MainState {
       {this.isChapterLoading = false,
       final List<Chapter> chapters = const [],
       this.selectIndex = 0,
+      this.isChapterSearching = false,
+      final List<Chapter> searchChapters = const [],
       this.pageController = null})
       : _chapters = chapters,
+        _searchChapters = searchChapters,
         super._();
 
   @override
@@ -163,11 +192,23 @@ class _$MainStateImpl extends _MainState {
   final int selectIndex;
   @override
   @JsonKey()
+  final bool isChapterSearching;
+  final List<Chapter> _searchChapters;
+  @override
+  @JsonKey()
+  List<Chapter> get searchChapters {
+    if (_searchChapters is EqualUnmodifiableListView) return _searchChapters;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_searchChapters);
+  }
+
+  @override
+  @JsonKey()
   final PageController? pageController;
 
   @override
   String toString() {
-    return 'MainState(isChapterLoading: $isChapterLoading, chapters: $chapters, selectIndex: $selectIndex, pageController: $pageController)';
+    return 'MainState(isChapterLoading: $isChapterLoading, chapters: $chapters, selectIndex: $selectIndex, isChapterSearching: $isChapterSearching, searchChapters: $searchChapters, pageController: $pageController)';
   }
 
   @override
@@ -180,6 +221,10 @@ class _$MainStateImpl extends _MainState {
             const DeepCollectionEquality().equals(other._chapters, _chapters) &&
             (identical(other.selectIndex, selectIndex) ||
                 other.selectIndex == selectIndex) &&
+            (identical(other.isChapterSearching, isChapterSearching) ||
+                other.isChapterSearching == isChapterSearching) &&
+            const DeepCollectionEquality()
+                .equals(other._searchChapters, _searchChapters) &&
             (identical(other.pageController, pageController) ||
                 other.pageController == pageController));
   }
@@ -190,6 +235,8 @@ class _$MainStateImpl extends _MainState {
       isChapterLoading,
       const DeepCollectionEquality().hash(_chapters),
       selectIndex,
+      isChapterSearching,
+      const DeepCollectionEquality().hash(_searchChapters),
       pageController);
 
   /// Create a copy of MainState
@@ -206,6 +253,8 @@ abstract class _MainState extends MainState {
       {final bool isChapterLoading,
       final List<Chapter> chapters,
       final int selectIndex,
+      final bool isChapterSearching,
+      final List<Chapter> searchChapters,
       final PageController? pageController}) = _$MainStateImpl;
   const _MainState._() : super._();
 
@@ -215,6 +264,10 @@ abstract class _MainState extends MainState {
   List<Chapter> get chapters;
   @override
   int get selectIndex;
+  @override
+  bool get isChapterSearching;
+  @override
+  List<Chapter> get searchChapters;
   @override
   PageController? get pageController;
 

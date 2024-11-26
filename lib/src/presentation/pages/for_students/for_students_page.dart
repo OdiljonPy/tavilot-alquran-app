@@ -1,3 +1,7 @@
+import 'package:al_quran/infrastructure/translations/locale_keys.g.dart';
+import 'package:al_quran/src/presentation/components/buttons/custom_back_button.dart';
+import 'package:al_quran/src/presentation/pages/main/riverpod/provider/main_provider.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,8 +19,10 @@ class ForStudentsPage extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          CustomBackButton(onTap: () => ref.read(mainProvider.notifier).changeIndex(0)),
+          90.verticalSpace,
           Text(
-            "Ta`vilot al quran oquvchilariga",
+            LocaleKeys.forStudent.tr(),
             style: Style.interSemi(size: 28, color: Style.primary),
           ),
           60.verticalSpace,
