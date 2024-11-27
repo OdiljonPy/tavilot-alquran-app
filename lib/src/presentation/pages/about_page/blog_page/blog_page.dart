@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import '../../../../../application/about/about_provider.dart';
 import '../../../../../generated/assets.dart';
 import '../../../../../infrastructure/translations/locale_keys.g.dart';
 import '../../../../core/utils/local_storage.dart';
@@ -115,6 +116,7 @@ class _BlogPageState extends ConsumerState<BlogPage> {
                     child: ButtonEffect(
                       onTap: () {
                         ref.read(mainProvider.notifier).changeIndex(2);
+                        ref.read(aboutProvider.notifier).fetchAbout(context);
                       },
                       child: Container(
                                         padding: REdgeInsets.all(24),
@@ -173,6 +175,7 @@ class _BlogPageState extends ConsumerState<BlogPage> {
                   ref.read(mainProvider.notifier).changeIndex(3,
                       onSuccess: () async {
                         ref.read(surahProvider.notifier)
+                          ..selectSurahId(ref.watch(mainProvider).searchChapters[index].id ??0)
                           ..fetchJuzes(context)
                           ..fetchSurah(context, ref.watch(mainProvider).searchChapters[index].id ??0)
                           ..fetchJuz(context, 1);
@@ -200,7 +203,7 @@ class _BlogPageState extends ConsumerState<BlogPage> {
                         ),
                         child: Center(
                           child: Text(
-                            "${ref.watch(mainProvider).searchChapters[index].number}",
+                            "${ref.watch(mainProvider).searchChapters[index].number ?? ref.watch(mainProvider).searchChapters[index].id ?? 0}",
                             style: Style.interRegular(
                               size: 24, color: Style.white,),
                           ),
@@ -251,7 +254,7 @@ class _BlogPageState extends ConsumerState<BlogPage> {
                       mainAxisSpacing: 12.r,
                       crossAxisSpacing: 12.r,
                       crossAxisCount: 3,
-                      mainAxisExtent: 110.r),
+                      mainAxisExtent: 120.r),
                   itemCount: ref.read(mainProvider).chapters.length,
                   itemBuilder: (BuildContext context, int index) {
                     return ButtonEffect(
@@ -259,6 +262,7 @@ class _BlogPageState extends ConsumerState<BlogPage> {
                         ref.read(mainProvider.notifier).changeIndex(3,
                             onSuccess: () async {
                           ref.read(surahProvider.notifier)
+                            ..selectSurahId(ref.watch(mainProvider).chapters[index].id ??0)
                             ..fetchJuzes(context)
                             ..fetchSurah(context, index + 1)
                             ..fetchJuz(context, index + 1);
@@ -316,7 +320,7 @@ class _BlogPageState extends ConsumerState<BlogPage> {
                               children: [
                                 Text(
                                     "${ref.read(mainProvider).chapters[index].nameArabic}",
-                                    style: Style.interRegular(
+                                    style: Style.regularArabic(
                                         size: 20, color: Style.black)),
                                 Text(
                                   "${ref.watch(mainProvider).chapters[index].verseNumber} ${LocaleKeys.verse.tr()}",

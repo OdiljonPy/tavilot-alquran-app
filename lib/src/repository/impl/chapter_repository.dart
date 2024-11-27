@@ -9,9 +9,9 @@ import '../chapter_facade.dart';
 
 class  ChapterRepository implements ChapterFacade {
   @override
-  Future<ApiResult<ChapterResponse>> getChapters() async {
+  Future<ApiResult<ChapterResponse>> getChapters({String? lang}) async {
     try {
-      final client = dioHttp.client(requireAuth: true);
+      final client = dioHttp.client(requireAuth: true, lang: lang);
       final response = await client.get(
         '/api/v1/chapters/',
       );
@@ -34,9 +34,9 @@ class  ChapterRepository implements ChapterFacade {
   }
 
   @override
-  Future<ApiResult<SingleChapterResponse>> getChapter({required int id}) async {
+  Future<ApiResult<SingleChapterResponse>> getChapter({required int id, String? lang}) async {
     try {
-      final client = dioHttp.client(requireAuth: true);
+      final client = dioHttp.client(requireAuth: true, lang: lang);
       final response = await client.get(
         '/api/v1/chapter/$id/',
       );

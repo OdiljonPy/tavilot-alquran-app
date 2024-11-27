@@ -20,6 +20,7 @@
   "sells": "Haridlar",
   "chapters": "Suralar",
   "juzes": "Juzlar",
+  "juz": "juz",
   "whatUWant": "Nima o'qimoqchisiz?",
   "goBack": "Ortga qaytish",
   "buy": "Xarid qilish",
@@ -37,5 +38,8 @@
   "madina": "Madaniy",
   "chooseLang": "Tilni tanlang",
   "kiril": "Kirilcha",
-  "lotin": "Lotincha"
+  "lotin": "Lotincha",
+  "yes": "Ha",
+  "no": "Yo'q",
+  "areYouSureYouWantLogOut": "Haqiqatan ham hisobingizdan chiqmoqchimisiz?"
 }

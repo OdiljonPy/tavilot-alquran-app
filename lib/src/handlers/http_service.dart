@@ -4,7 +4,7 @@ import '../../main.dart';
 import 'token_interceptor.dart';
 
 class HttpService {
-  Dio client({bool requireAuth = false, bool optional = false}) => Dio(
+  Dio client({bool requireAuth = false, bool optional = false, String? lang}) => Dio(
         BaseOptions(
           baseUrl: SecretVars.baseUrl,
           connectTimeout: const Duration(seconds: 40),
@@ -13,9 +13,9 @@ class HttpService {
           headers: {
             'Accept': 'application/json',
             'Content-type': 'application/json',
-            'Accept-Language': currentLocale?.countryCode?.toLowerCase() == 'ru'
+            'Accept-Language': lang ?? (currentLocale?.countryCode?.toLowerCase() == 'ru'
                 ? 'kr'
-                : currentLocale?.countryCode?.toLowerCase() ?? "kr",
+                : currentLocale?.countryCode?.toLowerCase() ?? "kr"),
           },
         ),
       )

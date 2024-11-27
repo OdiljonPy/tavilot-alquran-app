@@ -8,9 +8,9 @@ import '../about_facade.dart';
 
 class  AboutRepository implements AboutFacade {
   @override
-  Future<ApiResult<AboutResponse>> getAboutUs() async {
+  Future<ApiResult<AboutResponse>> getAboutUs({String? lang}) async {
     try {
-      final client = dioHttp.client(requireAuth: true);
+      final client = dioHttp.client(requireAuth: true, lang: lang);
       final response = await client.get(
         '/api/v1/about/',
       );

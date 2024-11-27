@@ -59,12 +59,12 @@ class SurahNotifier extends StateNotifier<SurahState> {
     state = state.copyWith(selectedIndicationType: index);
   }
 
-  Future<void> fetchJuzes(BuildContext context) async {
+  Future<void> fetchJuzes(BuildContext context,{String? lang}) async {
     state = state.copyWith(
       isJuzLoading: true,
     );
 
-    final response = await juzRepository.getJuzes();
+    final response = await juzRepository.getJuzes(lang: lang);
     response.when(
       success: (data) {
         state = state.copyWith(isJuzLoading: false, juzes: data.result ?? []);
@@ -78,12 +78,12 @@ class SurahNotifier extends StateNotifier<SurahState> {
     );
   }
 
-  Future<void> fetchJuz(BuildContext context, int id) async {
+  Future<void> fetchJuz(BuildContext context, int id, {String? lang}) async {
     state = state.copyWith(
       isJuzLoading: true,
     );
 
-    final response = await juzRepository.getJuz(id: id);
+    final response = await juzRepository.getJuz(id: id, lang: lang);
     response.when(
       success: (data) {
         state = state.copyWith(isJuzLoading: false, juz: data);
@@ -97,12 +97,12 @@ class SurahNotifier extends StateNotifier<SurahState> {
     );
   }
 
-  Future<void> fetchSurah(BuildContext context, int id,{VoidCallback? onSuccess}) async {
+  Future<void> fetchSurah(BuildContext context, int id,{VoidCallback? onSuccess, String? lang}) async {
     state = state.copyWith(
       isSurahLoading: true,
     );
 
-    final response = await chapterRepository.getChapter(id: id);
+    final response = await chapterRepository.getChapter(id: id, lang: lang);
     response.when(
       success: (data) {
         state = state.copyWith(isSurahLoading: false, chapter: data.result);

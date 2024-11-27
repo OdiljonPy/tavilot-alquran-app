@@ -36,8 +36,9 @@ class CodegenLoader extends AssetLoader{
   "sells": "Haridlar",
   "chapters": "Suralar",
   "juzes": "Juzlar",
+  "juz": "juz",
   "whatUWant": "Nima o'qimoqchisiz?",
-  "goBack": "Orqaga qaytish",
+  "goBack": "Ortga qaytish",
   "buy": "Xarid qilish",
   "withPremiumUWillGEt": "Premium obuna orqali quyidagi\nhususiyatlarga ega bo'lasiz",
   "chooseForSell": "To'lov uchun o'zingizga qulay bo'lgan ilovani tanlang",
@@ -53,7 +54,10 @@ class CodegenLoader extends AssetLoader{
   "madina": "Madaniy",
   "chooseLang": "Tilni tanlang",
   "kiril": "Kirilcha",
-  "lotin": "Lotincha"
+  "lotin": "Lotincha",
+  "yes": "Ha",
+  "no": "Yo'q",
+  "areYouSureYouWantLogOut": "Haqiqatan ham hisobingizdan chiqmoqchimisiz?"
 };
 static const Map<String,dynamic> ru_RU = {
   "hi": "Ассаламу алайкум!",
@@ -77,6 +81,7 @@ static const Map<String,dynamic> ru_RU = {
   "sells": "ҳаридлар",
   "chapters": "Суралар",
   "juzes": "Жузлар",
+  "juz": "жуз",
   "whatUWant": "Нима ӯқимоқчисиз?",
   "goBack": "Ортга кайтиш",
   "buy": "Харид килиш",
@@ -94,7 +99,10 @@ static const Map<String,dynamic> ru_RU = {
   "madina": "Маданий",
   "chooseLang": "Тилни танланг",
   "kiril": "Кирилча",
-  "lotin": "Лотинча"
+  "lotin": "Лотинча",
+  "yes": "Ҳа",
+  "no": "Йўқ",
+  "areYouSureYouWantLogOut": "Ҳақиқатан ҳам ҳисобингиздан чиқмоқчимисиз?"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"uz_UZ": uz_UZ, "ru_RU": ru_RU};
 }

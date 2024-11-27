@@ -242,6 +242,7 @@ class Style {
         letterSpacing: letterSpacing,
         decoration: textDecoration,
         fontStyle: fontStyle,
+        fontFeatures: [const FontFeature.liningFigures()],
       );
 
   static interRegular({
@@ -262,5 +263,24 @@ class Style {
         decorationColor: decorationColor,
         fontFeatures: [const FontFeature.liningFigures()],
 
+      );
+
+  static regularArabic({
+    double size = 16,
+    Color color = Style.black,
+    double letterSpacing = 0,
+    TextDecoration textDecoration = TextDecoration.none,
+    FontStyle? fontStyle,
+    Color? decorationColor,
+  }) =>
+      GoogleFonts.amiri(
+        fontSize: size.sp,
+        fontWeight: FontWeight.w400,
+        color: color,
+        letterSpacing: letterSpacing,
+        decoration: textDecoration,
+        fontStyle: fontStyle,
+        decorationColor: decorationColor,
+        fontFeatures: [const FontFeature.liningFigures()],
       );
 }

@@ -6,8 +6,8 @@ import '../models/response/chapter_response.dart';
 
 abstract class ChapterFacade {
 
-  Future<ApiResult<ChapterResponse>> getChapters();
+  Future<ApiResult<ChapterResponse>> getChapters({String? lang});
 
-  Future<ApiResult<SingleChapterResponse>> getChapter({required int id});
+  Future<ApiResult<SingleChapterResponse>> getChapter({required int id, String? lang});
 
 }

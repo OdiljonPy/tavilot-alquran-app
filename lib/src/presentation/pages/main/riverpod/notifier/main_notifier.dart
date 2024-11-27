@@ -20,13 +20,13 @@ class MainNotifier extends StateNotifier<MainState> {
   }
 
   Future<void> fetchChapters(
-      BuildContext context) async {
+      BuildContext context, {String? lang}) async {
     state = state.copyWith(
       isChapterLoading: true,
     );
 
     final response =
-    await chapterRepository.getChapters();
+    await chapterRepository.getChapters(lang: lang);
     response.when(
       success: (data) {
         state = state.copyWith(

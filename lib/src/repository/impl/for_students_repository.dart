@@ -8,9 +8,9 @@ import '../for_students_facade.dart';
 
 class  ForStudentsRepository implements ForStudentsFacade {
   @override
-  Future<ApiResult<CategoriesResponse>> getCategories() async {
+  Future<ApiResult<CategoriesResponse>> getCategories({String? lang}) async {
     try {
-      final client = dioHttp.client(requireAuth: true);
+      final client = dioHttp.client(requireAuth: true, lang:lang);
       final response = await client.get(
         '/api/v1/categories/',
       );

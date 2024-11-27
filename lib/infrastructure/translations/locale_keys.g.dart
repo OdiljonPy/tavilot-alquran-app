@@ -22,6 +22,7 @@ abstract class  LocaleKeys {
   static const sells = 'sells';
   static const chapters = 'chapters';
   static const juzes = 'juzes';
+  static const juz = 'juz';
   static const whatUWant = 'whatUWant';
   static const goBack = 'goBack';
   static const buy = 'buy';
@@ -40,5 +41,8 @@ abstract class  LocaleKeys {
   static const chooseLang = 'chooseLang';
   static const kiril = 'kiril';
   static const lotin = 'lotin';
+  static const yes = 'yes';
+  static const no = 'no';
+  static const areYouSureYouWantLogOut = 'areYouSureYouWantLogOut';
 
 }

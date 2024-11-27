@@ -4,7 +4,7 @@ import '../handlers/api_result.dart';
 
 
 abstract class JuzFacade {
-  Future<ApiResult<JuzListResponse>> getJuzes();
-  Future<ApiResult<JuzResponse>> getJuz({required int id});
+  Future<ApiResult<JuzListResponse>> getJuzes({String? lang});
+  Future<ApiResult<JuzResponse>> getJuz({required int id, String? lang});
 
 }

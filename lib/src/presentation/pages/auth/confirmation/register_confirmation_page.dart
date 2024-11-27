@@ -16,21 +16,30 @@ import '../../../styles/style.dart';
 @RoutePage()
 class RegisterConfirmationPage extends ConsumerStatefulWidget {
   final String phoneNumber;
+
   const RegisterConfirmationPage({super.key, required this.phoneNumber});
 
   @override
-  ConsumerState<RegisterConfirmationPage> createState() => _RegisterConfirmationPageState();
+  ConsumerState<RegisterConfirmationPage> createState() =>
+      _RegisterConfirmationPageState();
 }
 
-class _RegisterConfirmationPageState extends ConsumerState<RegisterConfirmationPage> {
-  late TextEditingController register;
-  late TextEditingController password;
+class _RegisterConfirmationPageState
+    extends ConsumerState<RegisterConfirmationPage> {
   @override
   void initState() {
     super.initState();
-    register = TextEditingController(text: "+998");
-    password = TextEditingController();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.refresh(registerConfirmationProvider.notifier).. startTimer()..isAllowed();
+    });
   }
+
+  @override
+  void deactivate() {
+    ref.read(registerConfirmationProvider.notifier).disposeTimer();
+    super.deactivate();
+  }
+
   @override
   Widget build(BuildContext context) {
     final notifier = ref.read(registerConfirmationProvider.notifier);
@@ -68,7 +77,8 @@ class _RegisterConfirmationPageState extends ConsumerState<RegisterConfirmationP
                             style: GoogleFonts.inter(
                               fontSize: 24.sp,
                               color: Style.black,
-                              fontWeight: FontWeight.normal,),
+                              fontWeight: FontWeight.normal,
+                            ),
                           ),
                           Text(
                             widget.phoneNumber,
@@ -77,7 +87,40 @@ class _RegisterConfirmationPageState extends ConsumerState<RegisterConfirmationP
                                 color: Style.black,
                                 fontWeight: FontWeight.w400),
                           ),
-                          36.verticalSpace,
+                          110.verticalSpace,
+                          state.isTimeExpired
+                              ? state.confirmCodeCount != 0
+                              ? ButtonEffect(
+                            onTap: () {
+                              state.isLoading
+                                  ? null
+                                  : notifier.reSendCode(context,
+                                  otpKey: ref
+                                      .watch(registerProvider)
+                                      .otpKey);
+                              notifier.startTimer();
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8.r),
+                                border: Border.all(
+                                  color: Style.primary,
+                                  width: 1.r,
+                                ),
+                              ),
+                              padding: REdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                              child: Text(LocaleKeys.sendAgain.tr(), style: Style.interNormal(size: 18, color: Style.primary),),
+                            ),
+                          )
+                              : const SizedBox.shrink()
+                              :     Text(
+                            state.timerText,
+                            style: Style.interRegular(
+                              size: 14,
+                              color: Style.primary,
+                            ),
+                          ),
+                          24.verticalSpace,
                           SizedBox(
                             height: 64,
                             child: PinFieldAutoFill(
@@ -94,14 +137,17 @@ class _RegisterConfirmationPageState extends ConsumerState<RegisterConfirmationP
                                 gapSpace: 20.r,
                                 textStyle: Style.interNormal(
                                   size: 15.sp,
-                                  color:
-                                  state.isCodeError ? Style.red : Style.black,
+                                  color: state.isCodeError
+                                      ? Style.red
+                                      : Style.black,
                                 ),
                                 bgColorBuilder: const FixedColorBuilder(
                                   Style.transparent,
                                 ),
                                 strokeColorBuilder: FixedColorBuilder(
-                                  state.isCodeError ? Style.red : Style.colorGrey,
+                                  state.isCodeError
+                                      ? Style.red
+                                      : Style.colorGrey,
                                 ),
                               ),
                             ),
@@ -113,15 +159,18 @@ class _RegisterConfirmationPageState extends ConsumerState<RegisterConfirmationP
                             isActive: state.isConfirm,
                             title: LocaleKeys.confirm.tr(),
                             onPressed: () {
-                                notifier.confirmCode(context, ref.watch(registerProvider).otpKey, onSuccess: (){
-                                  if(context.mounted){
+                              notifier.confirmCode(
+                                context,
+                                ref.watch(registerProvider).otpKey,
+                                onSuccess: () {
+                                  if (context.mounted) {
                                     context.router.popUntilRoot();
                                     context.replaceRoute(const LoginRoute());
                                   }
-                                });
+                                },
+                              );
                             },
                           ),
-
                         ],
                       ),
                     ),
@@ -131,11 +180,13 @@ class _RegisterConfirmationPageState extends ConsumerState<RegisterConfirmationP
               100.horizontalSpace,
               Expanded(
                   child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30.r),
-                      image: const DecorationImage(image:  AssetImage("assets/png/loginBook.png"), fit: BoxFit.cover),
-                    ),
-                  )),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30.r),
+                  image: const DecorationImage(
+                      image: AssetImage("assets/png/loginBook.png"),
+                      fit: BoxFit.cover),
+                ),
+              )),
             ],
           ),
         ),

@@ -9,9 +9,9 @@ import '../juz_facade.dart';
 
 class  JuzRepository implements JuzFacade {
   @override
-  Future<ApiResult<JuzListResponse>> getJuzes() async {
+  Future<ApiResult<JuzListResponse>> getJuzes({String? lang}) async {
     try {
-      final client = dioHttp.client(requireAuth: true);
+      final client = dioHttp.client(requireAuth: true, lang: lang);
       final response = await client.get(
         '/api/v1/juz/',
       );
@@ -34,9 +34,9 @@ class  JuzRepository implements JuzFacade {
   }
 
   @override
-  Future<ApiResult<JuzResponse>> getJuz({required int id}) async {
+  Future<ApiResult<JuzResponse>> getJuz({required int id, String? lang}) async {
     try {
-      final client = dioHttp.client(requireAuth: true);
+      final client = dioHttp.client(requireAuth: true, lang: lang);
       final response = await client.get(
         '/api/v1/juz/$id/',
       );

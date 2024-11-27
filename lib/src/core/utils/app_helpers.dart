@@ -445,16 +445,12 @@ class AppHelpers {
       content: child,
     );
 
-    // showDialog(
-    //   context: context,
-    //   builder: (BuildContext context) {
-    //     return Directionality(
-    //         textDirection: LocalStorage.getLangLtr()
-    //             ? TextDirection.ltr
-    //             : TextDirection.rtl,
-    //         child: alert);
-    //   },
-    // );
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
   }
 
   static showSnackBar(BuildContext context, String title,

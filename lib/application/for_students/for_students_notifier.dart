@@ -9,11 +9,11 @@ class ForStudentsNotifier extends StateNotifier<ForStudentsState> {
   ) : super(const ForStudentsState());
 
   Future<void> fetchCategories(
-      BuildContext context) async {
+      BuildContext context, {String? lang}) async {
     state = state.copyWith(
       isCategoriesLoading: true,
     );
-    final response = await forStudentsRepository.getCategories();
+    final response = await forStudentsRepository.getCategories(lang: lang);
     response.when(
       success: (data) {
         state = state.copyWith(

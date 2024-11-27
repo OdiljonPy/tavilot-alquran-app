@@ -280,8 +280,7 @@ class LocalStorage {
 
   static void deleteUser() => _preferences?.remove(AppConstants.keyUser);
 
-  static void clearStore() {
-    deletePinCode();
+  static void logOut() {
     deleteToken();
     deleteUser();
   }

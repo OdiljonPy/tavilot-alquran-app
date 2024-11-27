@@ -9,11 +9,11 @@ class AboutNotifier extends StateNotifier<AboutState> {
   ) : super(const AboutState());
 
   Future<void> fetchAbout(
-      BuildContext context) async {
+      BuildContext context,{String? lang}) async {
     state = state.copyWith(
       isAboutLoading: true,
     );
-    final response = await aboutRepository.getAboutUs();
+    final response = await aboutRepository.getAboutUs(lang: lang);
     response.when(
       success: (data) {
         state = state.copyWith(

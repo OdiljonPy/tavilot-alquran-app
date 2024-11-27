@@ -4,14 +4,17 @@ import 'package:al_quran/src/presentation/pages/about_page/surah_page/surah_page
 import 'package:al_quran/src/presentation/pages/for_students/for_students_page.dart';
 import 'package:al_quran/src/presentation/pages/main/riverpod/state/main_state.dart';
 import 'package:al_quran/src/presentation/pages/main/widgets/custom_pop_up.dart';
+import 'package:al_quran/src/presentation/pages/main/widgets/logout_modal.dart';
 import 'package:al_quran/src/presentation/pages/premium/premium_page.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../application/about/about_provider.dart';
 import '../../../../application/for_students/for_students_provider.dart';
+import '../../../core/utils/app_helpers.dart';
 import '../../components/app_logo.dart';
 import '../../components/components.dart';
 import '../../styles/style.dart';
@@ -88,7 +91,7 @@ class _MainPageState extends ConsumerState<MainPage>
                 },
                 child: const AppLogo()),
             const Expanded(
-              flex: 1,
+              flex: 2,
               child: SizedBox.shrink(),
             ),
             Expanded(
@@ -152,10 +155,29 @@ class _MainPageState extends ConsumerState<MainPage>
                                 : Style.black),
                       ),
                     ),
-                    36.horizontalSpace,
-                    CustomPopupItem(onTap: (){
-                      notifier.changeIndex(state.selectIndex);
-                    },)
+                    const Spacer(),
+                    const CustomPopupItem(),
+                    ButtonEffect(
+                      // borderRadius: BorderRadius.circular(60.r),
+                      // radius: 40.r,
+                      onTap: (){
+                        AppHelpers.showAlertDialog(
+                          context: context,
+                          child: SizedBox(
+                            height: MediaQuery.sizeOf(context).height / 4,
+                            width: MediaQuery.sizeOf(context).width / 5,
+                            child: const LogOutModal(),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Style.bg,
+                        ),
+                        child: Icon(FlutterRemix.logout_circle_r_line, color: Style.primary,size: 18.r,),
+                      ),
+                    ),
                   ],
                 ))
           ],

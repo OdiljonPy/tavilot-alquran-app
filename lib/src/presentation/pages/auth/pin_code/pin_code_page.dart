@@ -179,7 +179,7 @@ class PinCodePage extends ConsumerWidget {
                                       onPressed: () {
                                         context
                                             .replaceRoute(const LoginRoute());
-                                        LocalStorage.clearStore();
+                                        LocalStorage.logOut();
                                       }),
                                 ),
                               ],
