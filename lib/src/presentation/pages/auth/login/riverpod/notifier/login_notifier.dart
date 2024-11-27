@@ -65,13 +65,11 @@ class LoginNotifier extends StateNotifier<LoginState> {
         // );
 
         if (Platform.isAndroid || Platform.isIOS) {
-          String? fcmToken;
           try {
             // fcmToken = await FirebaseMessaging.instance.getToken();
           } catch (e) {
             debugPrint('===> error with getting firebase token $e');
           }
-          // _authRepository.updateFirebaseToken(fcmToken);
         }
       },
       failure: (failure, status) {

@@ -3,8 +3,6 @@ import '../models/models.dart';
 import '../models/response/register_response.dart';
 import '../models/response/resend_response.dart';
 import '../models/response/reset_token_response.dart';
-import '../models/response/update_response.dart';
-import '../models/response/user_response.dart';
 
 abstract class AuthFacade {
   Future<ApiResult<LoginResponse>> login({

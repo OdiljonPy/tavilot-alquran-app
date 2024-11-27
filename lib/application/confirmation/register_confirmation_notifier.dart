@@ -3,7 +3,6 @@ import 'package:al_quran/src/core/di/dependency_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../src/core/utils/app_connectivity.dart';
-import '../../src/core/utils/local_storage.dart';
 import 'register_confirmation_state.dart';
 
 class RegisterConfirmationNotifier

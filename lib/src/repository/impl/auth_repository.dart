@@ -8,8 +8,6 @@ import '../../models/response/register_response.dart';
 import '../../models/response/resend_response.dart';
 import '../../models/response/reset_token_response.dart';
 import '../../models/response/sign_up_request.dart';
-import '../../models/response/update_response.dart';
-import '../../models/response/user_response.dart';
 import '../auth_facade.dart';
 
 class AuthRepository implements AuthFacade {

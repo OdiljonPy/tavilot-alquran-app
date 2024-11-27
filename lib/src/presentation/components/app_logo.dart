@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../generated/assets.dart';
 import '../../core/constants/app_constants.dart';
-import '../styles/style.dart';
 
 class AppLogo extends StatelessWidget {
   const AppLogo({super.key});

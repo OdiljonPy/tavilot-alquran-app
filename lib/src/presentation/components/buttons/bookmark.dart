@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../styles/style.dart';
 
 class BookmarkWidget extends StatelessWidget {
   final VoidCallback onTap;
@@ -20,7 +19,7 @@ class BookmarkWidget extends StatelessWidget {
         decoration: BoxDecoration(
             boxShadow:  [
               BoxShadow(
-                color: const Color(0xFF0000000).withOpacity(.1),
+                color: const Color(0xFF000000).withOpacity(.1),
                 offset: const Offset(-2, 6),
                 blurRadius: 4,
               ),

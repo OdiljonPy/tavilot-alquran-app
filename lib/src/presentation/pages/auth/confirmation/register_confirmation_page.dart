@@ -9,7 +9,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 import '../../../../../application/confirmation/register_confirmation_provider.dart';
 import '../../../../../infrastructure/translations/locale_keys.g.dart';
-import '../../../../core/utils/utils.dart';
 import '../../../components/components.dart';
 import '../../../styles/style.dart';
 
