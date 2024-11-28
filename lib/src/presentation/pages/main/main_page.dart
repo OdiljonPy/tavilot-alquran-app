@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../application/about/about_provider.dart';
 import '../../../../application/for_students/for_students_provider.dart';
 import '../../../core/utils/app_helpers.dart';
@@ -33,7 +34,6 @@ class MainPage extends ConsumerStatefulWidget {
 
 class _MainPageState extends ConsumerState<MainPage>
     with SingleTickerProviderStateMixin {
-
   @override
   void initState() {
     super.initState();
@@ -85,9 +85,9 @@ class _MainPageState extends ConsumerState<MainPage>
           children: [
             GestureDetector(
                 onTap: () {
-                  ref
-                      .read(mainProvider.notifier)
-                      .fetchChapters(context);
+                  ref.read(mainProvider.notifier)
+                    ..fetchChapters(context)
+                    ..changeIndex(0);
                 },
                 child: const AppLogo()),
             const Expanded(
@@ -100,9 +100,9 @@ class _MainPageState extends ConsumerState<MainPage>
                   children: [
                     ButtonEffect(
                       onTap: () {
-                        ref.read(mainProvider.notifier).changeIndex(0,
-                            onSuccess: () {
-                        });
+                        ref
+                            .read(mainProvider.notifier)
+                            .changeIndex(0, onSuccess: () {});
                       },
                       child: Text(
                         LocaleKeys.mainPage.tr(),
@@ -119,9 +119,9 @@ class _MainPageState extends ConsumerState<MainPage>
                     36.horizontalSpace,
                     ButtonEffect(
                       onTap: () {
-                        ref.read(mainProvider.notifier).changeIndex(1,
-                            onSuccess: () {
-                        });
+                        ref
+                            .read(mainProvider.notifier)
+                            .changeIndex(1, onSuccess: () {});
                       },
                       child: Text(
                         LocaleKeys.forStudent.tr(),
@@ -157,10 +157,36 @@ class _MainPageState extends ConsumerState<MainPage>
                     ),
                     const Spacer(),
                     const CustomPopupItem(),
+                    12.horizontalSpace,
                     ButtonEffect(
-                      // borderRadius: BorderRadius.circular(60.r),
-                      // radius: 40.r,
-                      onTap: (){
+                      onTap: () {
+                        notifier.changeIndex(3);
+                        ref.read(surahProvider.notifier).changeIndex(2);
+                        if (ref.watch(surahProvider).selectedBookmarkId == 0 &&
+                            ref.watch(surahProvider).bookmarks.isNotEmpty) {
+                          ref.read(surahProvider.notifier)
+                            ..fetchSurah(context,
+                                ref.watch(surahProvider).bookmarks.first.id)
+                            ..selectBookmarkId(
+                                ref.watch(surahProvider).bookmarks.first.id,
+                                ref
+                                    .watch(surahProvider)
+                                    .bookmarks
+                                    .first
+                                    .verseIds
+                                    .first);
+                        }
+                        ref.read(surahProvider.notifier)
+                          ..fetchJuzes(context)
+                          ..fetchJuz(context, 1);
+                      },
+                      child: SvgPicture.asset(
+                        "assets/svg/bookmark.svg",
+                      ),
+                    ),
+                    12.horizontalSpace,
+                    ButtonEffect(
+                      onTap: () {
                         AppHelpers.showAlertDialog(
                           context: context,
                           child: SizedBox(
@@ -175,7 +201,11 @@ class _MainPageState extends ConsumerState<MainPage>
                           shape: BoxShape.circle,
                           color: Style.bg,
                         ),
-                        child: Icon(FlutterRemix.logout_circle_r_line, color: Style.primary,size: 18.r,),
+                        child: Icon(
+                          FlutterRemix.logout_circle_r_line,
+                          color: Style.primary,
+                          size: 20.r,
+                        ),
                       ),
                     ),
                   ],

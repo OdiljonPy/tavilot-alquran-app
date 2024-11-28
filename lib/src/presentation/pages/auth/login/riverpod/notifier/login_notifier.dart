@@ -1,15 +1,13 @@
-import 'dart:io';
 import 'package:al_quran/src/core/di/dependency_manager.dart';
+import 'package:al_quran/src/core/routes/app_router.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../../../core/utils/utils.dart';
 import '../state/login_state.dart';
 
 class LoginNotifier extends StateNotifier<LoginState> {
-
-  LoginNotifier(
-      )
-      : super(const LoginState());
+  LoginNotifier() : super(const LoginState());
 
   void setPassword(String text) {
     state = state.copyWith(
@@ -33,13 +31,13 @@ class LoginNotifier extends StateNotifier<LoginState> {
     state = state.copyWith(showPassword: show);
   }
 
-  Future<void> login({
+  Future<void> login(
+    BuildContext context, {
     String? phoneNumber,
     VoidCallback? checkYourNetwork,
     VoidCallback? unAuthorised,
     VoidCallback? goToMain,
   }) async {
-    final connected = await AppConnectivity.connectivity();
     state = state.copyWith(isLoading: true);
     final response = await authRepository.login(
       phoneNumber: phoneNumber ?? '',
@@ -49,80 +47,38 @@ class LoginNotifier extends StateNotifier<LoginState> {
       success: (data) async {
         await LocalStorage.setToken(data.result?.accessToken ?? '');
         await LocalStorage.setUserRate(data.result?.userRate ?? 1);
-        // await LocalStorage.setre(data.result?.user);
+        await LocalStorage.setRefreshDay(DateTime.now().toString());
+        await LocalStorage.setRefreshToken(data.result?.refreshToken);
         goToMain?.call();
-        // fetchCurrencies(
-        //   checkYourNetworkConnection: checkYourNetwork,
-        //   goToMain: goToMain,
-        // );
-
-        // res.when(
-        //   success: (s) {
-        //     LocalStorage.setUser(s.data);
-        //     LocalStorage.setWallet(s.data?.wallet);
-        //   },
-        //   failure: (failure, status) {},
-        // );
-
-        if (Platform.isAndroid || Platform.isIOS) {
-          try {
-            // fcmToken = await FirebaseMessaging.instance.getToken();
-          } catch (e) {
-            debugPrint('===> error with getting firebase token $e');
-          }
-        }
       },
       failure: (failure, status) {
         state = state.copyWith(isLoading: false, isLoginError: true);
-        if (status == 401) {
-          LocalStorage.deleteUser();
-          unAuthorised?.call();
-        }
-        debugPrint('==> login failure: $failure');
+        AppHelpers.showSnackBar(
+          context,
+          AppHelpers.getTranslation(failure),
+        );
       },
     );
-    // if (connected) {
-    //   // if (!AppValidators.isValidEmail(state.email)) {
-    //   //   state = state.copyWith(isEmailNotValid: true);
-    //   //   return;
-    //   // }
-    //
-    // } else {
-    //   // checkYourNetwork?.call();
-    // }
   }
-  //
-  // Future<void> fetchCurrencies({
-  //   VoidCallback? checkYourNetworkConnection,
-  //   VoidCallback? goToMain,
-  // }) async {
-  //   final connected = await AppConnectivity.connectivity();
-  //   if (connected) {
-  //     state = state.copyWith(isCurrenciesLoading: true);
-  //     final response = await _currenciesRepository.getCurrencies();
-  //     response.when(
-  //       success: (data) async {
-  //         int defaultCurrencyIndex = 0;
-  //         final List<CurrencyData> currencies = data.data ?? [];
-  //         for (int i = 0; i < currencies.length; i++) {
-  //           if (currencies[i].isDefault ?? false) {
-  //             defaultCurrencyIndex = i;
-  //             break;
-  //           }
-  //         }
-  //         LocalStorage.setSelectedCurrency(currencies[defaultCurrencyIndex]);
-  //         state = state.copyWith(isCurrenciesLoading: false);
-  //         goToMain?.call();
-  //       },
-  //       failure: (failure, status) {
-  //         state = state.copyWith(isCurrenciesLoading: false);
-  //         goToMain?.call();
-  //         debugPrint('==> get currency failure: $failure');
-  //       },
-  //     );
-  //   } else {
-  //     checkYourNetworkConnection?.call();
-  //     goToMain?.call();
-  //   }
-  // }
+
+  Future<void> refresh(BuildContext context,
+      {required String refreshToken, VoidCallback? onSuccess}) async {
+    final response = await authRepository.refreshToken(
+      refreshToken: refreshToken,
+    );
+    response.when(
+      success: (data) async {
+        state = state.copyWith(isLoading: false);
+        await LocalStorage.setToken(data.result?.accessToken ?? '');
+        await LocalStorage.setRefreshToken(data.result?.refreshToken ?? '');
+        await LocalStorage.setRefreshDay(DateTime.now().toString());
+        onSuccess?.call();
+      },
+      failure: (failure, status) {
+        LocalStorage.logOut();
+        state = state.copyWith(isLoading: false, isLoginError: true);
+        context.replaceRoute(const SplashRoute());
+      },
+    );
+  }
 }

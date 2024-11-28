@@ -41,5 +41,14 @@
   "lotin": "Lotincha",
   "yes": "Ha",
   "no": "Yo'q",
-  "areYouSureYouWantLogOut": "Haqiqatan ham hisobingizdan chiqmoqchimisiz?"
+  "areYouSureYouWantLogOut": "Haqiqatan ham hisobingizdan chiqmoqchimisiz?",
+  "invalidInputProvided": "Noto'g'ri ma'lumot kiritildi",
+  "resourceNotFound": "Resurs topilmadi",
+  "validateError": "Tekshiruv xatosi",
+  "incorrectPassword": "Noto'g'ri parol",
+  "userDoesNotExist": "Foydalanuvchi mavjud emas",
+  "userAlreadyExists": "Foydalanuvchi allaqachon mavjud",
+  "unauthorizedAccess": "Ruxsatsiz kirish",
+  "unknownError": "Noma'lum xato",
+  "close": "Yopish"
 }

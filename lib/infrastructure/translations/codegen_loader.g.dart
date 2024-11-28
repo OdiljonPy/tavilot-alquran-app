@@ -1,6 +1,6 @@
 // DO NOT EDIT. This is code generated via package:easy_localization/generate.dart
 
-// ignore_for_file: prefer_single_quotes, avoid_renaming_method_parameters, constant_identifier_names
+// ignore_for_file: prefer_single_quotes, avoid_renaming_method_parameters
 
 import 'dart:ui';
 
@@ -57,7 +57,16 @@ class CodegenLoader extends AssetLoader{
   "lotin": "Lotincha",
   "yes": "Ha",
   "no": "Yo'q",
-  "areYouSureYouWantLogOut": "Haqiqatan ham hisobingizdan chiqmoqchimisiz?"
+  "areYouSureYouWantLogOut": "Haqiqatan ham hisobingizdan chiqmoqchimisiz?",
+  "invalidInputProvided": "Noto'g'ri ma'lumot kiritildi",
+  "resourceNotFound": "Resurs topilmadi",
+  "validateError": "Tekshiruv xatosi",
+  "incorrectPassword": "Noto'g'ri parol",
+  "userDoesNotExist": "Foydalanuvchi mavjud emas",
+  "userAlreadyExists": "Foydalanuvchi allaqachon mavjud",
+  "unauthorizedAccess": "Ruxsatsiz kirish",
+  "unknownError": "Noma'lum xato",
+  "close": "Yopish"
 };
 static const Map<String,dynamic> ru_RU = {
   "hi": "Ассаламу алайкум!",
@@ -102,7 +111,16 @@ static const Map<String,dynamic> ru_RU = {
   "lotin": "Лотинча",
   "yes": "Ҳа",
   "no": "Йўқ",
-  "areYouSureYouWantLogOut": "Ҳақиқатан ҳам ҳисобингиздан чиқмоқчимисиз?"
+  "areYouSureYouWantLogOut": "Ҳақиқатан ҳам ҳисобингиздан чиқмоқчимисиз?",
+  "invalidInputProvided": "Нотўғри маълумот киритилди",
+  "resourceNotFound": "Ресурс топилмади",
+  "validateError": "Текширув хатоси",
+  "incorrectPassword": "Нотўғри парол",
+  "userDoesNotExist": "Фойдаланувчи мавжуд эмас",
+  "userAlreadyExists": "Фойдаланувчи аллақачон мавжуд",
+  "unauthorizedAccess": "Рухсатсиз кириш",
+  "unknownError": "Номаълум хато",
+  "close": "Ёпиш"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"uz_UZ": uz_UZ, "ru_RU": ru_RU};
 }

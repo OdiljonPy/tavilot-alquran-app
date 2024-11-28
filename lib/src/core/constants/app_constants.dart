@@ -8,6 +8,8 @@ class AppConstants {
   static const String keyLangSelected = 'keyLangSelected';
   static const String keyLanguageData = 'keyLanguageData';
   static const String keyToken = 'keyToken';
+  static const String keyRefreshToken = 'keyRefreshToken';
+  static const String keyRefreshDay = 'keyRefreshDay';
   static const String keyUserRate = 'keyUserRate';
   static const String keyWallet = 'keyWallet';
   static const String keySystemLanguage = 'keySystemLanguage';

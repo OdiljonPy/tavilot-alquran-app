@@ -30,11 +30,24 @@ class AppHelpers {
   static String errorCodeToMessage(int errorCode) {
     switch (errorCode) {
       case 1:
-        return LocaleKeys.register.tr();
+        return LocaleKeys.invalidInputProvided.tr();
+      case 2:
+        return LocaleKeys.resourceNotFound.tr();
+      case 3:
+        return LocaleKeys.validateError.tr();
+      case 4:
+        return LocaleKeys.incorrectPassword.tr();
+      case 5:
+        return LocaleKeys.userDoesNotExist.tr();
+      case 6:
+        return LocaleKeys.userAlreadyExists.tr();
+      case 7:
+        return LocaleKeys.unauthorizedAccess.tr();
       default:
-        return LocaleKeys.register.tr();
+        return LocaleKeys.unknownError.tr();
     }
   }
+
 
 
   // static getPhotoGallery(ValueChanged<String> onChange) async {
@@ -480,7 +493,7 @@ class AppHelpers {
         ],
       ),
       action: SnackBarAction(
-        label: AppHelpers.getTranslation(TrKeys.close),
+        label: LocaleKeys.close.tr(),
         disabledTextColor: Style.black,
         textColor: Style.black,
         onPressed: () {

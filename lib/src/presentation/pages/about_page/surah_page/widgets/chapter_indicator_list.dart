@@ -29,6 +29,11 @@ class ChapterIndicatorList extends ConsumerWidget {
               "${LocaleKeys.verse.tr()}",
           style: Style.interRegular(size: 16),
         ),
+        // Text(
+        //   "${ref.watch(surahProvider).chapter?.description}",
+        //   style: Style.interRegular(size: 16),
+        //   textAlign: TextAlign.center,
+        // ),
         120.verticalSpace,
         ListView.separated(
           shrinkWrap: true,

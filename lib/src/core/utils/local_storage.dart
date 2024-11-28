@@ -26,6 +26,24 @@ class LocalStorage {
     }
   }
 
+  static Future<void> setRefreshToken(String? token) async {
+    if (_preferences != null) {
+      await _preferences!.setString(AppConstants.keyRefreshToken, token ?? '');
+    }
+  }
+
+  static Future<void> setRefreshDay(String? token) async {
+    if (_preferences != null) {
+      await _preferences!.setString(AppConstants.keyRefreshDay, token ?? '');
+    }
+  }
+
+  static String getRefreshDay() =>
+      _preferences?.getString(AppConstants.keyRefreshDay) ?? '';
+
+  static String getRefreshToken() =>
+      _preferences?.getString(AppConstants.keyRefreshToken) ?? '';
+
   static Future<void> setUserRate(int? userRate) async {
     if (_preferences != null) {
       await _preferences!.setInt(AppConstants.keyUserRate, userRate ?? 1);

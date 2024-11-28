@@ -111,6 +111,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                               textCapitalization: TextCapitalization.none,
                               onFieldSubmitted: (_){
                                 notifier.login(
+                                  context,
                                   phoneNumber: login.text,
                                   checkYourNetwork: () {
                                     AppHelpers.showSnackBar(
@@ -150,6 +151,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                               title: LocaleKeys.continueForApp.tr(),
                               onPressed: () {
                                 notifier.login(
+                                  context,
                                   phoneNumber: login.text,
                                 checkYourNetwork: () {
                                   AppHelpers.showSnackBar(

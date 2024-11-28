@@ -1,15 +1,8 @@
-// ignore_for_file: unrelated_type_equality_checks
-
 import 'package:connectivity_plus/connectivity_plus.dart';
 
 class AppConnectivity {
   static Future<bool> connectivity() async {
-    var connectivityResult = await Connectivity().checkConnectivity();
-    if (connectivityResult == ConnectivityResult.mobile ||
-        connectivityResult == ConnectivityResult.wifi ||
-        connectivityResult == ConnectivityResult.ethernet) {
-      return true;
-    }
-    return false;
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    return connectivityResult != ConnectivityResult.none;
   }
 }

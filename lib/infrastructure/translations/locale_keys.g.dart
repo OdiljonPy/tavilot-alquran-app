@@ -44,5 +44,14 @@ abstract class  LocaleKeys {
   static const yes = 'yes';
   static const no = 'no';
   static const areYouSureYouWantLogOut = 'areYouSureYouWantLogOut';
+  static const invalidInputProvided = 'invalidInputProvided';
+  static const resourceNotFound = 'resourceNotFound';
+  static const validateError = 'validateError';
+  static const incorrectPassword = 'incorrectPassword';
+  static const userDoesNotExist = 'userDoesNotExist';
+  static const userAlreadyExists = 'userAlreadyExists';
+  static const unauthorizedAccess = 'unauthorizedAccess';
+  static const unknownError = 'unknownError';
+  static const close = 'close';
 
 }
