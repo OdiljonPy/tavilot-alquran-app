@@ -1,3 +1,4 @@
+import 'package:al_quran/src/models/response/chapter_names_response.dart';
 import 'package:al_quran/src/models/response/chapter_response.dart';
 import 'package:al_quran/src/models/response/single_chapter_response.dart';
 import 'package:dio/dio.dart';
@@ -42,6 +43,35 @@ class  ChapterRepository implements ChapterFacade {
       );
       return ApiResult.success(
         data: SingleChapterResponse.fromJson(response.data),
+      );
+    } catch (e) {
+      debugPrint('==> get single chapter failure: $e');
+      if (e is DioException && e.response != null) {
+        final errorResponse = e.response?.data;
+        final errorMessage = AppHelpers.errorCodeToMessage(errorResponse['error_code']);
+        return ApiResult.failure(
+            error: errorMessage, statusCode: NetworkExceptions.getDioStatus(e));
+      } else {
+        return ApiResult.failure(
+            error: AppHelpers.errorHandler(e),
+            statusCode: NetworkExceptions.getDioStatus(e));
+      }
+    }
+  }
+
+  @override
+  Future<ApiResult<ChapterNames>> getChapterNames({required List<int> ids, String? lang}) async {
+    final data = {
+      "chapter_ids":ids
+    };
+    try {
+      final client = dioHttp.client(requireAuth: true, lang: lang);
+      final response = await client.post(
+        '/api/v1/chapter/name/',
+        data: data
+      );
+      return ApiResult.success(
+        data: ChapterNames.fromJson(response.data),
       );
     } catch (e) {
       debugPrint('==> get single chapter failure: $e');

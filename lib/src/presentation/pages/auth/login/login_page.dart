@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../core/constants/constants.dart';
 import '../../../../core/routes/app_router.dart';
@@ -105,10 +106,18 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                               hintText: LocaleKeys.password.tr(),
                               onChanged: notifier.setPassword,
                               textController: password,
-                              obscure: true,
+                              obscure: state.showPassword,
                               validator: AppValidators.emptyCheck,
                               inputType: TextInputType.emailAddress,
                               textCapitalization: TextCapitalization.none,
+                              suffixIcon: IconButton(
+                                onPressed: notifier.toggleShowPassword,
+                                icon: SvgPicture.asset(
+                                  state.showPassword
+                                      ? "assets/svg/eyeClose.svg"
+                                      : "assets/svg/eye.svg",
+                                 ),
+                              ),
                               onFieldSubmitted: (_){
                                 notifier.login(
                                   context,

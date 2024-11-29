@@ -26,9 +26,8 @@ class LoginNotifier extends StateNotifier<LoginState> {
       isPasswordNotValid: false,
     );
   }
-
-  void setShowPassword(bool show) {
-    state = state.copyWith(showPassword: show);
+  void toggleShowPassword() {
+    state = state.copyWith(showPassword: !state.showPassword);
   }
 
   Future<void> login(

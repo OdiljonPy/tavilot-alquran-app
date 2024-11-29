@@ -50,5 +50,7 @@
   "userAlreadyExists": "Фойдаланувчи аллақачон мавжуд",
   "unauthorizedAccess": "Рухсатсиз кириш",
   "unknownError": "Номаълум хато",
-  "close": "Ёпиш"
+  "close": "Ёпиш",
+  "noChaptersFound": "Суралар топилмади",
+  "download": "Юклаб олиш"
 }

@@ -12,6 +12,7 @@ class MainNotifier extends StateNotifier<MainState> {
   changeIndex(int index, {VoidCallback? onSuccess}) {
     state = state.copyWith(selectIndex: index);
     state.pageController?.jumpToPage(index);
+    changeQuery("");
     onSuccess?.call();
   }
 

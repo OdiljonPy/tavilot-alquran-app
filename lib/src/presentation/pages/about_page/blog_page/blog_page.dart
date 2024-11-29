@@ -1,3 +1,4 @@
+import 'package:al_quran/application/for_students/for_students_provider.dart';
 import 'package:al_quran/application/surah/surah_provider.dart';
 import 'package:al_quran/src/presentation/components/components.dart';
 import 'package:al_quran/src/presentation/pages/main/riverpod/provider/main_provider.dart';
@@ -61,16 +62,20 @@ class _BlogPageState extends ConsumerState<BlogPage> {
               children: [
                 Expanded(
                     child: ButtonEffect(
-                      onTap: ()=>
-                        ref.read(mainProvider.notifier).changeIndex(1),
-                      child: Container(
-                                        padding: REdgeInsets.all(24),
-                                        decoration: BoxDecoration(
+                  onTap: () {
+                    ref.read(mainProvider.notifier).changeIndex(1);
+                    ref
+                        .read(forStudentsProvider.notifier)
+                        .fetchCategories(context);
+                  },
+                  child: Container(
+                    padding: REdgeInsets.all(24),
+                    decoration: BoxDecoration(
                       color: Style.secondary,
                       borderRadius: BorderRadius.circular(15.r),
-                                        ),
-                                        height: 180.r,
-                                        child: Column(
+                    ),
+                    height: 180.r,
+                    child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SvgPicture.asset("assets/svg/book.svg",
@@ -78,26 +83,27 @@ class _BlogPageState extends ConsumerState<BlogPage> {
                         const Spacer(),
                         Text(
                           LocaleKeys.forStudent.tr(),
-                          style: Style.interRegular(size: 24, color: Style.black),
+                          style:
+                              Style.interRegular(size: 24, color: Style.black),
                         )
                       ],
-                                        ),
-                                      ),
-                    )),
+                    ),
+                  ),
+                )),
                 12.horizontalSpace,
                 Expanded(
                     child: ButtonEffect(
-                      onTap: () {
-                        ref.read(mainProvider.notifier).changeIndex(4);
-                      },
-                      child: Container(
-                                        padding: REdgeInsets.all(24),
-                                        decoration: BoxDecoration(
+                  onTap: () {
+                    ref.read(mainProvider.notifier).changeIndex(4);
+                  },
+                  child: Container(
+                    padding: REdgeInsets.all(24),
+                    decoration: BoxDecoration(
                       color: Style.secondary,
                       borderRadius: BorderRadius.circular(15.r),
-                                        ),
-                                        height: 180.r,
-                                        child: Column(
+                    ),
+                    height: 180.r,
+                    child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SvgPicture.asset("assets/svg/bag.svg",
@@ -105,27 +111,28 @@ class _BlogPageState extends ConsumerState<BlogPage> {
                         const Spacer(),
                         Text(
                           LocaleKeys.sells.tr(),
-                          style: Style.interRegular(size: 24, color: Style.black),
+                          style:
+                              Style.interRegular(size: 24, color: Style.black),
                         )
                       ],
-                                        ),
-                                      ),
-                    )),
+                    ),
+                  ),
+                )),
                 12.horizontalSpace,
                 Expanded(
                     child: ButtonEffect(
-                      onTap: () {
-                        ref.read(mainProvider.notifier).changeIndex(2);
-                        ref.read(aboutProvider.notifier).fetchAbout(context);
-                      },
-                      child: Container(
-                                        padding: REdgeInsets.all(24),
-                                        decoration: BoxDecoration(
+                  onTap: () {
+                    ref.read(mainProvider.notifier).changeIndex(2);
+                    ref.read(aboutProvider.notifier).fetchAbout(context);
+                  },
+                  child: Container(
+                    padding: REdgeInsets.all(24),
+                    decoration: BoxDecoration(
                       color: Style.secondary,
                       borderRadius: BorderRadius.circular(15.r),
-                                        ),
-                                        height: 180.r,
-                                        child: Column(
+                    ),
+                    height: 180.r,
+                    child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SvgPicture.asset(
@@ -136,12 +143,13 @@ class _BlogPageState extends ConsumerState<BlogPage> {
                         const Spacer(),
                         Text(
                           LocaleKeys.aboutApp.tr(),
-                          style: Style.interRegular(size: 24, color: Style.black),
+                          style:
+                              Style.interRegular(size: 24, color: Style.black),
                         )
                       ],
-                                        ),
-                                      ),
-                    )),
+                    ),
+                  ),
+                )),
               ],
             ),
           ),
@@ -160,181 +168,212 @@ class _BlogPageState extends ConsumerState<BlogPage> {
           ),
           ref.watch(mainProvider).chapters.isEmpty
               ? const Loading()
-              : ref.watch(mainProvider).isChapterSearching ?GridView.builder(
-            padding: REdgeInsets.all(40),
-            shrinkWrap: true,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                mainAxisSpacing: 12.r,
-                crossAxisSpacing: 12.r,
-                crossAxisCount: 3,
-                mainAxisExtent: 110.r),
-            itemCount: ref.read(mainProvider).searchChapters.length,
-            itemBuilder: (BuildContext context, int index) {
-              return ButtonEffect(
-                onTap: () {
-                  ref.read(mainProvider.notifier).changeIndex(3,
-                      onSuccess: () async {
-                        ref.read(surahProvider.notifier)
-                          ..selectSurahId(ref.watch(mainProvider).searchChapters[index].id ??0)
-                          ..fetchJuzes(context)
-                          ..fetchSurah(context, ref.watch(mainProvider).searchChapters[index].id ??0)
-                          ..fetchJuz(context, 1);
-                      });
-                },
-                child: Container(
-                  padding: REdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    border:
-                    Border.all(color: Style.borderColor, width: 1),
-                    borderRadius: BorderRadius.circular(5.r),
-                  ),
-                  child: Row(
-                    children: [
-                      Container(
-                        height: 60.r,
-                        width: 60.r,
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage(
-                              Assets.star,
+              : ref.watch(mainProvider).isChapterSearching &&
+                      ref.watch(mainProvider).searchChapters.isNotEmpty
+                  ? GridView.builder(
+                      padding: REdgeInsets.all(40),
+                      shrinkWrap: true,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          mainAxisSpacing: 12.r,
+                          crossAxisSpacing: 12.r,
+                          crossAxisCount: 3,
+                          mainAxisExtent: 110.r),
+                      itemCount: ref.read(mainProvider).searchChapters.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return ButtonEffect(
+                          onTap: () {
+                            ref.read(mainProvider.notifier).changeIndex(3,
+                                onSuccess: () async {
+                              ref.read(surahProvider.notifier)
+                                ..selectSurahId(ref
+                                        .watch(mainProvider)
+                                        .searchChapters[index]
+                                        .id ??
+                                    0)
+                                ..fetchJuzes(context)
+                                ..fetchSurah(
+                                    context,
+                                    ref
+                                            .watch(mainProvider)
+                                            .searchChapters[index]
+                                            .id ??
+                                        0)
+                                ..fetchJuz(context, 1);
+                            });
+                          },
+                          child: Container(
+                            padding: REdgeInsets.all(20),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: Style.borderColor, width: 1),
+                              borderRadius: BorderRadius.circular(5.r),
                             ),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        child: Center(
-                          child: Text(
-                            "${ref.watch(mainProvider).searchChapters[index].number ?? ref.watch(mainProvider).searchChapters[index].id ?? 0}",
-                            style: Style.interRegular(
-                              size: 24, color: Style.white,),
-                          ),
-                        ),
-                      ),
-                      20.horizontalSpace,
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "${ref.watch(mainProvider).searchChapters[index].name}",
-                            style: Style.interRegular(
-                                size: 24, color: Style.black),
-                          ),
-                          Text(
-                            "${ref.watch(mainProvider).searchChapters[index].typeChoice == 1 ? LocaleKeys.makka.tr() : LocaleKeys.madina.tr()}, ${ref.watch(mainProvider).searchChapters[index].verseNumber} ${LocaleKeys.verse.tr()}",
-                            style: Style.interRegular(
-                                size: 10, color: Style.black),
-                          ),
-                        ],
-                      ),
-                      const Spacer(),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                              "${ref.read(mainProvider).searchChapters[index].nameArabic}",
-                              style: Style.interRegular(
-                                  size: 20, color: Style.black)),
-                          Text(
-                            "${ref.watch(mainProvider).searchChapters[index].verseNumber} ${LocaleKeys.verse.tr()}",
-                            style: Style.interRegular(
-                                size: 16, color: Style.textHint),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              );
-            },
-          ):  GridView.builder(
-                  padding: REdgeInsets.all(40),
-                  shrinkWrap: true,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      mainAxisSpacing: 12.r,
-                      crossAxisSpacing: 12.r,
-                      crossAxisCount: 3,
-                      mainAxisExtent: 120.r),
-                  itemCount: ref.read(mainProvider).chapters.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return ButtonEffect(
-                      onTap: () {
-                        ref.read(mainProvider.notifier).changeIndex(3,
-                            onSuccess: () async {
-                          ref.read(surahProvider.notifier)
-                            ..selectSurahId(ref.watch(mainProvider).chapters[index].id ??0)
-                            ..fetchJuzes(context)
-                            ..fetchSurah(context, index + 1)
-                            ..fetchJuz(context, index + 1);
-                        });
-                      },
-                      child: Container(
-                        padding: REdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                          border:
-                              Border.all(color: Style.borderColor, width: 1),
-                          borderRadius: BorderRadius.circular(5.r),
-                        ),
-                        child: Row(
-                          children: [
-                            Container(
-                              height: 60.r,
-                              width: 60.r,
-                              decoration: const BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage(
-                                    Assets.star,
+                            child: Row(
+                              children: [
+                                Container(
+                                  height: 60.r,
+                                  width: 60.r,
+                                  decoration: const BoxDecoration(
+                                    image: DecorationImage(
+                                      image: AssetImage(
+                                        Assets.star,
+                                      ),
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
-                                  fit: BoxFit.cover,
+                                  child: Center(
+                                    child: Text(
+                                      "${ref.watch(mainProvider).searchChapters[index].number ?? ref.watch(mainProvider).searchChapters[index].id ?? 0}",
+                                      style: Style.interRegular(
+                                        size: 24,
+                                        color: Style.white,
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  "${index + 1}",
-                                  style: Style.interRegular(
-                                      size: 24, color: Style.white,),
+                                20.horizontalSpace,
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "${ref.watch(mainProvider).searchChapters[index].name}",
+                                      style: Style.interRegular(
+                                          size: 24, color: Style.black),
+                                    ),
+                                    Text(
+                                      "${ref.watch(mainProvider).searchChapters[index].typeChoice == 1 ? LocaleKeys.makka.tr() : LocaleKeys.madina.tr()}, ${ref.watch(mainProvider).searchChapters[index].verseNumber} ${LocaleKeys.verse.tr()}",
+                                      style: Style.interRegular(
+                                          size: 10, color: Style.black),
+                                    ),
+                                  ],
                                 ),
-                              ),
-                            ),
-                            20.horizontalSpace,
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "${ref.watch(mainProvider).chapters[index].name}",
-                                  style: Style.interRegular(
-                                      size: 24, color: Style.black),
-                                ),
-                                Text(
-                                  "${ref.watch(mainProvider).chapters[index].typeChoice == 1 ? LocaleKeys.makka.tr() : LocaleKeys.madina.tr()}, ${ref.watch(mainProvider).chapters[index].verseNumber} ${LocaleKeys.verse.tr()}",
-                                  style: Style.interRegular(
-                                      size: 10, color: Style.black),
-                                ),
+                                const Spacer(),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                        "${ref.read(mainProvider).searchChapters[index].nameArabic}",
+                                        style: Style.interRegular(
+                                            size: 20, color: Style.black)),
+                                    Text(
+                                      "${ref.watch(mainProvider).searchChapters[index].verseNumber} ${LocaleKeys.verse.tr()}",
+                                      style: Style.interRegular(
+                                          size: 16, color: Style.textHint),
+                                    ),
+                                  ],
+                                )
                               ],
                             ),
-                            const Spacer(),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                    "${ref.read(mainProvider).chapters[index].nameArabic}",
-                                    style: Style.regularArabic(
-                                        size: 20, color: Style.black)),
-                                Text(
-                                  "${ref.watch(mainProvider).chapters[index].verseNumber} ${LocaleKeys.verse.tr()}",
-                                  style: Style.interRegular(
-                                      size: 16, color: Style.textHint),
+                          ),
+                        );
+                      },
+                    )
+                  : ref.watch(mainProvider).isChapterSearching &&
+                          ref.watch(mainProvider).searchChapters.isEmpty
+                      ? Text("")
+                      : GridView.builder(
+                          padding: REdgeInsets.all(40),
+                          shrinkWrap: true,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  mainAxisSpacing: 12.r,
+                                  crossAxisSpacing: 12.r,
+                                  crossAxisCount: 3,
+                                  mainAxisExtent: 120.r),
+                          itemCount: ref.read(mainProvider).chapters.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return ButtonEffect(
+                              onTap: () {
+                                ref.read(mainProvider.notifier).changeIndex(3,
+                                    onSuccess: () async {
+                                  ref.read(surahProvider.notifier)
+                                    ..selectSurahId(ref
+                                            .watch(mainProvider)
+                                            .chapters[index]
+                                            .id ??
+                                        0)
+                                    ..fetchJuzes(context)
+                                    ..fetchSurah(context, index + 1)
+                                    ..fetchJuz(context, index + 1);
+                                });
+                              },
+                              child: Container(
+                                padding: REdgeInsets.all(20),
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: Style.borderColor, width: 1),
+                                  borderRadius: BorderRadius.circular(5.r),
                                 ),
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                )
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      height: 60.r,
+                                      width: 60.r,
+                                      decoration: const BoxDecoration(
+                                        image: DecorationImage(
+                                          image: AssetImage(
+                                            Assets.star,
+                                          ),
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          "${index + 1}",
+                                          style: Style.interRegular(
+                                            size: 24,
+                                            color: Style.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    20.horizontalSpace,
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          "${ref.watch(mainProvider).chapters[index].name}",
+                                          style: Style.interRegular(
+                                              size: 24, color: Style.black),
+                                        ),
+                                        Text(
+                                          "${ref.watch(mainProvider).chapters[index].typeChoice == 1 ? LocaleKeys.makka.tr() : LocaleKeys.madina.tr()}, ${ref.watch(mainProvider).chapters[index].verseNumber} ${LocaleKeys.verse.tr()}",
+                                          style: Style.interRegular(
+                                              size: 10, color: Style.black),
+                                        ),
+                                      ],
+                                    ),
+                                    const Spacer(),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                            "${ref.read(mainProvider).chapters[index].nameArabic}",
+                                            style: Style.regularArabic(
+                                                size: 20, color: Style.black)),
+                                        Text(
+                                          "${ref.watch(mainProvider).chapters[index].verseNumber} ${LocaleKeys.verse.tr()}",
+                                          style: Style.interRegular(
+                                              size: 16, color: Style.textHint),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        )
         ],
       ),
     );

@@ -50,5 +50,7 @@
   "userAlreadyExists": "Foydalanuvchi allaqachon mavjud",
   "unauthorizedAccess": "Ruxsatsiz kirish",
   "unknownError": "Noma'lum xato",
-  "close": "Yopish"
+  "close": "Yopish",
+  "noChaptersFound": "Suralar topilmadi",
+  "download": "Yuklab olish"
 }

@@ -6,11 +6,10 @@ import 'for_students_state.dart';
 class ForStudentsNotifier extends StateNotifier<ForStudentsState> {
   ForStudentsNotifier() : super(const ForStudentsState());
 
-  void changeIndex(int index, BuildContext context, int id) async{
+  void changeIndex(int index, BuildContext context,
+      {VoidCallback? onSuccess}) async {
     state = state.copyWith(selectedIndex: index);
-    if(index == 1){
-     await fetchPost(context, id: id);
-    }
+    onSuccess?.call();
   }
 
   Future<void> fetchCategories(BuildContext context, {String? lang}) async {
@@ -45,6 +44,28 @@ class ForStudentsNotifier extends StateNotifier<ForStudentsState> {
       },
       failure: (failure, status) {
         state = state.copyWith(isPostLoading: false);
+        // AppHelpers.errorSnackBar(
+        //     context: context, message: failure.toString());
+      },
+    );
+  }
+
+  Future<void> fetchCategory(BuildContext context,
+      {required int id, String? lang}) async {
+    state = state.copyWith(
+      isSingleCategoriesLoading: true,
+    );
+    final response =
+        await forStudentsRepository.getCategory(id: id, lang: lang);
+    response.when(
+      success: (data) {
+        state = state.copyWith(
+            isSingleCategoriesLoading: false,
+            singleCategories: data.result ?? []);
+        return;
+      },
+      failure: (failure, status) {
+        state = state.copyWith(isSingleCategoriesLoading: false);
         // AppHelpers.errorSnackBar(
         //     context: context, message: failure.toString());
       },

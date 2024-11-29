@@ -116,4 +116,28 @@ class SurahNotifier extends StateNotifier<SurahState> {
       },
     );
   }
+
+  Future<void> fetchChapterNames(BuildContext context, {VoidCallback? onSuccess, String? lang}) async {
+    state = state.copyWith(
+      // isSurahLoading: true,
+    );
+    final bookmarkIds = state.bookmarks.map((bookmark) => bookmark.id).toList();
+    final response = await chapterRepository.getChapterNames(ids: bookmarkIds, lang: lang);
+    response.when(
+      success: (data) {
+        final updatedBookmarks = state.bookmarks.map((bookmark) {
+          final chapter = data.result?.firstWhere((chapter) => chapter.id == bookmark.id);
+          return bookmark.copyWith(name: chapter?.name);
+        }).toList();
+        state = state.copyWith( bookmarks: updatedBookmarks);
+        onSuccess?.call();
+        return;
+      },
+      failure: (failure, status) {
+        state = state.copyWith(isSurahLoading: false);
+        // AppHelpers.errorSnackBar(
+        //     context: context, message: failure.toString());
+      },
+    );
+  }
 }

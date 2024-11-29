@@ -50,6 +50,7 @@ class CustomPopupItem extends ConsumerWidget {
                     ref.read(surahProvider.notifier).fetchJuz(context, ref.watch(surahProvider).selectedJuzId,lang: "uz");
                   }else if((ref.watch(mainProvider).selectIndex == 3 && ref.watch(surahProvider).selectIndex == 0)
                       || (ref.watch(mainProvider).selectIndex == 3 && ref.watch(surahProvider).selectIndex == 2)){
+                    ref.read(surahProvider.notifier).fetchChapterNames(context, lang: "uz");
                     ref.read(surahProvider.notifier).fetchSurah(context, ref.watch(surahProvider).selectedSurahId, lang: "uz");
                   }else if(ref.watch(mainProvider).selectIndex ==2){
                     ref.read(aboutProvider.notifier).fetchAbout(context, lang: "uz");
@@ -73,6 +74,7 @@ class CustomPopupItem extends ConsumerWidget {
                   }else if((ref.watch(mainProvider).selectIndex == 3 && ref.watch(surahProvider).selectIndex == 0)
                       || (ref.watch(mainProvider).selectIndex == 3 && ref.watch(surahProvider).selectIndex == 2)){
                     ref.read(surahProvider.notifier).fetchSurah(context, ref.watch(surahProvider).selectedSurahId, lang: "kr");
+                    ref.read(surahProvider.notifier).fetchChapterNames(context, lang: "kr");
                   }else if(ref.watch(mainProvider).selectIndex ==2){
                     ref.read(aboutProvider.notifier).fetchAbout(context, lang: "kr");
                   }else if(ref.watch(mainProvider).selectIndex ==1){

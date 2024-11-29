@@ -8,6 +8,7 @@ import 'package:al_quran/src/presentation/pages/main/widgets/logout_modal.dart';
 import 'package:al_quran/src/presentation/pages/premium/premium_page.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -38,11 +39,13 @@ class _MainPageState extends ConsumerState<MainPage>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(surahProvider.notifier).setBookmarkFromLocale();
+      ref.read(surahProvider.notifier)
+          .setBookmarkFromLocale();
       ref.read(mainProvider.notifier)
-        ..setPageController()
-        ..fetchChapters(context);
-      ref.read(forStudentsProvider.notifier).fetchCategories(context);
+          ..setPageController()
+          ..fetchChapters(context);
+      ref.read(forStudentsProvider.notifier)
+          .fetchCategories(context);
     });
   }
 
@@ -90,9 +93,26 @@ class _MainPageState extends ConsumerState<MainPage>
                     ..changeIndex(0);
                 },
                 child: const AppLogo()),
-            const Expanded(
+             const Expanded(
               flex: 2,
-              child: SizedBox.shrink(),
+              child:
+              // ref.watch(mainProvider).selectIndex == 3 &&
+              //         ref.watch(surahProvider).selectIndex == 0
+              //     ? Padding(padding: REdgeInsets.only(left: 10), child:
+              // OutlinedBorderTextField(
+              //   onChanged: ref.read(mainProvider.notifier)
+              //                   .changeQuery,
+              //   prefixIcon:  const Icon(
+              //     CupertinoIcons.search,
+              //     color: Style.textHint,
+              //   ),
+              //   label: null,
+              //   hintText: LocaleKeys.whatUWant.tr(),
+              //   color: Style.white,
+              //   radius: 40,
+              // ))
+              //     :
+               SizedBox.shrink()
             ),
             Expanded(
                 flex: 5,
@@ -121,7 +141,9 @@ class _MainPageState extends ConsumerState<MainPage>
                       onTap: () {
                         ref
                             .read(mainProvider.notifier)
-                            .changeIndex(1, onSuccess: () {});
+                            .changeIndex(1, onSuccess: () {
+                              ref.read(forStudentsProvider.notifier).fetchCategories(context);
+                        });
                       },
                       child: Text(
                         LocaleKeys.forStudent.tr(),
@@ -201,7 +223,7 @@ class _MainPageState extends ConsumerState<MainPage>
                           shape: BoxShape.circle,
                           color: Style.bg,
                         ),
-                        child: Icon(
+                        child: const Icon(
                           FlutterRemix.logout_circle_r_line,
                           color: Style.primary,
                           size: 24,

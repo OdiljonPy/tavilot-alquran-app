@@ -5,6 +5,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../../infrastructure/translations/locale_keys.g.dart';
 import '../../../../core/utils/utils.dart';
@@ -78,21 +79,11 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
 
                           OutlinedBorderTextField(
                             hintText: LocaleKeys.phoneNumber.tr(),
-                            // onChanged:(s)=> notifier.setEmail(s),
                             textController: register,
                             inputType: TextInputType.phone,
                             validator: AppValidators.emptyCheck,
-                            // textCapitalization: TextCapitalization.none,
                             inputFormatters: [AppHelpers.phoneFormatter()],
-                            // descriptionText: state.isEmailNotValid
-                            //     ? AppHelpers.getTranslation(
-                            //         TrKeys.emailIsNotValid)
-                            //     : (state.isLoginError
-                            //         ? AppHelpers.getTranslation(
-                            //             TrKeys.loginCredentialsAreNotValid)
-                            //         : null),
-                            // onFieldSubmitted: (value) {
-                            // },
+
                             label: null,
                           ),
                           50.verticalSpace,
@@ -100,7 +91,15 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                             hintText: LocaleKeys.password.tr(),
                             onChanged: notifier.setPassword,
                             textController: password,
-                            obscure: true,
+                            obscure: state.showPassword,
+                            suffixIcon: IconButton(
+                              onPressed: notifier.toggleShowPassword,
+                              icon: SvgPicture.asset(
+                                state.showPassword
+                                    ? "assets/svg/eyeClose.svg"
+                                    : "assets/svg/eye.svg",
+                              ),
+                            ),
                             validator: AppValidators.emptyCheck,
                             inputType: TextInputType.emailAddress,
                             textCapitalization: TextCapitalization.none,
@@ -115,17 +114,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                                 phoneNumber: register.text,
                                 password: password.text,
                               );
-
                             },
-                            // isError:
-                            //     state.isLoginError || state.isEmailNotValid,
-                            // descriptionText: state.isEmailNotValid
-                            //     ? AppHelpers.getTranslation(
-                            //     TrKeys.emailIsNotValid)
-                            //     : (state.isLoginError
-                            //     ? AppHelpers.getTranslation(
-                            //     TrKeys.loginCredentialsAreNotValid)
-                            //     : null),
                             label: null,
                           ),
                           56.verticalSpace,
@@ -156,7 +145,6 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                               context.replaceRoute(const LoginRoute());
                             },
                           ),
-
                         ],
                       ),
                     ),

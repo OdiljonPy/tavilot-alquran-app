@@ -20,4 +20,11 @@ class Bookmark {
       'verse_id': verseIds,
     };
   }
+  Bookmark copyWith({String? name, int? id, List<int>? verseIds}) {
+    return Bookmark(
+      name: name ?? this.name,
+      id: id ?? this.id,
+      verseIds: verseIds ?? this.verseIds,
+    );
+  }
 }
