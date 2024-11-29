@@ -107,7 +107,7 @@ class CustomPopupItem extends ConsumerWidget {
           child: Text(
             title,
             style: Style.interNormal(
-                size: 8,
+                size: 12,
                 color: textColor ?? Style.black),
           ),
         ),

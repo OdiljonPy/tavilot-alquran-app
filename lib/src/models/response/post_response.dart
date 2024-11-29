@@ -1,45 +1,46 @@
-class SingleCategoryResponse {
-  final List<SingleCategory>? result;
+
+class PostResponse {
+  final Post? result;
   final bool? ok;
 
-  SingleCategoryResponse({
+  PostResponse({
     this.result,
     this.ok,
   });
 
-  SingleCategoryResponse copyWith({
-    List<SingleCategory>? result,
+  PostResponse copyWith({
+    Post? result,
     bool? ok,
   }) =>
-      SingleCategoryResponse(
+      PostResponse(
         result: result ?? this.result,
         ok: ok ?? this.ok,
       );
 
-  factory SingleCategoryResponse.fromJson(Map<String, dynamic> json) => SingleCategoryResponse(
-    result: json["result"] == null ? [] : List<SingleCategory>.from(json["result"]!.map((x) => SingleCategory.fromJson(x))),
+  factory PostResponse.fromJson(Map<String, dynamic> json) => PostResponse(
+    result: json["result"] == null ? null : Post.fromJson(json["result"]),
     ok: json["ok"],
   );
 
   Map<String, dynamic> toJson() => {
-    "result": result == null ? [] : List<dynamic>.from(result!.map((x) => x.toJson())),
+    "result": result?.toJson(),
     "ok": ok,
   };
 }
 
-class SingleCategory {
+class Post {
   final int? id;
   final String? title;
   final int? category;
   final dynamic subCategory;
-  final String? file;
-  final dynamic fileType;
+  final dynamic file;
+  final String? fileType;
   final String? description;
   final bool? isPublished;
   final bool? isPremium;
   final String? image;
 
-  SingleCategory({
+  Post({
     this.id,
     this.title,
     this.category,
@@ -52,19 +53,19 @@ class SingleCategory {
     this.image,
   });
 
-  SingleCategory copyWith({
+  Post copyWith({
     int? id,
     String? title,
     int? category,
     dynamic subCategory,
-    String? file,
-    dynamic fileType,
+    dynamic file,
+    String? fileType,
     String? description,
     bool? isPublished,
     bool? isPremium,
     String? image,
   }) =>
-      SingleCategory(
+      Post(
         id: id ?? this.id,
         title: title ?? this.title,
         category: category ?? this.category,
@@ -77,7 +78,7 @@ class SingleCategory {
         image: image ?? this.image,
       );
 
-  factory SingleCategory.fromJson(Map<String, dynamic> json) => SingleCategory(
+  factory Post.fromJson(Map<String, dynamic> json) => Post(
     id: json["id"],
     title: json["title"],
     category: json["category"],

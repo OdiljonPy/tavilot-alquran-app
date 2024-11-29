@@ -204,7 +204,7 @@ class _MainPageState extends ConsumerState<MainPage>
                         child: Icon(
                           FlutterRemix.logout_circle_r_line,
                           color: Style.primary,
-                          size: 20.r,
+                          size: 24,
                         ),
                       ),
                     ),

@@ -71,7 +71,7 @@ class PremiumPage extends ConsumerWidget {
                         onPressed: () async {
                           String encodedQuery = base64.encode(utf8.encode(
                               "m=6746cfafd33fb8548ceca73e;ac.user_id=13;a=10000"));
-                          await launchUrlString("https://checkout.paycom.uz/$encodedQuery");
+                          await launchUrlString("https://test.paycom.uz/$encodedQuery");
                         }),
                     80.verticalSpace,
                   ],
