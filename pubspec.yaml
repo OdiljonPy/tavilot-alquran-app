@@ -61,6 +61,7 @@ dependencies:
   sms_autofill: ^2.4.1
   syncfusion_flutter_pdfviewer: ^27.2.4
   webview_flutter: ^4.10.0
+  app_links: ^6.3.2
 dev_dependencies:
   flutter_test:
     sdk: flutter

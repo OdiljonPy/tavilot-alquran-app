@@ -9,6 +9,8 @@ import 'src/core/di/dependency_manager.dart';
 import 'src/core/utils/utils.dart';
 import 'dart:io' show Platform;
 Locale? currentLocale;
+var navigatorKey = GlobalKey<NavigatorState>();
+const kWindowsScheme = 'alquran';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

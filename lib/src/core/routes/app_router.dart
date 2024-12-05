@@ -7,17 +7,23 @@ import '../../presentation/pages/auth/pin_code/pin_code_page.dart';
 import '../../presentation/pages/auth/register/register_page.dart';
 import '../../presentation/pages/initial/splash_page.dart';
 import '../../presentation/pages/main/main_page.dart';
+import '../../presentation/pages/post/test.dart';
+import '../../presentation/pages/success_page/success_page.dart';
+
 part 'app_router.gr.dart';
 
 @AutoRouterConfig()
 class AppRouter extends _$AppRouter {
   @override
   List<AutoRoute> get routes => [
-    CupertinoRoute(path: '/', page: SplashRoute.page, initial: true),
-    CupertinoRoute(path: '/main', page: MainRoute.page),
-    CupertinoRoute(path: '/login', page: LoginRoute.page),
-    CupertinoRoute(path: '/register', page: RegisterRoute.page),
-    CupertinoRoute(path: '/registerConfirmation', page: RegisterConfirmationRoute.page),
-    CupertinoRoute(path: '/pinCode', page: PinCodeRoute.page),
-  ];
+        CupertinoRoute(path: '/', page: SplashRoute.page, initial: true),
+        CupertinoRoute(path: '/main', page: MainRoute.page),
+        CupertinoRoute(path: '/login', page: LoginRoute.page),
+        CupertinoRoute(path: '/register', page: RegisterRoute.page),
+        CupertinoRoute(
+            path: '/registerConfirmation',
+            page: RegisterConfirmationRoute.page),
+        CupertinoRoute(path: '/pinCode', page: PinCodeRoute.page),
+        CupertinoRoute(path: '/success', page: SuccessRoute.page),
+      ];
 }

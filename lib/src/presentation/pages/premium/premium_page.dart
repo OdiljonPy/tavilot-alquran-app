@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:al_quran/application/premium/premium_provider.dart';
 import 'package:al_quran/infrastructure/translations/locale_keys.g.dart';
 import 'package:al_quran/src/presentation/components/components.dart';
 import 'package:al_quran/src/presentation/styles/style.dart';
@@ -69,9 +70,10 @@ class PremiumPage extends ConsumerWidget {
                         bgColor: Style.white,
                         title: LocaleKeys.buy.tr(),
                         onPressed: () async {
-                          String encodedQuery = base64.encode(utf8.encode(
-                              "m=6746cfafd33fb8548ceca73e;ac.user_id=13;a=10000"));
-                          await launchUrlString("https://checkout.paycom.uz/$encodedQuery");
+                          ref.read(premiumProvider.notifier).fetchCheck(context);
+                          // String encodedQuery = base64.encode(utf8.encode(
+                          //     "m=6746cfafd33fb8548ceca73e;ac.user_id=39;a=1000; c=alquran://success"));
+                          // await launchUrlString("https://checkout.paycom.uz/$encodedQuery");
                         }),
                     80.verticalSpace,
                   ],

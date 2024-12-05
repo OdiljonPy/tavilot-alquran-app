@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:al_quran/application/surah/surah_provider.dart';
 import 'package:al_quran/infrastructure/translations/locale_keys.g.dart';
 import 'package:al_quran/src/presentation/pages/about_page/surah_page/surah_page.dart';
@@ -6,9 +8,9 @@ import 'package:al_quran/src/presentation/pages/main/riverpod/state/main_state.d
 import 'package:al_quran/src/presentation/pages/main/widgets/custom_pop_up.dart';
 import 'package:al_quran/src/presentation/pages/main/widgets/logout_modal.dart';
 import 'package:al_quran/src/presentation/pages/premium/premium_page.dart';
+import 'package:app_links/app_links.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,6 +18,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../application/about/about_provider.dart';
 import '../../../../application/for_students/for_students_provider.dart';
+import '../../../core/routes/app_router.dart';
 import '../../../core/utils/app_helpers.dart';
 import '../../components/app_logo.dart';
 import '../../components/components.dart';
@@ -35,9 +38,32 @@ class MainPage extends ConsumerStatefulWidget {
 
 class _MainPageState extends ConsumerState<MainPage>
     with SingleTickerProviderStateMixin {
+  late AppLinks _appLinks;
+  StreamSubscription<Uri>? _linkSubscription;
+
+  @override
+  void dispose() {
+    _linkSubscription?.cancel();
+
+    super.dispose();
+  }
+
+  Future<void> initDeepLinks() async {
+    _appLinks = AppLinks();
+    _linkSubscription = _appLinks.uriLinkStream.listen((uri) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        openAppLink(uri);
+      });
+    });
+  }
+
+  void openAppLink(Uri uri) {
+    context.pushRoute(const SuccessRoute());
+  }
   @override
   void initState() {
     super.initState();
+    initDeepLinks();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(surahProvider.notifier)
           .setBookmarkFromLocale();

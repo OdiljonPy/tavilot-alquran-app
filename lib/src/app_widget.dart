@@ -1,4 +1,8 @@
+import 'dart:async';
+import 'package:al_quran/src/presentation/pages/success_page/success_page.dart';
 import 'package:al_quran/src/presentation/styles/style.dart';
+import 'package:app_links/app_links.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,6 +23,8 @@ class AppWidget extends StatefulWidget {
 
 class _AppWidgetState extends State<AppWidget> {
   final _rootRouter = AppRouter();
+
+
 
   @override
   Widget build(BuildContext context) {

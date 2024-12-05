@@ -125,6 +125,8 @@ class SurahNotifier extends StateNotifier<SurahState> {
     final response = await chapterRepository.getChapterNames(ids: bookmarkIds, lang: lang);
     response.when(
       success: (data) {
+
+
         final updatedBookmarks = state.bookmarks.map((bookmark) {
           final chapter = data.result?.firstWhere((chapter) => chapter.id == bookmark.id);
           return bookmark.copyWith(name: chapter?.name);

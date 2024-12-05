@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:al_quran/src/models/response/check_subscription.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import '../../core/di/dependency_manager.dart';
@@ -232,6 +235,33 @@ class AuthRepository implements AuthFacade {
 
       return ApiResult.success(
         data: RegisterResponse.fromJson(response.data),
+      );
+    } catch (e) {
+      debugPrint('==> forgot password failure: $e');
+      if (e is DioException && e.response != null) {
+        final errorResponse = e.response?.data;
+        final errorMessage = AppHelpers.errorCodeToMessage(errorResponse['error_code']);
+        return ApiResult.failure(
+            error: errorMessage, statusCode: NetworkExceptions.getDioStatus(e));
+      } else {
+        return ApiResult.failure(
+            error: AppHelpers.errorHandler(e),
+            statusCode: NetworkExceptions.getDioStatus(e));
+      }
+    }
+  }
+
+  @override
+  Future<ApiResult<CheckSubscription>> checkSubscription() async {
+
+    try {
+      final client = dioHttp.client(requireAuth: true);
+      final response = await client.get(
+        '/api/v1/auth/check/subscription/',
+      );
+
+      return ApiResult.success(
+        data: CheckSubscription.fromJson(response.data),
       );
     } catch (e) {
       debugPrint('==> forgot password failure: $e');

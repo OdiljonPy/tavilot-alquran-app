@@ -1,3 +1,5 @@
+import 'package:al_quran/src/models/response/check_subscription.dart';
+
 import '../handlers/api_result.dart';
 import '../models/models.dart';
 import '../models/response/register_response.dart';
@@ -39,4 +41,6 @@ abstract class AuthFacade {
     required String resetToken,
     required String phoneNumber
   });
+
+  Future<ApiResult<CheckSubscription>> checkSubscription();
 }
