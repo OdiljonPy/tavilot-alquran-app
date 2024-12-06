@@ -1,3 +1,4 @@
+import 'package:al_quran/url_protocol/api.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ const kWindowsScheme = 'alquran';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setUpDependencies();
+  registerProtocolHandler(kWindowsScheme);
   if (Platform.isLinux || Platform.isWindows || Platform.isMacOS) {
     doWhenWindowReady(() {
       const initialSize = Size(1280, 720);
