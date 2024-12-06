@@ -44,7 +44,7 @@ bool SendAppLinkToInstance(const std::wstring& title) {
 int APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prev,
         _In_ wchar_t* command_line, _In_ int show_command) {
 // Check if there is already a running instance and send the deep link.
-if (SendAppLinkToInstance(L"al_quran")) {
+if (SendAppLinkToInstance(L"alquran")) {
 return EXIT_SUCCESS;
 }
 
@@ -67,7 +67,7 @@ project.set_dart_entrypoint_arguments(std::move(command_line_arguments));
 FlutterWindow window(project);
 Win32Window::Point origin(10, 10);
 Win32Window::Size size(1280, 720);
-if (!window.Create(L"al_quran", origin, size)) {
+if (!window.Create(L"alquran", origin, size)) {
 return EXIT_FAILURE;
 }
 window.SetQuitOnClose(true);
@@ -87,7 +87,7 @@ return EXIT_SUCCESS;
 // Function to send the deep link to the Flutter app instance.
 void SendAppLink(HWND hwnd) {
     COPYDATASTRUCT cds;
-    std::wstring deep_link = L"al_quran://example"; // Example deep link, replace as needed.
+    std::wstring deep_link = L"alquran://example"; // Example deep link, replace as needed.
     cds.dwData = 1; // Custom data identifier (can be used to specify deep link type).
     cds.cbData = static_cast<DWORD>((deep_link.size() + 1) * sizeof(wchar_t));
     cds.lpData = const_cast<wchar_t*>(deep_link.c_str());
