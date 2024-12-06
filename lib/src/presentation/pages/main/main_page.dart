@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:al_quran/application/surah/surah_provider.dart';
 import 'package:al_quran/infrastructure/translations/locale_keys.g.dart';
 import 'package:al_quran/src/presentation/pages/about_page/surah_page/surah_page.dart';
