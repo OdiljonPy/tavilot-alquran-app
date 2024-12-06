@@ -123,22 +123,6 @@ class _MainPageState extends ConsumerState<MainPage>
              const Expanded(
               flex: 2,
               child:
-              // ref.watch(mainProvider).selectIndex == 3 &&
-              //         ref.watch(surahProvider).selectIndex == 0
-              //     ? Padding(padding: REdgeInsets.only(left: 10), child:
-              // OutlinedBorderTextField(
-              //   onChanged: ref.read(mainProvider.notifier)
-              //                   .changeQuery,
-              //   prefixIcon:  const Icon(
-              //     CupertinoIcons.search,
-              //     color: Style.textHint,
-              //   ),
-              //   label: null,
-              //   hintText: LocaleKeys.whatUWant.tr(),
-              //   color: Style.white,
-              //   radius: 40,
-              // ))
-              //     :
                SizedBox.shrink()
             ),
             Expanded(
