@@ -19,7 +19,7 @@ class CodegenLoader extends AssetLoader{
   "enterLoginAndPassword": "Login va parolingizni kiriting",
   "registerToContinue": "Davom etish uchun ro'yxatdan o'ting",
   "continueForApp": "Davom etish",
-  "register": "Royhatdan otish",
+  "register": "Ro'yhatdan otish",
   "password": "Parol",
   "phoneNumber": "Telefon raqami",
   "passwordOrLoginIncorrect": "Parol/Login hato, tekshirib qaytadan yozing!",
@@ -32,8 +32,8 @@ class CodegenLoader extends AssetLoader{
   "enterNewPassword": "Yangi parol kiriting",
   "mainPage": "Asosiy Sahifa",
   "forStudent": "Ta'vilot Al-Qur'on o'quvchilariga",
-  "aboutApp": "Dastur Haqida",
-  "sells": "Haridlar",
+  "aboutApp": "Dastur haqida",
+  "sells": "Xaridlar",
   "chapters": "Suralar",
   "juzes": "Juzlar",
   "juz": "juz",
@@ -66,7 +66,11 @@ class CodegenLoader extends AssetLoader{
   "userAlreadyExists": "Foydalanuvchi allaqachon mavjud",
   "unauthorizedAccess": "Ruxsatsiz kirish",
   "unknownError": "Noma'lum xato",
-  "close": "Yopish"
+  "close": "Yopish",
+  "noChaptersFound": "Suralar topilmadi",
+  "download": "Yuklab olish",
+  "successfullyPaid": "To'lov muvaffaqiyatli amalga oshirildi!",
+  "toContinuePleaseLogin": "Davom etish uchun, iltimos tizimga qaytatdan kiring"
 };
 static const Map<String,dynamic> ru_RU = {
   "hi": "Ассаламу алайкум!",
@@ -120,7 +124,11 @@ static const Map<String,dynamic> ru_RU = {
   "userAlreadyExists": "Фойдаланувчи аллақачон мавжуд",
   "unauthorizedAccess": "Рухсатсиз кириш",
   "unknownError": "Номаълум хато",
-  "close": "Ёпиш"
+  "close": "Ёпиш",
+  "noChaptersFound": "Суралар топилмади",
+  "download": "Юклаб олиш",
+  "successfullyPaid": "Тўлов муваффақиятли амалга оширилди!",
+  "toContinuePleaseLogin": "Давом этиш учун кайтатдан иловага киринг"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"uz_UZ": uz_UZ, "ru_RU": ru_RU};
 }

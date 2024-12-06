@@ -53,5 +53,9 @@ abstract class  LocaleKeys {
   static const unauthorizedAccess = 'unauthorizedAccess';
   static const unknownError = 'unknownError';
   static const close = 'close';
+  static const noChaptersFound = 'noChaptersFound';
+  static const download = 'download';
+  static const successfullyPaid = 'successfullyPaid';
+  static const toContinuePleaseLogin = 'toContinuePleaseLogin';
 
 }

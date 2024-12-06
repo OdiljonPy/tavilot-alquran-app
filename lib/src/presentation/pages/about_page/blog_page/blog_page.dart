@@ -10,7 +10,6 @@ import 'package:flutter_svg/svg.dart';
 import '../../../../../application/about/about_provider.dart';
 import '../../../../../generated/assets.dart';
 import '../../../../../infrastructure/translations/locale_keys.g.dart';
-import '../../../../core/utils/local_storage.dart';
 import '../../../styles/style.dart';
 
 class BlogPage extends ConsumerStatefulWidget {
@@ -156,8 +155,10 @@ class _BlogPageState extends ConsumerState<BlogPage> {
           60.verticalSpace,
           ButtonEffect(
             onTap: () {
+              // LocalStorage.setToken("dsfdasfdsaf");
+              // context.pushRoute(const SuccessRoute());
               // ref.read(mainProvider.notifier).changeIndex(4);
-              LocalStorage.deleteToken();
+              // LocalStorage.deleteToken();
             },
             child: Padding(
                 padding: REdgeInsets.only(left: 40, bottom: 30),
@@ -274,7 +275,7 @@ class _BlogPageState extends ConsumerState<BlogPage> {
                     )
                   : ref.watch(mainProvider).isChapterSearching &&
                           ref.watch(mainProvider).searchChapters.isEmpty
-                      ? Text("")
+                      ? const Text("")
                       : GridView.builder(
                           padding: REdgeInsets.all(40),
                           shrinkWrap: true,

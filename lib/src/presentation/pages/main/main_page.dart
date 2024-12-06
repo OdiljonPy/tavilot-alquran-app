@@ -27,6 +27,7 @@ import '../about_page/about_page.dart';
 import '../about_page/blog_page/blog_page.dart';
 import 'riverpod/notifier/main_notifier.dart';
 import 'riverpod/provider/main_provider.dart';
+BuildContext? c;
 
 @RoutePage()
 class MainPage extends ConsumerStatefulWidget {
@@ -77,6 +78,7 @@ class _MainPageState extends ConsumerState<MainPage>
 
   @override
   Widget build(BuildContext context) {
+    c = context;
     return SafeArea(
       child: KeyboardDismisser(
         child: Consumer(

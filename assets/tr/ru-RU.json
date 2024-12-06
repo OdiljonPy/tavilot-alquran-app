@@ -52,5 +52,7 @@
   "unknownError": "Номаълум хато",
   "close": "Ёпиш",
   "noChaptersFound": "Суралар топилмади",
-  "download": "Юклаб олиш"
+  "download": "Юклаб олиш",
+  "successfullyPaid": "Тўлов муваффақиятли амалга оширилди!",
+  "toContinuePleaseLogin": "Давом этиш учун кайтатдан иловага киринг"
 }

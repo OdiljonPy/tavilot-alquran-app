@@ -3,7 +3,7 @@
   "enterLoginAndPassword": "Login va parolingizni kiriting",
   "registerToContinue": "Davom etish uchun ro'yxatdan o'ting",
   "continueForApp": "Davom etish",
-  "register": "Royhatdan otish",
+  "register": "Ro'yhatdan otish",
   "password": "Parol",
   "phoneNumber": "Telefon raqami",
   "passwordOrLoginIncorrect": "Parol/Login hato, tekshirib qaytadan yozing!",
@@ -16,8 +16,8 @@
   "enterNewPassword": "Yangi parol kiriting",
   "mainPage": "Asosiy Sahifa",
   "forStudent": "Ta'vilot Al-Qur'on o'quvchilariga",
-  "aboutApp": "Dastur Haqida",
-  "sells": "Haridlar",
+  "aboutApp": "Dastur haqida",
+  "sells": "Xaridlar",
   "chapters": "Suralar",
   "juzes": "Juzlar",
   "juz": "juz",
@@ -52,5 +52,7 @@
   "unknownError": "Noma'lum xato",
   "close": "Yopish",
   "noChaptersFound": "Suralar topilmadi",
-  "download": "Yuklab olish"
+  "download": "Yuklab olish",
+  "successfullyPaid": "To'lov muvaffaqiyatli amalga oshirildi!",
+  "toContinuePleaseLogin": "Davom etish uchun, iltimos tizimga qaytatdan kiring"
 }

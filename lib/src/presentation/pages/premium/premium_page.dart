@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:al_quran/application/premium/premium_provider.dart';
 import 'package:al_quran/infrastructure/translations/locale_keys.g.dart';
 import 'package:al_quran/src/presentation/components/components.dart';
@@ -7,7 +6,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 import '../main/riverpod/provider/main_provider.dart';
 
 class PremiumPage extends ConsumerWidget {
@@ -55,25 +53,41 @@ class PremiumPage extends ConsumerWidget {
                                 Style.interNormal(size: 22, color: Style.black),
                           ),
                           20.horizontalSpace,
-                          Image.asset("assets/png/payme.png"),
+                          ButtonEffect(
+                              onTap: ()=> ref.read(premiumProvider.notifier).setSelectedPaymentMethod(0),
+                              child: Container(
+                                width: 150.r,
+                                  height: 100.r,
+                                  padding: const EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    border: ref.watch(premiumProvider).selectedPaymentMethod == 0? Border.all(color: Style.primary): null,
+                                  ),
+                                  child: Image.asset("assets/png/payme.png"))),
                           27.horizontalSpace,
-                          Image.asset("assets/png/click.png"),
-                          27.horizontalSpace,
-                          Image.asset("assets/png/uzum.png"),
+                          ButtonEffect(
+                              onTap: ()=> ref.read(premiumProvider.notifier).setSelectedPaymentMethod(1),
+                              child: Container(
+                                  width: 150.r,
+                                  height: 100.r,
+                                padding: const EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    border: ref.watch(premiumProvider).selectedPaymentMethod == 1? Border.all(color: Style.primary): null,
+                                  ),
+                                  child: Image.asset("assets/png/click.png"))),
                         ],
                       ),
                     ),
                     36.verticalSpace,
                     LoginButton(
+                        isLoading: ref.watch(premiumProvider).isCheckLoading,
                         height: 80.r,
                         titleColor: Style.primary,
                         bgColor: Style.white,
                         title: LocaleKeys.buy.tr(),
                         onPressed: () async {
                           ref.read(premiumProvider.notifier).fetchCheck(context);
-                          // String encodedQuery = base64.encode(utf8.encode(
-                          //     "m=6746cfafd33fb8548ceca73e;ac.user_id=39;a=1000; c=alquran://success"));
-                          // await launchUrlString("https://checkout.paycom.uz/$encodedQuery");
                         }),
                     80.verticalSpace,
                   ],

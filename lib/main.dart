@@ -15,18 +15,6 @@ const kWindowsScheme = 'alquran';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setUpDependencies();
-  // await windowManager.ensureInitialized();
-  //
-  // WindowOptions windowOptions = const WindowOptions(
-  //   size: Size(800, 600),
-  //   center: true,
-  //   backgroundColor: Colors.transparent,
-  // );
-  // windowManager.waitUntilReadyToShow(windowOptions, () async {
-  //   await windowManager.show();
-  //   await windowManager.focus();
-  // });
-
   if (Platform.isLinux || Platform.isWindows || Platform.isMacOS) {
     doWhenWindowReady(() {
       const initialSize = Size(1280, 720);
