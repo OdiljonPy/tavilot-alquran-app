@@ -21,8 +21,6 @@ void main() async {
     doWhenWindowReady(() {
       const initialSize = Size(1280, 720);
       const minSize = Size(1024, 576);
-      // const maxSize = Size(1280, 720);
-      // appWindow.maxSize = maxSize;
       appWindow.minSize = minSize;
       appWindow.size = initialSize; //default size
       appWindow.show();

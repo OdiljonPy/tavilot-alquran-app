@@ -1,7 +1,6 @@
 import 'package:al_quran/src/core/routes/app_router.dart';
 import 'package:al_quran/src/core/utils/local_storage.dart';
 import 'package:al_quran/src/presentation/components/components.dart';
-import 'package:al_quran/src/presentation/pages/main/riverpod/provider/main_provider.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -44,8 +43,8 @@ class SuccessPage extends StatelessWidget {
                 builder: (BuildContext context, WidgetRef ref, Widget? child) {
                   return LoginButton(title: LocaleKeys.continueForApp.tr(), onPressed: (){
                     LocalStorage.logOut();
-                    ref.read(mainProvider.notifier).deletePageController();
-                    context.router.replace(const SplashRoute());
+                    context.router.popUntilRoot();
+                    context.replaceRoute(const SplashRoute());
                   });
                 },
               ),

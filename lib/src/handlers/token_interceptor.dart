@@ -4,7 +4,6 @@ import '../core/routes/app_router.dart';
 import '../core/utils/local_storage.dart';
 import '../presentation/pages/pages.dart';
 
-
 class TokenInterceptor extends Interceptor {
   final bool requireAuth;
   final bool optional;
@@ -40,6 +39,7 @@ class TokenInterceptor extends Interceptor {
       ) async {
     if (err.response?.statusCode == 401) {
       LocalStorage.logOut();
+      c?.router.popUntilRoot();
       c?.replaceRoute(const SplashRoute());
     }
     handler.next(err);

@@ -1,4 +1,3 @@
-import 'protocol.dart';
 import 'windows_protocol.dart'
     if (dart.library.js_interop) 'web_url_protocol.dart';
 
