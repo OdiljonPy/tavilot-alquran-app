@@ -37,6 +37,7 @@ class AppConstants {
   static const String chatGpt =
       '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';
   static const String initialCountryCode = '+1';
+  static const String kWindowsScheme = 'alquran';
 
 
   static const int hoursADay = 24;

@@ -1,3 +1,4 @@
+import 'package:al_quran/src/core/constants/app_constants.dart';
 import 'package:al_quran/url_protocol/api.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -10,13 +11,11 @@ import 'src/core/di/dependency_manager.dart';
 import 'src/core/utils/utils.dart';
 import 'dart:io' show Platform;
 Locale? currentLocale;
-var navigatorKey = GlobalKey<NavigatorState>();
-const kWindowsScheme = 'alquran';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setUpDependencies();
-  registerProtocolHandler(kWindowsScheme);
+  registerProtocolHandler(AppConstants.kWindowsScheme);
   if (Platform.isLinux || Platform.isWindows || Platform.isMacOS) {
     doWhenWindowReady(() {
       const initialSize = Size(1280, 720);
