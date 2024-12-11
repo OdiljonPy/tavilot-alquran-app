@@ -72,7 +72,14 @@ class CodegenLoader extends AssetLoader{
   "successfullyPaid": "To'lov muvaffaqiyatli amalga oshirildi!",
   "toContinuePleaseLogin": "Davom etish uchun, iltimos tizimga qaytatdan kiring",
   "youAlreadyHavePremium": "Sizning akkauntingizda premium obuna mavjud",
-  "skip": "O'tkazib yuborish"
+  "skip": "O'tkazib yuborish",
+  "abuMansurMotrudiy": "Abu Mansur Moturidiy",
+  "manuscriptAndComments": "Qo'lyozma va sharhlar",
+  "modernStudies": "Zamonaviy tadqiqotlar",
+  "resourcesStudyGuides": "Resurslar: O'quv qo'llanmalari va ilmiy manbalar",
+  "rebuttalsToFanaticism": "Mutaassib oqimlarga raddiyalar",
+  "tavilotAlQuran": "Ta'vilot Al-Qur'on",
+  "resources": "Resurslar"
 };
 static const Map<String,dynamic> ru_RU = {
   "hi": "Ассаламу алайкум!",
@@ -132,7 +139,14 @@ static const Map<String,dynamic> ru_RU = {
   "successfullyPaid": "Тўлов муваффақиятли амалга оширилди!",
   "toContinuePleaseLogin": "Давом этиш учун кайтатдан иловага киринг",
   "youAlreadyHavePremium": "Сизнинг аккаунтингизда премиум обуна мавжуд",
-  "skip": "Утказиб юбориш"
+  "skip": "Утказиб юбориш",
+  "abuMansurMotrudiy": "Абу Мансур Матрудий",
+  "manuscriptAndComments": "Қўлёзма ва шарҳлар",
+  "modernStudies": "Замонавий тадқиқотлар",
+  "resourcesStudyGuides": "Ресурслар: Ўқув қўлланмалари ва илмий манбалар",
+  "rebuttalsToFanaticism": "Мутаассиб оқимларга раддиялар",
+  "tavilotAlQuran": "Таъвилот ал-Қуръон",
+  "resources": "Ресурслар"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"uz_UZ": uz_UZ, "ru_RU": ru_RU};
 }

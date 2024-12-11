@@ -101,6 +101,12 @@ class LocalStorage {
 
   static void deleteToken() => _preferences?.remove(AppConstants.keyToken);
 
+  static void deleteUserRate() {
+    print("gandon");
+    _preferences?.remove(AppConstants.keyUserRate);
+  }
+
+
   static setPinCode(String pinCode) async {
     if (_preferences != null) {
       await _preferences!.setString(AppConstants.pinCode, pinCode);
@@ -110,26 +116,6 @@ class LocalStorage {
   static String getPinCode() => _preferences?.getString(AppConstants.pinCode) ?? '';
 
   static void deletePinCode() => _preferences?.remove(AppConstants.pinCode);
-
-  // static Future<void> setSettingsList(List<SettingsData> settings) async {
-  //   if (_preferences != null) {
-  //     final List<String> strings =
-  //         settings.map((setting) => jsonEncode(setting.toJson())).toList();
-  //     await _preferences!
-  //         .setStringList(AppConstants.keyGlobalSettings, strings);
-  //   }
-  // }
-  //
-  // static List<SettingsData> getSettingsList() {
-  //   final List<String> settings =
-  //       _preferences?.getStringList(AppConstants.keyGlobalSettings) ?? [];
-  //   final List<SettingsData> settingsList = settings
-  //       .map(
-  //         (setting) => SettingsData.fromJson(jsonDecode(setting)),
-  //       )
-  //       .toList();
-  //   return settingsList;
-  // }
 
   static void deleteSettingsList() =>
       _preferences?.remove(AppConstants.keyGlobalSettings);
@@ -301,5 +287,6 @@ class LocalStorage {
   static void logOut() {
     deleteToken();
     deleteUser();
+    deleteUserRate();
   }
 }

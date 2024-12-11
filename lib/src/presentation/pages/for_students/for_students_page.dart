@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../application/for_students/for_students_provider.dart';
-import 'category_list.dart';
 
 class ForStudentsPage extends ConsumerWidget {
   const ForStudentsPage({super.key});
@@ -16,10 +15,8 @@ class ForStudentsPage extends ConsumerWidget {
           ? EdgeInsets.zero
           : REdgeInsets.all(40),
       child: ref.watch(forStudentsProvider).selectedIndex == 0
-          ? const CategoryList()
-          : ref.watch(forStudentsProvider).selectedIndex == 1
-              ? const SingleCategoryPage()
-              : const PostPage(),
+          ? const SingleCategoryPage()
+          :  const PostPage()
     );
   }
 }

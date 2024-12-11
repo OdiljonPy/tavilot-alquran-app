@@ -1,3 +1,4 @@
+import 'package:al_quran/src/presentation/pages/main/riverpod/provider/main_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,7 +15,7 @@ class SingleCategoryPage extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CustomBackButton(onTap: () {
-          ref.read(forStudentsProvider.notifier).changeIndex(0, context);
+          ref.read(mainProvider.notifier).changeIndex(0);
         }),
         90.verticalSpace,
         ref.watch(forStudentsProvider).isSingleCategoriesLoading
@@ -29,26 +30,28 @@ class SingleCategoryPage extends ConsumerWidget {
                     crossAxisCount: 3,
                     mainAxisExtent: 240.r),
                 itemCount:
-                    ref.watch(forStudentsProvider).singleCategories.length,
+                    ref.watch(forStudentsProvider).categories.length,
                 itemBuilder: (BuildContext context, int index) {
                   return SingleCategoryItem(
                       onTap: () {
                         ref.read(forStudentsProvider.notifier).changeIndex(
-                              2,
+                              1,
                               context,
-                              onSuccess: () => ref
+                              onSuccess: () {
+                                ref
                                   .read(forStudentsProvider.notifier)
                                   .fetchPost(context,
                                       id: ref
                                               .watch(forStudentsProvider)
-                                              .singleCategories[index]
+                                              .categories[index]
                                               .id ??
-                                          0),
+                                          0);
+                              },
                             );
                       },
                       singleCategory: ref
                           .watch(forStudentsProvider)
-                          .singleCategories[index]);
+                          .categories[index]);
                 },
               )
       ],

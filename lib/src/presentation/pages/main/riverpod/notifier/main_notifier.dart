@@ -2,6 +2,7 @@ import 'package:al_quran/src/core/di/dependency_manager.dart';
 import 'package:al_quran/src/models/response/juz_response.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../../core/utils/app_helpers.dart';
 import '../state/main_state.dart';
 
 class MainNotifier extends StateNotifier<MainState> {
@@ -45,8 +46,10 @@ class MainNotifier extends StateNotifier<MainState> {
       },
       failure: (failure, status) {
         state = state.copyWith(isChapterLoading: false);
-        // AppHelpers.errorSnackBar(
-        //     context: context, message: failure.toString());
+        AppHelpers.showSnackBar(
+          context,
+          failure,
+        );
       },
     );
   }
@@ -68,8 +71,4 @@ class MainNotifier extends StateNotifier<MainState> {
       state = state.copyWith(isChapterSearching: false, searchChapters: []);
     }
   }
-
-
-
-
 }

@@ -59,5 +59,12 @@ abstract class  LocaleKeys {
   static const toContinuePleaseLogin = 'toContinuePleaseLogin';
   static const youAlreadyHavePremium = 'youAlreadyHavePremium';
   static const skip = 'skip';
+  static const abuMansurMotrudiy = 'abuMansurMotrudiy';
+  static const manuscriptAndComments = 'manuscriptAndComments';
+  static const modernStudies = 'modernStudies';
+  static const resourcesStudyGuides = 'resourcesStudyGuides';
+  static const rebuttalsToFanaticism = 'rebuttalsToFanaticism';
+  static const tavilotAlQuran = 'tavilotAlQuran';
+  static const resources = 'resources';
 
 }

@@ -1,3 +1,4 @@
+import 'package:al_quran/src/models/response/get_categories_response.dart';
 import 'package:al_quran/src/models/response/single_category_response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,7 +8,7 @@ import '../../../styles/style.dart';
 
 class SingleCategoryItem extends StatelessWidget {
   final VoidCallback onTap;
-  final SingleCategory singleCategory;
+  final GetCategory singleCategory;
   const SingleCategoryItem({
     super.key, required this.onTap,
     required this.singleCategory,

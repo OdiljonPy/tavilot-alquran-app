@@ -1,10 +1,14 @@
 import 'package:al_quran/application/surah/surah_state.dart';
 import 'package:al_quran/infrastructure/translations/locale_keys.g.dart';
+import 'package:al_quran/src/core/routes/app_router.dart';
 import 'package:al_quran/src/presentation/components/components.dart';
 import 'package:al_quran/src/presentation/components/helper/blur_wrap.dart';
 import 'package:al_quran/src/presentation/pages/about_page/surah_page/widgets/bookmark_indicator_list.dart';
 import 'package:al_quran/src/presentation/pages/about_page/surah_page/widgets/chapter_indicator_list.dart';
 import 'package:al_quran/src/presentation/pages/about_page/surah_page/widgets/juz_indicator_list.dart';
+import 'package:al_quran/src/presentation/pages/auth/login/login_page.dart';
+import 'package:al_quran/src/presentation/pages/main/riverpod/provider/main_provider.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -216,6 +220,14 @@ class _SurahPageState extends ConsumerState<SurahPage> {
               onTap: () {
                 if (LocalStorage.getUserRate() == 2) {
                   notifier.changeIndicationType(2);
+                }else{
+                  if(LocalStorage.getToken().isNotEmpty){
+                    ref.read(mainProvider.notifier).changeIndex(4);
+                  }else{
+                    LocalStorage.logOut();
+                    context.router.popUntilRoot();
+                    context.replaceRoute(const LoginRoute());
+                  }
                 }
               },
               child: Container(

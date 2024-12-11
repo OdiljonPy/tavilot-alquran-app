@@ -54,9 +54,10 @@ class CustomPopupItem extends ConsumerWidget {
                     ref.read(surahProvider.notifier).fetchSurah(context, ref.watch(surahProvider).selectedSurahId, lang: "uz");
                   }else if(ref.watch(mainProvider).selectIndex ==2){
                     ref.read(aboutProvider.notifier).fetchAbout(context, lang: "uz");
-                  }else if(ref.watch(mainProvider).selectIndex ==1){
-                    ref.read(forStudentsProvider.notifier).fetchCategories(context, lang: "uz");
                   }
+                  // else if(ref.watch(mainProvider).selectIndex ==1){
+                  //   ref.read(forStudentsProvider.notifier).fetchCategories(context, lang: "uz");
+                  // }
                 });
               },
             ),
@@ -77,9 +78,10 @@ class CustomPopupItem extends ConsumerWidget {
                     ref.read(surahProvider.notifier).fetchChapterNames(context, lang: "kr");
                   }else if(ref.watch(mainProvider).selectIndex ==2){
                     ref.read(aboutProvider.notifier).fetchAbout(context, lang: "kr");
-                  }else if(ref.watch(mainProvider).selectIndex ==1){
-                    ref.read(forStudentsProvider.notifier).fetchCategories(context, lang: "kr");
                   }
+                  // else if(ref.watch(mainProvider).selectIndex ==1){
+                  //   ref.read(forStudentsProvider.notifier).fetchCategories(context, lang: "kr");
+                  // }
                 });
               },
             ),

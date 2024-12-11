@@ -34,6 +34,7 @@ class LogOutModal extends ConsumerWidget {
                       titleColor: Style.secondary,
                       title: LocaleKeys.no.tr(),
                       onPressed: () {
+                        print(LocalStorage.getUserRate());
                         Navigator.pop(context);
                       })),
               20.horizontalSpace,

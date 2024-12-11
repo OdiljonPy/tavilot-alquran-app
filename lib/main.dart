@@ -28,8 +28,10 @@ void main() async {
 
   await LocalStorage.init();
   await EasyLocalization.ensureInitialized();
-  SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft,DeviceOrientation.landscapeRight]);
-  runApp(EasyLocalization(
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
+  runApp(
+    EasyLocalization(
       supportedLocales: const [
         Locale('ru', 'RU'),
         Locale('uz', 'UZ'),
@@ -38,6 +40,9 @@ void main() async {
       startLocale: const Locale('ru', 'RU'),
       assetLoader: const CodegenLoader(),
       path: 'assets/tr',
-
-      child: const ProviderScope(child: AppWidget())));}
-
+      child: const ProviderScope(
+        child: AppWidget(),
+      ),
+    ),
+  );
+}

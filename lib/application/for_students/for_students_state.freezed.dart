@@ -16,14 +16,12 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ForStudentsState {
-  bool get isCategoriesLoading => throw _privateConstructorUsedError;
   bool get isPostLoading => throw _privateConstructorUsedError;
   bool get isSingleCategoriesLoading => throw _privateConstructorUsedError;
   int get selectedIndex => throw _privateConstructorUsedError;
-  List<Category> get categories => throw _privateConstructorUsedError;
-  List<SingleCategory> get singleCategories =>
-      throw _privateConstructorUsedError;
-  Post? get post => throw _privateConstructorUsedError;
+  int get selectedCategory => throw _privateConstructorUsedError;
+  List<GetCategory> get categories => throw _privateConstructorUsedError;
+  GetCategory? get category => throw _privateConstructorUsedError;
 
   /// Create a copy of ForStudentsState
   /// with the given fields replaced by the non-null parameter values.
@@ -39,13 +37,12 @@ abstract class $ForStudentsStateCopyWith<$Res> {
       _$ForStudentsStateCopyWithImpl<$Res, ForStudentsState>;
   @useResult
   $Res call(
-      {bool isCategoriesLoading,
-      bool isPostLoading,
+      {bool isPostLoading,
       bool isSingleCategoriesLoading,
       int selectedIndex,
-      List<Category> categories,
-      List<SingleCategory> singleCategories,
-      Post? post});
+      int selectedCategory,
+      List<GetCategory> categories,
+      GetCategory? category});
 }
 
 /// @nodoc
@@ -63,19 +60,14 @@ class _$ForStudentsStateCopyWithImpl<$Res, $Val extends ForStudentsState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isCategoriesLoading = null,
     Object? isPostLoading = null,
     Object? isSingleCategoriesLoading = null,
     Object? selectedIndex = null,
+    Object? selectedCategory = null,
     Object? categories = null,
-    Object? singleCategories = null,
-    Object? post = freezed,
+    Object? category = freezed,
   }) {
     return _then(_value.copyWith(
-      isCategoriesLoading: null == isCategoriesLoading
-          ? _value.isCategoriesLoading
-          : isCategoriesLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
       isPostLoading: null == isPostLoading
           ? _value.isPostLoading
           : isPostLoading // ignore: cast_nullable_to_non_nullable
@@ -88,18 +80,18 @@ class _$ForStudentsStateCopyWithImpl<$Res, $Val extends ForStudentsState>
           ? _value.selectedIndex
           : selectedIndex // ignore: cast_nullable_to_non_nullable
               as int,
+      selectedCategory: null == selectedCategory
+          ? _value.selectedCategory
+          : selectedCategory // ignore: cast_nullable_to_non_nullable
+              as int,
       categories: null == categories
           ? _value.categories
           : categories // ignore: cast_nullable_to_non_nullable
-              as List<Category>,
-      singleCategories: null == singleCategories
-          ? _value.singleCategories
-          : singleCategories // ignore: cast_nullable_to_non_nullable
-              as List<SingleCategory>,
-      post: freezed == post
-          ? _value.post
-          : post // ignore: cast_nullable_to_non_nullable
-              as Post?,
+              as List<GetCategory>,
+      category: freezed == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as GetCategory?,
     ) as $Val);
   }
 }
@@ -113,13 +105,12 @@ abstract class _$$ForStudentsStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {bool isCategoriesLoading,
-      bool isPostLoading,
+      {bool isPostLoading,
       bool isSingleCategoriesLoading,
       int selectedIndex,
-      List<Category> categories,
-      List<SingleCategory> singleCategories,
-      Post? post});
+      int selectedCategory,
+      List<GetCategory> categories,
+      GetCategory? category});
 }
 
 /// @nodoc
@@ -135,19 +126,14 @@ class __$$ForStudentsStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isCategoriesLoading = null,
     Object? isPostLoading = null,
     Object? isSingleCategoriesLoading = null,
     Object? selectedIndex = null,
+    Object? selectedCategory = null,
     Object? categories = null,
-    Object? singleCategories = null,
-    Object? post = freezed,
+    Object? category = freezed,
   }) {
     return _then(_$ForStudentsStateImpl(
-      isCategoriesLoading: null == isCategoriesLoading
-          ? _value.isCategoriesLoading
-          : isCategoriesLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
       isPostLoading: null == isPostLoading
           ? _value.isPostLoading
           : isPostLoading // ignore: cast_nullable_to_non_nullable
@@ -160,18 +146,18 @@ class __$$ForStudentsStateImplCopyWithImpl<$Res>
           ? _value.selectedIndex
           : selectedIndex // ignore: cast_nullable_to_non_nullable
               as int,
+      selectedCategory: null == selectedCategory
+          ? _value.selectedCategory
+          : selectedCategory // ignore: cast_nullable_to_non_nullable
+              as int,
       categories: null == categories
           ? _value._categories
           : categories // ignore: cast_nullable_to_non_nullable
-              as List<Category>,
-      singleCategories: null == singleCategories
-          ? _value._singleCategories
-          : singleCategories // ignore: cast_nullable_to_non_nullable
-              as List<SingleCategory>,
-      post: freezed == post
-          ? _value.post
-          : post // ignore: cast_nullable_to_non_nullable
-              as Post?,
+              as List<GetCategory>,
+      category: freezed == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as GetCategory?,
     ));
   }
 }
@@ -180,20 +166,15 @@ class __$$ForStudentsStateImplCopyWithImpl<$Res>
 
 class _$ForStudentsStateImpl extends _ForStudentsState {
   const _$ForStudentsStateImpl(
-      {this.isCategoriesLoading = false,
-      this.isPostLoading = false,
+      {this.isPostLoading = false,
       this.isSingleCategoriesLoading = false,
       this.selectedIndex = 0,
-      final List<Category> categories = const [],
-      final List<SingleCategory> singleCategories = const [],
-      this.post})
+      this.selectedCategory = 0,
+      final List<GetCategory> categories = const [],
+      this.category})
       : _categories = categories,
-        _singleCategories = singleCategories,
         super._();
 
-  @override
-  @JsonKey()
-  final bool isCategoriesLoading;
   @override
   @JsonKey()
   final bool isPostLoading;
@@ -203,31 +184,24 @@ class _$ForStudentsStateImpl extends _ForStudentsState {
   @override
   @JsonKey()
   final int selectedIndex;
-  final List<Category> _categories;
   @override
   @JsonKey()
-  List<Category> get categories {
+  final int selectedCategory;
+  final List<GetCategory> _categories;
+  @override
+  @JsonKey()
+  List<GetCategory> get categories {
     if (_categories is EqualUnmodifiableListView) return _categories;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_categories);
   }
 
-  final List<SingleCategory> _singleCategories;
   @override
-  @JsonKey()
-  List<SingleCategory> get singleCategories {
-    if (_singleCategories is EqualUnmodifiableListView)
-      return _singleCategories;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_singleCategories);
-  }
-
-  @override
-  final Post? post;
+  final GetCategory? category;
 
   @override
   String toString() {
-    return 'ForStudentsState(isCategoriesLoading: $isCategoriesLoading, isPostLoading: $isPostLoading, isSingleCategoriesLoading: $isSingleCategoriesLoading, selectedIndex: $selectedIndex, categories: $categories, singleCategories: $singleCategories, post: $post)';
+    return 'ForStudentsState(isPostLoading: $isPostLoading, isSingleCategoriesLoading: $isSingleCategoriesLoading, selectedIndex: $selectedIndex, selectedCategory: $selectedCategory, categories: $categories, category: $category)';
   }
 
   @override
@@ -235,8 +209,6 @@ class _$ForStudentsStateImpl extends _ForStudentsState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ForStudentsStateImpl &&
-            (identical(other.isCategoriesLoading, isCategoriesLoading) ||
-                other.isCategoriesLoading == isCategoriesLoading) &&
             (identical(other.isPostLoading, isPostLoading) ||
                 other.isPostLoading == isPostLoading) &&
             (identical(other.isSingleCategoriesLoading,
@@ -244,23 +216,23 @@ class _$ForStudentsStateImpl extends _ForStudentsState {
                 other.isSingleCategoriesLoading == isSingleCategoriesLoading) &&
             (identical(other.selectedIndex, selectedIndex) ||
                 other.selectedIndex == selectedIndex) &&
+            (identical(other.selectedCategory, selectedCategory) ||
+                other.selectedCategory == selectedCategory) &&
             const DeepCollectionEquality()
                 .equals(other._categories, _categories) &&
-            const DeepCollectionEquality()
-                .equals(other._singleCategories, _singleCategories) &&
-            (identical(other.post, post) || other.post == post));
+            (identical(other.category, category) ||
+                other.category == category));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      isCategoriesLoading,
       isPostLoading,
       isSingleCategoriesLoading,
       selectedIndex,
+      selectedCategory,
       const DeepCollectionEquality().hash(_categories),
-      const DeepCollectionEquality().hash(_singleCategories),
-      post);
+      category);
 
   /// Create a copy of ForStudentsState
   /// with the given fields replaced by the non-null parameter values.
@@ -274,17 +246,14 @@ class _$ForStudentsStateImpl extends _ForStudentsState {
 
 abstract class _ForStudentsState extends ForStudentsState {
   const factory _ForStudentsState(
-      {final bool isCategoriesLoading,
-      final bool isPostLoading,
+      {final bool isPostLoading,
       final bool isSingleCategoriesLoading,
       final int selectedIndex,
-      final List<Category> categories,
-      final List<SingleCategory> singleCategories,
-      final Post? post}) = _$ForStudentsStateImpl;
+      final int selectedCategory,
+      final List<GetCategory> categories,
+      final GetCategory? category}) = _$ForStudentsStateImpl;
   const _ForStudentsState._() : super._();
 
-  @override
-  bool get isCategoriesLoading;
   @override
   bool get isPostLoading;
   @override
@@ -292,11 +261,11 @@ abstract class _ForStudentsState extends ForStudentsState {
   @override
   int get selectedIndex;
   @override
-  List<Category> get categories;
+  int get selectedCategory;
   @override
-  List<SingleCategory> get singleCategories;
+  List<GetCategory> get categories;
   @override
-  Post? get post;
+  GetCategory? get category;
 
   /// Create a copy of ForStudentsState
   /// with the given fields replaced by the non-null parameter values.

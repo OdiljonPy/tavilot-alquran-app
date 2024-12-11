@@ -41,11 +41,11 @@ class _PostPageState extends ConsumerState<PostPage> {
                 CustomBackButton(onTap: () {
                   ref
                       .read(forStudentsProvider.notifier)
-                      .changeIndex(1, context);
+                      .changeIndex(0, context);
                 }),
                 90.verticalSpace,
                 Text(
-                  ref.watch(forStudentsProvider).post?.title ?? "",
+                  ref.watch(forStudentsProvider).category?.title ?? "",
                 ),
                 Markdown(
                     shrinkWrap: true,
@@ -64,12 +64,12 @@ class _PostPageState extends ConsumerState<PostPage> {
                         return const Icon(Icons.error, color: Colors.red);
                       }
                     },
-                    data: ref.watch(forStudentsProvider).post?.description ?? ""),
-                if (ref.watch(forStudentsProvider).post?.file != null)
+                    data: ref.watch(forStudentsProvider).category?.description ?? ""),
+                if (ref.watch(forStudentsProvider).category?.file != null)
                 SizedBox(
                   height: MediaQuery.sizeOf(context).height *.7,
                   child: WebViewPage(
-                      url: ref.watch(forStudentsProvider).post?.file ?? ""),
+                      url: ref.watch(forStudentsProvider).category?.file ?? ""),
                 ),
               ],
             ),
