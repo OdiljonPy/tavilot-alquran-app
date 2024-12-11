@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:al_quran/src/core/di/dependency_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../src/core/utils/app_helpers.dart';
 import 'register_state.dart';
 
 class RegisterNotifier extends StateNotifier<RegisterState> {
@@ -55,13 +56,10 @@ class RegisterNotifier extends StateNotifier<RegisterState> {
       },
       failure: (failure, status) {
         state = state.copyWith(isLoading: false);
-        // if (status == 400) {
-        //   AppHelpers.errorSnackBar(
-        //       context: context, message: failure.toString());
-        // } else {
-        //   AppHelpers.errorSnackBar(
-        //       context: context, message: failure.toString());
-        // }
+        AppHelpers.showSnackBar(
+          context,
+          failure,
+        );
       },
     );
   }

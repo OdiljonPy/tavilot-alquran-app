@@ -2,6 +2,7 @@ import 'package:al_quran/src/core/di/dependency_manager.dart';
 import 'package:al_quran/src/models/data/bookmark_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../src/core/utils/app_helpers.dart';
 import '../../src/core/utils/local_storage.dart';
 import 'surah_state.dart';
 
@@ -72,8 +73,10 @@ class SurahNotifier extends StateNotifier<SurahState> {
       },
       failure: (failure, status) {
         state = state.copyWith(isJuzLoading: false);
-        // AppHelpers.errorSnackBar(
-        //     context: context, message: failure.toString());
+        AppHelpers.showSnackBar(
+          context,
+          failure,
+        );
       },
     );
   }
@@ -91,8 +94,10 @@ class SurahNotifier extends StateNotifier<SurahState> {
       },
       failure: (failure, status) {
         state = state.copyWith(isJuzLoading: false);
-        // AppHelpers.errorSnackBar(
-        //     context: context, message: failure.toString());
+        AppHelpers.showSnackBar(
+          context,
+          failure,
+        );
       },
     );
   }
@@ -111,8 +116,10 @@ class SurahNotifier extends StateNotifier<SurahState> {
       },
       failure: (failure, status) {
         state = state.copyWith(isSurahLoading: false);
-        // AppHelpers.errorSnackBar(
-        //     context: context, message: failure.toString());
+        AppHelpers.showSnackBar(
+          context,
+          failure,
+        );
       },
     );
   }
@@ -137,8 +144,10 @@ class SurahNotifier extends StateNotifier<SurahState> {
       },
       failure: (failure, status) {
         state = state.copyWith(isSurahLoading: false);
-        // AppHelpers.errorSnackBar(
-        //     context: context, message: failure.toString());
+        AppHelpers.showSnackBar(
+          context,
+          failure,
+        );
       },
     );
   }

@@ -13,7 +13,7 @@ class AppLogo extends StatelessWidget {
       child: SizedBox(
         width: 52.r,
         child: Image.asset(
-          Assets.appLogo,
+          'assets/png/al_logo.png',
           height: 52.r,
           width: 52.r,
         ),

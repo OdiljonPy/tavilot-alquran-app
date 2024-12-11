@@ -193,7 +193,7 @@ class __$$LoginStateImplCopyWithImpl<$Res>
 class _$LoginStateImpl extends _LoginState {
   const _$LoginStateImpl(
       {this.isLoading = false,
-      this.showPassword = false,
+      this.showPassword = true,
       this.isCurrenciesLoading = false,
       this.isLoginError = false,
       this.isEmailNotValid = false,

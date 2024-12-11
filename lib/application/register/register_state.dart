@@ -9,7 +9,7 @@ class RegisterState with _$RegisterState {
     @Default(false) bool hasFocus,
     @Default(false) bool isAcceptTerms,
     @Default(false) bool isSuccess,
-    @Default(false) bool showPassword,
+    @Default(true) bool showPassword,
     @Default(false) bool isMinimumLength,
     @Default(false) bool isMinimumNum,
     @Default(false) bool isMinimumChar,

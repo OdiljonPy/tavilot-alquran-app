@@ -70,7 +70,9 @@ class CodegenLoader extends AssetLoader{
   "noChaptersFound": "Suralar topilmadi",
   "download": "Yuklab olish",
   "successfullyPaid": "To'lov muvaffaqiyatli amalga oshirildi!",
-  "toContinuePleaseLogin": "Davom etish uchun, iltimos tizimga qaytatdan kiring"
+  "toContinuePleaseLogin": "Davom etish uchun, iltimos tizimga qaytatdan kiring",
+  "youAlreadyHavePremium": "Sizning akkauntingizda premium obuna mavjud",
+  "skip": "O'tkazib yuborish"
 };
 static const Map<String,dynamic> ru_RU = {
   "hi": "Ассаламу алайкум!",
@@ -128,7 +130,9 @@ static const Map<String,dynamic> ru_RU = {
   "noChaptersFound": "Суралар топилмади",
   "download": "Юклаб олиш",
   "successfullyPaid": "Тўлов муваффақиятли амалга оширилди!",
-  "toContinuePleaseLogin": "Давом этиш учун кайтатдан иловага киринг"
+  "toContinuePleaseLogin": "Давом этиш учун кайтатдан иловага киринг",
+  "youAlreadyHavePremium": "Сизнинг аккаунтингизда премиум обуна мавжуд",
+  "skip": "Утказиб юбориш"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"uz_UZ": uz_UZ, "ru_RU": ru_RU};
 }

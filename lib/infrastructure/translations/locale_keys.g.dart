@@ -57,5 +57,7 @@ abstract class  LocaleKeys {
   static const download = 'download';
   static const successfullyPaid = 'successfullyPaid';
   static const toContinuePleaseLogin = 'toContinuePleaseLogin';
+  static const youAlreadyHavePremium = 'youAlreadyHavePremium';
+  static const skip = 'skip';
 
 }

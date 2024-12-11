@@ -22,7 +22,7 @@ class AuthRepository implements AuthFacade {
       'password': password,
     };
     try {
-      final client = dioHttp.client(requireAuth: false);
+      final client = dioHttp.client(requireAuth: false, optional: false);
       final response = await client.post(
         '/api/v1/auth/login/',
         data: data,
@@ -53,7 +53,7 @@ class AuthRepository implements AuthFacade {
       'refresh': refreshToken,
     };
     try {
-      final client = dioHttp.client(requireAuth: false);
+      final client = dioHttp.client(requireAuth: false, optional: false);
       final response = await client.post(
         '/api/v1/auth/refresh/',
         data: data,
@@ -80,7 +80,7 @@ class AuthRepository implements AuthFacade {
   Future<ApiResult<ReSendResponse>> reSendCode({required String otpKey}) async {
     final data = {'otp_key': otpKey};
     try {
-      final client = dioHttp.client(requireAuth: false);
+      final client = dioHttp.client(requireAuth: false, optional: false);
       final response = await client.post(
         'api/v1/auth/resend/',
         data: data,
@@ -110,7 +110,7 @@ class AuthRepository implements AuthFacade {
       'phone_number': AppHelpers.phoneNumberSpaceRemover(phoneNumber)
     };
     try {
-      final client = dioHttp.client(requireAuth: false);
+      final client = dioHttp.client(requireAuth: false, optional: false);
       final response = await client.post(
         'api/v1/auth/reset/',
         data: data,
@@ -138,7 +138,7 @@ class AuthRepository implements AuthFacade {
       {required String otpKey, required String otpCode}) async {
     final data = {'otp_key': otpKey, 'otp_code': int.parse(otpCode)};
     try {
-      final client = dioHttp.client(requireAuth: false);
+      final client = dioHttp.client(requireAuth: false, optional: false);
       final response = await client.post(
         'api/v1/auth/resent/verify/',
         data: data,
@@ -166,7 +166,7 @@ class AuthRepository implements AuthFacade {
       {required String resetToken, required String phoneNumber}) async {
     final data = {'new_password': phoneNumber};
     try {
-      final client = dioHttp.client(requireAuth: false);
+      final client = dioHttp.client(requireAuth: false, optional: false);
       final response = await client.post(
         'api/v1/auth/change/password/$resetToken/',
         data: data,
@@ -194,7 +194,7 @@ class AuthRepository implements AuthFacade {
       {required String otpKey, required int otpCode}) async {
     final data = {'otp_key': otpKey, 'otp_code': otpCode};
     try {
-      final client = dioHttp.client(requireAuth: false);
+      final client = dioHttp.client(requireAuth: false, optional: false);
       final response = await client.post(
         '/api/v1/auth/verify/',
         data: data,
@@ -224,7 +224,7 @@ class AuthRepository implements AuthFacade {
       password: password,
     );
     try {
-      final client = dioHttp.client(requireAuth: false);
+      final client = dioHttp.client(requireAuth: false, optional: false);
       final response = await client.post(
         '/api/v1/auth/register/',
         data: data.toJson(),

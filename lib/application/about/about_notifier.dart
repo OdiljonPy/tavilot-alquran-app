@@ -1,6 +1,7 @@
 import 'package:al_quran/src/core/di/dependency_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../src/core/utils/app_helpers.dart';
 import 'about_state.dart';
 
 class AboutNotifier extends StateNotifier<AboutState> {
@@ -24,8 +25,10 @@ class AboutNotifier extends StateNotifier<AboutState> {
       },
       failure: (failure, status) {
         state = state.copyWith(isAboutLoading: false);
-        // AppHelpers.errorSnackBar(
-        //     context: context, message: failure.toString());
+        AppHelpers.showSnackBar(
+          context,
+          failure,
+        );
       },
     );
   }

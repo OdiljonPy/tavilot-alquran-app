@@ -30,7 +30,7 @@ class BookmarkList extends ConsumerWidget {
                   .length,
               itemBuilder:
                   (BuildContext context, int j) {
-                return ButtonEffect(
+                return InkWell(
                   onTap: () {
                     notifier
                       ..selectBookmarkId(

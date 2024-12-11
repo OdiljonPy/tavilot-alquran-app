@@ -3,6 +3,7 @@ import 'package:al_quran/src/core/di/dependency_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../src/core/utils/app_connectivity.dart';
+import '../../src/core/utils/app_helpers.dart';
 import 'register_confirmation_state.dart';
 
 class RegisterConfirmationNotifier
@@ -45,10 +46,10 @@ class RegisterConfirmationNotifier
         failure: (failure, status) {
           state = state.copyWith(
               isLoading: false, isCodeError: true, isSuccess: false);
-          // AppHelpers.showCheckTopSnackBar(
-          //   context,
-          //   AppHelpers.getTranslation(failure.toString()),
-          // );
+          AppHelpers.showSnackBar(
+            context,
+            failure,
+          );
           debugPrint('==> confirm code failure: $failure');
         },
       );

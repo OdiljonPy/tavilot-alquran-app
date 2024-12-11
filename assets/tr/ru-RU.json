@@ -54,5 +54,7 @@
   "noChaptersFound": "Суралар топилмади",
   "download": "Юклаб олиш",
   "successfullyPaid": "Тўлов муваффақиятли амалга оширилди!",
-  "toContinuePleaseLogin": "Давом этиш учун кайтатдан иловага киринг"
+  "toContinuePleaseLogin": "Давом этиш учун кайтатдан иловага киринг",
+  "youAlreadyHavePremium": "Сизнинг аккаунтингизда премиум обуна мавжуд",
+  "skip": "Утказиб юбориш"
 }

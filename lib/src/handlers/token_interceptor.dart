@@ -10,7 +10,7 @@ class TokenInterceptor extends Interceptor {
 
   TokenInterceptor({
     required this.requireAuth,
-    this.optional = false,
+    this.optional = true,
   });
 
   @override

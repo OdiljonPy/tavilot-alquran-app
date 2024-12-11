@@ -54,5 +54,7 @@
   "noChaptersFound": "Suralar topilmadi",
   "download": "Yuklab olish",
   "successfullyPaid": "To'lov muvaffaqiyatli amalga oshirildi!",
-  "toContinuePleaseLogin": "Davom etish uchun, iltimos tizimga qaytatdan kiring"
+  "toContinuePleaseLogin": "Davom etish uchun, iltimos tizimga qaytatdan kiring",
+  "youAlreadyHavePremium": "Sizning akkauntingizda premium obuna mavjud",
+  "skip": "O'tkazib yuborish"
 }

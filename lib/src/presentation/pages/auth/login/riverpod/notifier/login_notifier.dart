@@ -54,7 +54,7 @@ class LoginNotifier extends StateNotifier<LoginState> {
         state = state.copyWith(isLoading: false, isLoginError: true);
         AppHelpers.showSnackBar(
           context,
-          AppHelpers.getTranslation(failure),
+          failure,
         );
       },
     );

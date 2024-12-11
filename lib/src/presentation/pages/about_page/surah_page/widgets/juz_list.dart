@@ -18,7 +18,7 @@ class JuzList extends ConsumerWidget {
       shrinkWrap: true,
       itemCount: ref.watch(surahProvider).juzes.length,
       itemBuilder: (BuildContext context, int index) {
-        return ButtonEffect(
+        return InkWell(
           onTap: () {
             notifier.selectJuzId(index + 1);
             notifier.fetchJuz(context, index + 1);

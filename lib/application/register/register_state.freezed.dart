@@ -261,7 +261,7 @@ class _$RegisterStateImpl extends _RegisterState {
       this.hasFocus = false,
       this.isAcceptTerms = false,
       this.isSuccess = false,
-      this.showPassword = false,
+      this.showPassword = true,
       this.isMinimumLength = false,
       this.isMinimumNum = false,
       this.isMinimumChar = false,

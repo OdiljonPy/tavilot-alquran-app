@@ -200,11 +200,43 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 ),
                 100.horizontalSpace,
                 Expanded(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30.r),
-                        image: const DecorationImage(image:  AssetImage("assets/png/loginBook.png"), fit: BoxFit.cover),
-                      ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        30.verticalSpace,
+                        Row(
+                          children: [
+                            const Spacer(),
+                            InkWell(
+                              onTap: (){
+                                context.replaceRoute(const MainRoute());
+                              },
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Style.primary,
+                                    borderRadius: BorderRadius.circular(12.r),
+                                  ),
+                                  padding: REdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                                  child: Row(
+                                children: [
+                                  Text(LocaleKeys.skip.tr(), style: Style.interNormal(color: Style.white),),
+                                  5.horizontalSpace,
+                                  Icon(Icons.arrow_forward_ios, size: 24.r, color: Style.white,)
+                                ],
+                              )),
+                            ),
+                          ],
+                        ),
+                        30.verticalSpace,
+                        Expanded(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(30.r),
+                              image: const DecorationImage(image:  AssetImage("assets/png/loginBook.png"), fit: BoxFit.cover),
+                            ),
+                          ),
+                        ),
+                      ],
                     )),
               ],
             ),
