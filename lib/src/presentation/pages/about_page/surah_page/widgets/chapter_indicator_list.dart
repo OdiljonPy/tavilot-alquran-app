@@ -1,4 +1,4 @@
-import 'package:easy_localization/easy_localization.dart';
+import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -29,13 +29,9 @@ class ChapterIndicatorList extends ConsumerWidget {
               "${LocaleKeys.verse.tr()}",
           style: Style.interRegular(size: 16),
         ),
-        // Text(
-        //   "${ref.watch(surahProvider).chapter?.description}",
-        //   style: Style.interRegular(size: 16),
-        //   textAlign: TextAlign.center,
-        // ),
         120.verticalSpace,
         ListView.separated(
+          physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           itemCount: ref.watch(surahProvider).chapter?.verses?.length ?? 0,
           itemBuilder: (BuildContext context, int j) {
@@ -54,24 +50,25 @@ class ChapterIndicatorList extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      BookmarkWidget(
-                        onTap: () {
-                          notifier.setBookMark(
-                              ref.watch(surahProvider).chapter?.id ?? 0,
-                              ref.watch(surahProvider).chapter?.verses?[j].id ??
-                                  0,
-                              ref.watch(surahProvider).chapter?.name ?? "");
-                        },
-                        isBookmarked: state.bookmarks.any((element) =>
-                            element.id ==
-                                ref.watch(surahProvider).chapter?.id &&
-                            element.verseIds.contains(ref
-                                .watch(surahProvider)
-                                .chapter
-                                ?.verses?[j]
-                                .id)),
-                      ),
-                      const Spacer(),
+                      // BookmarkWidget(
+                      //   onTap: () {
+                      //     notifier.setBookMark(
+                      //         ref.watch(surahProvider).chapter?.id ?? 0,
+                      //         ref.watch(surahProvider).chapter?.verses?[j].id ??
+                      //             0,
+                      //         ref.watch(surahProvider).chapter?.name ?? "");
+                      //   },
+                      //   isBookmarked: state.bookmarks.any((element) =>
+                      //       element.id ==
+                      //           ref.watch(surahProvider).chapter?.id &&
+                      //       element.verseIds.contains(ref
+                      //           .watch(surahProvider)
+                      //           .chapter
+                      //           ?.verses?[j]
+                      //           .id)),
+                      // ),
+                      // const Spacer(),
+                      20.horizontalSpace,
                       Container(
                           height: 30.r,
                           width: 30.r,
@@ -89,10 +86,24 @@ class ChapterIndicatorList extends ConsumerWidget {
                           )),
                       20.horizontalSpace,
                       Flexible(
-                        child: Text(
-                          "${ref.watch(surahProvider).chapter?.verses?[j].textArabic}",
-                          style: Style.regularArabic(size: 20),
-                          textAlign: TextAlign.end,
+                        child: Directionality(
+                          textDirection:TextDirection.rtl,
+                          child: Text.rich(
+                              // textAlign: TextAlign.justify,
+                            TextSpan(
+                              children: [
+                                TextSpan(
+                                  text:   "      ",
+                                  style: Style.regularArabic(size: 20),
+                                ),
+                              TextSpan(
+                                text:   "${ref.watch(surahProvider).chapter?.verses?[j].textArabic}",
+                                style: Style.regularArabic(size: 20),
+                              ),
+                              ],
+                            )
+
+                          ),
                         ),
                       ),
                       20.horizontalSpace,
@@ -105,7 +116,6 @@ class ChapterIndicatorList extends ConsumerWidget {
                       state.selectedIndicationType == 2)
                     Row(
                       children: [
-                        const Spacer(),
                         Expanded(
                           child: Text(
                             "${ref.watch(surahProvider).chapter?.verses?[j].text}",

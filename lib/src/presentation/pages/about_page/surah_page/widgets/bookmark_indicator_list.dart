@@ -30,8 +30,7 @@ class BookmarkIndicatorList extends ConsumerWidget {
         ),
         120.verticalSpace,
         ListView.separated(
-          // itemScrollController: _itemScrollController,
-          // itemPositionsListener: _itemPositionsListener,
+          physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           itemCount: ref
               .watch(surahProvider)

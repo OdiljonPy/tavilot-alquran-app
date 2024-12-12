@@ -16,6 +16,7 @@ class JuzIndicatorList extends ConsumerWidget {
     final state = ref.watch(surahProvider);
     final notifier = ref.read(surahProvider.notifier);
     return ListView.separated(
+      physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemCount: ref
           .watch(surahProvider)
@@ -39,6 +40,7 @@ class JuzIndicatorList extends ConsumerWidget {
             ),
             120.verticalSpace,
             ListView.separated(
+              physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemCount: ref
                   .watch(surahProvider)
