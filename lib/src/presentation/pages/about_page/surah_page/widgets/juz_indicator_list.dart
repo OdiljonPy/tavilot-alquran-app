@@ -1,10 +1,9 @@
-import 'package:easy_localization/easy_localization.dart';
+import 'package:easy_localization/easy_localization.dart'  hide TextDirection;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../../application/surah/surah_provider.dart';
 import '../../../../../../infrastructure/translations/locale_keys.g.dart';
-import '../../../../components/buttons/bookmark.dart';
 import '../../../../components/components.dart';
 import '../../../../styles/style.dart';
 
@@ -89,61 +88,7 @@ class JuzIndicatorList extends ConsumerWidget {
                         mainAxisAlignment:
                         MainAxisAlignment.end,
                         children: [
-                          BookmarkWidget(
-                            onTap: () {
-                              notifier.setBookMark(
-                                  ref
-                                      .watch(
-                                      surahProvider)
-                                      .juz
-                                      ?.result
-                                      ?.chapters?[
-                                  index]
-                                      .id ??
-                                      0,
-                                  ref
-                                      .watch(
-                                      surahProvider)
-                                      .juz
-                                      ?.result
-                                      ?.chapters?[
-                                  index]
-                                      .verses?[i]
-                                      .id ??
-                                      0,
-                                  ref
-                                      .watch(
-                                      surahProvider)
-                                      .juz
-                                      ?.result
-                                      ?.chapters?[
-                                  index]
-                                      .name ??
-                                      "");
-                            },
-                            isBookmarked: state.bookmarks
-                                .any((element) =>
-                            element.id ==
-                                ref
-                                    .watch(
-                                    surahProvider)
-                                    .juz
-                                    ?.result
-                                    ?.chapters?[
-                                index]
-                                    .id &&
-                                element.verseIds
-                                    .contains(ref
-                                    .watch(
-                                    surahProvider)
-                                    .juz
-                                    ?.result
-                                    ?.chapters?[
-                                index]
-                                    .verses?[i]
-                                    .id)),
-                          ),
-                          const Spacer(),
+                          20.horizontalSpace,
                           Container(
                               height: 30.r,
                               width: 30.r,
@@ -166,11 +111,24 @@ class JuzIndicatorList extends ConsumerWidget {
                               )),
                           20.horizontalSpace,
                           Flexible(
-                            child: Text(
-                              "${ref.watch(surahProvider).juz?.result?.chapters?[index].verses?[i].textArabic}",
-                              style: Style.regularArabic(
-                                  size: 20),
-                              textAlign: TextAlign.end,
+                            child: Directionality(
+                              textDirection:TextDirection.rtl,
+                              child: Text.rich(
+                                // textAlign: TextAlign.justify,
+                                  TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text:   "      ",
+                                        style: Style.regularArabic(size: 20),
+                                      ),
+                                      TextSpan(
+                                        text:   "${ref.watch(surahProvider).juz?.result?.chapters?[index].verses?[i].textArabic}",
+                                        style: Style.regularArabic(size: 20),
+                                      ),
+                                    ],
+                                  )
+
+                              ),
                             ),
                           ),
                           20.horizontalSpace,
@@ -187,7 +145,6 @@ class JuzIndicatorList extends ConsumerWidget {
                               2)
                         Row(
                           children: [
-                            const Spacer(),
                             Expanded(
                               child: Text(
                                 "${ref.watch(surahProvider).juz?.result?.chapters?[index].verses?[i].text}",
@@ -206,8 +163,7 @@ class JuzIndicatorList extends ConsumerWidget {
                           2)
                         Row(
                           children: [
-                            const Spacer(),
-                            Expanded(
+                              Expanded(
                               child: Text(
                                 "${ref.watch(surahProvider).juz?.result?.chapters?[index].verses?[i].description}",
                                 style: Style.interRegular(

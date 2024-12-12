@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../../application/surah/surah_provider.dart';
 import '../../../../../../infrastructure/translations/locale_keys.g.dart';
-import '../../../../components/buttons/bookmark.dart';
 import '../../../../components/components.dart';
 import '../../../../styles/style.dart';
 
@@ -50,24 +49,6 @@ class ChapterIndicatorList extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      // BookmarkWidget(
-                      //   onTap: () {
-                      //     notifier.setBookMark(
-                      //         ref.watch(surahProvider).chapter?.id ?? 0,
-                      //         ref.watch(surahProvider).chapter?.verses?[j].id ??
-                      //             0,
-                      //         ref.watch(surahProvider).chapter?.name ?? "");
-                      //   },
-                      //   isBookmarked: state.bookmarks.any((element) =>
-                      //       element.id ==
-                      //           ref.watch(surahProvider).chapter?.id &&
-                      //       element.verseIds.contains(ref
-                      //           .watch(surahProvider)
-                      //           .chapter
-                      //           ?.verses?[j]
-                      //           .id)),
-                      // ),
-                      // const Spacer(),
                       20.horizontalSpace,
                       Container(
                           height: 30.r,
@@ -130,7 +111,6 @@ class ChapterIndicatorList extends ConsumerWidget {
                   if (state.selectedIndicationType == 2)
                     Row(
                       children: [
-                        const Spacer(),
                         Expanded(
                           child: Text(
                             "${ref.watch(surahProvider).chapter?.verses?[j].description}",

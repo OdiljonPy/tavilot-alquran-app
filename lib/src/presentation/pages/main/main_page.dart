@@ -70,7 +70,6 @@ class _MainPageState extends ConsumerState<MainPage>
       ref.read(mainProvider.notifier)
         ..setPageController()
         ..fetchChapters(context);
-      // ref.read(forStudentsProvider.notifier).fetchCategories(context);
     });
   }
 
@@ -89,7 +88,7 @@ class _MainPageState extends ConsumerState<MainPage>
                 controller: state.pageController,
                 onPageChanged: notifier.changeIndex,
                 physics: const NeverScrollableScrollPhysics(),
-                children: const [
+                children:  [
                   BlogPage(),
                   ForStudentsPage(),
                   AboutPage(),
@@ -186,33 +185,6 @@ class _MainPageState extends ConsumerState<MainPage>
                   Row(
                     children: [
                       const CustomPopupItem(),
-                      12.horizontalSpace,
-                      ButtonEffect(
-                        onTap: () {
-                          notifier.changeIndex(3);
-                          ref.read(surahProvider.notifier).changeIndex(2);
-                          if (ref.watch(surahProvider).selectedBookmarkId == 0 &&
-                              ref.watch(surahProvider).bookmarks.isNotEmpty) {
-                            ref.read(surahProvider.notifier)
-                              ..fetchSurah(context,
-                                  ref.watch(surahProvider).bookmarks.first.id)
-                              ..selectBookmarkId(
-                                  ref.watch(surahProvider).bookmarks.first.id,
-                                  ref
-                                      .watch(surahProvider)
-                                      .bookmarks
-                                      .first
-                                      .verseIds
-                                      .first);
-                          }
-                          ref.read(surahProvider.notifier)
-                            ..fetchJuzes(context)
-                            ..fetchJuz(context, 1);
-                        },
-                        child: SvgPicture.asset(
-                          "assets/svg/bookmark.svg",
-                        ),
-                      ),
                       12.horizontalSpace,
                       ButtonEffect(
                         onTap: () {

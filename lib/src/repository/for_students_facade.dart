@@ -1,7 +1,6 @@
 import 'package:al_quran/src/models/models.dart';
 import 'package:al_quran/src/models/response/get_categories_response.dart';
 import 'package:al_quran/src/models/response/get_single_category_response.dart';
-import 'package:al_quran/src/models/response/post_response.dart';
 
 import '../handlers/api_result.dart';
 import '../models/response/categories_response.dart';

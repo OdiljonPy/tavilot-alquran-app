@@ -1,16 +1,11 @@
 import 'package:al_quran/application/for_students/for_students_provider.dart';
 import 'package:al_quran/application/surah/surah_provider.dart';
-import 'package:al_quran/src/presentation/components/components.dart';
 import 'package:al_quran/src/presentation/pages/main/riverpod/provider/main_provider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
-import '../../../../../application/about/about_provider.dart';
-import '../../../../../generated/assets.dart';
 import '../../../../../infrastructure/translations/locale_keys.g.dart';
-import '../../../styles/style.dart';
 import 'widgets/main_post_item.dart';
 
 class BlogPage extends ConsumerStatefulWidget {

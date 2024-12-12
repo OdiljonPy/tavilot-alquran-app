@@ -1,5 +1,4 @@
 import 'package:al_quran/src/models/response/get_categories_response.dart';
-import 'package:al_quran/src/models/response/single_category_response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';

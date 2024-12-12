@@ -102,7 +102,6 @@ class LocalStorage {
   static void deleteToken() => _preferences?.remove(AppConstants.keyToken);
 
   static void deleteUserRate() {
-    print("gandon");
     _preferences?.remove(AppConstants.keyUserRate);
   }
 

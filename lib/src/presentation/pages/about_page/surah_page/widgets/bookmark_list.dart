@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../../application/surah/surah_provider.dart';
 import '../../../../../../infrastructure/translations/locale_keys.g.dart';
-import '../../../../components/components.dart';
 import '../../../../styles/style.dart';
 
 class BookmarkList extends ConsumerWidget {

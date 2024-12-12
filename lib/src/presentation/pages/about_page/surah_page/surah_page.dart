@@ -6,7 +6,6 @@ import 'package:al_quran/src/presentation/components/helper/blur_wrap.dart';
 import 'package:al_quran/src/presentation/pages/about_page/surah_page/widgets/bookmark_indicator_list.dart';
 import 'package:al_quran/src/presentation/pages/about_page/surah_page/widgets/chapter_indicator_list.dart';
 import 'package:al_quran/src/presentation/pages/about_page/surah_page/widgets/juz_indicator_list.dart';
-import 'package:al_quran/src/presentation/pages/auth/login/login_page.dart';
 import 'package:al_quran/src/presentation/pages/main/riverpod/provider/main_provider.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -18,7 +17,6 @@ import '../../../../../application/surah/surah_notifier.dart';
 import '../../../../../application/surah/surah_provider.dart';
 import '../../../../core/utils/local_storage.dart';
 import '../../../styles/style.dart';
-import 'widgets/bookmark_list.dart';
 import 'widgets/chapter_list.dart';
 import 'widgets/juz_list.dart';
 
@@ -57,9 +55,7 @@ class _SurahPageState extends ConsumerState<SurahPage> {
                   40.verticalSpace,
                   state.selectIndex == 0
                       ? const ChapterList()
-                      : state.selectIndex == 1
-                          ? const JuzList()
-                          : const BookmarkList(),
+                      : const JuzList()
                 ],
               ),
             ),
@@ -97,8 +93,8 @@ class _SurahPageState extends ConsumerState<SurahPage> {
 
   Widget _selectType(SurahState state, SurahNotifier notifier) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        18.horizontalSpace,
         ButtonEffect(
           onTap: () {
             notifier.changeIndex(0);
@@ -113,7 +109,7 @@ class _SurahPageState extends ConsumerState<SurahPage> {
                     : TextDecoration.none,
               )),
         ),
-        20.horizontalSpace,
+        30.horizontalSpace,
         ButtonEffect(
           onTap: () {
             notifier.changeIndex(1);
@@ -131,24 +127,7 @@ class _SurahPageState extends ConsumerState<SurahPage> {
                     : TextDecoration.none,
               )),
         ),
-        20.horizontalSpace,
-        ButtonEffect(
-          onTap: () {
-            notifier.changeIndex(2);
-            if(ref.watch(surahProvider).selectedBookmarkId == 0 && state.bookmarks.isNotEmpty){
-              notifier.selectBookmarkId(state.bookmarks.first.id, state.bookmarks.first.verseIds.first);
-            }
-          },
-          child: Text(LocaleKeys.bookmarks.tr(),
-              style: Style.interRegular(
-                decorationColor: Style.primary,
-                size: 14,
-                color: state.selectIndex == 2 ? Style.black : Style.hint,
-                textDecoration: state.selectIndex == 2
-                    ? TextDecoration.underline
-                    : TextDecoration.none,
-              )),
-        ),
+
       ],
     );
   }
