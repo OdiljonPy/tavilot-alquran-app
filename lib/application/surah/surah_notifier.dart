@@ -43,6 +43,10 @@ class SurahNotifier extends StateNotifier<SurahState> {
     state = state.copyWith(selectedJuzId: index);
   }
 
+  changeDrawer() {
+    state = state.copyWith(isDrawerOpened: !state.isDrawerOpened);
+  }
+
   selectBookmarkId(int index, int verseId) {
     state = state.copyWith(selectedBookmarkId: index, selectedVerseId: verseId);
   }

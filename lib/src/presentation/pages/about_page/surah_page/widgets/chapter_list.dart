@@ -54,6 +54,7 @@ class SingleChapterWidget extends ConsumerWidget {
         width: double.infinity,
         padding: REdgeInsets.all(5),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
               height: 50.r,
@@ -70,6 +71,7 @@ class SingleChapterWidget extends ConsumerWidget {
               )),
             ),
             14.horizontalSpace,
+            if(ref.watch(surahProvider).isDrawerOpened)
             Expanded(
               child: SizedBox(
                 height: 50.r,

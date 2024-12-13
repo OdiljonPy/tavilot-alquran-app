@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:al_quran/application/about/about_provider.dart';
 import 'package:al_quran/application/surah/surah_provider.dart';
 import 'package:al_quran/infrastructure/translations/locale_keys.g.dart';
 import 'package:al_quran/src/presentation/pages/about_page/surah_page/surah_page.dart';
@@ -14,7 +15,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../application/for_students/for_students_provider.dart';
 import '../../../core/routes/app_router.dart';
 import '../../../core/utils/app_helpers.dart';
@@ -209,6 +209,24 @@ class _MainPageState extends ConsumerState<MainPage>
                           ),
                         ),
                       ),
+                      12.horizontalSpace,
+                      ButtonEffect(
+                        onTap: () {
+                          ref.read(aboutProvider.notifier).fetchAbout(context);
+                          ref.read(mainProvider.notifier).changeIndex(2);
+                        },
+                        child: Container(
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Style.bg,
+                          ),
+                          child: const Icon(
+                            FlutterRemix.information_line,
+                            color: Style.primary,
+                            size: 24,
+                          ),
+                        ),
+                      ),
                     ],
                   )
                 ],
@@ -221,7 +239,7 @@ class _MainPageState extends ConsumerState<MainPage>
   }
 }
 
-class CatalogTextItem extends StatelessWidget {
+class CatalogTextItem extends ConsumerWidget {
   const CatalogTextItem({
     super.key,
     required this.title,
@@ -234,9 +252,14 @@ class CatalogTextItem extends StatelessWidget {
   final bool isActive;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
     return ButtonEffect(
-      onTap: onTap,
+      onTap:(){
+        onTap();
+        if(ref.watch(forStudentsProvider).selectedIndex == 1){
+          ref.read(forStudentsProvider.notifier).changeIndex(0, context);
+        }
+      } ,
       child: Text(
         title,
         style: Style.interRegular(

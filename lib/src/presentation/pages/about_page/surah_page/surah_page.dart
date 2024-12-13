@@ -28,7 +28,6 @@ class SurahPage extends ConsumerStatefulWidget {
 }
 
 class _SurahPageState extends ConsumerState<SurahPage> {
-
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(surahProvider);
@@ -37,7 +36,7 @@ class _SurahPageState extends ConsumerState<SurahPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
-          flex: 3,
+          flex: state.isDrawerOpened ? 3 : 1,
           child: SingleChildScrollView(
             child: Container(
               decoration: BoxDecoration(
@@ -53,9 +52,7 @@ class _SurahPageState extends ConsumerState<SurahPage> {
                   25.verticalSpace,
                   _selectType(state, notifier),
                   40.verticalSpace,
-                  state.selectIndex == 0
-                      ? const ChapterList()
-                      : const JuzList()
+                  state.selectIndex == 0 ? const ChapterList() : const JuzList()
                 ],
               ),
             ),
@@ -70,8 +67,8 @@ class _SurahPageState extends ConsumerState<SurahPage> {
                   child: const Loading())
               : SingleChildScrollView(
                   child: Container(
-                    constraints:
-                    BoxConstraints(minHeight: MediaQuery.sizeOf(context).height),
+                    constraints: BoxConstraints(
+                        minHeight: MediaQuery.sizeOf(context).height),
                     color: Style.white,
                     child: Column(
                       children: [
@@ -92,49 +89,84 @@ class _SurahPageState extends ConsumerState<SurahPage> {
   }
 
   Widget _selectType(SurahState state, SurahNotifier notifier) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        ButtonEffect(
-          onTap: () {
-            notifier.changeIndex(0);
-          },
-          child: Text(LocaleKeys.chapters.tr(),
-              style: Style.interRegular(
-                decorationColor: Style.primary,
-                size: 14,
-                color: state.selectIndex == 0 ? Style.black : Style.hint,
-                textDecoration: state.selectIndex == 0
-                    ? TextDecoration.underline
-                    : TextDecoration.none,
-              )),
-        ),
-        30.horizontalSpace,
-        ButtonEffect(
-          onTap: () {
-            notifier.changeIndex(1);
-            if(ref.watch(surahProvider).selectedJuzId == 0){
-              notifier.selectJuzId(1);
-            }
-          },
-          child: Text(LocaleKeys.juzes.tr(),
-              style: Style.interRegular(
-                decorationColor: Style.primary,
-                size: 14,
-                color: state.selectIndex == 1 ? Style.black : Style.hint,
-                textDecoration: state.selectIndex == 1
-                    ? TextDecoration.underline
-                    : TextDecoration.none,
-              )),
-        ),
+    return state.isDrawerOpened
+        ? Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ButtonEffect(
+                onTap: () {
+                  notifier.changeIndex(0);
+                },
+                child: Text(LocaleKeys.chapters.tr(),
+                    style: Style.interRegular(
+                      decorationColor: Style.primary,
+                      size: 14,
+                      color: state.selectIndex == 0 ? Style.black : Style.hint,
+                      textDecoration: state.selectIndex == 0
+                          ? TextDecoration.underline
+                          : TextDecoration.none,
+                    )),
+              ),
+              30.horizontalSpace,
+              ButtonEffect(
+                onTap: () {
+                  notifier.changeIndex(1);
+                  if (ref.watch(surahProvider).selectedJuzId == 0) {
+                    notifier.selectJuzId(1);
+                  }
+                },
+                child: Text(LocaleKeys.juzes.tr(),
+                    style: Style.interRegular(
+                      decorationColor: Style.primary,
+                      size: 14,
+                      color: state.selectIndex == 1 ? Style.black : Style.hint,
+                      textDecoration: state.selectIndex == 1
+                          ? TextDecoration.underline
+                          : TextDecoration.none,
+                    )),
+              ),
+              30.horizontalSpace,
+              ButtonEffect(
+                  onTap: () {
+                    notifier.changeDrawer();
+                  },
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.keyboard_double_arrow_left,
+                        size: 10.r,
+                        color: Style.primary,
+                      ),
+                      Text(LocaleKeys.close.tr(), style: Style.interNormal(
+                          size: 10,
+                          color: Style.primary),)
 
-      ],
-    );
+                    ],
+                  ))
+            ],
+          )
+        :   ButtonEffect(
+      onTap: () {
+        notifier.changeDrawer();
+      },
+          child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.keyboard_double_arrow_right,
+                size: 10.r,
+                color: Style.primary,
+              ),
+              Text(LocaleKeys.open.tr(), style: Style.interNormal(
+                  size: 10,color: Style.primary),)
+            ],
+          ),
+        );
   }
 
   Widget _selectTypeOfIndication(SurahState state, SurahNotifier notifier) {
     return Container(
-      height: 40.r,
+      height: 45.r,
       margin: REdgeInsets.symmetric(vertical: 20),
       padding: REdgeInsets.all(4),
       decoration: BoxDecoration(
@@ -149,9 +181,8 @@ class _SurahPageState extends ConsumerState<SurahPage> {
               notifier.changeIndicationType(0);
             },
             child: Container(
-              height: 32.r,
-              padding: REdgeInsets.symmetric(
-                  horizontal: 24, vertical: 5),
+              height: 36.r,
+              padding: REdgeInsets.symmetric(horizontal: 24, vertical: 5),
               decoration: BoxDecoration(
                 color: state.selectedIndicationType == 0
                     ? Style.primary
@@ -173,9 +204,8 @@ class _SurahPageState extends ConsumerState<SurahPage> {
               notifier.changeIndicationType(1);
             },
             child: Container(
-              height: 32.r,
-              padding: REdgeInsets.symmetric(
-                  horizontal: 24, vertical: 5),
+              height: 36.r,
+              padding: REdgeInsets.symmetric(horizontal: 24, vertical: 5),
               decoration: BoxDecoration(
                 color: state.selectedIndicationType == 1
                     ? Style.primary
@@ -199,10 +229,10 @@ class _SurahPageState extends ConsumerState<SurahPage> {
               onTap: () {
                 if (LocalStorage.getUserRate() == 2) {
                   notifier.changeIndicationType(2);
-                }else{
-                  if(LocalStorage.getToken().isNotEmpty){
+                } else {
+                  if (LocalStorage.getToken().isNotEmpty) {
                     ref.read(mainProvider.notifier).changeIndex(4);
-                  }else{
+                  } else {
                     LocalStorage.logOut();
                     context.router.popUntilRoot();
                     context.replaceRoute(const LoginRoute());
@@ -210,9 +240,8 @@ class _SurahPageState extends ConsumerState<SurahPage> {
                 }
               },
               child: Container(
-                height: 32.r,
-                padding: REdgeInsets.symmetric(
-                    horizontal: 24, vertical: 5),
+                height: 36.r,
+                padding: REdgeInsets.symmetric(horizontal: 24, vertical: 5),
                 decoration: BoxDecoration(
                   color: state.selectedIndicationType == 2
                       ? Style.primary
@@ -225,14 +254,11 @@ class _SurahPageState extends ConsumerState<SurahPage> {
                       LocaleKeys.surahDescription.tr(),
                       style: Style.interRegular(
                           size: 16,
-                          color:
-                          state.selectedIndicationType ==
-                              2
+                          color: state.selectedIndicationType == 2
                               ? Style.white
                               : Style.black),
                     ),
-                    if (LocalStorage.getUserRate() != 2)
-                      8.horizontalSpace,
+                    if (LocalStorage.getUserRate() != 2) 8.horizontalSpace,
                     if (LocalStorage.getUserRate() != 2)
                       SvgPicture.asset(
                         "assets/svg/lock.svg",

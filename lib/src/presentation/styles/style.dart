@@ -13,7 +13,7 @@ class Style {
   static const primary = Color(0xFFC99F69);
   static const secondary = Color(0xFFEAD3B7);
   static const green = Color(0xFF16AA16);
-  static const darkGreen = Color(0xFF007577);
+  static const darkGreen = Color(0xFF00CED1);
   static const greenColor = Color(0xFF60CC3B);
   static const red = Color(0xFFFF3D00);
   static const redColor = Color(0xFFF34750);

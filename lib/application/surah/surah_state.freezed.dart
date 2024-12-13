@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$SurahState {
   bool get isJuzLoading => throw _privateConstructorUsedError;
   bool get isSurahLoading => throw _privateConstructorUsedError;
+  bool get isDrawerOpened => throw _privateConstructorUsedError;
   int get selectedSurahId => throw _privateConstructorUsedError;
   int get selectedJuzId => throw _privateConstructorUsedError;
   int get selectedBookmarkId => throw _privateConstructorUsedError;
@@ -45,6 +46,7 @@ abstract class $SurahStateCopyWith<$Res> {
   $Res call(
       {bool isJuzLoading,
       bool isSurahLoading,
+      bool isDrawerOpened,
       int selectedSurahId,
       int selectedJuzId,
       int selectedBookmarkId,
@@ -74,6 +76,7 @@ class _$SurahStateCopyWithImpl<$Res, $Val extends SurahState>
   $Res call({
     Object? isJuzLoading = null,
     Object? isSurahLoading = null,
+    Object? isDrawerOpened = null,
     Object? selectedSurahId = null,
     Object? selectedJuzId = null,
     Object? selectedBookmarkId = null,
@@ -93,6 +96,10 @@ class _$SurahStateCopyWithImpl<$Res, $Val extends SurahState>
       isSurahLoading: null == isSurahLoading
           ? _value.isSurahLoading
           : isSurahLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isDrawerOpened: null == isDrawerOpened
+          ? _value.isDrawerOpened
+          : isDrawerOpened // ignore: cast_nullable_to_non_nullable
               as bool,
       selectedSurahId: null == selectedSurahId
           ? _value.selectedSurahId
@@ -149,6 +156,7 @@ abstract class _$$SurahStateImplCopyWith<$Res>
   $Res call(
       {bool isJuzLoading,
       bool isSurahLoading,
+      bool isDrawerOpened,
       int selectedSurahId,
       int selectedJuzId,
       int selectedBookmarkId,
@@ -176,6 +184,7 @@ class __$$SurahStateImplCopyWithImpl<$Res>
   $Res call({
     Object? isJuzLoading = null,
     Object? isSurahLoading = null,
+    Object? isDrawerOpened = null,
     Object? selectedSurahId = null,
     Object? selectedJuzId = null,
     Object? selectedBookmarkId = null,
@@ -195,6 +204,10 @@ class __$$SurahStateImplCopyWithImpl<$Res>
       isSurahLoading: null == isSurahLoading
           ? _value.isSurahLoading
           : isSurahLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isDrawerOpened: null == isDrawerOpened
+          ? _value.isDrawerOpened
+          : isDrawerOpened // ignore: cast_nullable_to_non_nullable
               as bool,
       selectedSurahId: null == selectedSurahId
           ? _value.selectedSurahId
@@ -246,6 +259,7 @@ class _$SurahStateImpl extends _SurahState {
   const _$SurahStateImpl(
       {this.isJuzLoading = false,
       this.isSurahLoading = false,
+      this.isDrawerOpened = false,
       this.selectedSurahId = 0,
       this.selectedJuzId = 0,
       this.selectedBookmarkId = 0,
@@ -266,6 +280,9 @@ class _$SurahStateImpl extends _SurahState {
   @override
   @JsonKey()
   final bool isSurahLoading;
+  @override
+  @JsonKey()
+  final bool isDrawerOpened;
   @override
   @JsonKey()
   final int selectedSurahId;
@@ -309,7 +326,7 @@ class _$SurahStateImpl extends _SurahState {
 
   @override
   String toString() {
-    return 'SurahState(isJuzLoading: $isJuzLoading, isSurahLoading: $isSurahLoading, selectedSurahId: $selectedSurahId, selectedJuzId: $selectedJuzId, selectedBookmarkId: $selectedBookmarkId, selectIndex: $selectIndex, selectedVerseId: $selectedVerseId, selectedIndicationType: $selectedIndicationType, juzes: $juzes, bookmarks: $bookmarks, juz: $juz, chapter: $chapter)';
+    return 'SurahState(isJuzLoading: $isJuzLoading, isSurahLoading: $isSurahLoading, isDrawerOpened: $isDrawerOpened, selectedSurahId: $selectedSurahId, selectedJuzId: $selectedJuzId, selectedBookmarkId: $selectedBookmarkId, selectIndex: $selectIndex, selectedVerseId: $selectedVerseId, selectedIndicationType: $selectedIndicationType, juzes: $juzes, bookmarks: $bookmarks, juz: $juz, chapter: $chapter)';
   }
 
   @override
@@ -321,6 +338,8 @@ class _$SurahStateImpl extends _SurahState {
                 other.isJuzLoading == isJuzLoading) &&
             (identical(other.isSurahLoading, isSurahLoading) ||
                 other.isSurahLoading == isSurahLoading) &&
+            (identical(other.isDrawerOpened, isDrawerOpened) ||
+                other.isDrawerOpened == isDrawerOpened) &&
             (identical(other.selectedSurahId, selectedSurahId) ||
                 other.selectedSurahId == selectedSurahId) &&
             (identical(other.selectedJuzId, selectedJuzId) ||
@@ -345,6 +364,7 @@ class _$SurahStateImpl extends _SurahState {
       runtimeType,
       isJuzLoading,
       isSurahLoading,
+      isDrawerOpened,
       selectedSurahId,
       selectedJuzId,
       selectedBookmarkId,
@@ -369,6 +389,7 @@ abstract class _SurahState extends SurahState {
   const factory _SurahState(
       {final bool isJuzLoading,
       final bool isSurahLoading,
+      final bool isDrawerOpened,
       final int selectedSurahId,
       final int selectedJuzId,
       final int selectedBookmarkId,
@@ -385,6 +406,8 @@ abstract class _SurahState extends SurahState {
   bool get isJuzLoading;
   @override
   bool get isSurahLoading;
+  @override
+  bool get isDrawerOpened;
   @override
   int get selectedSurahId;
   @override

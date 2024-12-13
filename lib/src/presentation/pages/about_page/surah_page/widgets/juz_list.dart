@@ -29,6 +29,7 @@ class JuzList extends ConsumerWidget {
                 : null,
             padding: REdgeInsets.all(5),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
                   height: 50.r,
@@ -51,24 +52,28 @@ class JuzList extends ConsumerWidget {
                         style: Style.interRegular(size: 10),
                       )),
                 ),
+                if(state.isDrawerOpened)
                 14.horizontalSpace,
-                SizedBox(
-                  height: 50.r,
-                  child: Column(
-                    crossAxisAlignment:
-                    CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "${ref.watch(surahProvider).juzes[index].number} - ${LocaleKeys.juz.tr()}",
-                        style: Style.interRegular(
-                            size: 18),
-                      ),
-                      Text(
-                        "${ref.watch(surahProvider).juzes[index].title}",
-                        style:
-                        Style.interRegular(size: 8),
-                      ),
-                    ],
+                if(state.isDrawerOpened)
+                Expanded(
+                  child: SizedBox(
+                    height: 50.r,
+                    child: Column(
+                      crossAxisAlignment:
+                      CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "${ref.watch(surahProvider).juzes[index].number} - ${LocaleKeys.juz.tr()}",
+                          style: Style.interRegular(
+                              size: 18),
+                        ),
+                        Text(
+                          "${ref.watch(surahProvider).juzes[index].title}",
+                          style:
+                          Style.interRegular(size: 8),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
