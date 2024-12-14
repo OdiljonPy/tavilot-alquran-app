@@ -962,6 +962,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.5.0"
+  nuget:
+    dependency: "direct main"
+    description:
+      name: nuget
+      sha256: "5a80bb680a210477a6d8a6e338f15da4f1861e86fb1ebbeedf2279bbb0eb673c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.0"
   octo_image:
     dependency: transitive
     description:
@@ -1551,6 +1559,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.4"
+  version:
+    dependency: transitive
+    description:
+      name: version
+      sha256: "3d4140128e6ea10d83da32fef2fa4003fccbf6852217bb854845802f04191f94"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.2"
   video_player:
     dependency: transitive
     description:
