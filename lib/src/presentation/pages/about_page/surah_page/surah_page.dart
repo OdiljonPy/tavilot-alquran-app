@@ -134,34 +134,37 @@ class _SurahPageState extends ConsumerState<SurahPage> {
                     children: [
                       Icon(
                         Icons.keyboard_double_arrow_left,
-                        size: 10.r,
+                        size: 14.r,
                         color: Style.primary,
                       ),
-                      Text(LocaleKeys.close.tr(), style: Style.interNormal(
-                          size: 10,
-                          color: Style.primary),)
-
+                      Text(
+                        LocaleKeys.close.tr(),
+                        style:
+                            Style.interNormal(size: 14, color: Style.primary),
+                      )
                     ],
                   ))
             ],
           )
-        :   ButtonEffect(
-      onTap: () {
-        notifier.changeDrawer();
-      },
-          child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.keyboard_double_arrow_right,
-                size: 10.r,
-                color: Style.primary,
-              ),
-              Text(LocaleKeys.open.tr(), style: Style.interNormal(
-                  size: 10,color: Style.primary),)
-            ],
-          ),
-        );
+        : ButtonEffect(
+            onTap: () {
+              notifier.changeDrawer();
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.keyboard_double_arrow_right,
+                  size: 14.r,
+                  color: Style.primary,
+                ),
+                Text(
+                  LocaleKeys.open.tr(),
+                  style: Style.interNormal(size: 14, color: Style.primary),
+                )
+              ],
+            ),
+          );
   }
 
   Widget _selectTypeOfIndication(SurahState state, SurahNotifier notifier) {

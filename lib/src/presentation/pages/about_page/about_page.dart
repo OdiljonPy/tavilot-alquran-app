@@ -36,7 +36,6 @@ class AboutPage extends ConsumerWidget {
                           ),
                         );
                       } catch (e) {
-                        // Handle decoding errors
                         return const Icon(Icons.error, color: Colors.red);
                       }
                     },

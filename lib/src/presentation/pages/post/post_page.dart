@@ -1,15 +1,11 @@
 import 'dart:convert';
-import 'package:al_quran/src/core/routes/app_router.dart';
 import 'package:al_quran/src/presentation/components/components.dart';
-import 'package:al_quran/src/presentation/pages/post/youtube_launcher.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../../application/for_students/for_students_provider.dart';
-import 'webview_windows.dart';
 
 class PostPage extends ConsumerStatefulWidget {
   const PostPage({super.key});
@@ -80,26 +76,31 @@ class _PostPageState extends ConsumerState<PostPage> {
                       }
                     },
                     data: ref.watch(forStudentsProvider).category?.description ?? ""),
-                // if (ref.watch(forStudentsProvider).category?.file != null)
-                // SizedBox(
-                //   height: MediaQuery.sizeOf(context).height *.7,
-                //   child: WebViewPage(
-                //       url: ref.watch(forStudentsProvider).category?.file ?? ""),
-                // ),
-                ButtonEffect(
-                  onTap: (){
-                    _launchYouTube(ref.watch(forStudentsProvider).category?.file ?? "");
-                  },
-                  child: Container(
-                    child: Text("ddddddd"),
+                if (ref.watch(forStudentsProvider).category?.file != null)
+                  Center(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Image.asset("assets/png/pdf.png"),
+                        20.verticalSpace,
+                        SizedBox(
+                            width: MediaQuery.sizeOf(context).width/5,
+                            child: LoginButton(title: "Yuklab olish", onPressed: (){
+                              _launchYouTube(ref.watch(forStudentsProvider).category?.file ?? "");
+                            })),
+                      ],
+                    ),
                   ),
-                )
-                // SizedBox(
-                //   width: MediaQuery.sizeOf(context).width,
-                //   height: MediaQuery.sizeOf(context).height *.7,
-                //   child: YouTubePlayerPage(
-                //       videoUrl:"https://www.youtube.com/watch?v=ytmY9QzfWSc"),
-                // ),
+                // ButtonEffect(
+                //   onTap: (){
+                //     _launchYouTube(ref.watch(forStudentsProvider).category?.file ?? "");
+                //   },
+                //   child: Container(
+                //     child: Text("ddddddd"),
+                //   ),
+                // )
+
               ],
             ),
           );

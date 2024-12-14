@@ -86,7 +86,7 @@ class JuzIndicatorList extends ConsumerWidget {
                         crossAxisAlignment:
                         CrossAxisAlignment.start,
                         mainAxisAlignment:
-                        MainAxisAlignment.end,
+                        MainAxisAlignment.center,
                         children: [
                           20.horizontalSpace,
                           Container(
@@ -111,24 +111,9 @@ class JuzIndicatorList extends ConsumerWidget {
                               )),
                           20.horizontalSpace,
                           Flexible(
-                            child: Directionality(
-                              textDirection:TextDirection.rtl,
-                              child: Text.rich(
-                                // textAlign: TextAlign.justify,
-                                  TextSpan(
-                                    children: [
-                                      TextSpan(
-                                        text:   "      ",
-                                        style: Style.regularArabic(size: 20),
-                                      ),
-                                      TextSpan(
-                                        text:   "${ref.watch(surahProvider).juz?.result?.chapters?[index].verses?[i].textArabic}",
-                                        style: Style.regularArabic(size: 20),
-                                      ),
-                                    ],
-                                  )
-
-                              ),
+                            child: Text(
+                                 "${ref.watch(surahProvider).juz?.result?.chapters?[index].verses?[i].textArabic}",
+                              style: Style.regularArabic(size: 20),
                             ),
                           ),
                           20.horizontalSpace,
@@ -145,12 +130,12 @@ class JuzIndicatorList extends ConsumerWidget {
                               2)
                         Row(
                           children: [
+                            20.horizontalSpace,
                             Expanded(
                               child: Text(
                                 "${ref.watch(surahProvider).juz?.result?.chapters?[index].verses?[i].text}",
                                 style: Style.interRegular(
                                     size: 20),
-                                textAlign: TextAlign.end,
                               ),
                             ),
                             20.horizontalSpace,
@@ -163,12 +148,12 @@ class JuzIndicatorList extends ConsumerWidget {
                           2)
                         Row(
                           children: [
+                            20.horizontalSpace,
                               Expanded(
                               child: Text(
                                 "${ref.watch(surahProvider).juz?.result?.chapters?[index].verses?[i].description}",
                                 style: Style.interRegular(
                                     size: 20),
-                                textAlign: TextAlign.end,
                               ),
                             ),
                             20.horizontalSpace,

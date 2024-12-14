@@ -21,11 +21,9 @@ class ChapterIndicatorList extends ConsumerWidget {
           style: Style.interSemi(size: 24),
         ),
         Text(
-          "${ref.watch(surahProvider).chapter?.typeChoice == 1
-              ? LocaleKeys.makka.tr()
-              : LocaleKeys.madina.tr()}, "
-              "${ref.watch(surahProvider).chapter?.verseNumber} "
-              "${LocaleKeys.verse.tr()}",
+          "${ref.watch(surahProvider).chapter?.typeChoice == 1 ? LocaleKeys.makka.tr() : LocaleKeys.madina.tr()}, "
+          "${ref.watch(surahProvider).chapter?.verseNumber} "
+          "${LocaleKeys.verse.tr()}",
           style: Style.interRegular(size: 16),
         ),
         120.verticalSpace,
@@ -67,11 +65,10 @@ class ChapterIndicatorList extends ConsumerWidget {
                           )),
                       20.horizontalSpace,
                       Flexible(
-                        child:     Text(
-                          "${ref.watch(surahProvider).chapter?.verses?[j].textArabic}",
-                          style: Style.regularArabic(size: 20),
-                        )
-                      ),
+                          child: Text(
+                        "${ref.watch(surahProvider).chapter?.verses?[j].textArabic}",
+                        style: Style.regularArabic(size: 20),
+                      )),
                       20.horizontalSpace,
                     ],
                   ),
@@ -82,11 +79,12 @@ class ChapterIndicatorList extends ConsumerWidget {
                       state.selectedIndicationType == 2)
                     Row(
                       children: [
+                        20.horizontalSpace,
                         Expanded(
                           child: Text(
                             "${ref.watch(surahProvider).chapter?.verses?[j].text}",
                             style: Style.interRegular(size: 20),
-                            textAlign: TextAlign.end,
+                            // textAlign: TextAlign.end,
                           ),
                         ),
                         20.horizontalSpace,
@@ -96,11 +94,11 @@ class ChapterIndicatorList extends ConsumerWidget {
                   if (state.selectedIndicationType == 2)
                     Row(
                       children: [
+                        20.horizontalSpace,
                         Expanded(
                           child: Text(
                             "${ref.watch(surahProvider).chapter?.verses?[j].description}",
                             style: Style.interRegular(size: 20),
-                            textAlign: TextAlign.end,
                           ),
                         ),
                         20.horizontalSpace,
