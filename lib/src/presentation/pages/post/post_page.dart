@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../../application/for_students/for_students_provider.dart';
 import 'webview_windows.dart';
 
@@ -18,6 +19,17 @@ class PostPage extends ConsumerStatefulWidget {
 }
 
 class _PostPageState extends ConsumerState<PostPage> {
+  Future<void> _launchYouTube(String url) async {
+    final Uri uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(
+        uri,
+        mode: LaunchMode.externalApplication, // Opens in browser or YouTube app
+      );
+    } else {
+      throw Exception('Could not launch $url');
+    }
+  }
 
   @override
   void initState() {
@@ -74,14 +86,14 @@ class _PostPageState extends ConsumerState<PostPage> {
                 //   child: WebViewPage(
                 //       url: ref.watch(forStudentsProvider).category?.file ?? ""),
                 // ),
-                // ButtonEffect(
-                //   onTap: (){
-                //     context.pushRoute(YouTubePlayerRoute(videoUrl: "https://www.youtube.com/watch?v=ytmY9QzfWSc"));
-                //   },
-                //   child: Container(
-                //     child: Text("ddddddd"),
-                //   ),
-                // )
+                ButtonEffect(
+                  onTap: (){
+                    _launchYouTube(ref.watch(forStudentsProvider).category?.file ?? "");
+                  },
+                  child: Container(
+                    child: Text("ddddddd"),
+                  ),
+                )
                 // SizedBox(
                 //   width: MediaQuery.sizeOf(context).width,
                 //   height: MediaQuery.sizeOf(context).height *.7,
