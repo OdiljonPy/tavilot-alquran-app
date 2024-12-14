@@ -68,6 +68,7 @@ class GetCategory {
     fileType: json["file_type"],
     description: json["description"],
     isPublished: json["is_published"],
+    // isPublished: json["youtube_url"],
   );
 
   Map<String, dynamic> toJson() => {

@@ -7,7 +7,7 @@ import '../../presentation/pages/auth/pin_code/pin_code_page.dart';
 import '../../presentation/pages/auth/register/register_page.dart';
 import '../../presentation/pages/initial/splash_page.dart';
 import '../../presentation/pages/main/main_page.dart';
-import '../../presentation/pages/post/test.dart';
+import '../../presentation/pages/post/youtube_launcher.dart';
 import '../../presentation/pages/success_page/success_page.dart';
 
 part 'app_router.gr.dart';
@@ -25,5 +25,6 @@ class AppRouter extends _$AppRouter {
             page: RegisterConfirmationRoute.page),
         CupertinoRoute(path: '/pinCode', page: PinCodeRoute.page),
         CupertinoRoute(path: '/success', page: SuccessRoute.page),
+        CupertinoRoute(path: '/youtube', page: YouTubePlayerRoute.page),
       ];
 }

@@ -16,7 +16,9 @@ class ForStudentsPage extends ConsumerWidget {
           : REdgeInsets.all(40),
       child: ref.watch(forStudentsProvider).selectedIndex == 0
           ? const SingleCategoryPage()
-          :  const PostPage()
+          :  const PostPage(
+
+      )
     );
   }
 }

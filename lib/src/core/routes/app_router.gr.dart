@@ -65,13 +65,13 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const SuccessPage(),
       );
     },
-    WebViewRoute.name: (routeData) {
-      final args = routeData.argsAs<WebViewRouteArgs>();
+    YouTubePlayerRoute.name: (routeData) {
+      final args = routeData.argsAs<YouTubePlayerRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: WebViewPage(
+        child: YouTubePlayerPage(
           key: args.key,
-          url: args.url,
+          videoUrl: args.videoUrl,
         ),
       );
     },
@@ -226,39 +226,39 @@ class SuccessRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [WebViewPage]
-class WebViewRoute extends PageRouteInfo<WebViewRouteArgs> {
-  WebViewRoute({
+/// [YouTubePlayerPage]
+class YouTubePlayerRoute extends PageRouteInfo<YouTubePlayerRouteArgs> {
+  YouTubePlayerRoute({
     Key? key,
-    required String url,
+    required String videoUrl,
     List<PageRouteInfo>? children,
   }) : super(
-          WebViewRoute.name,
-          args: WebViewRouteArgs(
+          YouTubePlayerRoute.name,
+          args: YouTubePlayerRouteArgs(
             key: key,
-            url: url,
+            videoUrl: videoUrl,
           ),
           initialChildren: children,
         );
 
-  static const String name = 'WebViewRoute';
+  static const String name = 'YouTubePlayerRoute';
 
-  static const PageInfo<WebViewRouteArgs> page =
-      PageInfo<WebViewRouteArgs>(name);
+  static const PageInfo<YouTubePlayerRouteArgs> page =
+      PageInfo<YouTubePlayerRouteArgs>(name);
 }
 
-class WebViewRouteArgs {
-  const WebViewRouteArgs({
+class YouTubePlayerRouteArgs {
+  const YouTubePlayerRouteArgs({
     this.key,
-    required this.url,
+    required this.videoUrl,
   });
 
   final Key? key;
 
-  final String url;
+  final String videoUrl;
 
   @override
   String toString() {
-    return 'WebViewRouteArgs{key: $key, url: $url}';
+    return 'YouTubePlayerRouteArgs{key: $key, videoUrl: $videoUrl}';
   }
 }

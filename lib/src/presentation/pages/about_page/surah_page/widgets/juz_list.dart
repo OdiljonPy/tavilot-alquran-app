@@ -75,7 +75,7 @@ class JuzList extends ConsumerWidget {
                       ],
                     ),
                   ),
-                ),
+                ),  
               ],
             ),
           ),

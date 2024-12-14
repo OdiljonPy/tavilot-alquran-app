@@ -47,7 +47,7 @@ class ChapterIndicatorList extends ConsumerWidget {
                 children: [
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       20.horizontalSpace,
                       Container(
@@ -67,25 +67,10 @@ class ChapterIndicatorList extends ConsumerWidget {
                           )),
                       20.horizontalSpace,
                       Flexible(
-                        child: Directionality(
-                          textDirection:TextDirection.rtl,
-                          child: Text.rich(
-                              // textAlign: TextAlign.justify,
-                            TextSpan(
-                              children: [
-                                TextSpan(
-                                  text:   "      ",
-                                  style: Style.regularArabic(size: 20),
-                                ),
-                              TextSpan(
-                                text:   "${ref.watch(surahProvider).chapter?.verses?[j].textArabic}",
-                                style: Style.regularArabic(size: 20),
-                              ),
-                              ],
-                            )
-
-                          ),
-                        ),
+                        child:     Text(
+                          "${ref.watch(surahProvider).chapter?.verses?[j].textArabic}",
+                          style: Style.regularArabic(size: 20),
+                        )
                       ),
                       20.horizontalSpace,
                     ],

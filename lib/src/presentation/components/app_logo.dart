@@ -10,11 +10,9 @@ class AppLogo extends StatelessWidget {
     return Hero(
       tag: AppConstants.heroLogo,
       child: SizedBox(
-        width: 52.r,
         child: Image.asset(
           'assets/png/blog_logo.png',
-          height: 52.r,
-          width: 52.r,
+          height: 60.r,
         ),
       ),
     );
