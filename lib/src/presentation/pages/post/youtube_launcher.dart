@@ -2,7 +2,6 @@ import 'package:auto_route/annotations.dart';
 import 'package:flutter/foundation.dart' show defaultTargetPlatform, TargetPlatform;
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-import 'package:webview_windows/webview_windows.dart';
 @RoutePage()
 class YouTubePlayerPage extends StatefulWidget {
   final String videoUrl;
@@ -15,7 +14,7 @@ class YouTubePlayerPage extends StatefulWidget {
 
 class _YouTubePlayerPageState extends State<YouTubePlayerPage> {
   late YoutubePlayerController _youtubeController;
-  final WebviewController _webviewController = WebviewController();
+  // final WebviewController _webviewController = WebviewController();
   bool _isWindows = false;
 
   @override
@@ -25,11 +24,9 @@ class _YouTubePlayerPageState extends State<YouTubePlayerPage> {
     // Detect the platform
     _isWindows = defaultTargetPlatform == TargetPlatform.windows;
 
-    if (_isWindows) {
-      _initializeWebView();
-    } else {
+
       _initializeYouTubePlayer();
-    }
+
   }
 
   void _initializeYouTubePlayer() {
@@ -43,18 +40,18 @@ class _YouTubePlayerPageState extends State<YouTubePlayerPage> {
     );
   }
 
-  Future<void> _initializeWebView() async {
-    await _webviewController.initialize();
-    final videoId = YoutubePlayer.convertUrlToId(widget.videoUrl);
-    final embedUrl = 'https://www.youtube.com/embed/$videoId';
-    await _webviewController.loadUrl(embedUrl);
-  }
+  // Future<void> _initializeWebView() async {
+  //   await _webviewController.initialize();
+  //   final videoId = YoutubePlayer.convertUrlToId(widget.videoUrl);
+  //   final embedUrl = 'https://www.youtube.com/embed/$videoId';
+  //   await _webviewController.loadUrl(embedUrl);
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("YouTube Player")),
-      body: _isWindows ? _buildWebView() : _buildYouTubePlayer(),
+      body: _buildYouTubePlayer(),
     );
   }
 
@@ -68,11 +65,11 @@ class _YouTubePlayerPageState extends State<YouTubePlayerPage> {
     );
   }
 
-  Widget _buildWebView() {
-    return Center(
-      child: Webview(_webviewController),
-    );
-  }
+  // Widget _buildWebView() {
+  //   return Center(
+  //     child: Webview(_webviewController),
+  //   );
+  // }
 
   @override
   void dispose() {

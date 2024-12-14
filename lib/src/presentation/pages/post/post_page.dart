@@ -69,25 +69,25 @@ class _PostPageState extends ConsumerState<PostPage> {
                     },
                     data: ref.watch(forStudentsProvider).category?.description ?? ""),
                 if (ref.watch(forStudentsProvider).category?.file != null)
-                SizedBox(
-                  height: MediaQuery.sizeOf(context).height *.7,
-                  child: WebViewPage(
-                      url: ref.watch(forStudentsProvider).category?.file ?? ""),
-                ),
-                ButtonEffect(
-                  onTap: (){
-                    context.pushRoute(YouTubePlayerRoute(videoUrl: "https://www.youtube.com/watch?v=ytmY9QzfWSc"));
-                  },
-                  child: Container(
-                    child: Text("ddddddd"),
-                  ),
-                )
                 // SizedBox(
-                //   width: MediaQuery.sizeOf(context).width,
                 //   height: MediaQuery.sizeOf(context).height *.7,
-                //   child: YouTubePlayerPage(
-                //       videoUrl:"https://www.youtube.com/watch?v=ytmY9QzfWSc"),
+                //   child: WebViewPage(
+                //       url: ref.watch(forStudentsProvider).category?.file ?? ""),
                 // ),
+                // ButtonEffect(
+                //   onTap: (){
+                //     context.pushRoute(YouTubePlayerRoute(videoUrl: "https://www.youtube.com/watch?v=ytmY9QzfWSc"));
+                //   },
+                //   child: Container(
+                //     child: Text("ddddddd"),
+                //   ),
+                // )
+                SizedBox(
+                  width: MediaQuery.sizeOf(context).width,
+                  height: MediaQuery.sizeOf(context).height *.7,
+                  child: YouTubePlayerPage(
+                      videoUrl:"https://www.youtube.com/watch?v=ytmY9QzfWSc"),
+                ),
               ],
             ),
           );
