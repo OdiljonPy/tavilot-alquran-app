@@ -146,7 +146,7 @@ class Verse {
   final int? number;
   final String? text;
   final String? textArabic;
-  final dynamic description;
+  final String? description;
 
   Verse({
     this.id,
@@ -165,7 +165,7 @@ class Verse {
     int? number,
     String? text,
     String? textArabic,
-    dynamic description,
+    String? description,
   }) =>
       Verse(
         id: id ?? this.id,

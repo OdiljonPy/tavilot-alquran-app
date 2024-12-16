@@ -1,3 +1,4 @@
+import 'package:al_quran/src/core/utils/app_helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -45,14 +46,9 @@ class MainPostItem extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 10.r,
-            right: index .isEven ? -30.r: -60.r,
-            child: Image.asset(
-              index.isEven ? "assets/png/blog_image.png" :
-              "assets/png/blog_image_second.png",
-              height: 180.r,
-              width: 235.r,
-            ),
+            top: 12.r,
+            right: 12.r,
+            child: SvgPicture.asset("assets/svg/${AppHelpers.numberToOrdinal(index)}.svg",  color: Style.white.withOpacity(.7),height: 250.r /2,),
           )
         ],
       ),

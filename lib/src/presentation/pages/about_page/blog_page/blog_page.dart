@@ -53,10 +53,10 @@ class _BlogPageState extends ConsumerState<BlogPage> {
               },
               icon: "assets/svg/book.svg",
               title: LocaleKeys.abuMansurMotrudiy.tr(),
-              index: 2,
+              index: 1,
             ),
             MainPostItem(
-              index: 1,
+              index: 2,
               onTap: () {
                 ref.read(mainProvider.notifier).changeIndex(3,
                     onSuccess: () async {
@@ -70,7 +70,7 @@ class _BlogPageState extends ConsumerState<BlogPage> {
               title: LocaleKeys.tavilotAlQuran.tr(),
             ),
             MainPostItem(
-              index: 1,
+              index: 3,
               onTap: () {
                 ref.read(mainProvider.notifier).changeIndex(1);
                 ref.read(forStudentsProvider.notifier)
@@ -81,7 +81,7 @@ class _BlogPageState extends ConsumerState<BlogPage> {
               title: LocaleKeys.manuscriptAndComments.tr(),
             ),
             MainPostItem(
-              index: 1,
+              index: 4,
               onTap: () {
                 ref.read(mainProvider.notifier).changeIndex(1);
                 ref.read(forStudentsProvider.notifier)
@@ -92,7 +92,7 @@ class _BlogPageState extends ConsumerState<BlogPage> {
               title: LocaleKeys.modernStudies.tr(),
             ),
             MainPostItem(
-              index: 1,
+              index: 5,
               onTap: () {
                 ref.read(mainProvider.notifier).changeIndex(1);
                 ref.read(forStudentsProvider.notifier)

@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../../application/surah/surah_provider.dart';
@@ -75,8 +78,15 @@ class ChapterIndicatorList extends ConsumerWidget {
                   if (state.selectedIndicationType == 1 ||
                       state.selectedIndicationType == 2)
                     28.verticalSpace,
-                  if (state.selectedIndicationType == 1 ||
-                      state.selectedIndicationType == 2)
+                  if ((state.selectedIndicationType == 1 ||
+                          state.selectedIndicationType == 2) &&
+                      (ref
+                              .watch(surahProvider)
+                              .chapter
+                              ?.verses?[j]
+                              .text
+                              ?.isNotEmpty ??
+                          false))
                     Row(
                       children: [
                         20.horizontalSpace,
@@ -90,20 +100,45 @@ class ChapterIndicatorList extends ConsumerWidget {
                         20.horizontalSpace,
                       ],
                     ),
-                  if (state.selectedIndicationType == 2) 28.verticalSpace,
-                  if (state.selectedIndicationType == 2)
-                    Row(
-                      children: [
-                        20.horizontalSpace,
-                        Expanded(
-                          child: Text(
-                            "${ref.watch(surahProvider).chapter?.verses?[j].description}",
-                            style: Style.interRegular(size: 20),
-                          ),
-                        ),
-                        20.horizontalSpace,
-                      ],
-                    ),
+                  if (state.selectedIndicationType == 2 &&
+            (ref
+                          .watch(surahProvider)
+                          .chapter
+                          ?.verses?[j]
+                          .description
+                          ?.isNotEmpty ?? false ))
+                    28.verticalSpace,
+                  if (state.selectedIndicationType == 2 &&
+            (ref
+                .watch(surahProvider)
+                .chapter
+                ?.verses?[j]
+                .description
+                ?.isNotEmpty ?? false ))
+                  Markdown(
+                      shrinkWrap: true,
+                      imageBuilder: (uri, title, alt) {
+                        final base64String = uri.toString().split(',').last;
+                        try {
+                          final imageBytes = base64Decode(base64String);
+                          return ClipRRect(
+                            borderRadius: BorderRadius.circular(8.0),
+                            child: Image.memory(
+                              imageBytes,
+                            ),
+                          );
+                        } catch (e) {
+                          // Handle decoding errors
+                          return const Icon(Icons.error, color: Colors.red);
+                        }
+                      },
+                      styleSheet: MarkdownStyleSheet(
+                        p: Style.interRegular(size: 20),
+                        blockquotePadding: const EdgeInsets.all(12.0),
+                      ),
+                      data:
+                      ref.watch(surahProvider).chapter?.verses?[j].description ??
+                          ""),
                   14.verticalSpace
                 ],
               ),

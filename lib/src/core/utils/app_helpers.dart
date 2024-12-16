@@ -18,7 +18,27 @@ class AppHelpers {
   static String phoneNumberSpaceRemover(String phoneNumber) {
     return phoneNumber.replaceAll(RegExp(r'[^\d+]'), '');
   }
-  static MaskTextInputFormatter phoneFormatter() {
+
+ static String numberToOrdinal(int number) {
+    switch (number) {
+      case 1:
+        return 'first';
+      case 2:
+        return 'second';
+      case 3:
+        return 'third';
+      case 4:
+        return 'fourth';
+      case 5:
+        return 'fifth';
+      case 6:
+        return 'sixth';
+      default:
+        return 'Number out of range';
+    }
+  }
+
+    static MaskTextInputFormatter phoneFormatter() {
     return MaskTextInputFormatter(
       mask: '+998 (##) ###-##-##',
       filter: {
