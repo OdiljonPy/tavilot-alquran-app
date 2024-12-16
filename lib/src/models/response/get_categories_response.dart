@@ -33,6 +33,7 @@ class GetCategory {
   final String? file;
   final String? fileType;
   final String? description;
+  final String? youtubeUrl;
   final bool? isPublished;
 
   GetCategory({
@@ -41,6 +42,7 @@ class GetCategory {
     this.file,
     this.fileType,
     this.description,
+    this.youtubeUrl,
     this.isPublished,
   });
 
@@ -50,6 +52,7 @@ class GetCategory {
     String? file,
     String? fileType,
     String? description,
+    String? youtubeUrl,
     bool? isPublished,
   }) =>
       GetCategory(
@@ -58,6 +61,7 @@ class GetCategory {
         file: file ?? this.file,
         fileType: fileType ?? this.fileType,
         description: description ?? this.description,
+        youtubeUrl: youtubeUrl ?? this.youtubeUrl,
         isPublished: isPublished ?? this.isPublished,
       );
 
@@ -68,7 +72,7 @@ class GetCategory {
     fileType: json["file_type"],
     description: json["description"],
     isPublished: json["is_published"],
-    // isPublished: json["youtube_url"],
+    youtubeUrl: json["youtube_url"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -78,5 +82,6 @@ class GetCategory {
     "file_type": fileType,
     "description": description,
     "is_published": isPublished,
+    "youtube_url": youtubeUrl,
   };
 }

@@ -65,16 +65,6 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const SuccessPage(),
       );
     },
-    // YouTubePlayerRoute.name: (routeData) {
-    //   final args = routeData.argsAs<YouTubePlayerRouteArgs>();
-    //   return AutoRoutePage<dynamic>(
-    //     routeData: routeData,
-    //     child: YouTubePlayerPage(
-    //       key: args.key,
-    //       videoUrl: args.videoUrl,
-    //     ),
-    //   );
-    // },
   };
 }
 

@@ -1,11 +1,14 @@
 import 'dart:convert';
+import 'package:al_quran/infrastructure/translations/locale_keys.g.dart';
+import 'package:al_quran/src/core/utils/app_helpers.dart';
 import 'package:al_quran/src/presentation/components/components.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../../../../application/for_students/for_students_provider.dart';
+import 'widgets/youtube_thumbnail.dart';
 
 class PostPage extends ConsumerStatefulWidget {
   const PostPage({super.key});
@@ -15,24 +18,10 @@ class PostPage extends ConsumerStatefulWidget {
 }
 
 class _PostPageState extends ConsumerState<PostPage> {
-  Future<void> _launchYouTube(String url) async {
-    final Uri uri = Uri.parse(url);
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(
-        uri,
-        mode: LaunchMode.externalApplication, // Opens in browser or YouTube app
-      );
-    } else {
-      throw Exception('Could not launch $url');
-    }
-  }
-
   @override
   void initState() {
     super.initState();
-
   }
-
 
   @override
   void dispose() {
@@ -75,7 +64,9 @@ class _PostPageState extends ConsumerState<PostPage> {
                         return const Icon(Icons.error, color: Colors.red);
                       }
                     },
-                    data: ref.watch(forStudentsProvider).category?.description ?? ""),
+                    data:
+                        ref.watch(forStudentsProvider).category?.description ??
+                            ""),
                 if (ref.watch(forStudentsProvider).category?.file != null)
                   Center(
                     child: Column(
@@ -85,22 +76,26 @@ class _PostPageState extends ConsumerState<PostPage> {
                         Image.asset("assets/png/pdf.png"),
                         20.verticalSpace,
                         SizedBox(
-                            width: MediaQuery.sizeOf(context).width/5,
-                            child: LoginButton(title: "Yuklab olish", onPressed: (){
-                              _launchYouTube(ref.watch(forStudentsProvider).category?.file ?? "");
-                            })),
+                            width: MediaQuery.sizeOf(context).width / 5,
+                            child: LoginButton(
+                                title: LocaleKeys.download.tr(),
+                                onPressed: () {
+                                  AppHelpers.launchExternalUrl(ref
+                                          .watch(forStudentsProvider)
+                                          .category
+                                          ?.file ??
+                                      "");
+                                })),
                       ],
                     ),
                   ),
-                // ButtonEffect(
-                //   onTap: (){
-                //     _launchYouTube(ref.watch(forStudentsProvider).category?.file ?? "");
-                //   },
-                //   child: Container(
-                //     child: Text("ddddddd"),
-                //   ),
-                // )
-
+                if (ref.watch(forStudentsProvider).category?.youtubeUrl !=
+                        null &&
+                    ref.watch(forStudentsProvider).category?.youtubeUrl != "")
+                  YouTubeThumbnail(
+                      videoUrl:
+                          ref.watch(forStudentsProvider).category?.youtubeUrl ??
+                              ""),
               ],
             ),
           );

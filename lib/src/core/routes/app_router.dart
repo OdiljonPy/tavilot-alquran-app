@@ -1,15 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart' hide Image;
-
 import '../../presentation/pages/auth/confirmation/register_confirmation_page.dart';
 import '../../presentation/pages/auth/login/login_page.dart';
 import '../../presentation/pages/auth/pin_code/pin_code_page.dart';
 import '../../presentation/pages/auth/register/register_page.dart';
 import '../../presentation/pages/initial/splash_page.dart';
 import '../../presentation/pages/main/main_page.dart';
-import '../../presentation/pages/post/youtube_launcher.dart';
 import '../../presentation/pages/success_page/success_page.dart';
-
 part 'app_router.gr.dart';
 
 @AutoRouterConfig()
@@ -25,6 +22,5 @@ class AppRouter extends _$AppRouter {
             page: RegisterConfirmationRoute.page),
         CupertinoRoute(path: '/pinCode', page: PinCodeRoute.page),
         CupertinoRoute(path: '/success', page: SuccessRoute.page),
-        CupertinoRoute(path: '/youtube', page: YouTubePlayerRoute.page),
       ];
 }

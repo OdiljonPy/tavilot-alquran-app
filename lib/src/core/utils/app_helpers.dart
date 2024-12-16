@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../infrastructure/translations/locale_keys.g.dart';
 import '../../presentation/styles/style.dart';
 import '../constants/constants.dart';
@@ -25,6 +26,17 @@ class AppHelpers {
       },
       type: MaskAutoCompletionType.lazy,
     );
+  }
+  static Future<void> launchExternalUrl(String url) async {
+    final Uri uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(
+        uri,
+        mode: LaunchMode.externalApplication, // Opens in browser or YouTube app
+      );
+    } else {
+      throw Exception('Could not launch $url');
+    }
   }
 
   static String errorCodeToMessage(int errorCode) {

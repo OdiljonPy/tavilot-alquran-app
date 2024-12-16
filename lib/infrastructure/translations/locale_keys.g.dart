@@ -67,5 +67,6 @@ abstract class  LocaleKeys {
   static const rebuttalsToFanaticism = 'rebuttalsToFanaticism';
   static const tavilotAlQuran = 'tavilotAlQuran';
   static const resources = 'resources';
+  static const watchVideo = 'watchVideo';
 
 }
