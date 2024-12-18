@@ -10,7 +10,7 @@ class SurahState with _$SurahState {
   const factory SurahState({
     @Default(false) bool isJuzLoading,
     @Default(false) bool isSurahLoading,
-    @Default(false) bool isDrawerOpened,
+    @Default(true) bool isDrawerOpened,
     @Default(0) int selectedSurahId,
     @Default(0) int selectedJuzId,
     @Default(0) int selectedBookmarkId,

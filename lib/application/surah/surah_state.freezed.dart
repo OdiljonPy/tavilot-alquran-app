@@ -259,7 +259,7 @@ class _$SurahStateImpl extends _SurahState {
   const _$SurahStateImpl(
       {this.isJuzLoading = false,
       this.isSurahLoading = false,
-      this.isDrawerOpened = false,
+      this.isDrawerOpened = true,
       this.selectedSurahId = 0,
       this.selectedJuzId = 0,
       this.selectedBookmarkId = 0,
