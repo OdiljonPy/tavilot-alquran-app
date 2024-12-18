@@ -10,15 +10,10 @@ class ForStudentsPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    return Padding(
-      padding: ref.watch(forStudentsProvider).selectedIndex == 2
-          ? EdgeInsets.zero
-          : REdgeInsets.all(40),
-      child: ref.watch(forStudentsProvider).selectedIndex == 0
-          ? const SingleCategoryPage()
-          :  const PostPage(
+    return ref.watch(forStudentsProvider).selectedIndex == 0
+        ? const SingleCategoryPage()
+        :  const PostPage(
 
-      )
     );
   }
 }

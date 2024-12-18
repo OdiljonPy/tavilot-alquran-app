@@ -35,7 +35,7 @@ class _PostPageState extends ConsumerState<PostPage> {
                     child: Image.asset("assets/png/frame.png", fit: BoxFit.fill,)),
                 20.horizontalSpace,
                 Expanded(
-                  flex: 15,
+                  flex: 12,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
