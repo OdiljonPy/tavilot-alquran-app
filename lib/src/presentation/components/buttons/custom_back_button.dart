@@ -36,10 +36,10 @@ class CustomBackButton extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(FlutterRemix.arrow_left_s_line,
-                size:24.r),
+                size:24.r, color: Style.primary,),
             6.horizontalSpace,
             Text(LocaleKeys.goBack.tr(),
-                style: Style.interNormal(size: 16)),
+                style: Style.interNormal(size: 16, color: Style.primary)),
           ],
         ),
       ),

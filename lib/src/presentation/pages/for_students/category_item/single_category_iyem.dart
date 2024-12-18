@@ -19,7 +19,7 @@ class SingleCategoryItem extends StatelessWidget {
       onTap: onTap,
       child: Container(
           decoration: BoxDecoration(
-            color: Style.white,
+            color: Style.primary.withOpacity(.7),
             borderRadius: BorderRadius.circular(15.r),
           ),
           padding: REdgeInsets.all(24),
@@ -30,11 +30,12 @@ class SingleCategoryItem extends StatelessWidget {
                 "assets/svg/forStudents.svg",
                 height: 30.r,
                 width: 30.r,
+                color: Style.white,
               ),
               30.verticalSpace,
               Text(
                 "${singleCategory.title}",
-                style: Style.interRegular(size: 24),
+                style: Style.interRegular(size: 24, color: Style.white),
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
               ),

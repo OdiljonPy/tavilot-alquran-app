@@ -239,7 +239,7 @@ class _MainPageState extends ConsumerState<MainPage>
   }
 }
 
-class CatalogTextItem extends ConsumerWidget {
+class CatalogTextItem extends ConsumerStatefulWidget {
   const CatalogTextItem({
     super.key,
     required this.title,
@@ -252,22 +252,48 @@ class CatalogTextItem extends ConsumerWidget {
   final bool isActive;
 
   @override
-  Widget build(BuildContext context, ref) {
-    return ButtonEffect(
-      onTap:(){
-        onTap();
-        if(ref.watch(forStudentsProvider).selectedIndex == 1){
-          ref.read(forStudentsProvider.notifier).changeIndex(0, context);
-        }
-      } ,
-      child: Text(
-        title,
-        style: Style.interRegular(
-            textDecoration:
-                isActive ? TextDecoration.underline : TextDecoration.none,
+  ConsumerState<CatalogTextItem> createState() => _CatalogTextItemState();
+}
+
+class _CatalogTextItemState extends ConsumerState<CatalogTextItem> {
+  bool isHovered = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      onEnter: (_) {
+        setState(() {
+          isHovered = true;
+        });
+      },
+      onExit: (_) {
+        setState(() {
+          isHovered = false;
+        });
+      },
+      child: GestureDetector(
+        onTap: () {
+          widget.onTap();
+          if (ref.watch(forStudentsProvider).selectedIndex == 1) {
+            ref.read(forStudentsProvider.notifier).changeIndex(0, context);
+          }
+        },
+        child: Text(
+          widget.title,
+          style: Style.interRegular(
+            textDecoration: widget.isActive
+                ? TextDecoration.underline
+                : TextDecoration.none,
             size: 14,
-            color: isActive ? Style.darkGreen : Style.black),
+            color: widget.isActive
+                ? Style.darkGreen
+                : isHovered
+                ? Style.darkGreen
+                : Style.black,
+          ),
+        ),
       ),
     );
   }
 }
+
