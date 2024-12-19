@@ -134,6 +134,7 @@ class ChapterIndicatorList extends ConsumerWidget {
                       styleSheet: MarkdownStyleSheet(
                         p: Style.interRegular(size: 20),
                         blockquotePadding: const EdgeInsets.all(12.0),
+                        textAlign: WrapAlignment.center,
                       ),
                       data:
                       ref.watch(surahProvider).chapter?.verses?[j].description ??

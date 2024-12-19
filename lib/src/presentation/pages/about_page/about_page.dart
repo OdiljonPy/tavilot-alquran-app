@@ -5,6 +5,7 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../application/about/about_provider.dart';
+import '../../styles/style.dart';
 import '../main/riverpod/provider/main_provider.dart';
 
 class AboutPage extends ConsumerWidget {
@@ -39,6 +40,11 @@ class AboutPage extends ConsumerWidget {
                         return const Icon(Icons.error, color: Colors.red);
                       }
                     },
+                    styleSheet: MarkdownStyleSheet(
+                      p: Style.interRegular(size: 20),
+                      blockquotePadding: const EdgeInsets.all(12.0),
+                      textAlign: WrapAlignment.center,
+                    ),
                     data: ref.watch(aboutProvider).about?.description ?? ''),
               ],
             ),

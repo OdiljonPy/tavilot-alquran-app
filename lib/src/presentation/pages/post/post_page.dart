@@ -65,6 +65,11 @@ class _PostPageState extends ConsumerState<PostPage> {
                               return const Icon(Icons.error, color: Colors.red);
                             }
                           },
+                          styleSheet: MarkdownStyleSheet(
+                            p: Style.interRegular(size: 20),
+                            blockquotePadding: const EdgeInsets.all(12.0),
+                            textAlign: WrapAlignment.center,
+                          ),
                           data:
                               ref.watch(forStudentsProvider).category?.description ??
                                   ""),
