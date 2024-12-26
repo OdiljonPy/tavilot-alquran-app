@@ -118,7 +118,7 @@ class _ChapterIndicatorListState extends ConsumerState<ChapterIndicatorList> {
                     }
                   },
                   styleSheet: MarkdownStyleSheet(
-                    p: Style.interRegular(size: 20),
+                    p: Style.interRegular(size: 20, color: Style.primary),
                     blockquotePadding: const EdgeInsets.all(12.0),
                     textAlign: WrapAlignment.center,
                   ),

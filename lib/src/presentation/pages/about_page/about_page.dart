@@ -41,7 +41,7 @@ class AboutPage extends ConsumerWidget {
                       }
                     },
                     styleSheet: MarkdownStyleSheet(
-                      p: Style.interRegular(size: 20),
+                      // p: Style.interRegular(size: 20),
                       blockquotePadding: const EdgeInsets.all(12.0),
                       textAlign: WrapAlignment.center,
                     ),
