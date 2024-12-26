@@ -1,5 +1,6 @@
 import 'package:al_quran/src/models/response/juz_list_response.dart';
 import 'package:al_quran/src/models/response/juz_response.dart';
+import 'package:al_quran/src/models/response/search_response.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import '../../core/di/dependency_manager.dart';
@@ -45,6 +46,35 @@ class  JuzRepository implements JuzFacade {
       );
     } catch (e) {
       debugPrint('==> get juz failure: $e');
+      if (e is DioException && e.response != null) {
+        final errorResponse = e.response?.data;
+        final errorMessage = AppHelpers.errorCodeToMessage(errorResponse['error_code']);
+        return ApiResult.failure(
+            error: errorMessage, statusCode: NetworkExceptions.getDioStatus(e));
+      } else {
+        return ApiResult.failure(
+            error: AppHelpers.errorHandler(e),
+            statusCode: NetworkExceptions.getDioStatus(e));
+      }
+    }
+  }
+
+  @override
+  Future<ApiResult<SearchResponse>> getSearchResults(String query) async {
+    final data  = {
+      "q": query
+    };
+    try {
+      final client = dioHttp.client(optional: true);
+      final response = await client.get(
+        '/api/v1/search/',
+        queryParameters: data
+      );
+      return ApiResult.success(
+        data: SearchResponse.fromJson(response.data),
+      );
+    } catch (e) {
+      debugPrint('==> get search failure: $e');
       if (e is DioException && e.response != null) {
         final errorResponse = e.response?.data;
         final errorMessage = AppHelpers.errorCodeToMessage(errorResponse['error_code']);

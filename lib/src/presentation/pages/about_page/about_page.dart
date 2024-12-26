@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'package:al_quran/src/presentation/components/components.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../application/about/about_provider.dart';
+import '../../components/flutter_markdown/flutter_markdown.dart';
 import '../../styles/style.dart';
 import '../main/riverpod/provider/main_provider.dart';
 

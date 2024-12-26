@@ -68,5 +68,6 @@ abstract class  LocaleKeys {
   static const tavilotAlQuran = 'tavilotAlQuran';
   static const resources = 'resources';
   static const watchVideo = 'watchVideo';
+  static const search = 'search';
 
 }

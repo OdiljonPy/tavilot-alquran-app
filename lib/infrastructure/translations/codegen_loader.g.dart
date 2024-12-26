@@ -81,7 +81,8 @@ class CodegenLoader extends AssetLoader{
   "rebuttalsToFanaticism": "Mutaassib oqimlarga raddiyalar",
   "tavilotAlQuran": "Ta'vilot Al-Qur'on",
   "resources": "Resurslar",
-  "watchVideo": "Videoni ko'rish"
+  "watchVideo": "Videoni ko'rish",
+  "search": "Qidiruv"
 };
 static const Map<String,dynamic> ru_RU = {
   "hi": "Ассаламу алайкум!",
@@ -150,7 +151,8 @@ static const Map<String,dynamic> ru_RU = {
   "rebuttalsToFanaticism": "Мутаассиб оқимларга раддиялар",
   "tavilotAlQuran": "Таъвилот ал-Қуръон",
   "resources": "Ресурслар",
-  "watchVideo": "Видеони кўриш"
+  "watchVideo": "Видеони кўриш",
+  "search": "Қидирув"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"uz_UZ": uz_UZ, "ru_RU": ru_RU};
 }

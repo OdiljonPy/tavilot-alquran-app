@@ -19,6 +19,8 @@ mixin _$SurahState {
   bool get isJuzLoading => throw _privateConstructorUsedError;
   bool get isSurahLoading => throw _privateConstructorUsedError;
   bool get isDrawerOpened => throw _privateConstructorUsedError;
+  bool get isSearchLoading => throw _privateConstructorUsedError;
+  bool get isSearch => throw _privateConstructorUsedError;
   int get selectedSurahId => throw _privateConstructorUsedError;
   int get selectedJuzId => throw _privateConstructorUsedError;
   int get selectedBookmarkId => throw _privateConstructorUsedError;
@@ -27,6 +29,9 @@ mixin _$SurahState {
   int get selectedIndicationType => throw _privateConstructorUsedError;
   List<JuzListItem> get juzes => throw _privateConstructorUsedError;
   List<Bookmark> get bookmarks => throw _privateConstructorUsedError;
+  List<SearchData> get searchResults => throw _privateConstructorUsedError;
+  AutoScrollController? get autoScrollController =>
+      throw _privateConstructorUsedError;
   JuzResponse? get juz => throw _privateConstructorUsedError;
   SingleChapter? get chapter => throw _privateConstructorUsedError;
 
@@ -47,6 +52,8 @@ abstract class $SurahStateCopyWith<$Res> {
       {bool isJuzLoading,
       bool isSurahLoading,
       bool isDrawerOpened,
+      bool isSearchLoading,
+      bool isSearch,
       int selectedSurahId,
       int selectedJuzId,
       int selectedBookmarkId,
@@ -55,6 +62,8 @@ abstract class $SurahStateCopyWith<$Res> {
       int selectedIndicationType,
       List<JuzListItem> juzes,
       List<Bookmark> bookmarks,
+      List<SearchData> searchResults,
+      AutoScrollController? autoScrollController,
       JuzResponse? juz,
       SingleChapter? chapter});
 }
@@ -77,6 +86,8 @@ class _$SurahStateCopyWithImpl<$Res, $Val extends SurahState>
     Object? isJuzLoading = null,
     Object? isSurahLoading = null,
     Object? isDrawerOpened = null,
+    Object? isSearchLoading = null,
+    Object? isSearch = null,
     Object? selectedSurahId = null,
     Object? selectedJuzId = null,
     Object? selectedBookmarkId = null,
@@ -85,6 +96,8 @@ class _$SurahStateCopyWithImpl<$Res, $Val extends SurahState>
     Object? selectedIndicationType = null,
     Object? juzes = null,
     Object? bookmarks = null,
+    Object? searchResults = null,
+    Object? autoScrollController = freezed,
     Object? juz = freezed,
     Object? chapter = freezed,
   }) {
@@ -100,6 +113,14 @@ class _$SurahStateCopyWithImpl<$Res, $Val extends SurahState>
       isDrawerOpened: null == isDrawerOpened
           ? _value.isDrawerOpened
           : isDrawerOpened // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSearchLoading: null == isSearchLoading
+          ? _value.isSearchLoading
+          : isSearchLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSearch: null == isSearch
+          ? _value.isSearch
+          : isSearch // ignore: cast_nullable_to_non_nullable
               as bool,
       selectedSurahId: null == selectedSurahId
           ? _value.selectedSurahId
@@ -133,6 +154,14 @@ class _$SurahStateCopyWithImpl<$Res, $Val extends SurahState>
           ? _value.bookmarks
           : bookmarks // ignore: cast_nullable_to_non_nullable
               as List<Bookmark>,
+      searchResults: null == searchResults
+          ? _value.searchResults
+          : searchResults // ignore: cast_nullable_to_non_nullable
+              as List<SearchData>,
+      autoScrollController: freezed == autoScrollController
+          ? _value.autoScrollController
+          : autoScrollController // ignore: cast_nullable_to_non_nullable
+              as AutoScrollController?,
       juz: freezed == juz
           ? _value.juz
           : juz // ignore: cast_nullable_to_non_nullable
@@ -157,6 +186,8 @@ abstract class _$$SurahStateImplCopyWith<$Res>
       {bool isJuzLoading,
       bool isSurahLoading,
       bool isDrawerOpened,
+      bool isSearchLoading,
+      bool isSearch,
       int selectedSurahId,
       int selectedJuzId,
       int selectedBookmarkId,
@@ -165,6 +196,8 @@ abstract class _$$SurahStateImplCopyWith<$Res>
       int selectedIndicationType,
       List<JuzListItem> juzes,
       List<Bookmark> bookmarks,
+      List<SearchData> searchResults,
+      AutoScrollController? autoScrollController,
       JuzResponse? juz,
       SingleChapter? chapter});
 }
@@ -185,6 +218,8 @@ class __$$SurahStateImplCopyWithImpl<$Res>
     Object? isJuzLoading = null,
     Object? isSurahLoading = null,
     Object? isDrawerOpened = null,
+    Object? isSearchLoading = null,
+    Object? isSearch = null,
     Object? selectedSurahId = null,
     Object? selectedJuzId = null,
     Object? selectedBookmarkId = null,
@@ -193,6 +228,8 @@ class __$$SurahStateImplCopyWithImpl<$Res>
     Object? selectedIndicationType = null,
     Object? juzes = null,
     Object? bookmarks = null,
+    Object? searchResults = null,
+    Object? autoScrollController = freezed,
     Object? juz = freezed,
     Object? chapter = freezed,
   }) {
@@ -208,6 +245,14 @@ class __$$SurahStateImplCopyWithImpl<$Res>
       isDrawerOpened: null == isDrawerOpened
           ? _value.isDrawerOpened
           : isDrawerOpened // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSearchLoading: null == isSearchLoading
+          ? _value.isSearchLoading
+          : isSearchLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSearch: null == isSearch
+          ? _value.isSearch
+          : isSearch // ignore: cast_nullable_to_non_nullable
               as bool,
       selectedSurahId: null == selectedSurahId
           ? _value.selectedSurahId
@@ -241,6 +286,14 @@ class __$$SurahStateImplCopyWithImpl<$Res>
           ? _value._bookmarks
           : bookmarks // ignore: cast_nullable_to_non_nullable
               as List<Bookmark>,
+      searchResults: null == searchResults
+          ? _value._searchResults
+          : searchResults // ignore: cast_nullable_to_non_nullable
+              as List<SearchData>,
+      autoScrollController: freezed == autoScrollController
+          ? _value.autoScrollController
+          : autoScrollController // ignore: cast_nullable_to_non_nullable
+              as AutoScrollController?,
       juz: freezed == juz
           ? _value.juz
           : juz // ignore: cast_nullable_to_non_nullable
@@ -260,6 +313,8 @@ class _$SurahStateImpl extends _SurahState {
       {this.isJuzLoading = false,
       this.isSurahLoading = false,
       this.isDrawerOpened = true,
+      this.isSearchLoading = false,
+      this.isSearch = false,
       this.selectedSurahId = 0,
       this.selectedJuzId = 0,
       this.selectedBookmarkId = 0,
@@ -268,10 +323,13 @@ class _$SurahStateImpl extends _SurahState {
       this.selectedIndicationType = 0,
       final List<JuzListItem> juzes = const [],
       final List<Bookmark> bookmarks = const [],
+      final List<SearchData> searchResults = const [],
+      this.autoScrollController,
       this.juz,
       this.chapter})
       : _juzes = juzes,
         _bookmarks = bookmarks,
+        _searchResults = searchResults,
         super._();
 
   @override
@@ -283,6 +341,12 @@ class _$SurahStateImpl extends _SurahState {
   @override
   @JsonKey()
   final bool isDrawerOpened;
+  @override
+  @JsonKey()
+  final bool isSearchLoading;
+  @override
+  @JsonKey()
+  final bool isSearch;
   @override
   @JsonKey()
   final int selectedSurahId;
@@ -319,6 +383,17 @@ class _$SurahStateImpl extends _SurahState {
     return EqualUnmodifiableListView(_bookmarks);
   }
 
+  final List<SearchData> _searchResults;
+  @override
+  @JsonKey()
+  List<SearchData> get searchResults {
+    if (_searchResults is EqualUnmodifiableListView) return _searchResults;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_searchResults);
+  }
+
+  @override
+  final AutoScrollController? autoScrollController;
   @override
   final JuzResponse? juz;
   @override
@@ -326,7 +401,7 @@ class _$SurahStateImpl extends _SurahState {
 
   @override
   String toString() {
-    return 'SurahState(isJuzLoading: $isJuzLoading, isSurahLoading: $isSurahLoading, isDrawerOpened: $isDrawerOpened, selectedSurahId: $selectedSurahId, selectedJuzId: $selectedJuzId, selectedBookmarkId: $selectedBookmarkId, selectIndex: $selectIndex, selectedVerseId: $selectedVerseId, selectedIndicationType: $selectedIndicationType, juzes: $juzes, bookmarks: $bookmarks, juz: $juz, chapter: $chapter)';
+    return 'SurahState(isJuzLoading: $isJuzLoading, isSurahLoading: $isSurahLoading, isDrawerOpened: $isDrawerOpened, isSearchLoading: $isSearchLoading, isSearch: $isSearch, selectedSurahId: $selectedSurahId, selectedJuzId: $selectedJuzId, selectedBookmarkId: $selectedBookmarkId, selectIndex: $selectIndex, selectedVerseId: $selectedVerseId, selectedIndicationType: $selectedIndicationType, juzes: $juzes, bookmarks: $bookmarks, searchResults: $searchResults, autoScrollController: $autoScrollController, juz: $juz, chapter: $chapter)';
   }
 
   @override
@@ -340,6 +415,10 @@ class _$SurahStateImpl extends _SurahState {
                 other.isSurahLoading == isSurahLoading) &&
             (identical(other.isDrawerOpened, isDrawerOpened) ||
                 other.isDrawerOpened == isDrawerOpened) &&
+            (identical(other.isSearchLoading, isSearchLoading) ||
+                other.isSearchLoading == isSearchLoading) &&
+            (identical(other.isSearch, isSearch) ||
+                other.isSearch == isSearch) &&
             (identical(other.selectedSurahId, selectedSurahId) ||
                 other.selectedSurahId == selectedSurahId) &&
             (identical(other.selectedJuzId, selectedJuzId) ||
@@ -355,6 +434,10 @@ class _$SurahStateImpl extends _SurahState {
             const DeepCollectionEquality().equals(other._juzes, _juzes) &&
             const DeepCollectionEquality()
                 .equals(other._bookmarks, _bookmarks) &&
+            const DeepCollectionEquality()
+                .equals(other._searchResults, _searchResults) &&
+            (identical(other.autoScrollController, autoScrollController) ||
+                other.autoScrollController == autoScrollController) &&
             (identical(other.juz, juz) || other.juz == juz) &&
             (identical(other.chapter, chapter) || other.chapter == chapter));
   }
@@ -365,6 +448,8 @@ class _$SurahStateImpl extends _SurahState {
       isJuzLoading,
       isSurahLoading,
       isDrawerOpened,
+      isSearchLoading,
+      isSearch,
       selectedSurahId,
       selectedJuzId,
       selectedBookmarkId,
@@ -373,6 +458,8 @@ class _$SurahStateImpl extends _SurahState {
       selectedIndicationType,
       const DeepCollectionEquality().hash(_juzes),
       const DeepCollectionEquality().hash(_bookmarks),
+      const DeepCollectionEquality().hash(_searchResults),
+      autoScrollController,
       juz,
       chapter);
 
@@ -390,6 +477,8 @@ abstract class _SurahState extends SurahState {
       {final bool isJuzLoading,
       final bool isSurahLoading,
       final bool isDrawerOpened,
+      final bool isSearchLoading,
+      final bool isSearch,
       final int selectedSurahId,
       final int selectedJuzId,
       final int selectedBookmarkId,
@@ -398,6 +487,8 @@ abstract class _SurahState extends SurahState {
       final int selectedIndicationType,
       final List<JuzListItem> juzes,
       final List<Bookmark> bookmarks,
+      final List<SearchData> searchResults,
+      final AutoScrollController? autoScrollController,
       final JuzResponse? juz,
       final SingleChapter? chapter}) = _$SurahStateImpl;
   const _SurahState._() : super._();
@@ -408,6 +499,10 @@ abstract class _SurahState extends SurahState {
   bool get isSurahLoading;
   @override
   bool get isDrawerOpened;
+  @override
+  bool get isSearchLoading;
+  @override
+  bool get isSearch;
   @override
   int get selectedSurahId;
   @override
@@ -424,6 +519,10 @@ abstract class _SurahState extends SurahState {
   List<JuzListItem> get juzes;
   @override
   List<Bookmark> get bookmarks;
+  @override
+  List<SearchData> get searchResults;
+  @override
+  AutoScrollController? get autoScrollController;
   @override
   JuzResponse? get juz;
   @override

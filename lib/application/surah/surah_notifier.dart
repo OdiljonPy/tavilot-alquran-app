@@ -2,6 +2,7 @@ import 'package:al_quran/src/core/di/dependency_manager.dart';
 import 'package:al_quran/src/models/data/bookmark_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:scroll_to_index/scroll_to_index.dart';
 import '../../src/core/utils/app_helpers.dart';
 import '../../src/core/utils/local_storage.dart';
 import 'surah_state.dart';
@@ -55,6 +56,14 @@ class SurahNotifier extends StateNotifier<SurahState> {
     state = state.copyWith(selectedSurahId: index);
   }
 
+  removeSearch(){
+    state = state.copyWith(searchResults: []);
+  }
+
+  setSearch(bool result){
+    state = state.copyWith(isSearch: result);
+  }
+
   clear() {
     state = state.copyWith(
         juz: null, juzes: [], selectedIndicationType: 0, selectIndex: 0);
@@ -64,7 +73,7 @@ class SurahNotifier extends StateNotifier<SurahState> {
     state = state.copyWith(selectedIndicationType: index);
   }
 
-  Future<void> fetchJuzes(BuildContext context,{String? lang}) async {
+  Future<void> fetchJuzes(BuildContext context, {String? lang}) async {
     state = state.copyWith(
       isJuzLoading: true,
     );
@@ -77,6 +86,51 @@ class SurahNotifier extends StateNotifier<SurahState> {
       },
       failure: (failure, status) {
         state = state.copyWith(isJuzLoading: false);
+        AppHelpers.showSnackBar(
+          context,
+          failure,
+        );
+      },
+    );
+  }
+
+  void scrollToCounter(int index) async {
+    print("worked");
+    final controller = state.autoScrollController;
+    if (controller != null) {
+      await controller.scrollToIndex(index - 1, preferPosition: AutoScrollPosition.middle);
+      controller.highlight(index-1);
+    }
+  }
+
+
+  setAutoController(BuildContext c){
+    state = state.copyWith(autoScrollController: AutoScrollController(
+        viewportBoundaryGetter: () =>
+            Rect.fromLTRB(0, 0, 0, MediaQuery.of(c).padding.bottom),
+        axis: Axis.vertical));
+  }
+
+  @override
+  void dispose() {
+    state.autoScrollController?.dispose();
+    super.dispose();
+  }
+
+  Future<void> fetchSearches(BuildContext context, String query) async {
+    state = state.copyWith(
+      isSearchLoading: true,
+    );
+
+    final response = await juzRepository.getSearchResults(query);
+    response.when(
+      success: (data) {
+        state = state.copyWith(
+            isSearchLoading: false, searchResults: data.result ?? []);
+        return;
+      },
+      failure: (failure, status) {
+        state = state.copyWith(isSearchLoading: false);
         AppHelpers.showSnackBar(
           context,
           failure,
@@ -106,7 +160,8 @@ class SurahNotifier extends StateNotifier<SurahState> {
     );
   }
 
-  Future<void> fetchSurah(BuildContext context, int id,{VoidCallback? onSuccess, String? lang}) async {
+  Future<void> fetchSurah(BuildContext context, int id,
+      {VoidCallback? onSuccess, String? lang}) async {
     state = state.copyWith(
       isSurahLoading: true,
     );
@@ -128,21 +183,22 @@ class SurahNotifier extends StateNotifier<SurahState> {
     );
   }
 
-  Future<void> fetchChapterNames(BuildContext context, {VoidCallback? onSuccess, String? lang}) async {
+  Future<void> fetchChapterNames(BuildContext context,
+      {VoidCallback? onSuccess, String? lang}) async {
     state = state.copyWith(
-      // isSurahLoading: true,
-    );
+        // isSurahLoading: true,
+        );
     final bookmarkIds = state.bookmarks.map((bookmark) => bookmark.id).toList();
-    final response = await chapterRepository.getChapterNames(ids: bookmarkIds, lang: lang);
+    final response =
+        await chapterRepository.getChapterNames(ids: bookmarkIds, lang: lang);
     response.when(
       success: (data) {
-
-
         final updatedBookmarks = state.bookmarks.map((bookmark) {
-          final chapter = data.result?.firstWhere((chapter) => chapter.id == bookmark.id);
+          final chapter =
+              data.result?.firstWhere((chapter) => chapter.id == bookmark.id);
           return bookmark.copyWith(name: chapter?.name);
         }).toList();
-        state = state.copyWith( bookmarks: updatedBookmarks);
+        state = state.copyWith(bookmarks: updatedBookmarks);
         onSuccess?.call();
         return;
       },

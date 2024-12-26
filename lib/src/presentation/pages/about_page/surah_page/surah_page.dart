@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:al_quran/application/surah/surah_state.dart';
 import 'package:al_quran/infrastructure/translations/locale_keys.g.dart';
 import 'package:al_quran/src/core/routes/app_router.dart';
+import 'package:al_quran/src/models/response/search_response.dart';
 import 'package:al_quran/src/presentation/components/components.dart';
 import 'package:al_quran/src/presentation/components/helper/blur_wrap.dart';
 import 'package:al_quran/src/presentation/pages/about_page/surah_page/widgets/bookmark_indicator_list.dart';
@@ -13,9 +16,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:scroll_to_index/scroll_to_index.dart';
 import '../../../../../application/surah/surah_notifier.dart';
 import '../../../../../application/surah/surah_provider.dart';
 import '../../../../core/utils/local_storage.dart';
+import '../../../components/flutter_markdown/flutter_markdown.dart';
 import '../../../styles/style.dart';
 import 'widgets/chapter_list.dart';
 import 'widgets/juz_list.dart';
@@ -65,24 +70,177 @@ class _SurahPageState extends ConsumerState<SurahPage> {
               ? SizedBox(
                   height: MediaQuery.sizeOf(context).height,
                   child: const Loading())
-              : SingleChildScrollView(
-                  child: Container(
-                    constraints: BoxConstraints(
-                        minHeight: MediaQuery.sizeOf(context).height),
-                    color: Style.white,
-                    child: Column(
+              : Stack(
+                children: [
+                  state.isSearch ?
+                    ListView.separated(
+                      controller: state.autoScrollController,
+                      itemCount: state.chapter?.verses?.length ?? 0,
+                      itemBuilder: (BuildContext context, int j) {
+                        return AutoScrollTag(
+                          highlightColor: Style.darkGreen,
+                          key: ValueKey(j),
+                          controller: state.autoScrollController!,
+                          index: j,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  20.horizontalSpace,
+                                  Container(
+                                      height: 30.r,
+                                      width: 30.r,
+                                      decoration: const BoxDecoration(
+                                        image: DecorationImage(
+                                            image:
+                                            AssetImage("assets/png/juzComponent.png")),
+                                      ),
+                                      child: Align(
+                                        alignment: const Alignment(0, -.3),
+                                        child: Text(
+                                          "${state.chapter?.verses?[j].number}",
+                                          style: Style.interRegular(size: 10),
+                                        ),
+                                      )),
+                                  20.horizontalSpace,
+                                  Flexible(
+                                      child: Text(
+                                        "${state.chapter?.verses?[j].textArabic}",
+                                        style: Style.regularArabic(size: 20),
+                                      )),
+                                  20.horizontalSpace,
+                                ],
+                              ),
+                              if (state.selectedIndicationType == 1 ||
+                                  state.selectedIndicationType == 2)
+                                28.verticalSpace,
+                              if ((state.selectedIndicationType == 1 ||
+                                  state.selectedIndicationType == 2) &&
+                                  (ref
+                                      .watch(surahProvider)
+                                      .chapter
+                                      ?.verses?[j]
+                                      .text
+                                      ?.isNotEmpty ??
+                                      false))
+                                Row(
+                                  children: [
+                                    20.horizontalSpace,
+                                    Expanded(
+                                      child: Text(
+                                        "${state.chapter?.verses?[j].text}",
+                                        style: Style.interRegular(size: 20),
+                                        // textAlign: TextAlign.end,
+                                      ),
+                                    ),
+                                    20.horizontalSpace,
+                                  ],
+                                ),
+                              if (state.selectedIndicationType == 2 &&
+                                  (state
+                                      .chapter
+                                      ?.verses?[j]
+                                      .description
+                                      ?.isNotEmpty ?? false ))
+                                28.verticalSpace,
+                              if (state.selectedIndicationType == 2 &&
+                                  (state
+                                      .chapter
+                                      ?.verses?[j]
+                                      .description
+                                      ?.isNotEmpty ?? false ))
+                                Markdown(
+                                    selectable: true,
+                                    shrinkWrap: true,
+                                    imageBuilder: (uri, title, alt) {
+                                      final base64String = uri.toString().split(',').last;
+                                      try {
+                                        final imageBytes = base64Decode(base64String);
+                                        return ClipRRect(
+                                          borderRadius: BorderRadius.circular(8.0),
+                                          child: Image.memory(
+                                            imageBytes,
+                                          ),
+                                        );
+                                      } catch (e) {
+                                        return const Icon(Icons.error, color: Colors.red);
+                                      }
+                                    },
+                                    styleSheet: MarkdownStyleSheet(
+                                      p: Style.interRegular(size: 20),
+                                      blockquotePadding: const EdgeInsets.all(12.0),
+                                      textAlign: WrapAlignment.center,
+                                    ),
+                                    data:
+                                    state.chapter?.verses?[j].description ??
+                                        ""),
+                              14.verticalSpace
+                            ],
+                          ),
+                        );
+                      },
+                      separatorBuilder: (BuildContext context, int index) {
+                        return const Divider(
+                          thickness: 1,
+                          color: Style.secondary,
+                        );
+                      },
+                    ):
+                  ListView(
                       children: [
-                        _selectTypeOfIndication(state, notifier),
-                        if (state.selectIndex == 0)
-                          const ChapterIndicatorList()
-                        else if (state.selectIndex == 1)
-                          const JuzIndicatorList()
-                        else
-                          const BookmarkIndicatorList()
-                      ],
+                        Container(
+                          constraints: BoxConstraints(
+                              minHeight: MediaQuery.sizeOf(context).height),
+                          color: Style.white,
+                          child: Column(
+                            children: [
+                              _selectTypeOfIndication(state, notifier),
+                              if (state.selectIndex == 0)
+                                const ChapterIndicatorList()
+                              else if (state.selectIndex == 1)
+                                const JuzIndicatorList()
+                              else
+                                const BookmarkIndicatorList()
+                            ],
+                          ),
+                        ),
+                      ]
+                    ),
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: Container(
+                      width: MediaQuery.sizeOf(context).width/6,
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: state.searchResults.length,
+                        padding: REdgeInsets.symmetric(
+                            horizontal: 10, vertical: 10),
+                        itemBuilder: (context, index) {
+                          return SearchItem(
+                            searchResult: state.searchResults[index],
+                            onTap: () {
+                              ref.read(surahProvider.notifier).fetchSurah(context, state.searchResults[index].chapterId ??0, onSuccess: (){
+                                ref.read(surahProvider.notifier)..setSearch(true)..scrollToCounter(state.searchResults[index].number ?? 0);
+                              });
+                            },
+                          );
+                        },
+                      ),
                     ),
                   ),
-                ),
+                  if(state.isSearch)
+                  Align(
+                    alignment: const Alignment(-.96,-.95),
+                    child: CustomBackButton(onTap: (){
+                      ref.read(surahProvider.notifier).setSearch(false);
+                    })
+                  ),
+                ],
+              ),
         ),
       ],
     );
@@ -278,3 +436,40 @@ class _SurahPageState extends ConsumerState<SurahPage> {
     );
   }
 }
+
+class SearchItem extends StatelessWidget {
+  final SearchData searchResult;
+  final VoidCallback onTap;
+
+  const SearchItem({
+    super.key,
+    required this.searchResult,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Style.white,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(12.r),
+        onTap: onTap,
+        child: Container(
+
+          constraints: BoxConstraints(
+              minWidth: MediaQuery.sizeOf(context).width / 6),
+          padding: REdgeInsets.all(5),
+          child: Text(
+            "${searchResult.chapterName}, ${searchResult.number} - ${LocaleKeys.verse.tr()}",
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: Style.interNormal(
+                color: Style.black, size: 16),
+            textAlign: TextAlign.start,
+          ),
+        ),
+      ),
+    );
+  }
+}
+

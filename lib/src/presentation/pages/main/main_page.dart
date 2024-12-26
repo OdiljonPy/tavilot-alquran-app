@@ -11,6 +11,7 @@ import 'package:al_quran/src/presentation/pages/premium/premium_page.dart';
 import 'package:app_links/app_links.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -18,6 +19,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../application/for_students/for_students_provider.dart';
 import '../../../core/routes/app_router.dart';
 import '../../../core/utils/app_helpers.dart';
+import '../../../core/utils/typing_delay.dart';
 import '../../components/app_logo.dart';
 import '../../components/components.dart';
 import '../../styles/style.dart';
@@ -40,11 +42,13 @@ class _MainPageState extends ConsumerState<MainPage>
     with SingleTickerProviderStateMixin {
   late AppLinks _appLinks;
   StreamSubscription<Uri>? _linkSubscription;
+  final Delayed delayed = Delayed(milliseconds: 700);
+  late TextEditingController searchController;
 
   @override
   void dispose() {
     _linkSubscription?.cancel();
-
+    searchController.dispose();
     super.dispose();
   }
 
@@ -65,8 +69,11 @@ class _MainPageState extends ConsumerState<MainPage>
   void initState() {
     super.initState();
     initDeepLinks();
+    searchController = TextEditingController();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(surahProvider.notifier).setBookmarkFromLocale();
+      ref.read(surahProvider.notifier)
+          .setAutoController(context);
       ref.read(mainProvider.notifier)
         ..setPageController()
         ..fetchChapters(context);
@@ -88,7 +95,7 @@ class _MainPageState extends ConsumerState<MainPage>
                 controller: state.pageController,
                 onPageChanged: notifier.changeIndex,
                 physics: const NeverScrollableScrollPhysics(),
-                children:  [
+                children: [
                   BlogPage(),
                   ForStudentsPage(),
                   AboutPage(),
@@ -132,18 +139,19 @@ class _MainPageState extends ConsumerState<MainPage>
                           ..selectCategory(0)
                           ..fetchCategory(context, index: 0);
                       },
-                      isActive: state.selectIndex == 1 && ref.watch(forStudentsProvider).selectedCategory ==0),
+                      isActive: state.selectIndex == 1 &&
+                          ref.watch(forStudentsProvider).selectedCategory == 0),
                   CatalogTextItem(
                       title: LocaleKeys.tavilotAlQuran.tr(),
                       onTap: () {
                         ref.read(mainProvider.notifier).changeIndex(3,
                             onSuccess: () async {
-                              ref.read(surahProvider.notifier)
-                                ..selectSurahId(1)
-                                ..fetchJuzes(context)
-                                ..fetchSurah(context, 1)
-                                ..fetchJuz(context, 1);
-                            });
+                          ref.read(surahProvider.notifier)
+                            ..selectSurahId(1)
+                            ..fetchJuzes(context)
+                            ..fetchSurah(context, 1)
+                            ..fetchJuz(context, 1);
+                        });
                       },
                       isActive: state.selectIndex == 3),
                   CatalogTextItem(
@@ -154,7 +162,8 @@ class _MainPageState extends ConsumerState<MainPage>
                           ..selectCategory(1)
                           ..fetchCategory(context, index: 1);
                       },
-                      isActive: state.selectIndex == 1 && ref.watch(forStudentsProvider).selectedCategory ==1),
+                      isActive: state.selectIndex == 1 &&
+                          ref.watch(forStudentsProvider).selectedCategory == 1),
                   CatalogTextItem(
                       title: LocaleKeys.modernStudies.tr(),
                       onTap: () {
@@ -163,7 +172,8 @@ class _MainPageState extends ConsumerState<MainPage>
                           ..selectCategory(2)
                           ..fetchCategory(context, index: 2);
                       },
-                      isActive: state.selectIndex == 1 && ref.watch(forStudentsProvider).selectedCategory ==2),
+                      isActive: state.selectIndex == 1 &&
+                          ref.watch(forStudentsProvider).selectedCategory == 2),
                   CatalogTextItem(
                       title: LocaleKeys.resources.tr(),
                       onTap: () {
@@ -172,7 +182,8 @@ class _MainPageState extends ConsumerState<MainPage>
                           ..selectCategory(3)
                           ..fetchCategory(context, index: 3);
                       },
-                      isActive: state.selectIndex == 1 && ref.watch(forStudentsProvider).selectedCategory ==3),
+                      isActive: state.selectIndex == 1 &&
+                          ref.watch(forStudentsProvider).selectedCategory == 3),
                   CatalogTextItem(
                       title: LocaleKeys.rebuttalsToFanaticism.tr(),
                       onTap: () {
@@ -181,54 +192,99 @@ class _MainPageState extends ConsumerState<MainPage>
                           ..selectCategory(4)
                           ..fetchCategory(context, index: 4);
                       },
-                      isActive: state.selectIndex == 1 && ref.watch(forStudentsProvider).selectedCategory ==4),
-                  Row(
-                    children: [
-                      const CustomPopupItem(),
-                      12.horizontalSpace,
-                      ButtonEffect(
-                        onTap: () {
-                          AppHelpers.showAlertDialog(
-                            context: context,
-                            child: SizedBox(
-                              height: MediaQuery.sizeOf(context).height / 4,
-                              width: MediaQuery.sizeOf(context).width / 5,
-                              child: const LogOutModal(),
+                      isActive: state.selectIndex == 1 &&
+                          ref.watch(forStudentsProvider).selectedCategory == 4),
+                  if (state.selectIndex == 3)
+                    SizedBox(
+                      width: MediaQuery.sizeOf(context).width / 6,
+                      child: OutlinedBorderTextField(
+                        textController: searchController,
+                        onChanged: (s) async {
+                          if(s == ""){
+                            ref.read(surahProvider.notifier).removeSearch();
+                            return;
+                          }
+                          if(s.isNotEmpty){
+                            delayed.run(() async {
+
+                              ref
+                                  .read(surahProvider.notifier)
+                                  .fetchSearches(context, s);
+                            });
+                          }else{
+                            ref.read(surahProvider.notifier).removeSearch();
+                          }
+                        },
+                        prefixIcon: const Icon(
+                          CupertinoIcons.search,
+                          color: Style.textHint,
+                        ),
+                        suffixIcon: InkWell(
+                          onTap: (){
+                            searchController.clear();
+                            ref.read(surahProvider.notifier).removeSearch();
+                          },
+                          child: const Icon(
+                            CupertinoIcons.clear,
+                            color: Style.textHint,
+                          ),
+                        ),
+                        label: null,
+                        hintText: LocaleKeys.search.tr(),
+                        color: Style.white,
+                        radius: 40,
+                      ),
+                    ),
+                  if (state.selectIndex != 3)
+                    Row(
+                      children: [
+                        const CustomPopupItem(),
+                        12.horizontalSpace,
+                        ButtonEffect(
+                          onTap: () {
+                            AppHelpers.showAlertDialog(
+                              context: context,
+                              child: SizedBox(
+                                height: MediaQuery.sizeOf(context).height / 4,
+                                width: MediaQuery.sizeOf(context).width / 5,
+                                child: const LogOutModal(),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Style.bg,
                             ),
-                          );
-                        },
-                        child: Container(
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Style.bg,
-                          ),
-                          child: const Icon(
-                            FlutterRemix.logout_circle_r_line,
-                            color: Style.primary,
-                            size: 24,
+                            child: const Icon(
+                              FlutterRemix.logout_circle_r_line,
+                              color: Style.primary,
+                              size: 24,
+                            ),
                           ),
                         ),
-                      ),
-                      12.horizontalSpace,
-                      ButtonEffect(
-                        onTap: () {
-                          ref.read(aboutProvider.notifier).fetchAbout(context);
-                          ref.read(mainProvider.notifier).changeIndex(2);
-                        },
-                        child: Container(
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Style.bg,
-                          ),
-                          child: const Icon(
-                            FlutterRemix.information_line,
-                            color: Style.primary,
-                            size: 24,
+                        12.horizontalSpace,
+                        ButtonEffect(
+                          onTap: () {
+                            ref
+                                .read(aboutProvider.notifier)
+                                .fetchAbout(context);
+                            ref.read(mainProvider.notifier).changeIndex(2);
+                          },
+                          child: Container(
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Style.bg,
+                            ),
+                            child: const Icon(
+                              FlutterRemix.information_line,
+                              color: Style.primary,
+                              size: 24,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  )
+                      ],
+                    )
                 ],
               ),
             )
@@ -288,12 +344,11 @@ class _CatalogTextItemState extends ConsumerState<CatalogTextItem> {
             color: widget.isActive
                 ? Style.darkGreen
                 : isHovered
-                ? Style.darkGreen
-                : Style.black,
+                    ? Style.darkGreen
+                    : Style.black,
           ),
         ),
       ),
     );
   }
 }
-

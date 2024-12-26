@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -5,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../../application/surah/surah_provider.dart';
 import '../../../../../../infrastructure/translations/locale_keys.g.dart';
 import '../../../../components/components.dart';
+import '../../../../components/flutter_markdown/flutter_markdown.dart';
 import '../../../../styles/style.dart';
 
 class JuzIndicatorList extends ConsumerWidget {
@@ -160,18 +162,32 @@ class JuzIndicatorList extends ConsumerWidget {
                                   .description
                                   ?.isNotEmpty ??
                               false))
-                        Row(
-                          children: [
-                            20.horizontalSpace,
-                            Expanded(
-                              child: Text(
-                                "${ref.watch(surahProvider).juz?.result?.chapters?[index].verses?[i].description}",
-                                style: Style.interRegular(size: 20),
-                              ),
+                        Markdown(
+                            selectable: true,
+                            shrinkWrap: true,
+                            imageBuilder: (uri, title, alt) {
+                              final base64String = uri.toString().split(',').last;
+                              try {
+                                final imageBytes = base64Decode(base64String);
+                                return ClipRRect(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  child: Image.memory(
+                                    imageBytes,
+                                  ),
+                                );
+                              } catch (e) {
+                                // Handle decoding errors
+                                return const Icon(Icons.error, color: Colors.red);
+                              }
+                            },
+                            styleSheet: MarkdownStyleSheet(
+                              p: Style.interRegular(size: 20),
+                              blockquotePadding: const EdgeInsets.all(12.0),
+                              textAlign: WrapAlignment.center,
                             ),
-                            20.horizontalSpace,
-                          ],
-                        ),
+                            data:
+                            ref.watch(surahProvider).juz?.result?.chapters?[index].verses?[i].description ??
+                                ""),
                       14.verticalSpace
                     ],
                   ),

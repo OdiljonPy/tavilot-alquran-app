@@ -15,7 +15,7 @@ class MainNotifier extends StateNotifier<MainState> {
     if(state.pageController != null){
       state.pageController?.jumpToPage(index);
     }
-    changeQuery("");
+    // changeQuery("");
     onSuccess?.call();
   }
 
@@ -54,21 +54,21 @@ class MainNotifier extends StateNotifier<MainState> {
     );
   }
 
-  changeQuery(String query) {
-    if (query.isNotEmpty) {
-      state = state.copyWith(isChapterSearching: true);
-      List<Chapter> list = [];
-      for (int i = 0; i < state.chapters.length; i++) {
-        if (state.chapters[i].name
-            ?.toLowerCase()
-            .startsWith(query.toLowerCase()) ??
-            false) {
-          list.add(state.chapters[i]);
-        }
-      }
-      state = state.copyWith(searchChapters: list);
-    } else {
-      state = state.copyWith(isChapterSearching: false, searchChapters: []);
-    }
-  }
+  // changeQuery(String query) {
+  //   if (query.isNotEmpty) {
+  //     state = state.copyWith(isChapterSearching: true);
+  //     List<Chapter> list = [];
+  //     for (int i = 0; i < state.chapters.length; i++) {
+  //       if (state.chapters[i].name
+  //           ?.toLowerCase()
+  //           .startsWith(query.toLowerCase()) ??
+  //           false) {
+  //         list.add(state.chapters[i]);
+  //       }
+  //     }
+  //     state = state.copyWith(searchChapters: list);
+  //   } else {
+  //     state = state.copyWith(isChapterSearching: false, searchChapters: []);
+  //   }
+  // }
 }
