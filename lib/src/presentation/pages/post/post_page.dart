@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../application/for_students/for_students_provider.dart';
-import '../../components/flutter_markdown/flutter_markdown.dart';
+import '../../components/flutter_markdown/src/widget.dart';
 import '../../styles/style.dart';
 import 'widgets/youtube_thumbnail.dart';
 
@@ -19,20 +19,23 @@ class PostPage extends ConsumerStatefulWidget {
 }
 
 class _PostPageState extends ConsumerState<PostPage> {
-  late ScrollController _scrollController;
-  @override
-  void initState() {
-    _scrollController = ScrollController();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
     return ref.watch(forStudentsProvider).isPostLoading
         ? const Center(child: Loading())
         : SingleChildScrollView(
-            controller: _scrollController,
-            padding: REdgeInsets.all(40),
+      padding: REdgeInsets.all(40),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+              flex: 1,
+              child: Image.asset("assets/png/frame.png", fit: BoxFit.fill,)),
+          20.horizontalSpace,
+          Expanded(
+            flex: 12,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -45,45 +48,26 @@ class _PostPageState extends ConsumerState<PostPage> {
                 Text(
                   ref.watch(forStudentsProvider).category?.title ?? "",
                 ),
-                20.verticalSpace,
-                Container(
-                  decoration: BoxDecoration(
-                    border: Border(
-                        left: BorderSide(
-                          color: Style.primary.withOpacity(0.3),
-                          width: 2,
-                        ),
-                        right: BorderSide(
-                          color: Style.primary.withOpacity(0.3),
-                          width: 2,
-                        )),),
-                  child: Markdown(
-                    physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      imageBuilder: (uri, title, alt) {
-                        final base64String = uri.toString().split(',').last;
-                        try {
-                          final imageBytes = base64Decode(base64String);
-                          return ClipRRect(
-                            borderRadius: BorderRadius.circular(8.0),
-                            child: Image.memory(
-                              imageBytes,
-                            ),
-                          );
-                        } catch (e) {
-                          // Handle decoding errors
-                          return const Icon(Icons.error, color: Colors.red);
-                        }
-                      },
-                      styleSheet: MarkdownStyleSheet(
-                        p: Style.interRegular(size: 20),
-                        blockquotePadding: const EdgeInsets.all(12.0),
-                        textAlign: WrapAlignment.center,
-                      ),
-                      data:
-                          ref.watch(forStudentsProvider).category?.description ??
-                              ""),
-                ),
+                Markdown(
+                    shrinkWrap: true,
+                    imageBuilder: (uri, title, alt) {
+                      final base64String = uri.toString().split(',').last;
+                      try {
+                        final imageBytes = base64Decode(base64String);
+                        return ClipRRect(
+                          borderRadius: BorderRadius.circular(8.0),
+                          child: Image.memory(
+                            imageBytes,
+                          ),
+                        );
+                      } catch (e) {
+                        // Handle decoding errors
+                        return const Icon(Icons.error, color: Colors.red);
+                      }
+                    },
+                    data:
+                    ref.watch(forStudentsProvider).category?.description ??
+                        ""),
                 if (ref.watch(forStudentsProvider).category?.file != null)
                   Center(
                     child: Column(
@@ -101,23 +85,29 @@ class _PostPageState extends ConsumerState<PostPage> {
                                 title: LocaleKeys.download.tr(),
                                 onPressed: () {
                                   AppHelpers.launchExternalUrl(ref
-                                          .watch(forStudentsProvider)
-                                          .category
-                                          ?.file ??
+                                      .watch(forStudentsProvider)
+                                      .category
+                                      ?.file ??
                                       "");
                                 })),
                       ],
                     ),
                   ),
                 if (ref.watch(forStudentsProvider).category?.youtubeUrl !=
-                        null &&
+                    null &&
                     ref.watch(forStudentsProvider).category?.youtubeUrl != "")
                   YouTubeThumbnail(
-                      videoUrl:
-                          ref.watch(forStudentsProvider).category?.youtubeUrl ??
-                              "", ),
+                    videoUrl:
+                    ref.watch(forStudentsProvider).category?.youtubeUrl ??
+                        "", ),
               ],
             ),
-          );
+          ),
+          20.horizontalSpace,
+          Expanded(
+              flex: 1,
+              child: Image.asset("assets/png/frame.png", fit: BoxFit.fill,)),              ],
+      ),
+    );
   }
 }
