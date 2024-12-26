@@ -17,24 +17,6 @@ class ChapterIndicatorList extends ConsumerStatefulWidget {
 class _ChapterIndicatorListState extends ConsumerState<ChapterIndicatorList> {
 
   @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-
-    });
-    
-    // controller = AutoScrollController(
-    //     viewportBoundaryGetter: () =>
-    //         Rect.fromLTRB(0, 0, 0, MediaQuery.of(context).padding.bottom),
-    //     axis: Axis.vertical);
-  }
-  // Future _scrollToCounter(int index) async {
-  //   await controller.scrollToIndex(index,
-  //       preferPosition: AutoScrollPosition.begin);
-  //   controller.highlight(index);
-  // }
-
-  @override
   Widget build(BuildContext context) {
     final state = ref.watch(surahProvider);
     return ListView.separated(
