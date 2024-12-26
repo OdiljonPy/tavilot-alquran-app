@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:al_quran/application/surah/surah_state.dart';
 import 'package:al_quran/infrastructure/translations/locale_keys.g.dart';
 import 'package:al_quran/src/core/routes/app_router.dart';
@@ -74,6 +73,7 @@ class _SurahPageState extends ConsumerState<SurahPage> {
                 children: [
                   state.isSearch ?
                     ListView.separated(
+                      padding: REdgeInsets.only(top: 150),
                       controller: state.autoScrollController,
                       itemCount: state.chapter?.verses?.length ?? 0,
                       itemBuilder: (BuildContext context, int j) {
@@ -115,11 +115,11 @@ class _SurahPageState extends ConsumerState<SurahPage> {
                                   20.horizontalSpace,
                                 ],
                               ),
-                              if (state.selectedIndicationType == 1 ||
-                                  state.selectedIndicationType == 2)
+                              if (state.searchType == 2 ||
+                                  state.searchType == 3)
                                 28.verticalSpace,
-                              if ((state.selectedIndicationType == 1 ||
-                                  state.selectedIndicationType == 2) &&
+                              if ((state.searchType == 2 ||
+                                  state.searchType == 3) &&
                                   (ref
                                       .watch(surahProvider)
                                       .chapter
@@ -140,14 +140,14 @@ class _SurahPageState extends ConsumerState<SurahPage> {
                                     20.horizontalSpace,
                                   ],
                                 ),
-                              if (state.selectedIndicationType == 2 &&
+                              if (state.searchType == 3 &&
                                   (state
                                       .chapter
                                       ?.verses?[j]
                                       .description
                                       ?.isNotEmpty ?? false ))
                                 28.verticalSpace,
-                              if (state.selectedIndicationType == 2 &&
+                              if (state.searchType == 3 &&
                                   (state
                                       .chapter
                                       ?.verses?[j]
@@ -212,7 +212,7 @@ class _SurahPageState extends ConsumerState<SurahPage> {
                     ),
                   Align(
                     alignment: Alignment.topRight,
-                    child: Container(
+                    child: SizedBox(
                       width: MediaQuery.sizeOf(context).width/6,
                       child: ListView.builder(
                         shrinkWrap: true,
@@ -239,6 +239,11 @@ class _SurahPageState extends ConsumerState<SurahPage> {
                       ref.read(surahProvider.notifier).setSearch(false);
                     })
                   ),
+                  if(state.isSearch)
+                    Align(
+                        alignment: const Alignment(-.1, -.95),
+                        child: _selectTypeOfSearch(state, notifier)
+                    ),
                 ],
               ),
         ),
@@ -268,6 +273,9 @@ class _SurahPageState extends ConsumerState<SurahPage> {
               30.horizontalSpace,
               ButtonEffect(
                 onTap: () {
+                  if(state.isSearch){
+                    notifier.setSearch(false);
+                  }
                   notifier.changeIndex(1);
                   if (ref.watch(surahProvider).selectedJuzId == 0) {
                     notifier.selectJuzId(1);
@@ -435,6 +443,117 @@ class _SurahPageState extends ConsumerState<SurahPage> {
       ),
     );
   }
+
+  Widget _selectTypeOfSearch(SurahState state, SurahNotifier notifier) {
+    return Container(
+      height: 45.r,
+      padding: REdgeInsets.all(4),
+      decoration: BoxDecoration(
+        color: Style.backgroundColor,
+        borderRadius: BorderRadius.circular(20.r),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          ButtonEffect(
+            onTap: () {
+              notifier.selectSearchType(1,context);
+            },
+            child: Container(
+              height: 36.r,
+              padding: REdgeInsets.symmetric(horizontal: 24, vertical: 5),
+              decoration: BoxDecoration(
+                color: state.searchType == 1
+                    ? Style.primary
+                    : Style.transparent,
+                borderRadius: BorderRadius.circular(20.r),
+              ),
+              child: Text(
+                LocaleKeys.arabic.tr(),
+                style: Style.interRegular(
+                    size: 16,
+                    color: state.searchType == 1
+                        ? Style.white
+                        : Style.black),
+              ),
+            ),
+          ),
+          ButtonEffect(
+            onTap: () {
+              notifier.selectSearchType(2, context);
+            },
+            child: Container(
+              height: 36.r,
+              padding: REdgeInsets.symmetric(horizontal: 24, vertical: 5),
+              decoration: BoxDecoration(
+                color: state.searchType == 2
+                    ? Style.primary
+                    : Style.transparent,
+                borderRadius: BorderRadius.circular(20.r),
+              ),
+              child: Text(
+                LocaleKeys.translate.tr(),
+                style: Style.interRegular(
+                    size: 16,
+                    color: state.searchType == 2
+                        ? Style.white
+                        : Style.black),
+              ),
+            ),
+          ),
+          BlurWrap(
+            blur: LocalStorage.getUserRate() != 2 ? 10 : 0,
+            radius: BorderRadius.circular(20.r),
+            child: ButtonEffect(
+              onTap: () {
+                if (LocalStorage.getUserRate() == 2) {
+                  notifier.selectSearchType(3, context);
+                } else {
+                  if (LocalStorage.getToken().isNotEmpty) {
+                    ref.read(mainProvider.notifier).changeIndex(4);
+                  } else {
+                    LocalStorage.logOut();
+                    context.router.popUntilRoot();
+                    context.replaceRoute(const LoginRoute());
+                  }
+                }
+              },
+              child: Container(
+                height: 36.r,
+                padding: REdgeInsets.symmetric(horizontal: 24, vertical: 5),
+                decoration: BoxDecoration(
+                  color: state.searchType == 3
+                      ? Style.primary
+                      : Style.transparent,
+                  borderRadius: BorderRadius.circular(20.r),
+                ),
+                child: Row(
+                  children: [
+                    Text(
+                      LocaleKeys.surahDescription.tr(),
+                      style: Style.interRegular(
+                          size: 16,
+                          color: state.searchType == 3
+                              ? Style.white
+                              : Style.black),
+                    ),
+                    if (LocalStorage.getUserRate() != 2) 8.horizontalSpace,
+                    if (LocalStorage.getUserRate() != 2)
+                      SvgPicture.asset(
+                        "assets/svg/lock.svg",
+                        height: 24.r,
+                        width: 24.r,
+                      )
+                  ],
+                ),
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
 }
 
 class SearchItem extends StatelessWidget {

@@ -60,12 +60,12 @@ class _ButtonEffectAnimationState extends State<ButtonEffect>
             },
             child: Transform.scale(
               scale: squareScaleA,
-              child: GestureDetector(
+              child: InkWell(
                   onTap: widget.onTap,
                   child:
                       Container(color: Style.transparent, child: widget.child)),
             ),
           )
-        : GestureDetector(onTap: widget.onTap, child: widget.child);
+        : InkWell(onTap: widget.onTap, child: widget.child);
   }
 }

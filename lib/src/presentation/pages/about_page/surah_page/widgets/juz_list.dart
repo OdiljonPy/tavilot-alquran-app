@@ -19,6 +19,9 @@ class JuzList extends ConsumerWidget {
       itemBuilder: (BuildContext context, int index) {
         return InkWell(
           onTap: () {
+            if(state.isSearch){
+              notifier.setSearch(false);
+            }
             notifier.selectJuzId(index + 1);
             notifier.fetchJuz(context, index + 1);
           },

@@ -206,10 +206,9 @@ class _MainPageState extends ConsumerState<MainPage>
                           }
                           if(s.isNotEmpty){
                             delayed.run(() async {
-
                               ref
                                   .read(surahProvider.notifier)
-                                  .fetchSearches(context, s);
+                                  ..fetchSearches(context, s)..setQuery(s);
                             });
                           }else{
                             ref.read(surahProvider.notifier).removeSearch();
@@ -327,7 +326,7 @@ class _CatalogTextItemState extends ConsumerState<CatalogTextItem> {
           isHovered = false;
         });
       },
-      child: GestureDetector(
+      child: InkWell(
         onTap: () {
           widget.onTap();
           if (ref.watch(forStudentsProvider).selectedIndex == 1) {

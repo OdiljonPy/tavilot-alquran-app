@@ -113,12 +113,11 @@ class _ChapterIndicatorListState extends ConsumerState<ChapterIndicatorList> {
                         ),
                       );
                     } catch (e) {
-                      // Handle decoding errors
                       return const Icon(Icons.error, color: Colors.red);
                     }
                   },
                   styleSheet: MarkdownStyleSheet(
-                    p: Style.interRegular(size: 20, color: Style.primary),
+                    p: Style.interRegular(size: 20),
                     blockquotePadding: const EdgeInsets.all(12.0),
                     textAlign: WrapAlignment.center,
                   ),

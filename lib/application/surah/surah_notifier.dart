@@ -44,6 +44,11 @@ class SurahNotifier extends StateNotifier<SurahState> {
     state = state.copyWith(selectedJuzId: index);
   }
 
+  selectSearchType(int index, BuildContext context) async{
+    state = state.copyWith(searchType: index);
+    await fetchSearches(context, state.query, i: index);
+  }
+
   changeDrawer() {
     state = state.copyWith(isDrawerOpened: !state.isDrawerOpened);
   }
@@ -116,12 +121,15 @@ class SurahNotifier extends StateNotifier<SurahState> {
     super.dispose();
   }
 
-  Future<void> fetchSearches(BuildContext context, String query) async {
+  setQuery(String s){
+    state = state.copyWith(query: s);
+  }
+
+  Future<void> fetchSearches(BuildContext context, String query,{int? i}) async {
     state = state.copyWith(
       isSearchLoading: true,
     );
-
-    final response = await juzRepository.getSearchResults(query);
+    final response = await juzRepository.getSearchResults(query, i ?? state.searchType);
     response.when(
       success: (data) {
         state = state.copyWith(

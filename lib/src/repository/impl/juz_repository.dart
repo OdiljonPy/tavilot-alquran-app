@@ -60,9 +60,10 @@ class  JuzRepository implements JuzFacade {
   }
 
   @override
-  Future<ApiResult<SearchResponse>> getSearchResults(String query) async {
+  Future<ApiResult<SearchResponse>> getSearchResults(String query, int index) async {
     final data  = {
-      "q": query
+      "q": query,
+      "search_type": index,
     };
     try {
       final client = dioHttp.client(optional: true);
