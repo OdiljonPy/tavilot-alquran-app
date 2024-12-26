@@ -4,8 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import '../../../../../../application/surah/surah_provider.dart';
-import '../../../../../../infrastructure/translations/locale_keys.g.dart';
-import '../../../../components/components.dart';
 import '../../../../components/flutter_markdown/flutter_markdown.dart';
 import '../../../../styles/style.dart';
 

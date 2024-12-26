@@ -95,10 +95,9 @@ class SurahNotifier extends StateNotifier<SurahState> {
   }
 
   void scrollToCounter(int index) async {
-    print("worked");
     final controller = state.autoScrollController;
     if (controller != null) {
-      await controller.scrollToIndex(index - 1, preferPosition: AutoScrollPosition.middle);
+      await controller.scrollToIndex(index - 1, preferPosition: AutoScrollPosition.begin);
       controller.highlight(index-1);
     }
   }

@@ -1,5 +1,4 @@
 import 'package:al_quran/src/core/di/dependency_manager.dart';
-import 'package:al_quran/src/models/response/juz_response.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../../core/utils/app_helpers.dart';
